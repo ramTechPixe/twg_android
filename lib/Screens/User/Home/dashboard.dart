@@ -14,11 +14,12 @@ class _UserDashboardState extends State<UserDashboard> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   void initState() {
-    userprofilecontroller.userProfile();
+    // userprofilecontroller.userProfile();
     // dashboardcontroller.userTotalPostAPI();
     // dashboardcontroller.userPlanExpiryAPI();
     // dashboardcontroller.userQuickPostAPI();
-    dashboardcontroller.userSocialMediaAccountsAPI();
+    // dashboardcontroller.dashboardTotalSocialPostAPI();
+    dashboardcontroller.dashboardTotalSocialPostAPI();
     dashboardcontroller.dashboardTotalPostAPI();
     // userprofilecontroller.userProfile();
 
@@ -38,7 +39,8 @@ class _UserDashboardState extends State<UserDashboard> {
           () => userprofilecontroller.profiledataLoading == true ||
                   // dashboardcontroller.userTotalPostLoading == true ||
                   // dashboardcontroller.userPlanExpiryLoading == true ||
-                  // dashboardcontroller.userQuickPostsdataLoading == true ||
+                  dashboardcontroller.dashboardTotalSocialPostsLoading ==
+                      true ||
                   dashboardcontroller.userSocialMediadataLoading == true ||
                   dashboardcontroller.dashboardTotalPostsLoading == true
               ? Center(
@@ -470,7 +472,7 @@ Widget leftDrawerMenu(
                                   height: 8.h,
                                 ),
                                 Text(
-                                  "Free Stryle",
+                                  "Free Style",
                                   style: GoogleFonts.poppins(
                                       color: kblack,
                                       fontSize: kFourteenFont,

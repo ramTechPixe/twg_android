@@ -8,42 +8,19 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  // @override
-  // void initState() {
-
-  //   Future.delayed(const Duration(seconds: 3), () async {
-  //     Get.toNamed(kOnboarding);
-  //   });
-  //   super.initState();
-  // }
+  ProfileController userprofilecontroller = Get.put(ProfileController());
   /////////////////////////////////////////////
   bool? isUserLoggedIn;
   @override
   void initState() {
     super.initState();
-/////////////////////////original code
-    // isUserLoggedIn = UserSimplePreferences.getLoginStatus();
-    // Future.delayed(const Duration(seconds: 2), () async {
-    //   if (isUserLoggedIn != null && isUserLoggedIn == true) {
-    //     await apiController.getProfile();
 
-    //     apiController.profileData["employeeType"] == "Donor"
-    //         ? Get.toNamed(kDonorBottomNavigation)
-    //         : Get.toNamed(kNavigation);
-    //   } else {
-    //     Get.toNamed(kMobileSignUp);
-    //   }
-    // });
-    ////////////////////////////////////////////////////
-    // isUserLoggedIn = UserSimplePreferences.getLoginStatus();
-    // Future.delayed(const Duration(seconds: 2), () async {
-    //   await Get.toNamed(kNavigation);
-    // });
     //////////////////////////////
     isUserLoggedIn = UserSimplePreferences.getLoginStatus();
     Future.delayed(const Duration(seconds: 3), () async {
       if (isUserLoggedIn != null && isUserLoggedIn == true) {
-        Get.toNamed(kNavigation);
+        // Get.toNamed(kNavigation);
+        userprofilecontroller.userProfileNavigation();
       } else {
         Get.toNamed(kOnboarding);
       }
