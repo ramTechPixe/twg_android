@@ -11,7 +11,7 @@ import 'dart:io';
 
 class AuthController extends GetxController {
   final apiService = Get.put(ApiService());
-
+  ProfileController userprofilecontroller = Get.put(ProfileController());
   var counter = 10.obs;
 
   void increment() {
@@ -48,7 +48,8 @@ class AuthController extends GetxController {
         Fluttertoast.showToast(
           msg: data["message"],
         );
-        Get.toNamed(kNavigation);
+        userprofilecontroller.userProfileNavigation();
+        // Get.toNamed(kNavigation);
 
         print("object");
       } else if (data["status"] == "error") {
