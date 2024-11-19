@@ -138,36 +138,5 @@ class CustomTotalCards extends StatelessWidget {
         ],
       ),
     );
-    ////////////////////////////////////////////
-    // GestureDetector(
-    //   onTap: onTap,
-    //   child: Container(
-    //       margin: margin,
-    //       padding: Padding,
-    //       height: 40,
-    //       width: width,
-    //       alignment: Alignment.center,
-    //       decoration: BoxDecoration(
-    //           border: GradientBoxBorder(
-    //             gradient: LinearGradient(colors: [
-    //               KGradientPurple_twg,
-    //               KGradientPink_twg,
-    //               KLightPurple_twg
-    //             ], begin: Alignment.topCenter, end: Alignment.bottomCenter),
-    //             width: 2.w,
-    //           ),
-    //           borderRadius: BorderRadius.circular(8)),
-    //       child: Text(label,
-    //           textAlign: TextAlign.center,
-    //           style: GoogleFonts.poppins(
-    //               fontSize: fontSize, color: textColor, fontWeight: fontWeight))
-    //       // Text(
-    //       //   label,
-    //       //   textAlign: TextAlign.center,
-    //       //   style: GoogleFonts.roboto(
-    //       //       fontSize: fontSize, color: textColor, fontWeight: fontWeight),
-    //       // ),
-    //       ),
-    // );
   }
 }

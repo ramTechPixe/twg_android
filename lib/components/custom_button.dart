@@ -43,14 +43,6 @@ class CustomButton extends StatelessWidget {
           width: width,
           alignment: Alignment.center,
           decoration: BoxDecoration(
-            // boxShadow: [
-            //   BoxShadow(
-            //     color: Ktextcolor.withOpacity(0.5),
-            //     blurRadius: 5.r,
-            //     offset: Offset(0, 5),
-            //     spreadRadius: 1.r,
-            //   )
-            // ],
             color: Color,
             borderRadius: borderRadius,
           ),
@@ -119,41 +111,9 @@ class CustomButtonGradientOutlined extends StatelessWidget {
           child: Text(label,
               textAlign: TextAlign.center,
               style: GoogleFonts.poppins(
-                  fontSize: fontSize, color: textColor, fontWeight: fontWeight))
-          // Text(
-          //   label,
-          //   textAlign: TextAlign.center,
-          //   style: GoogleFonts.roboto(
-          //       fontSize: fontSize, color: textColor, fontWeight: fontWeight),
-          // ),
-          ),
+                  fontSize: fontSize,
+                  color: textColor,
+                  fontWeight: fontWeight))),
     );
   }
 }
-
-
-//////////////////////////////////////
-  //  Container(
-  //                                       // width: 120,
-  //                                       height: 40,
-  //                                       padding: EdgeInsets.symmetric(
-  //                                           vertical: 8, horizontal: 24),
-                                       
-  //                                       decoration: BoxDecoration(
-  //                                           border: GradientBoxBorder(
-  //                                             gradient: LinearGradient(colors: [
-  //                                               KGradientPurple_twg,
-  //                                               KGradientPink_twg,
-  //                                               KLightPurple_twg
-  //                                             ]),
-  //                                             width: 2.w,
-  //                                           ),
-  //                                           borderRadius:
-  //                                               BorderRadius.circular(8)),
-  //                                       child: Text("Next",
-  //                                           textAlign: TextAlign.center,
-  //                                           style: GoogleFonts.poppins(
-  //                                               fontSize: kSixteenFont,
-  //                                               fontWeight: kFW500,
-  //                                               color: KBlack_twg)),
-  //                                     ),
