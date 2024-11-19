@@ -1,0 +1,135 @@
+import 'dart:async';
+
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+// import 'package:geocoding/geocoding.dart';
+// import 'package:geolocator/geolocator.dart';
+import 'package:twg/untils/export_file.dart';
+import 'package:intl/intl.dart';
+
+import 'dart:convert';
+import 'dart:io';
+
+class ProfileController extends GetxController {
+  final apiService = Get.put(ApiService());
+
+  TextEditingController UserEmailSignInController = TextEditingController();
+  TextEditingController UserEmailPasswordController = TextEditingController();
+
+  //
+  TextEditingController editFirstNameController = TextEditingController();
+  TextEditingController editLastNameController = TextEditingController();
+  TextEditingController editEmailController = TextEditingController();
+  TextEditingController editPasswordController = TextEditingController();
+  TextEditingController editConfirmPasswordController = TextEditingController();
+
+  var profileData = {}.obs;
+  var profiledataLoading = false.obs;
+  Future<void> userProfile() async {
+    profiledataLoading(true);
+
+    try {
+      //
+      var response = await apiService.getRequest(endpoint: "my-account-api/");
+
+      //    Map data = jsonDecode(response);
+      Map data = jsonDecode(response);
+      print(data);
+      if (data["status"] == "success") {
+        profileData.value = data["data"];
+
+        print("object");
+      } else if (data["message"] == "Invalid session token") {
+        Fluttertoast.showToast(
+          msg: data["message"],
+        );
+        Get.toNamed(kSignIns);
+      } else {
+        Fluttertoast.showToast(
+          msg: data["message"],
+        );
+      }
+    } catch (e) {
+      Fluttertoast.showToast(
+        msg: "Something went wrong",
+      );
+    } finally {
+      profiledataLoading(false);
+    }
+  }
+
+  //edit Profile
+  var userEditProfileLoading = false.obs;
+  Future<void> userEditprofile(Map payload) async {
+    userEditProfileLoading(true);
+
+    try {
+      var response = await apiService.postRequestEditProfileFormData(
+          endpoint: "update-user-api/", payload: payload);
+
+      Map data = jsonDecode(response);
+      print(data);
+      if (data["status"] == "success") {
+        Fluttertoast.showToast(
+          msg: data["message"],
+        );
+        userProfile();
+        Get.back();
+        Get.back();
+
+        print("object");
+      } else if (data["status"] == "error") {
+        Fluttertoast.showToast(
+          msg: response["message"],
+        );
+      } else {
+        Fluttertoast.showToast(
+          msg: data["message"],
+        );
+      }
+    } catch (e) {
+      Fluttertoast.showToast(
+        msg: "Something went wrong",
+      );
+    } finally {
+      userEditProfileLoading(false);
+    }
+  }
+
+  // with password
+  Future<void> userEditprofilePassword(Map payload) async {
+    userEditProfileLoading(true);
+
+    try {
+      var response = await apiService.postRequestEditProfilePasswordFormData(
+          endpoint: "update-user-api/", payload: payload);
+
+      Map data = jsonDecode(response);
+      print(data);
+      if (data["status"] == "success") {
+        Fluttertoast.showToast(
+          msg: data["message"],
+        );
+        userProfile();
+        Get.back();
+        Get.back();
+
+        print("object");
+      } else if (data["status"] == "error") {
+        Fluttertoast.showToast(
+          msg: response["message"],
+        );
+      } else {
+        Fluttertoast.showToast(
+          msg: data["message"],
+        );
+      }
+    } catch (e) {
+      Fluttertoast.showToast(
+        msg: "Something went wrong",
+      );
+    } finally {
+      userEditProfileLoading(false);
+    }
+  }
+}
