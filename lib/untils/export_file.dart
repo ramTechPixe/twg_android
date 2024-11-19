@@ -15,8 +15,7 @@ export 'package:gradient_borders/box_borders/gradient_box_border.dart';
 export 'package:flutter_svg/flutter_svg.dart';
 export 'package:sliding_sheet_new/sliding_sheet_new.dart';
 export 'package:curved_navigation_bar/curved_navigation_bar.dart';
-// export 'package:m7_livelyness_detection/m7_livelyness_detection.dart';
-// export 'package:eattendance/untils/user_simple_preferences.dart';
+
 export 'package:cached_network_image/cached_network_image.dart';
 
 export 'package:twg/untils/constants.dart';
