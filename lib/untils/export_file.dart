@@ -73,3 +73,8 @@ export 'package:twg/Screens/User/Settings/pinterest.dart';
 export 'package:twg/Screens/User/Settings/google_business.dart';
 export 'package:twg/Screens/User/Settings/insta_settings.dart';
 export 'package:twg/Screens/User/Settings/you_tube.dart';
+
+// Multi posts
+export 'package:twg/Screens/User/Multi/multi_post.dart';
+export 'package:twg/Screens/User/Multi/add_multi_post.dart';
+export 'package:twg/Screens/User/Multi/edit_post.dart';

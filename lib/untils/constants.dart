@@ -16,8 +16,11 @@ String kPublishedScreens = "/Screens/User/Semi/published_screens.dart";
 String kSettingsScreens = "/Screens/User/Settings/user_settings.dart";
 String kScheduledPostScreens = "/Screens/User/Semi/schedule_post_view.dart";
 String kCreateBannersScreens = "/Screens/User/Home/customize_banners.dart";
+String kMultiPostScreens = "/Screens/User/Multi/multi_post.dart";
+String kAddMultiPost = "/Screens/User/Multi/add_multi_post.dart";
+String kEditMultiPost = "/Screens/User/Multi/edit_post.dart";
+
 // export 'package:twg/';
-// export 'package:twg/Screens/User/Semi/schedule_post_view.dart';
 ////////// Fonts Size
 double kTenFont = MediaQueryData.fromWindow(WidgetsBinding.instance.window)
             .size
@@ -118,6 +121,7 @@ const Color KPinterestred_twg = Color(0xffCB1F27);
 const Color Kgoogledark_green_twg = Color(0xff587DBD);
 const Color KInsta_orange_twg = Color(0xffFF7944);
 const Color Kyou_tube_red = Color(0xffFF0000);
+const Color KGreen = Color(0xff00A65A);
 // #
 
 // #new
