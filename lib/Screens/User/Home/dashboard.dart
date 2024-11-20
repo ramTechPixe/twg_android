@@ -41,7 +41,7 @@ class _UserDashboardState extends State<UserDashboard> {
                   // dashboardcontroller.userPlanExpiryLoading == true ||
                   dashboardcontroller.dashboardTotalSocialPostsLoading ==
                       true ||
-                  dashboardcontroller.userSocialMediadataLoading == true ||
+                  //  dashboardcontroller.userSocialMediadataLoading == true ||
                   dashboardcontroller.dashboardTotalPostsLoading == true
               ? Center(
                   child: CircularProgressIndicator(

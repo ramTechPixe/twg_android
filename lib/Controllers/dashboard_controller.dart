@@ -145,44 +145,44 @@ class DashboardController extends GetxController {
     }
   }
 
-  var userSocialMediadata = {}.obs;
-  var networksCountList = [].obs;
-  var userSocialMediadataLoading = false.obs;
+  // var userSocialMediadata = {}.obs;
+  // var networksCountList = [].obs;
+  // var userSocialMediadataLoading = false.obs;
 
-  Future<void> userSocialMediaAccountsAPI() async {
-    userSocialMediadataLoading(true);
+  // Future<void> userSocialMediaAccountsAPI() async {
+  //   userSocialMediadataLoading(true);
 
-    try {
-      var response =
-          await apiService.livegetRequest(endpoint: "posts-by-category/3");
-      Map<String, dynamic> data = jsonDecode(response);
-      print(data);
-      networksCountList.clear();
+  //   try {
+  //     var response =
+  //         await apiService.livegetRequest(endpoint: "posts-by-category/3");
+  //     Map<String, dynamic> data = jsonDecode(response);
+  //     print(data);
+  //     networksCountList.clear();
 
-      if (data["status"] == 200) {
-        userSocialMediadata.value = data["response_data"];
+  //     if (data["status"] == 200) {
+  //       userSocialMediadata.value = data["response_data"];
 
-        // Check for networks_count existence and convert it to desired list format
-        if (data['response_data'].containsKey('networks_count')) {
-          networksCountList.value = data['response_data']['networks_count']
-              .entries
-              .map((entry) => {entry.key: entry.value.toString()})
-              .toList();
-          print("object");
-        } else {
-          print("networks_count key is missing in response_data.");
-        }
-      } else if (data["message"] == "Invalid session token") {
-        Fluttertoast.showToast(msg: data["message"]);
-        Get.toNamed(kSignIns);
-      } else {
-        Fluttertoast.showToast(msg: data["message"]);
-      }
-    } catch (e) {
-      print("Error: $e");
-      Fluttertoast.showToast(msg: "Something went wrong");
-    } finally {
-      userSocialMediadataLoading(false);
-    }
-  }
+  //       // Check for networks_count existence and convert it to desired list format
+  //       if (data['response_data'].containsKey('networks_count')) {
+  //         networksCountList.value = data['response_data']['networks_count']
+  //             .entries
+  //             .map((entry) => {entry.key: entry.value.toString()})
+  //             .toList();
+  //         print("object");
+  //       } else {
+  //         print("networks_count key is missing in response_data.");
+  //       }
+  //     } else if (data["message"] == "Invalid session token") {
+  //       Fluttertoast.showToast(msg: data["message"]);
+  //       Get.toNamed(kSignIns);
+  //     } else {
+  //       Fluttertoast.showToast(msg: data["message"]);
+  //     }
+  //   } catch (e) {
+  //     print("Error: $e");
+  //     Fluttertoast.showToast(msg: "Something went wrong");
+  //   } finally {
+  //     userSocialMediadataLoading(false);
+  //   }
+  // }
 }
