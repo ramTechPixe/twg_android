@@ -27,9 +27,6 @@ class _SocialMediaCardsState extends State<SocialMediaCards> {
                   for (int i = 0;
                       i < dashboardController.networkCountList.length;
                       i++)
-                    // dashboardController.networkCountList[i]["count"] == 0
-                    //     ? SizedBox()
-                    //     :
                     Container(
                       padding: EdgeInsets.all(10),
                       decoration: BoxDecoration(
