@@ -145,22 +145,27 @@ Widget leftDrawerMenu(
         SizedBox(
           height: 20.h,
         ),
-        Row(
-          children: [
-            Image.asset(
-              "assets/images/multi_posting.png",
-              height: 30.h,
-              width: 30.w,
-            ),
-            SizedBox(
-              width: 15.w,
-            ),
-            Text(
-              "Multi Posting",
-              style: GoogleFonts.poppins(
-                  color: kblack, fontSize: kSixteenFont, fontWeight: kFW500),
-            ),
-          ],
+        InkWell(
+          onTap: () {
+            Get.toNamed(kMultiPostScreens);
+          },
+          child: Row(
+            children: [
+              Image.asset(
+                "assets/images/multi_posting.png",
+                height: 30.h,
+                width: 30.w,
+              ),
+              SizedBox(
+                width: 15.w,
+              ),
+              Text(
+                "Multi Posting",
+                style: GoogleFonts.poppins(
+                    color: kblack, fontSize: kSixteenFont, fontWeight: kFW500),
+              ),
+            ],
+          ),
         ),
         SizedBox(
           height: 20.h,
