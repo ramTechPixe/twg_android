@@ -64,5 +64,38 @@ class Routes {
         name: kEditMultiPost,
         transition: Transition.rightToLeft,
         page: () => const EditMultiScreen()),
+    GetPage(
+        name: kToolsScreen,
+        transition: Transition.rightToLeft,
+        page: () => const ToolsScreen()),
+    GetPage(
+        name: kDigitalInfluencerScreen,
+        transition: Transition.rightToLeft,
+        page: () => const DigitalInfluencer()),
+    GetPage(
+        name: kLogoScreen,
+        transition: Transition.rightToLeft,
+        page: () => const LogosScreen()),
+    GetPage(
+        name: kMusicScreen,
+        transition: Transition.rightToLeft,
+        page: () => const MusicScreen()),
+    GetPage(
+        name: kAiBLogScreen,
+        transition: Transition.rightToLeft,
+        page: () => const AiBLogScreen()),
+    GetPage(
+        name: kHashtagScreen,
+        transition: Transition.rightToLeft,
+        page: () => const HashtagScreen()),
+    GetPage(
+        name: kAutomationCRMScreen,
+        transition: Transition.rightToLeft,
+        page: () => const AutomationCRMScreen()),
+    GetPage(
+        name: kInfluencerPosecreen,
+        transition: Transition.rightToLeft,
+        page: () => const DigitalInfluencerPose()),
+    //  kInfluencerPosecreen
   ];
 }

@@ -19,8 +19,16 @@ String kCreateBannersScreens = "/Screens/User/Home/customize_banners.dart";
 String kMultiPostScreens = "/Screens/User/Multi/multi_post.dart";
 String kAddMultiPost = "/Screens/User/Multi/add_multi_post.dart";
 String kEditMultiPost = "/Screens/User/Multi/edit_post.dart";
-
-// export 'package:twg/';
+String kToolsScreen = "/Screens/User/Tools/tools_screen.dart";
+String kDigitalInfluencerScreen =
+    "/Screens/User/Tools/digital_influencer_screen.dart";
+String kLogoScreen = "/Screens/User/Tools/logo_screen.dart";
+String kMusicScreen = "/Screens/User/Tools/music_screen.dart";
+String kAiBLogScreen = "/Screens/User/Tools/ai_blog_screen.dart";
+String kHashtagScreen = "/Screens/User/Tools/hashtag_screen.dart";
+String kAutomationCRMScreen = "/Screens/User/Tools/automation_crm.dart";
+String kInfluencerPosecreen = "/Screens/User/Tools/influencer_pose.dart";
+//  export 'package:twg/';
 ////////// Fonts Size
 double kTenFont = MediaQueryData.fromWindow(WidgetsBinding.instance.window)
             .size

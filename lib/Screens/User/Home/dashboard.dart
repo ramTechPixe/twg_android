@@ -290,22 +290,27 @@ Widget leftDrawerMenu(
         SizedBox(
           height: 20.h,
         ),
-        Row(
-          children: [
-            Image.asset(
-              "assets/images/tools.png",
-              height: 30.h,
-              width: 30.w,
-            ),
-            SizedBox(
-              width: 15.w,
-            ),
-            Text(
-              "Tools",
-              style: GoogleFonts.poppins(
-                  color: kblack, fontSize: kSixteenFont, fontWeight: kFW500),
-            ),
-          ],
+        InkWell(
+          onTap: () {
+            Get.toNamed(kToolsScreen);
+          },
+          child: Row(
+            children: [
+              Image.asset(
+                "assets/images/tools.png",
+                height: 30.h,
+                width: 30.w,
+              ),
+              SizedBox(
+                width: 15.w,
+              ),
+              Text(
+                "Tools",
+                style: GoogleFonts.poppins(
+                    color: kblack, fontSize: kSixteenFont, fontWeight: kFW500),
+              ),
+            ],
+          ),
         ),
         SizedBox(
           height: 20.h,
