@@ -12,15 +12,66 @@ import 'dart:io';
 class AuthController extends GetxController {
   final apiService = Get.put(ApiService());
   ProfileController userprofilecontroller = Get.put(ProfileController());
-  var counter = 10.obs;
+  // var counter = 10.obs;
+
+  // void increment() {
+  //   counter.value += 1;
+  // }
+
+  // void decrement() {
+  //   counter.value -= 1;
+  // }
+  // var counter = 10.obs;
+
+  // void increment() {
+  //   counter.value++;
+  // }
+
+  // void decrement() {
+  //   if (counter.value > 0) {
+  //     counter.value--;
+  //   }
+  // }
+
+  // void setCounter(int value) {
+  //   if (value >= 0) {
+  //     counter.value = value;
+  //   }
+  // }
+  ////////////////////////////////////////////////
+  var counter = 0.obs;
+  late TextEditingController textController;
+
+  @override
+  void onInit() {
+    super.onInit();
+
+    // Initialize the TextEditingController
+    textController = TextEditingController(text: counter.value.toString());
+
+    // Update the text field whenever the counter changes
+    counter.listen((value) {
+      textController.text = value.toString();
+    });
+  }
 
   void increment() {
-    counter.value += 1;
+    counter.value++;
   }
 
   void decrement() {
-    counter.value -= 1;
+    if (counter.value > 0) {
+      counter.value--;
+    }
   }
+
+  void setCounter(String value) {
+    final int? parsedValue = int.tryParse(value);
+    if (parsedValue != null && parsedValue >= 0) {
+      counter.value = parsedValue;
+    }
+  }
+  ///////////////////////////////////////////////////////
 
   TextEditingController UserEmailSignInController = TextEditingController();
   TextEditingController UserEmailPasswordController = TextEditingController();

@@ -78,3 +78,14 @@ export 'package:twg/Screens/User/Settings/you_tube.dart';
 export 'package:twg/Screens/User/Multi/multi_post.dart';
 export 'package:twg/Screens/User/Multi/add_multi_post.dart';
 export 'package:twg/Screens/User/Multi/edit_post.dart';
+
+// Tools
+export 'package:twg/Screens/User/Tools/tools_screen.dart';
+export 'package:twg/Screens/User/Tools/tool_cards.dart';
+export 'package:twg/Screens/User/Tools/digital_influencer_screen.dart';
+export 'package:twg/Screens/User/Tools/logo_screen.dart';
+export 'package:twg/Screens/User/Tools/music_screen.dart';
+export 'package:twg/Screens/User/Tools/ai_blog_screen.dart';
+export 'package:twg/Screens/User/Tools/hashtag_screen.dart';
+export 'package:twg/Screens/User/Tools/automation_crm.dart';
+export 'package:twg/Screens/User/Tools/influencer_pose.dart';

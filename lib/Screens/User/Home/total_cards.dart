@@ -82,8 +82,8 @@ class _TotalCardsState extends State<TotalCards> {
                   buttonTitle: "Remaining Points",
                   imageAddress: "assets/images/frames_images.png",
                   cardTitle: "Total Frames",
-                  value: "5",
-                  buttonValue: '5',
+                  value: "0",
+                  buttonValue: '0',
                 ),
                 CustomTotalCards(
                   buttonTitle: "Remaining Days",
