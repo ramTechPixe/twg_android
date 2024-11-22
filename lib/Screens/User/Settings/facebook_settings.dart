@@ -1,4 +1,5 @@
 import 'package:chips_input_autocomplete/chips_input_autocomplete.dart';
+import 'package:multiselect/multiselect.dart';
 import 'package:twg/untils/export_file.dart';
 
 class FacebbokSettings extends StatefulWidget {
@@ -17,6 +18,19 @@ class _FacebbokSettingsState extends State<FacebbokSettings> {
     'Kolkata',
     'Delhi',
   ];
+  List<String> variantsList = [
+    'Ram',
+    "Komal",
+    "Usha",
+    "Raju",
+    "Bihar",
+    "Bangalore",
+    "UP",
+    "Pune",
+    "Surat",
+    "Nashik"
+  ];
+  List<String> selectedCheckBoxValue = [];
 
   String? selectedUserValue;
   bool isautopostingSwitched = false;
@@ -50,6 +64,9 @@ class _FacebbokSettingsState extends State<FacebbokSettings> {
     }
   }
 
+////
+  List<String> selected = [];
+//////
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -517,36 +534,78 @@ class _FacebbokSettingsState extends State<FacebbokSettings> {
                       borderRadius: BorderRadius.circular(8),
                       color: Kwhite,
                     ),
-                    child: ChipsInputAutocomplete(
-                      showClearButton: true,
-                      widgetContainerDecoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(8),
-                          border:
-                              Border.all(color: KText_border_twg, width: 0.5)),
-
-                      // addChipOnSelection: true,
-                      // placeChipsSectionAbove: true,
-                      autoFocus: false,
-                      // enabled: true,
-                      // keyboardType: TextInputType.none,
-                      decorationTextField: InputDecoration(
-                        hintStyle: GoogleFonts.poppins(
-                          color: KLighText_twg,
-                          fontSize: 14.sp,
-                          fontWeight: kFW400,
-                        ),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(8.r),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderSide:
-                              BorderSide(color: KText_border_twg, width: 0.5),
-                          borderRadius: BorderRadius.circular(8.r),
-                        ),
+                    child: DropDownMultiSelect(
+                      decoration: InputDecoration(
+                        contentPadding:
+                            EdgeInsets.symmetric(vertical: 16, horizontal: 8),
+                        fillColor: Kwhite,
+                        focusColor: Theme.of(context).colorScheme.onPrimary,
+                        enabledBorder: const OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(8)),
+                            borderSide:
+                                BorderSide(color: KText_border_twg, width: 1)),
+                        focusedBorder: const OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(8)),
+                            borderSide: BorderSide(
+                              color: Kform_border_twg,
+                              width: 1,
+                            )),
                       ),
-                      options: yourOptionsList,
+                      options: variantsList,
+                      selectedValues: selectedCheckBoxValue,
+                      onChanged: (List<String> value) {
+                        //   value = selectedCheckBoxValue;
+                        print("${selectedCheckBoxValue}");
+                      },
+                      whenEmpty: 'Select User',
                     ),
                   ),
+                  // Container(
+                  //   width: double.infinity,
+                  //   decoration: BoxDecoration(
+                  //     borderRadius: BorderRadius.circular(8),
+                  //     color: Kwhite,
+                  //   ),
+                  //   child: DropDownMultiSelect(
+                  //     onChanged: (List<String> x) {
+                  //       setState(() {
+                  //         selected = x;
+                  //       });
+                  //     },
+                  //     options: ['a', 'b', 'c', 'd'],
+                  //     selectedValues: selected,
+                  //     whenEmpty: '',
+                  //   ),
+                  //   // ChipsInputAutocomplete(
+                  //   //   showClearButton: true,
+                  //   //   widgetContainerDecoration: BoxDecoration(
+                  //   //       borderRadius: BorderRadius.circular(8),
+                  //   //       border:
+                  //   //           Border.all(color: KText_border_twg, width: 0.5)),
+
+                  //   //   // addChipOnSelection: true,
+                  //   //   // placeChipsSectionAbove: true,
+                  //   //   autoFocus: false,
+                  //   //   // enabled: true,
+                  //   //   // keyboardType: TextInputType.none,
+                  //   //   decorationTextField: InputDecoration(
+                  //   //     hintStyle: GoogleFonts.poppins(
+                  //   //       color: KLighText_twg,
+                  //   //       fontSize: 14.sp,
+                  //   //       fontWeight: kFW400,
+                  //   //     ),
+                  //   //     border: OutlineInputBorder(
+                  //   //       borderRadius: BorderRadius.circular(8.r),
+                  //   //     ),
+                  //   //     enabledBorder: OutlineInputBorder(
+                  //   //       borderSide:
+                  //   //           BorderSide(color: KText_border_twg, width: 0.5),
+                  //   //       borderRadius: BorderRadius.circular(8.r),
+                  //   //     ),
+                  //   //   ),
+                  //   //   options: yourOptionsList,
+                  //   // ),
+                  // ),
                   SizedBox(
                     height: 10.h,
                   ),
