@@ -28,7 +28,12 @@ String kAiBLogScreen = "/Screens/User/Tools/ai_blog_screen.dart";
 String kHashtagScreen = "/Screens/User/Tools/hashtag_screen.dart";
 String kAutomationCRMScreen = "/Screens/User/Tools/automation_crm.dart";
 String kInfluencerPosecreen = "/Screens/User/Tools/influencer_pose.dart";
+String kNointernetScreen = "/Screens/no_internet_screen.dart";
+String kFBAddDemoScreen = "/Screens/User/Tools/fb_ads_lead_demo.dart";
+String kFBAddApplyScreen = "/Screens/User/Tools/fb_add_apply.dart";
+String kWebAddDemoScreen = "/Screens/User/Tools/crm_tool_website_demo.dart";
 //  export 'package:twg/';
+//   export 'package:twg/';
 ////////// Fonts Size
 double kTenFont = MediaQueryData.fromWindow(WidgetsBinding.instance.window)
             .size

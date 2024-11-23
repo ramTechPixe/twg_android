@@ -96,6 +96,22 @@ class Routes {
         name: kInfluencerPosecreen,
         transition: Transition.rightToLeft,
         page: () => const DigitalInfluencerPose()),
-    //  kInfluencerPosecreen
+    GetPage(
+        name: kNointernetScreen,
+        transition: Transition.rightToLeft,
+        page: () => const NoInternet()),
+    GetPage(
+        name: kFBAddDemoScreen,
+        transition: Transition.rightToLeft,
+        page: () => const AutomationCRMFBDemo()),
+    GetPage(
+        name: kFBAddApplyScreen,
+        transition: Transition.rightToLeft,
+        page: () => const FB_ad_apply()),
+    GetPage(
+        name: kWebAddDemoScreen,
+        transition: Transition.rightToLeft,
+        page: () => const WebsiteToolDemo()),
+    //  //
   ];
 }

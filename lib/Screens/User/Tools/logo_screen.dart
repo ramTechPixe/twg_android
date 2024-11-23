@@ -397,7 +397,94 @@ class _LogosScreenState extends State<LogosScreen> {
                               fontSize: kSixteenFont,
                               fontWeight: kFW700,
                               isLoading: false,
-                              onTap: () {}),
+                              onTap: () {
+                                showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return AlertDialog(
+                                        backgroundColor: Kwhite,
+                                        title: Text('Final Logo',
+                                            maxLines: 1,
+                                            overflow: TextOverflow.ellipsis,
+                                            style: GoogleFonts.poppins(
+                                                fontSize: 12.sp,
+                                                fontWeight: kFW700,
+                                                color: KText)),
+                                        content: Image.asset(
+                                          "assets/images/dummyLogo.png",
+                                          width: 150.w,
+                                          height: 150.h,
+                                          fit: BoxFit.fitHeight,
+                                        ),
+                                        actions: [
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceAround,
+                                            children: [
+                                              Container(
+                                                height: 36.h,
+                                                padding: EdgeInsets.only(
+                                                    left: 14.w, right: 14.w),
+                                                alignment: Alignment.center,
+                                                decoration: BoxDecoration(
+                                                  boxShadow: [
+                                                    BoxShadow(
+                                                      color: Ktextcolor
+                                                          .withOpacity(0.5),
+                                                      blurRadius: 0.5.r,
+                                                      offset: Offset(1, 1),
+                                                      spreadRadius: 0.5.r,
+                                                    )
+                                                  ],
+                                                  color: Kform_border_twg,
+                                                  borderRadius:
+                                                      BorderRadius.all(
+                                                          Radius.circular(5)),
+                                                ),
+                                                child: Text(
+                                                  "Download",
+                                                  textAlign: TextAlign.center,
+                                                  style: GoogleFonts.poppins(
+                                                      fontWeight: kFW500,
+                                                      color: Kwhite,
+                                                      fontSize: kTwelveFont),
+                                                ),
+                                              ),
+                                              Container(
+                                                height: 36.h,
+                                                padding: EdgeInsets.only(
+                                                    left: 14.w, right: 14.w),
+                                                alignment: Alignment.center,
+                                                decoration: BoxDecoration(
+                                                  boxShadow: [
+                                                    BoxShadow(
+                                                      color: Ktextcolor
+                                                          .withOpacity(0.5),
+                                                      blurRadius: 5.r,
+                                                      offset: Offset(1, 1),
+                                                      spreadRadius: 1.r,
+                                                    )
+                                                  ],
+                                                  color: Kwhite,
+                                                  borderRadius:
+                                                      BorderRadius.all(
+                                                          Radius.circular(5)),
+                                                ),
+                                                child: Text(
+                                                  "Regenerate",
+                                                  textAlign: TextAlign.center,
+                                                  style: GoogleFonts.poppins(
+                                                      fontWeight: kFW500,
+                                                      color: kblack,
+                                                      fontSize: kTwelveFont),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      );
+                                    });
+                              }),
                         ],
                       ),
                     ),
