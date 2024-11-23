@@ -186,14 +186,10 @@ class _CustomizeBannersState extends State<CustomizeBanners> {
                   final emoji = emojis[index];
                   return GestureDetector(
                     onTap: () {
-                      // setState(() {
-                      //   selectedEmojis += emoji;
-                      // });
                       controller.add(
                         CustomCanvasItem(
                           child: Text(
                             emoji,
-                            // selectedEmojis,
                             style: TextStyle(fontSize: 30, color: Kwhite),
                           ),
                           canvasConfig: CanvasConfig(

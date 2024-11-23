@@ -12,8 +12,17 @@ class _UserDashboardState extends State<UserDashboard> {
   ProfileController userprofilecontroller = Get.put(ProfileController());
   DashboardController dashboardcontroller = Get.put(DashboardController());
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  void checkInternet() async {
+    bool isConnected = await InternetConnection().hasInternetAccess;
+    if (isConnected == false) {
+      Get.toNamed(kNointernetScreen);
+    }
+    // debugPrint("${isConnected}");
+  }
+
   @override
   void initState() {
+    checkInternet();
     // userprofilecontroller.userProfile();
     // dashboardcontroller.userTotalPostAPI();
     // dashboardcontroller.userPlanExpiryAPI();
@@ -63,12 +72,17 @@ class _UserDashboardState extends State<UserDashboard> {
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
-                                  "Welcome",
-                                  style: GoogleFonts.poppins(
-                                      color: KDarkPink_twg,
-                                      fontSize: 24.sp,
-                                      fontWeight: kFW600),
+                                InkWell(
+                                  onTap: () {
+                                    Get.toNamed(kNointernetScreen);
+                                  },
+                                  child: Text(
+                                    "Welcome",
+                                    style: GoogleFonts.poppins(
+                                        color: KDarkPink_twg,
+                                        fontSize: 24.sp,
+                                        fontWeight: kFW600),
+                                  ),
                                 ),
                                 Text(
                                   userprofilecontroller

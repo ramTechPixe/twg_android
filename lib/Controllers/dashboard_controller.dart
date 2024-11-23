@@ -18,6 +18,7 @@ class DashboardController extends GetxController {
   var selectedSocialPlatform = "General".obs;
   var autoPostUploadType = "image".obs;
   var selectappmethidType = "appmethod".obs;
+  var choosenAutoCRMTool = "".obs;
   ProfileController userprofilecontroller = Get.put(ProfileController());
   TextEditingController v1 = TextEditingController();
   TextEditingController v2 = TextEditingController();
