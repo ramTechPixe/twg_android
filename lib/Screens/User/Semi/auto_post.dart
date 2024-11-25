@@ -1232,7 +1232,51 @@ class _AutoPostState extends State<AutoPost> {
                                 : DateFormat('dd/MM/yyyy')
                                     // DateFormat.yMMMEd()
                                     .format(selectedDate),
-                        ontap: () {},
+                        ontap: () async {
+                          final DateTime? picked = await showDatePicker(
+                            context: context,
+                            initialDate: selectedDate,
+                            firstDate: DateTime(1924, 8),
+
+                            //  firstDate: DateTime(2015, 8),
+                            lastDate: DateTime(2025, 8),
+                            //  lastDate: DateTime.now(),
+                            builder: (context, child) {
+                              return Theme(
+                                data: Theme.of(context).copyWith(
+                                  colorScheme: const ColorScheme.light(
+                                    // background: white,
+                                    primary: Kform_border_twg,
+                                    //onPrimary: white,
+                                    onSurface: Colors.black,
+                                  ),
+                                  textButtonTheme: TextButtonThemeData(
+                                    style: TextButton.styleFrom(
+                                        // primary: Kbluedark,
+                                        ),
+                                  ),
+                                ),
+                                child: child!,
+                              );
+                            },
+                          );
+
+                          if (picked != null && picked != selectedDate) {
+                            setState(() {
+                              selectedDate = picked;
+                              choosenDate = selectedDate;
+                              selectDate.value = DateFormat('MM/dd/yyyy')
+                                  // DateFormat.yMMMEd()
+                                  .format(selectedDate);
+                            });
+                            //  }
+                            // setState(() {
+                            //   selectedDate = picked;
+                            //   choosenDate = selectedDate;
+                            // }
+                            // );
+                          }
+                        },
                         enabled: true,
                         readOnly: true,
 //keyboardType: TextInput.ke,
@@ -1244,60 +1288,10 @@ class _AutoPostState extends State<AutoPost> {
                         contentPadding: const EdgeInsets.symmetric(
                             vertical: 16, horizontal: 8),
                         fontSize: kFourteenFont,
-                        prefix: InkWell(
-                          onTap: () async {
-                            // setState(() {
-                            //   isFormOpen.value = true;
-                            // });
-                            final DateTime? picked = await showDatePicker(
-                              context: context,
-                              initialDate: selectedDate,
-                              firstDate: DateTime(1924, 8),
-
-                              //  firstDate: DateTime(2015, 8),
-                              lastDate: DateTime(2025, 8),
-                              //  lastDate: DateTime.now(),
-                              builder: (context, child) {
-                                return Theme(
-                                  data: Theme.of(context).copyWith(
-                                    colorScheme: const ColorScheme.light(
-                                      // background: white,
-                                      primary: Kform_border_twg,
-                                      //onPrimary: white,
-                                      onSurface: Colors.black,
-                                    ),
-                                    textButtonTheme: TextButtonThemeData(
-                                      style: TextButton.styleFrom(
-                                          // primary: Kbluedark,
-                                          ),
-                                    ),
-                                  ),
-                                  child: child!,
-                                );
-                              },
-                            );
-
-                            if (picked != null && picked != selectedDate) {
-                              setState(() {
-                                selectedDate = picked;
-                                choosenDate = selectedDate;
-                                selectDate.value = DateFormat('MM/dd/yyyy')
-                                    // DateFormat.yMMMEd()
-                                    .format(selectedDate);
-                              });
-                              //  }
-                              // setState(() {
-                              //   selectedDate = picked;
-                              //   choosenDate = selectedDate;
-                              // }
-                              // );
-                            }
-                          },
-                          child: Image.asset(
-                            "assets/images/black_clock.png",
-                            height: 10.h,
-                            width: 10.w,
-                          ),
+                        prefix: Image.asset(
+                          "assets/images/black_clock.png",
+                          height: 10.h,
+                          width: 10.w,
                         ),
                         fontWeight: FontWeight.w500,
                         hintColor: DateFormat.yMMMd().format(selectedDate) ==

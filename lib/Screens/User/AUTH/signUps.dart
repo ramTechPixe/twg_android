@@ -880,55 +880,69 @@ class _SignUPSState extends State<SignUPS> {
                             color: KBlack_twg,
                             fontWeight: kFW400),
                       ),
-
-                      Container(
-                        margin: EdgeInsets.only(top: 10.h),
-                        padding: EdgeInsets.all(6),
-                        decoration: BoxDecoration(
-                            color: Kwhite,
-                            border: Border.all(
-                              color: Kblue_twg,
-                            ),
-                            borderRadius: BorderRadius.circular(8)),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            SizedBox(
-                              height: 20,
-                              width: MediaQuery.of(context).size.width / 2,
-                              child: TextFormField(
-                                style: GoogleFonts.poppins(
-                                    fontSize: 15.sp,
-                                    color: KBlack_twg,
-                                    fontWeight: kFW500),
-                                decoration: InputDecoration(
-                                  border: InputBorder.none,
-                                  hintText: "Enter your Coupon",
-                                  hintStyle: GoogleFonts.poppins(
-                                      fontSize: kFourteenFont,
-                                      color: KText_border_twg,
-                                      fontWeight: kFW400),
-                                ),
+                      Obx(() => authcontroller.signUpCouponLoading == true
+                          ? Center(
+                              child: CircularProgressIndicator(
+                                color: Kform_border_twg,
                               ),
-                            ),
-                            CustomButton(
-                                borderRadius: BorderRadius.circular(4.r),
-                                Color: Kblue_twg,
-                                textColor: Kwhite,
-                                height: 42,
-                                width: 120.w,
-                                label: "Apply coupon",
-                                fontSize: kFourteenFont,
-                                fontWeight: kFW600,
-                                isLoading: false,
-                                onTap: () {
-                                  // Get.back();
-                                }),
-                            // CustomButton(
-                            //     label: "Apply coupon", isLoading: false, onTap: () {})
-                          ],
-                        ),
-                      ),
+                            )
+                          : Container(
+                              margin: EdgeInsets.only(top: 10.h),
+                              padding: EdgeInsets.all(6),
+                              decoration: BoxDecoration(
+                                  color: Kwhite,
+                                  border: Border.all(
+                                    color: Kblue_twg,
+                                  ),
+                                  borderRadius: BorderRadius.circular(8)),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  SizedBox(
+                                    height: 20,
+                                    width:
+                                        MediaQuery.of(context).size.width / 2,
+                                    child: TextFormField(
+                                      controller:
+                                          authcontroller.signUpCouponController,
+                                      style: GoogleFonts.poppins(
+                                          fontSize: 15.sp,
+                                          color: KBlack_twg,
+                                          fontWeight: kFW500),
+                                      decoration: InputDecoration(
+                                        border: InputBorder.none,
+                                        hintText: "Enter your Coupon",
+                                        hintStyle: GoogleFonts.poppins(
+                                            fontSize: kFourteenFont,
+                                            color: KText_border_twg,
+                                            fontWeight: kFW400),
+                                      ),
+                                    ),
+                                  ),
+                                  CustomButton(
+                                      borderRadius: BorderRadius.circular(4.r),
+                                      Color: Kblue_twg,
+                                      textColor: Kwhite,
+                                      height: 42,
+                                      width: 120.w,
+                                      label: "Apply coupon",
+                                      fontSize: kFourteenFont,
+                                      fontWeight: kFW600,
+                                      isLoading: false,
+                                      onTap: () {
+                                        var payload = {
+                                          "coupon_code": authcontroller
+                                              .signUpCouponController.text
+                                        };
+
+                                        authcontroller.SignUpCoupon(payload);
+                                      }),
+                                  // CustomButton(
+                                  //     label: "Apply coupon", isLoading: false, onTap: () {})
+                                ],
+                              ),
+                            )),
                       SizedBox(
                         height: 20.h,
                       ),

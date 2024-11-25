@@ -51,6 +51,7 @@ export 'package:twg/Controllers/auth_controllers.dart';
 export 'package:twg/Controllers/dashboard_controller.dart';
 export 'package:twg/Controllers/profile_controller.dart';
 export 'package:twg/Controllers/semi_controller.dart';
+export 'package:twg/Controllers/multi_posting_controller.dart';
 
 // Semi Automation
 export 'package:twg/Screens/User/Semi/quick_posting_screen.dart';
