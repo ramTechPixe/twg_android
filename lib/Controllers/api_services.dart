@@ -66,6 +66,38 @@ class ApiService extends GetxService {
     }
   }
 
+  //PostRequestCoupons
+  Future postRequestSignUpCouponsFormData({
+    required String endpoint,
+    required Map<dynamic, dynamic> payload,
+    Map<String, String>? customHeaders,
+  }) async {
+    Uri url = Uri.parse(baseUrl + endpoint);
+
+    try {
+      var request = http.MultipartRequest('POST', url)
+        ..fields['coupon_code'] = payload['coupon_code'];
+
+      var streamedResponse = await request.send();
+      var response = await http.Response.fromStream(streamedResponse);
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        return response.body;
+      }
+    } on DioError catch (e) {
+      debugPrint("$e");
+      if (e.response?.statusCode == 404) {
+        return e.response?.data;
+      } else if (e.response?.statusCode == 401) {
+        return e.response?.data;
+      } else if (e.response?.statusCode == 400) {
+        return e.response?.data;
+      } else {
+        return {"message": "Something went wrong!"};
+      }
+    }
+  }
+
   /////
   Future postRequestSignInFormData({
     required String endpoint,

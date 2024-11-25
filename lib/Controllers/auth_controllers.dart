@@ -78,6 +78,43 @@ class AuthController extends GetxController {
 
   //
   TextEditingController autoPostMessageController = TextEditingController();
+  TextEditingController signUpCouponController = TextEditingController();
+  ////////Coupons Api
+  var signUpCouponLoading = false.obs;
+  var signUpCoupondata = {}.obs;
+  Future<void> SignUpCoupon(Map payload) async {
+    signUpCouponLoading(true);
+
+    try {
+      //
+      var response = await apiService.postRequestSignUpCouponsFormData(
+          endpoint: "check-coupon-code-api/", payload: payload);
+
+      //    Map data = jsonDecode(response);
+      Map data = jsonDecode(response);
+      print(data);
+
+      if (data["message"] == "Coupon code is applied successfully") {
+        signUpCoupondata.value = data["data"];
+        Fluttertoast.showToast(
+          msg: data["message"],
+        );
+
+        print("object");
+      } else {
+        Fluttertoast.showToast(
+          msg: data["message"],
+        );
+      }
+    } catch (e) {
+      Fluttertoast.showToast(
+        msg: "Something went wrong",
+      );
+    } finally {
+      signUpCouponLoading(false);
+    }
+  }
+  ////////
 
   var userSignInLoading = false.obs;
   Future<void> userSignIn(Map payload) async {

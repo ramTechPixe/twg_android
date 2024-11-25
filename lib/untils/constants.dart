@@ -32,7 +32,8 @@ String kNointernetScreen = "/Screens/no_internet_screen.dart";
 String kFBAddDemoScreen = "/Screens/User/Tools/fb_ads_lead_demo.dart";
 String kFBAddApplyScreen = "/Screens/User/Tools/fb_add_apply.dart";
 String kWebAddDemoScreen = "/Screens/User/Tools/crm_tool_website_demo.dart";
-//  export 'package:twg/';
+
+//   export 'package:twg/Controllers/multi_posting_controller.dart';
 //   export 'package:twg/';
 ////////// Fonts Size
 double kTenFont = MediaQueryData.fromWindow(WidgetsBinding.instance.window)
@@ -185,7 +186,7 @@ const Color KRed = Color(0xffEB1202);
 //eattendance
 const Color KOrange = Color(0xffFF7A00);
 
-//const String kBaseImageUrl = "https://testattendanceapi.nuhvin.com/";
+const String kBaseImageUrl = "https://dev.thewisguystech.com/uploads/";
 const String staticToken = "fac9c5a8e589874def312d5084c802c6";
 
 const List<Color> colorPallet = [

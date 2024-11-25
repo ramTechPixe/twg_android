@@ -2299,8 +2299,10 @@ class _EditProfileState extends State<EditProfile> {
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
                     colors: [
-                      KGradientPurple_twg,
-                      KGradientPink_twg,
+                      // KGradientPurple_twg,
+                      // KGradientPink_twg,
+                      Kform_border_twg,
+                      Kform_border_twg
                     ],
                     begin: Alignment.centerLeft,
                     end: Alignment.centerRight,
