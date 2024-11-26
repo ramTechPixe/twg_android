@@ -85,9 +85,12 @@ class _SignInState extends State<SignIn> {
           elevation: 2,
           cornerRadius: 20,
           snapSpec: const SnapSpec(
-            initialSnap: 0.8,
+            initialSnap: 0.79,
             snap: true,
-            snappings: [0.5, 0.8],
+            snappings: [0.79, 0.8],
+            // initialSnap: 0.8,
+            // snap: true,
+            // snappings: [0.5, 0.8],
             positioning: SnapPositioning.relativeToAvailableSpace,
           ),
           body: SingleChildScrollView(

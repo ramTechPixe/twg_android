@@ -112,6 +112,9 @@ class Routes {
         name: kWebAddDemoScreen,
         transition: Transition.rightToLeft,
         page: () => const WebsiteToolDemo()),
-    //  //
+    GetPage(
+        name: kPreviewScreen,
+        transition: Transition.rightToLeft,
+        page: () => const PreviewScreen()),
   ];
 }

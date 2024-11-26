@@ -123,8 +123,6 @@ class _MultiPostScreenState extends State<MultiPostScreen> {
 
                         setState(() {
                           multiPostcontroller.userMultiPost();
-
-                       
                         });
                       }
                     },

@@ -74,7 +74,7 @@ class _UserDashboardState extends State<UserDashboard> {
                               children: [
                                 InkWell(
                                   onTap: () {
-                                    Get.toNamed(kNointernetScreen);
+                                    // Get.toNamed(kNointernetScreen);
                                   },
                                   child: Text(
                                     "Welcome",
