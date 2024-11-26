@@ -2287,7 +2287,7 @@ class _EditProfileState extends State<EditProfile> {
         snapSpec: const SnapSpec(
           initialSnap: 0.8,
           snap: true,
-          snappings: [0.5, 0.8, 1.0],
+          snappings: [0.8, 0.81],
           positioning: SnapPositioning.relativeToAvailableSpace,
         ),
         body: SingleChildScrollView(

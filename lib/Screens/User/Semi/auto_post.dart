@@ -137,9 +137,13 @@ class _AutoPostState extends State<AutoPost> {
       image = await ImagePicker()
           .pickImage(source: ImageSource.gallery, imageQuality: 10);
     }
+    ////
+    // controller.setSelectedImage(File(image.path));
+    /////
     if (image != null) {
       setState(() {
         selectedImage = File(image.path);
+        dashboardcontroller.setSelectedImage(selectedImage);
         base64Image = base64Encode(selectedImage!.readAsBytesSync());
         // profilecontroller.editProfilePicture(selectedImage!); //
         print(selectedImage!.readAsBytesSync().lengthInBytes);

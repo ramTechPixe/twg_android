@@ -27,6 +27,46 @@ class _QuickPostingState extends State<QuickPosting> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Kwhite,
+        floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
+        floatingActionButton: InkWell(
+          onTap: () {
+            Get.toNamed(kPublishedScreens);
+          },
+          child: Container(
+            margin: EdgeInsets.only(bottom: 100.h),
+            padding: EdgeInsets.only(left: 20.w, right: 20.w),
+            height: 52,
+            width: 160.w,
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(50.r),
+              color: Kform_border_twg,
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "Published",
+                  textAlign: TextAlign.center,
+                  style: GoogleFonts.poppins(
+                    fontSize: kFourteenFont,
+                    color: Kwhite,
+                    fontWeight: kFW600,
+                  ),
+                ),
+                CircleAvatar(
+                  radius: 12,
+                  backgroundColor: Kwhite,
+                  child: Icon(
+                    Icons.arrow_forward,
+                    color: Kform_border_twg,
+                    size: 18.sp,
+                  ),
+                )
+              ],
+            ),
+          ),
+        ),
         appBar: AppBar(
           elevation: 3,
           shadowColor: kblack,
@@ -37,6 +77,48 @@ class _QuickPostingState extends State<QuickPosting> {
             style: GoogleFonts.poppins(
                 color: Kwhite, fontSize: kTwentyFont, fontWeight: kFW600),
           ),
+          actions: [
+            InkWell(
+              onTap: () {
+                Get.toNamed(kPreviewScreen);
+              },
+              child: Container(
+                padding: EdgeInsets.only(left: 12.w, right: 12.w),
+                height: 38.h,
+                // width: 160.w,
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(50.r),
+                  color: Kwhite,
+                ),
+                child: Row(
+                  children: [
+                    Text(
+                      "Preview",
+                      textAlign: TextAlign.center,
+                      style: GoogleFonts.poppins(
+                        fontSize: kTwelveFont,
+                        color: kblack,
+                        fontWeight: kFW600,
+                      ),
+                    ),
+                    SizedBox(
+                      width: 3.w,
+                    ),
+                    CircleAvatar(
+                      radius: 12,
+                      backgroundColor: Kwhite,
+                      child: Icon(
+                        Icons.arrow_forward_ios,
+                        color: kblack,
+                        size: 14.sp,
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            ),
+          ],
         ),
         body: SingleChildScrollView(
           child: Obx(
@@ -555,50 +637,50 @@ class _QuickPostingState extends State<QuickPosting> {
                               "Custom Message"
                           ? CustomPost()
                           : AiPost(),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      InkWell(
-                        onTap: () {
-                          Get.toNamed(kPublishedScreens);
-                        },
-                        child: Container(
-                          margin: EdgeInsets.only(top: 30.h),
-                          padding: EdgeInsets.only(left: 20.w, right: 20.w),
-                          height: 52,
-                          width: 160.w,
-                          alignment: Alignment.center,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(50.r),
-                            color: Kform_border_twg,
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                "Published",
-                                textAlign: TextAlign.center,
-                                style: GoogleFonts.poppins(
-                                  fontSize: kFourteenFont,
-                                  color: Kwhite,
-                                  fontWeight: kFW600,
-                                ),
-                              ),
-                              CircleAvatar(
-                                radius: 12,
-                                backgroundColor: Kwhite,
-                                child: Icon(
-                                  Icons.arrow_forward,
-                                  color: Kform_border_twg,
-                                  size: 18.sp,
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
+                  // Row(
+                  //   mainAxisAlignment: MainAxisAlignment.end,
+                  //   children: [
+                  //     InkWell(
+                  //       onTap: () {
+                  //         Get.toNamed(kPublishedScreens);
+                  //       },
+                  //       child: Container(
+                  //         margin: EdgeInsets.only(top: 30.h),
+                  //         padding: EdgeInsets.only(left: 20.w, right: 20.w),
+                  //         height: 52,
+                  //         width: 160.w,
+                  //         alignment: Alignment.center,
+                  //         decoration: BoxDecoration(
+                  //           borderRadius: BorderRadius.circular(50.r),
+                  //           color: Kform_border_twg,
+                  //         ),
+                  //         child: Row(
+                  //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  //           children: [
+                  //             Text(
+                  //               "Published",
+                  //               textAlign: TextAlign.center,
+                  //               style: GoogleFonts.poppins(
+                  //                 fontSize: kFourteenFont,
+                  //                 color: Kwhite,
+                  //                 fontWeight: kFW600,
+                  //               ),
+                  //             ),
+                  //             CircleAvatar(
+                  //               radius: 12,
+                  //               backgroundColor: Kwhite,
+                  //               child: Icon(
+                  //                 Icons.arrow_forward,
+                  //                 color: Kform_border_twg,
+                  //                 size: 18.sp,
+                  //               ),
+                  //             )
+                  //           ],
+                  //         ),
+                  //       ),
+                  //     ),
+                  //   ],
+                  // ),
 
                   // CustomButton(
                   //   margin: EdgeInsets.only(top: 36.h),

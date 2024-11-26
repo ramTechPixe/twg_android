@@ -61,6 +61,7 @@ export 'package:twg/Screens/User/Semi/ai_post.dart';
 export 'package:twg/Screens/User/Semi/published_screens.dart';
 export 'package:twg/Screens/User/Semi/schedule_post_view.dart';
 export 'package:twg/Screens/User/Settings/wordpress.dart';
+export 'package:twg/Screens/User/Semi/preview_screen.dart';
 //Profile
 export 'package:twg/Screens/User/Profile/edit_profile.dart';
 

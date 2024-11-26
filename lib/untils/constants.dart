@@ -32,8 +32,8 @@ String kNointernetScreen = "/Screens/no_internet_screen.dart";
 String kFBAddDemoScreen = "/Screens/User/Tools/fb_ads_lead_demo.dart";
 String kFBAddApplyScreen = "/Screens/User/Tools/fb_add_apply.dart";
 String kWebAddDemoScreen = "/Screens/User/Tools/crm_tool_website_demo.dart";
-
-//   export 'package:twg/Controllers/multi_posting_controller.dart';
+String kPreviewScreen = "/Screens/User/Semi/preview_screen.dart";
+//    export 'package:twg/';
 //   export 'package:twg/';
 ////////// Fonts Size
 double kTenFont = MediaQueryData.fromWindow(WidgetsBinding.instance.window)

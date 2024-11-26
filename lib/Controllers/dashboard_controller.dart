@@ -15,11 +15,22 @@ class DashboardController extends GetxController {
   var selectedQuickPost = "Auto Post".obs;
 
   var selectedPublishedorScheduled = "Published".obs;
+  var selectedMediaType = "".obs;
   var selectedSocialPlatform = "General".obs;
   var autoPostUploadType = "image".obs;
   var selectappmethidType = "appmethod".obs;
   var choosenAutoCRMTool = "".obs;
   ProfileController userprofilecontroller = Get.put(ProfileController());
+
+  ///
+  var selectedImageobss = Rxn<File>();
+
+  // Function to update the selected file
+  void setSelectedImage(File? imageFile) {
+    selectedImageobss.value = imageFile;
+  }
+
+  /////
   TextEditingController v1 = TextEditingController();
   TextEditingController v2 = TextEditingController();
   TextEditingController v3 = TextEditingController();

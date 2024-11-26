@@ -167,6 +167,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           );
                         }),
                   ),
+                
                   dashboardcontroller.selectedSocialPlatform == "General"
                       ? Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
