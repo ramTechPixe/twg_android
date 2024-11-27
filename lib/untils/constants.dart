@@ -33,8 +33,9 @@ String kFBAddDemoScreen = "/Screens/User/Tools/fb_ads_lead_demo.dart";
 String kFBAddApplyScreen = "/Screens/User/Tools/fb_add_apply.dart";
 String kWebAddDemoScreen = "/Screens/User/Tools/crm_tool_website_demo.dart";
 String kPreviewScreen = "/Screens/User/Semi/preview_screen.dart";
-//    export 'package:twg/';
-//   export 'package:twg/';
+String kEditScheduleScreen =
+    "/Screens/User/Semi/Edit_post/edit_schedule_post.dart";
+
 ////////// Fonts Size
 double kTenFont = MediaQueryData.fromWindow(WidgetsBinding.instance.window)
             .size

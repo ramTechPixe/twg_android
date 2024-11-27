@@ -17,16 +17,28 @@ import 'package:image_pickers/image_pickers.dart';
 import 'dart:ui' as ui;
 import 'package:expandable_section/expandable_section.dart';
 
-class AiPost extends StatefulWidget {
-  const AiPost({super.key});
+class EditCustomPost extends StatefulWidget {
+  const EditCustomPost({super.key});
 
   @override
-  State<AiPost> createState() => _AiPostState();
+  State<EditCustomPost> createState() => _EditCustomPostState();
 }
 
-class _AiPostState extends State<AiPost> {
+class _EditCustomPostState extends State<EditCustomPost> {
   DashboardController dashboardcontroller = Get.put(DashboardController());
   GlobalKey? globalKey;
+  List<String> variantsList = [
+    'Ram',
+    "Komal",
+    "Usha",
+    "Raju",
+    "Bihar",
+    "Bangalore",
+    "UP",
+    "Pune",
+    "Surat",
+    "Nashik"
+  ];
   int _characterCount = 0;
   List<bool> _isExpandedList = [false, false, false];
   String? selectedValue;
@@ -48,6 +60,7 @@ class _AiPostState extends State<AiPost> {
     }
   }
 
+  List<String> selectedCheckBoxValue = [];
 ///////////
   bool _isfbExpandCard = false;
   bool isfbSwitched = false;
@@ -106,19 +119,6 @@ class _AiPostState extends State<AiPost> {
     globalKey = GlobalKey();
   }
 
-  List<String> variantsList = [
-    'Ram',
-    "Komal",
-    "Usha",
-    "Raju",
-    "Bihar",
-    "Bangalore",
-    "UP",
-    "Pune",
-    "Surat",
-    "Nashik"
-  ];
-  List<String> selectedCheckBoxValue = [];
   List<Media> _listImagePaths = [];
   List<Media> _listVideoPaths = [];
   List<Media> _listImageVideoPaths = [];
@@ -593,7 +593,62 @@ class _AiPostState extends State<AiPost> {
               ],
             ),
           ),
+          Container(
+            margin: EdgeInsets.only(top: 20),
+            width: double.infinity,
+            padding: EdgeInsets.all(14),
+            decoration: BoxDecoration(
+              border: GradientBoxBorder(
+                gradient: LinearGradient(colors: [
+                  Klight_grey_twg,
+                  Klight_grey_twg,
+                  Klight_grey_twg,
+                  Klight_grey_twg,
+                  Klight_grey_twg,
+                  Klight_grey_twg
+                ], begin: Alignment.topCenter, end: Alignment.bottomCenter),
+                width: 1,
+              ),
+              color: Kwhite,
+              borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(5),
+                  topRight: Radius.circular(5),
+                  bottomLeft: Radius.circular(5),
+                  bottomRight: Radius.circular(5)),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                CustomFormFields(
+                  ontap: () {
+                    //  Get.toNamed(kSearchPlaces); // kForgotPassword
+                  },
+                  enabled: true,
+                  labelColor: KText,
+                  onChanged: (Value) {
+                    setState(() {});
+                  },
+                  obscureText: false,
+                  contentPadding:
+                      const EdgeInsets.symmetric(vertical: 16, horizontal: 8),
+                  fontSize: kFourteenFont,
+                  fontWeight: FontWeight.w500,
+                  hintText: "Enter Content Link",
+                  maxLines: 1,
+                  readOnly: false,
+                  label: "Link",
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return 'Please enter Link';
+                    }
+                    return null;
+                  },
+                ),
 
+                //
+              ],
+            ),
+          ),
           Container(
             margin: EdgeInsets.only(top: 20),
             width: double.infinity,
@@ -1686,4 +1741,5 @@ class _AiPostState extends State<AiPost> {
       ),
     );
   }
+
 }

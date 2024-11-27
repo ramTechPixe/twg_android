@@ -62,6 +62,10 @@ export 'package:twg/Screens/User/Semi/published_screens.dart';
 export 'package:twg/Screens/User/Semi/schedule_post_view.dart';
 export 'package:twg/Screens/User/Settings/wordpress.dart';
 export 'package:twg/Screens/User/Semi/preview_screen.dart';
+export 'package:twg/Screens/User/Semi/Edit_post/edit_schedule_post.dart';
+export 'package:twg/Screens/User/Semi/Edit_post/edit_auto_post.dart';
+export 'package:twg/Screens/User/Semi/Edit_post/edit_custom_post.dart';
+export 'package:twg/Screens/User/Semi/Edit_post/edit_Ai_post.dart';
 //Profile
 export 'package:twg/Screens/User/Profile/edit_profile.dart';
 
@@ -96,3 +100,7 @@ export 'package:twg/Screens/User/Tools/fb_add_apply.dart';
 export 'package:twg/Screens/User/Tools/crm_tool_website_demo.dart';
 // settings
 export 'package:twg/Screens/no_internet_screen.dart';
+
+// Reports
+export 'package:twg/Screens/User/Reports/reports_screen.dart';
+export 'package:twg/Screens/User/Reports/bargraph.dart';

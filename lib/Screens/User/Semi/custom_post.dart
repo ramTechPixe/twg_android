@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:intl/intl.dart';
+import 'package:multiselect/multiselect.dart';
 import 'package:twg/untils/export_file.dart';
 import 'dart:io';
 import 'dart:typed_data';
@@ -30,9 +31,22 @@ class _CustomPostState extends State<CustomPost> {
   List<bool> _isExpandedList = [false, false, false];
   String? selectedValue;
   String? selectedGenderValue;
+  List<String> selectedCheckBoxValue = [];
   DateTime selectedDate = DateTime.now();
   DateTime choosenDate = DateTime.now();
   var selectDate = "Select Date".obs;
+  List<String> variantsList = [
+    'Ram',
+    "Komal",
+    "Usha",
+    "Raju",
+    "Bihar",
+    "Bangalore",
+    "UP",
+    "Pune",
+    "Surat",
+    "Nashik"
+  ];
   bool _switchValue = false;
   bool isSwitched = false;
   void toggleSwitch(bool value) async {
@@ -727,122 +741,167 @@ class _CustomPostState extends State<CustomPost> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
+                              // Text(
+                              //   "Select Accout",
+                              //   style: GoogleFonts.poppins(
+                              //       color: kblack,
+                              //       fontSize: kSixteenFont,
+                              //       fontWeight: kFW400),
+                              // ),
+                              // Container(
+                              //   margin: EdgeInsets.only(top: 10.h),
+                              //   decoration: BoxDecoration(
+                              //       borderRadius: BorderRadius.circular(10.0),
+                              //       color: Kwhite,
+                              //       boxShadow: [
+                              //         BoxShadow(
+                              //           color: kblack.withOpacity(0.2),
+                              //           blurRadius: 2.r,
+                              //           offset: Offset(1, 1),
+                              //           spreadRadius: 1.r,
+                              //         )
+                              //         // BoxShadow(
+                              //         //   color: Color(0x3FD3D1D8),
+                              //         //   blurRadius: 30,
+                              //         //   offset: Offset(15, 15),
+                              //         //   spreadRadius: 2,
+                              //         // )
+                              //       ]),
+                              //   child: DropdownButtonFormField2<String>(
+                              //     isExpanded: true,
+                              //     decoration: InputDecoration(
+                              //       enabledBorder: OutlineInputBorder(
+                              //         borderSide: BorderSide(
+                              //             color: kblack.withOpacity(0.6),
+                              //             width: 0.5),
+                              //         borderRadius: BorderRadius.circular(10.r),
+                              //       ),
+                              //       errorBorder: OutlineInputBorder(
+                              //         borderSide: BorderSide(
+                              //             color: kblack.withOpacity(0.6),
+                              //             width: 0.5),
+                              //         borderRadius: BorderRadius.circular(10.r),
+                              //       ),
+                              //       disabledBorder: OutlineInputBorder(
+                              //         borderSide: BorderSide(
+                              //             color: kblack.withOpacity(0.6),
+                              //             width: 0.5),
+                              //         borderRadius: BorderRadius.circular(10.r),
+                              //       ),
+                              //       focusedErrorBorder: OutlineInputBorder(
+                              //         borderSide: BorderSide(
+                              //             color: Kform_border_twg, width: 1),
+                              //         borderRadius: BorderRadius.circular(10.r),
+                              //       ),
+                              //       focusedBorder: OutlineInputBorder(
+                              //         borderSide: BorderSide(
+                              //             color: Kform_border_twg, width: 1),
+                              //         borderRadius: BorderRadius.circular(10.r),
+                              //       ),
+                              //       contentPadding: const EdgeInsets.symmetric(
+                              //           vertical: 10, horizontal: 8),
+                              //       border: OutlineInputBorder(
+                              //         borderRadius: BorderRadius.circular(10),
+                              //       ),
+                              //     ),
+                              //     hint: Text(
+                              //       'Select User',
+                              //       style: GoogleFonts.poppins(
+                              //         fontSize: 14,
+                              //         color: KTextgery.withOpacity(0.5),
+                              //       ),
+                              //     ),
+                              //     items: CompanyList.map(
+                              //         (item) => DropdownMenuItem<String>(
+                              //               value: item,
+                              //               child: Text(
+                              //                 item,
+                              //                 style: GoogleFonts.poppins(
+                              //                   fontSize: 14,
+                              //                 ),
+                              //               ),
+                              //             )).toList(),
+                              //     validator: (value) {
+                              //       if (value == null) {
+                              //         return 'Please select User.';
+                              //       }
+                              //       return null;
+                              //     },
+                              //     onChanged: (value) {
+                              //       setState(() {
+                              //         selectedUserValue = value.toString();
+                              //         setState(() {});
+                              //       });
+                              //     },
+                              //     onSaved: (value) {
+                              //       selectedUserValue = value.toString();
+                              //       print(selectedUserValue);
+                              //       setState(() {});
+                              //     },
+                              //     buttonStyleData: const ButtonStyleData(
+                              //       padding: EdgeInsets.only(right: 8),
+                              //     ),
+                              //     iconStyleData: IconStyleData(
+                              //       icon: Icon(
+                              //         Icons.arrow_drop_down,
+                              //         color: kblack.withOpacity(0.6),
+                              //       ),
+                              //       iconSize: 24,
+                              //     ),
+                              //     dropdownStyleData: DropdownStyleData(
+                              //       decoration: BoxDecoration(
+                              //         borderRadius: BorderRadius.circular(15),
+                              //       ),
+                              //     ),
+                              //     menuItemStyleData: const MenuItemStyleData(
+                              //       padding:
+                              //           EdgeInsets.symmetric(horizontal: 16),
+                              //     ),
+                              //   ),
+                              // ),
                               Text(
-                                "Select Accout",
+                                "Select Account",
                                 style: GoogleFonts.poppins(
-                                    color: kblack,
                                     fontSize: kSixteenFont,
-                                    fontWeight: kFW400),
+                                    color: kblack,
+                                    fontWeight: kFW500),
+                              ),
+                              SizedBox(
+                                height: 15.h,
                               ),
                               Container(
-                                margin: EdgeInsets.only(top: 10.h),
+                                width: double.infinity,
                                 decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10.0),
-                                    color: Kwhite,
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: kblack.withOpacity(0.2),
-                                        blurRadius: 2.r,
-                                        offset: Offset(1, 1),
-                                        spreadRadius: 1.r,
-                                      )
-                                      // BoxShadow(
-                                      //   color: Color(0x3FD3D1D8),
-                                      //   blurRadius: 30,
-                                      //   offset: Offset(15, 15),
-                                      //   spreadRadius: 2,
-                                      // )
-                                    ]),
-                                child: DropdownButtonFormField2<String>(
-                                  isExpanded: true,
+                                  borderRadius: BorderRadius.circular(8),
+                                  color: Kwhite,
+                                ),
+                                child: DropDownMultiSelect(
                                   decoration: InputDecoration(
-                                    enabledBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                          color: kblack.withOpacity(0.6),
-                                          width: 0.5),
-                                      borderRadius: BorderRadius.circular(10.r),
-                                    ),
-                                    errorBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                          color: kblack.withOpacity(0.6),
-                                          width: 0.5),
-                                      borderRadius: BorderRadius.circular(10.r),
-                                    ),
-                                    disabledBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                          color: kblack.withOpacity(0.6),
-                                          width: 0.5),
-                                      borderRadius: BorderRadius.circular(10.r),
-                                    ),
-                                    focusedErrorBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                          color: Kform_border_twg, width: 1),
-                                      borderRadius: BorderRadius.circular(10.r),
-                                    ),
-                                    focusedBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                          color: Kform_border_twg, width: 1),
-                                      borderRadius: BorderRadius.circular(10.r),
-                                    ),
-                                    contentPadding: const EdgeInsets.symmetric(
-                                        vertical: 10, horizontal: 8),
-                                    border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(10),
-                                    ),
+                                    contentPadding: EdgeInsets.symmetric(
+                                        vertical: 16, horizontal: 8),
+                                    fillColor: Kwhite,
+                                    focusColor:
+                                        Theme.of(context).colorScheme.onPrimary,
+                                    enabledBorder: const OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(8)),
+                                        borderSide: BorderSide(
+                                            color: KText_border_twg, width: 1)),
+                                    focusedBorder: const OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(8)),
+                                        borderSide: BorderSide(
+                                          color: Kform_border_twg,
+                                          width: 1,
+                                        )),
                                   ),
-                                  hint: Text(
-                                    'Select User',
-                                    style: GoogleFonts.poppins(
-                                      fontSize: 14,
-                                      color: KTextgery.withOpacity(0.5),
-                                    ),
-                                  ),
-                                  items: CompanyList.map(
-                                      (item) => DropdownMenuItem<String>(
-                                            value: item,
-                                            child: Text(
-                                              item,
-                                              style: GoogleFonts.poppins(
-                                                fontSize: 14,
-                                              ),
-                                            ),
-                                          )).toList(),
-                                  validator: (value) {
-                                    if (value == null) {
-                                      return 'Please select User.';
-                                    }
-                                    return null;
+                                  options: variantsList,
+                                  selectedValues: selectedCheckBoxValue,
+                                  onChanged: (List<String> value) {
+                                    //   value = selectedCheckBoxValue;
+                                    print("${selectedCheckBoxValue}");
                                   },
-                                  onChanged: (value) {
-                                    setState(() {
-                                      selectedUserValue = value.toString();
-                                      setState(() {});
-                                    });
-                                  },
-                                  onSaved: (value) {
-                                    selectedUserValue = value.toString();
-                                    print(selectedUserValue);
-                                    setState(() {});
-                                  },
-                                  buttonStyleData: const ButtonStyleData(
-                                    padding: EdgeInsets.only(right: 8),
-                                  ),
-                                  iconStyleData: IconStyleData(
-                                    icon: Icon(
-                                      Icons.arrow_drop_down,
-                                      color: kblack.withOpacity(0.6),
-                                    ),
-                                    iconSize: 24,
-                                  ),
-                                  dropdownStyleData: DropdownStyleData(
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(15),
-                                    ),
-                                  ),
-                                  menuItemStyleData: const MenuItemStyleData(
-                                    padding:
-                                        EdgeInsets.symmetric(horizontal: 16),
-                                  ),
+                                  whenEmpty: 'Select User',
                                 ),
                               ),
                               SizedBox(
@@ -879,47 +938,149 @@ class _CustomPostState extends State<CustomPost> {
                               SizedBox(
                                 height: 20.h,
                               ),
-                              Stack(
-                                children: [
-                                  CustomFormFields(
-                                    ontap: () {
-                                      //  Get.toNamed(kSearchPlaces);
+                              CustomFormFields(
+                                hintText:
+                                    DateFormat.yMMMd().format(selectedDate) ==
+                                            DateFormat.yMMMd()
+                                                .format(DateTime.now())
+                                        ? "Select Date & Time"
+                                        : DateFormat('dd/MM/yyyy hh:mm a')
+                                            .format(selectedDate),
+                                ontap: () async {
+                                  // Step 1: Show Date Picker
+                                  final DateTime? pickedDate =
+                                      await showDatePicker(
+                                    context: context,
+                                    initialDate: selectedDate,
+                                    firstDate: DateTime(1924, 8),
+                                    lastDate: DateTime(2025, 8),
+                                    builder: (context, child) {
+                                      return Theme(
+                                        data: Theme.of(context).copyWith(
+                                          colorScheme: const ColorScheme.light(
+                                            primary:
+                                                Kform_border_twg, // Primary color for date picker
+                                            onSurface: Colors
+                                                .black, // Text color for unselected items
+                                          ),
+                                        ),
+                                        child: child!,
+                                      );
                                     },
-                                    enabled: true,
-                                    //    controller: userprofilecontroller.editFirstNameController,
-                                    labelColor: KText,
-                                    obscureText: false,
-                                    contentPadding: const EdgeInsets.symmetric(
-                                        vertical: 16, horizontal: 8),
-                                    fontSize: kFourteenFont,
-                                    fontWeight: FontWeight.w500,
-                                    hintText: "",
-                                    maxLines: 1,
-                                    readOnly: false,
-                                    label: "Schedule Individually",
-                                    validator: (value) {
-                                      if (value!.isEmpty) {
-                                        return 'Please enter data';
-                                      }
-                                      return null;
-                                    },
-                                  ),
-                                  Positioned(
-                                    right: 60,
-                                    child: CircleAvatar(
-                                      radius: 11.r,
-                                      backgroundColor: kblack,
-                                      child: Text(
-                                        "?",
-                                        style: GoogleFonts.poppins(
-                                            color: Kwhite,
-                                            fontSize: kSixteenFont,
-                                            fontWeight: kFW400),
-                                      ),
-                                    ),
-                                  ),
-                                ],
+                                  );
+
+                                  if (pickedDate != null) {
+                                    // Step 2: Show Time Picker
+                                    final TimeOfDay? pickedTime =
+                                        await showTimePicker(
+                                      context: context,
+                                      initialTime:
+                                          TimeOfDay.fromDateTime(selectedDate),
+                                      builder: (context, child) {
+                                        return Theme(
+                                          data: Theme.of(context).copyWith(
+                                            timePickerTheme:
+                                                const TimePickerThemeData(
+                                              dialBackgroundColor: Colors.white,
+                                              hourMinuteTextColor: Colors.black,
+                                            ),
+                                          ),
+                                          child: child!,
+                                        );
+                                      },
+                                    );
+
+                                    if (pickedTime != null) {
+                                      // Step 3: Combine Date and Time
+                                      setState(() {
+                                        selectedDate = DateTime(
+                                          pickedDate.year,
+                                          pickedDate.month,
+                                          pickedDate.day,
+                                          pickedTime.hour,
+                                          pickedTime.minute,
+                                        );
+                                        choosenDate =
+                                            selectedDate; // Store the selected date
+                                        selectDate.value =
+                                            DateFormat('MM/dd/yyyy hh:mm a')
+                                                .format(selectedDate);
+                                      });
+                                    }
+                                  }
+                                },
+                                enabled: true,
+                                readOnly: true,
+                                labelColor: KText,
+                                onChanged: (value) {
+                                  setState(() {});
+                                },
+                                obscureText: false,
+                                contentPadding: const EdgeInsets.symmetric(
+                                    vertical: 16, horizontal: 8),
+                                fontSize: kFourteenFont,
+                                // prefix: Image.asset(
+                                //   "assets/images/black_clock.png",
+                                //   height: 10.h,
+                                //   width: 10.w,
+                                // ),
+                                fontWeight: FontWeight.w500,
+                                hintColor:
+                                    DateFormat.yMMMd().format(selectedDate) ==
+                                            DateFormat.yMMMd()
+                                                .format(DateTime.now())
+                                        ? KTextgery.withOpacity(0.5)
+                                        : KdarkText,
+                                maxLines: 1,
+                                label: "Schedule Individual",
+                                validator: (value) {
+                                  if (value!.isEmpty) {
+                                    return 'Please Schedule';
+                                  }
+                                  return null;
+                                },
                               ),
+                              // Stack(
+                              //   children: [
+                              //     CustomFormFields(
+                              //       ontap: () {
+                              //         //  Get.toNamed(kSearchPlaces);
+                              //       },
+                              //       enabled: true,
+                              //       //    controller: userprofilecontroller.editFirstNameController,
+                              //       labelColor: KText,
+                              //       obscureText: false,
+                              //       contentPadding: const EdgeInsets.symmetric(
+                              //           vertical: 16, horizontal: 8),
+                              //       fontSize: kFourteenFont,
+                              //       fontWeight: FontWeight.w500,
+                              //       hintText: "",
+                              //       maxLines: 1,
+                              //       readOnly: false,
+                              //       label: "Schedule Individually",
+                              //       validator: (value) {
+                              //         if (value!.isEmpty) {
+                              //           return 'Please enter data';
+                              //         }
+                              //         return null;
+                              //       },
+                              //     ),
+                              //     Positioned(
+                              //       right: 60,
+                              //       child: CircleAvatar(
+                              //         radius: 11.r,
+                              //         backgroundColor: kblack,
+                              //         child: Text(
+                              //           "?",
+                              //           style: GoogleFonts.poppins(
+                              //               color: Kwhite,
+                              //               fontSize: kSixteenFont,
+                              //               fontWeight: kFW400),
+                              //         ),
+                              //       ),
+                              //     ),
+                              //   ],
+                              // ),
                             ],
                           ),
                         ),
@@ -989,122 +1150,167 @@ class _CustomPostState extends State<CustomPost> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
+                              // Text(
+                              //   "Select Accout",
+                              //   style: GoogleFonts.poppins(
+                              //       color: kblack,
+                              //       fontSize: kSixteenFont,
+                              //       fontWeight: kFW400),
+                              // ),
+                              // Container(
+                              //   margin: EdgeInsets.only(top: 10.h),
+                              //   decoration: BoxDecoration(
+                              //       borderRadius: BorderRadius.circular(10.0),
+                              //       color: Kwhite,
+                              //       boxShadow: [
+                              //         BoxShadow(
+                              //           color: kblack.withOpacity(0.2),
+                              //           blurRadius: 2.r,
+                              //           offset: Offset(1, 1),
+                              //           spreadRadius: 1.r,
+                              //         )
+                              //         // BoxShadow(
+                              //         //   color: Color(0x3FD3D1D8),
+                              //         //   blurRadius: 30,
+                              //         //   offset: Offset(15, 15),
+                              //         //   spreadRadius: 2,
+                              //         // )
+                              //       ]),
+                              //   child: DropdownButtonFormField2<String>(
+                              //     isExpanded: true,
+                              //     decoration: InputDecoration(
+                              //       enabledBorder: OutlineInputBorder(
+                              //         borderSide: BorderSide(
+                              //             color: kblack.withOpacity(0.6),
+                              //             width: 0.5),
+                              //         borderRadius: BorderRadius.circular(10.r),
+                              //       ),
+                              //       errorBorder: OutlineInputBorder(
+                              //         borderSide: BorderSide(
+                              //             color: kblack.withOpacity(0.6),
+                              //             width: 0.5),
+                              //         borderRadius: BorderRadius.circular(10.r),
+                              //       ),
+                              //       disabledBorder: OutlineInputBorder(
+                              //         borderSide: BorderSide(
+                              //             color: kblack.withOpacity(0.6),
+                              //             width: 0.5),
+                              //         borderRadius: BorderRadius.circular(10.r),
+                              //       ),
+                              //       focusedErrorBorder: OutlineInputBorder(
+                              //         borderSide: BorderSide(
+                              //             color: Kform_border_twg, width: 1),
+                              //         borderRadius: BorderRadius.circular(10.r),
+                              //       ),
+                              //       focusedBorder: OutlineInputBorder(
+                              //         borderSide: BorderSide(
+                              //             color: Kform_border_twg, width: 1),
+                              //         borderRadius: BorderRadius.circular(10.r),
+                              //       ),
+                              //       contentPadding: const EdgeInsets.symmetric(
+                              //           vertical: 10, horizontal: 8),
+                              //       border: OutlineInputBorder(
+                              //         borderRadius: BorderRadius.circular(10),
+                              //       ),
+                              //     ),
+                              //     hint: Text(
+                              //       'Select User',
+                              //       style: GoogleFonts.poppins(
+                              //         fontSize: 14,
+                              //         color: KTextgery.withOpacity(0.5),
+                              //       ),
+                              //     ),
+                              //     items: CompanyList.map(
+                              //         (item) => DropdownMenuItem<String>(
+                              //               value: item,
+                              //               child: Text(
+                              //                 item,
+                              //                 style: GoogleFonts.poppins(
+                              //                   fontSize: 14,
+                              //                 ),
+                              //               ),
+                              //             )).toList(),
+                              //     validator: (value) {
+                              //       if (value == null) {
+                              //         return 'Please select User.';
+                              //       }
+                              //       return null;
+                              //     },
+                              //     onChanged: (value) {
+                              //       setState(() {
+                              //         selectedUserValue = value.toString();
+                              //         setState(() {});
+                              //       });
+                              //     },
+                              //     onSaved: (value) {
+                              //       selectedUserValue = value.toString();
+                              //       print(selectedUserValue);
+                              //       setState(() {});
+                              //     },
+                              //     buttonStyleData: const ButtonStyleData(
+                              //       padding: EdgeInsets.only(right: 8),
+                              //     ),
+                              //     iconStyleData: IconStyleData(
+                              //       icon: Icon(
+                              //         Icons.arrow_drop_down,
+                              //         color: kblack.withOpacity(0.6),
+                              //       ),
+                              //       iconSize: 24,
+                              //     ),
+                              //     dropdownStyleData: DropdownStyleData(
+                              //       decoration: BoxDecoration(
+                              //         borderRadius: BorderRadius.circular(15),
+                              //       ),
+                              //     ),
+                              //     menuItemStyleData: const MenuItemStyleData(
+                              //       padding:
+                              //           EdgeInsets.symmetric(horizontal: 16),
+                              //     ),
+                              //   ),
+                              // ),
                               Text(
-                                "Select Accout",
+                                "Select Account",
                                 style: GoogleFonts.poppins(
-                                    color: kblack,
                                     fontSize: kSixteenFont,
-                                    fontWeight: kFW400),
+                                    color: kblack,
+                                    fontWeight: kFW500),
+                              ),
+                              SizedBox(
+                                height: 15.h,
                               ),
                               Container(
-                                margin: EdgeInsets.only(top: 10.h),
+                                width: double.infinity,
                                 decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10.0),
-                                    color: Kwhite,
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: kblack.withOpacity(0.2),
-                                        blurRadius: 2.r,
-                                        offset: Offset(1, 1),
-                                        spreadRadius: 1.r,
-                                      )
-                                      // BoxShadow(
-                                      //   color: Color(0x3FD3D1D8),
-                                      //   blurRadius: 30,
-                                      //   offset: Offset(15, 15),
-                                      //   spreadRadius: 2,
-                                      // )
-                                    ]),
-                                child: DropdownButtonFormField2<String>(
-                                  isExpanded: true,
+                                  borderRadius: BorderRadius.circular(8),
+                                  color: Kwhite,
+                                ),
+                                child: DropDownMultiSelect(
                                   decoration: InputDecoration(
-                                    enabledBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                          color: kblack.withOpacity(0.6),
-                                          width: 0.5),
-                                      borderRadius: BorderRadius.circular(10.r),
-                                    ),
-                                    errorBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                          color: kblack.withOpacity(0.6),
-                                          width: 0.5),
-                                      borderRadius: BorderRadius.circular(10.r),
-                                    ),
-                                    disabledBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                          color: kblack.withOpacity(0.6),
-                                          width: 0.5),
-                                      borderRadius: BorderRadius.circular(10.r),
-                                    ),
-                                    focusedErrorBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                          color: Kform_border_twg, width: 1),
-                                      borderRadius: BorderRadius.circular(10.r),
-                                    ),
-                                    focusedBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                          color: Kform_border_twg, width: 1),
-                                      borderRadius: BorderRadius.circular(10.r),
-                                    ),
-                                    contentPadding: const EdgeInsets.symmetric(
-                                        vertical: 10, horizontal: 8),
-                                    border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(10),
-                                    ),
+                                    contentPadding: EdgeInsets.symmetric(
+                                        vertical: 16, horizontal: 8),
+                                    fillColor: Kwhite,
+                                    focusColor:
+                                        Theme.of(context).colorScheme.onPrimary,
+                                    enabledBorder: const OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(8)),
+                                        borderSide: BorderSide(
+                                            color: KText_border_twg, width: 1)),
+                                    focusedBorder: const OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(8)),
+                                        borderSide: BorderSide(
+                                          color: Kform_border_twg,
+                                          width: 1,
+                                        )),
                                   ),
-                                  hint: Text(
-                                    'Select User',
-                                    style: GoogleFonts.poppins(
-                                      fontSize: 14,
-                                      color: KTextgery.withOpacity(0.5),
-                                    ),
-                                  ),
-                                  items: CompanyList.map(
-                                      (item) => DropdownMenuItem<String>(
-                                            value: item,
-                                            child: Text(
-                                              item,
-                                              style: GoogleFonts.poppins(
-                                                fontSize: 14,
-                                              ),
-                                            ),
-                                          )).toList(),
-                                  validator: (value) {
-                                    if (value == null) {
-                                      return 'Please select User.';
-                                    }
-                                    return null;
+                                  options: variantsList,
+                                  selectedValues: selectedCheckBoxValue,
+                                  onChanged: (List<String> value) {
+                                    //   value = selectedCheckBoxValue;
+                                    print("${selectedCheckBoxValue}");
                                   },
-                                  onChanged: (value) {
-                                    setState(() {
-                                      selectedUserValue = value.toString();
-                                      setState(() {});
-                                    });
-                                  },
-                                  onSaved: (value) {
-                                    selectedUserValue = value.toString();
-                                    print(selectedUserValue);
-                                    setState(() {});
-                                  },
-                                  buttonStyleData: const ButtonStyleData(
-                                    padding: EdgeInsets.only(right: 8),
-                                  ),
-                                  iconStyleData: IconStyleData(
-                                    icon: Icon(
-                                      Icons.arrow_drop_down,
-                                      color: kblack.withOpacity(0.6),
-                                    ),
-                                    iconSize: 24,
-                                  ),
-                                  dropdownStyleData: DropdownStyleData(
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(15),
-                                    ),
-                                  ),
-                                  menuItemStyleData: const MenuItemStyleData(
-                                    padding:
-                                        EdgeInsets.symmetric(horizontal: 16),
-                                  ),
+                                  whenEmpty: 'Select User',
                                 ),
                               ),
                               SizedBox(
@@ -1141,47 +1347,149 @@ class _CustomPostState extends State<CustomPost> {
                               SizedBox(
                                 height: 20.h,
                               ),
-                              Stack(
-                                children: [
-                                  CustomFormFields(
-                                    ontap: () {
-                                      //  Get.toNamed(kSearchPlaces);
+                              CustomFormFields(
+                                hintText:
+                                    DateFormat.yMMMd().format(selectedDate) ==
+                                            DateFormat.yMMMd()
+                                                .format(DateTime.now())
+                                        ? "Select Date & Time"
+                                        : DateFormat('dd/MM/yyyy hh:mm a')
+                                            .format(selectedDate),
+                                ontap: () async {
+                                  // Step 1: Show Date Picker
+                                  final DateTime? pickedDate =
+                                      await showDatePicker(
+                                    context: context,
+                                    initialDate: selectedDate,
+                                    firstDate: DateTime(1924, 8),
+                                    lastDate: DateTime(2025, 8),
+                                    builder: (context, child) {
+                                      return Theme(
+                                        data: Theme.of(context).copyWith(
+                                          colorScheme: const ColorScheme.light(
+                                            primary:
+                                                Kform_border_twg, // Primary color for date picker
+                                            onSurface: Colors
+                                                .black, // Text color for unselected items
+                                          ),
+                                        ),
+                                        child: child!,
+                                      );
                                     },
-                                    enabled: true,
-                                    //    controller: userprofilecontroller.editFirstNameController,
-                                    labelColor: KText,
-                                    obscureText: false,
-                                    contentPadding: const EdgeInsets.symmetric(
-                                        vertical: 16, horizontal: 8),
-                                    fontSize: kFourteenFont,
-                                    fontWeight: FontWeight.w500,
-                                    hintText: "",
-                                    maxLines: 1,
-                                    readOnly: false,
-                                    label: "Schedule Individually",
-                                    validator: (value) {
-                                      if (value!.isEmpty) {
-                                        return 'Please enter data';
-                                      }
-                                      return null;
-                                    },
-                                  ),
-                                  Positioned(
-                                    right: 60,
-                                    child: CircleAvatar(
-                                      radius: 11.r,
-                                      backgroundColor: kblack,
-                                      child: Text(
-                                        "?",
-                                        style: GoogleFonts.poppins(
-                                            color: Kwhite,
-                                            fontSize: kSixteenFont,
-                                            fontWeight: kFW400),
-                                      ),
-                                    ),
-                                  ),
-                                ],
+                                  );
+
+                                  if (pickedDate != null) {
+                                    // Step 2: Show Time Picker
+                                    final TimeOfDay? pickedTime =
+                                        await showTimePicker(
+                                      context: context,
+                                      initialTime:
+                                          TimeOfDay.fromDateTime(selectedDate),
+                                      builder: (context, child) {
+                                        return Theme(
+                                          data: Theme.of(context).copyWith(
+                                            timePickerTheme:
+                                                const TimePickerThemeData(
+                                              dialBackgroundColor: Colors.white,
+                                              hourMinuteTextColor: Colors.black,
+                                            ),
+                                          ),
+                                          child: child!,
+                                        );
+                                      },
+                                    );
+
+                                    if (pickedTime != null) {
+                                      // Step 3: Combine Date and Time
+                                      setState(() {
+                                        selectedDate = DateTime(
+                                          pickedDate.year,
+                                          pickedDate.month,
+                                          pickedDate.day,
+                                          pickedTime.hour,
+                                          pickedTime.minute,
+                                        );
+                                        choosenDate =
+                                            selectedDate; // Store the selected date
+                                        selectDate.value =
+                                            DateFormat('MM/dd/yyyy hh:mm a')
+                                                .format(selectedDate);
+                                      });
+                                    }
+                                  }
+                                },
+                                enabled: true,
+                                readOnly: true,
+                                labelColor: KText,
+                                onChanged: (value) {
+                                  setState(() {});
+                                },
+                                obscureText: false,
+                                contentPadding: const EdgeInsets.symmetric(
+                                    vertical: 16, horizontal: 8),
+                                fontSize: kFourteenFont,
+                                // prefix: Image.asset(
+                                //   "assets/images/black_clock.png",
+                                //   height: 10.h,
+                                //   width: 10.w,
+                                // ),
+                                fontWeight: FontWeight.w500,
+                                hintColor:
+                                    DateFormat.yMMMd().format(selectedDate) ==
+                                            DateFormat.yMMMd()
+                                                .format(DateTime.now())
+                                        ? KTextgery.withOpacity(0.5)
+                                        : KdarkText,
+                                maxLines: 1,
+                                label: "Schedule Individual",
+                                validator: (value) {
+                                  if (value!.isEmpty) {
+                                    return 'Please Schedule';
+                                  }
+                                  return null;
+                                },
                               ),
+                              // Stack(
+                              //   children: [
+                              //     CustomFormFields(
+                              //       ontap: () {
+                              //         //  Get.toNamed(kSearchPlaces);
+                              //       },
+                              //       enabled: true,
+                              //       //    controller: userprofilecontroller.editFirstNameController,
+                              //       labelColor: KText,
+                              //       obscureText: false,
+                              //       contentPadding: const EdgeInsets.symmetric(
+                              //           vertical: 16, horizontal: 8),
+                              //       fontSize: kFourteenFont,
+                              //       fontWeight: FontWeight.w500,
+                              //       hintText: "",
+                              //       maxLines: 1,
+                              //       readOnly: false,
+                              //       label: "Schedule Individually",
+                              //       validator: (value) {
+                              //         if (value!.isEmpty) {
+                              //           return 'Please enter data';
+                              //         }
+                              //         return null;
+                              //       },
+                              //     ),
+                              //     Positioned(
+                              //       right: 60,
+                              //       child: CircleAvatar(
+                              //         radius: 11.r,
+                              //         backgroundColor: kblack,
+                              //         child: Text(
+                              //           "?",
+                              //           style: GoogleFonts.poppins(
+                              //               color: Kwhite,
+                              //               fontSize: kSixteenFont,
+                              //               fontWeight: kFW400),
+                              //         ),
+                              //       ),
+                              //     ),
+                              //   ],
+                              // ),
                             ],
                           ),
                         ),
@@ -1192,6 +1500,7 @@ class _CustomPostState extends State<CustomPost> {
               ],
             ),
           ),
+
           Container(
             margin: EdgeInsets.only(top: 20),
             width: double.infinity,
@@ -1224,52 +1533,44 @@ class _CustomPostState extends State<CustomPost> {
                     SizedBox(
                       width: MediaQuery.of(context).size.width / 2.5,
                       child: CustomFormFields(
-                        hintText:
-                            // selectedDate == DateTime.now()
-                            DateFormat.yMMMd().format(selectedDate) ==
-                                    DateFormat.yMMMd().format(DateTime.now())
-                                ? "Select Date"
-                                : DateFormat('dd/MM/yyyy')
-                                    // DateFormat.yMMMEd()
-                                    .format(selectedDate),
-                        ontap: () {},
-                        enabled: true,
-                        readOnly: true,
-//keyboardType: TextInput.ke,
-                        labelColor: KText,
-                        onChanged: (Value) {
-                          setState(() {});
-                        },
-                        obscureText: false,
-                        contentPadding: const EdgeInsets.symmetric(
-                            vertical: 16, horizontal: 8),
-                        fontSize: kFourteenFont,
-                        prefix: InkWell(
-                          onTap: () async {
-                            // setState(() {
-                            //   isFormOpen.value = true;
-                            // });
-                            final DateTime? picked = await showDatePicker(
-                              context: context,
-                              initialDate: selectedDate,
-                              firstDate: DateTime(1924, 8),
+                        hintText: DateFormat.yMMMd().format(selectedDate) ==
+                                DateFormat.yMMMd().format(DateTime.now())
+                            ? "Select Date & Time"
+                            : DateFormat('dd/MM/yyyy hh:mm a')
+                                .format(selectedDate),
+                        ontap: () async {
+                          // Step 1: Show Date Picker
+                          final DateTime? pickedDate = await showDatePicker(
+                            context: context,
+                            initialDate: selectedDate,
+                            firstDate: DateTime(1924, 8),
+                            lastDate: DateTime(2025, 8),
+                            builder: (context, child) {
+                              return Theme(
+                                data: Theme.of(context).copyWith(
+                                  colorScheme: const ColorScheme.light(
+                                    primary:
+                                        Kform_border_twg, // Primary color for date picker
+                                    onSurface: Colors
+                                        .black, // Text color for unselected items
+                                  ),
+                                ),
+                                child: child!,
+                              );
+                            },
+                          );
 
-                              //  firstDate: DateTime(2015, 8),
-                              lastDate: DateTime(2025, 8),
-                              //  lastDate: DateTime.now(),
+                          if (pickedDate != null) {
+                            // Step 2: Show Time Picker
+                            final TimeOfDay? pickedTime = await showTimePicker(
+                              context: context,
+                              initialTime: TimeOfDay.fromDateTime(selectedDate),
                               builder: (context, child) {
                                 return Theme(
                                   data: Theme.of(context).copyWith(
-                                    colorScheme: const ColorScheme.light(
-                                      // background: white,
-                                      primary: Kform_border_twg,
-                                      //onPrimary: white,
-                                      onSurface: Colors.black,
-                                    ),
-                                    textButtonTheme: TextButtonThemeData(
-                                      style: TextButton.styleFrom(
-                                          // primary: Kbluedark,
-                                          ),
+                                    timePickerTheme: const TimePickerThemeData(
+                                      dialBackgroundColor: Colors.white,
+                                      hourMinuteTextColor: Colors.black,
                                     ),
                                   ),
                                   child: child!,
@@ -1277,44 +1578,145 @@ class _CustomPostState extends State<CustomPost> {
                               },
                             );
 
-                            if (picked != null && picked != selectedDate) {
+                            if (pickedTime != null) {
+                              // Step 3: Combine Date and Time
                               setState(() {
-                                selectedDate = picked;
-                                choosenDate = selectedDate;
-                                selectDate.value = DateFormat('MM/dd/yyyy')
-                                    // DateFormat.yMMMEd()
-                                    .format(selectedDate);
+                                selectedDate = DateTime(
+                                  pickedDate.year,
+                                  pickedDate.month,
+                                  pickedDate.day,
+                                  pickedTime.hour,
+                                  pickedTime.minute,
+                                );
+                                choosenDate =
+                                    selectedDate; // Store the selected date
+                                selectDate.value =
+                                    DateFormat('MM/dd/yyyy hh:mm a')
+                                        .format(selectedDate);
                               });
-                              //  }
-                              // setState(() {
-                              //   selectedDate = picked;
-                              //   choosenDate = selectedDate;
-                              // }
-                              // );
                             }
-                          },
-                          child: Image.asset(
-                            "assets/images/black_clock.png",
-                            height: 10.h,
-                            width: 10.w,
-                          ),
-                        ),
+                          }
+                        },
+                        enabled: true,
+                        readOnly: true,
+                        labelColor: KText,
+                        onChanged: (value) {
+                          setState(() {});
+                        },
+                        obscureText: false,
+                        contentPadding: const EdgeInsets.symmetric(
+                            vertical: 16, horizontal: 8),
+                        fontSize: kFourteenFont,
+                        // prefix: Image.asset(
+                        //   "assets/images/black_clock.png",
+                        //   height: 10.h,
+                        //   width: 10.w,
+                        // ),
                         fontWeight: FontWeight.w500,
                         hintColor: DateFormat.yMMMd().format(selectedDate) ==
                                 DateFormat.yMMMd().format(DateTime.now())
                             ? KTextgery.withOpacity(0.5)
                             : KdarkText,
                         maxLines: 1,
-
-                        label: "",
+                        label: "Schedule Global",
                         validator: (value) {
                           if (value!.isEmpty) {
-                            return 'Please  Schedule';
+                            return 'Please Schedule';
                           }
                           return null;
                         },
                       ),
-                    ),
+                    )
+
+//                     SizedBox(
+//                       width: MediaQuery.of(context).size.width / 2.5,
+//                       child: CustomFormFields(
+//                         hintText:
+//                             // selectedDate == DateTime.now()
+//                             DateFormat.yMMMd().format(selectedDate) ==
+//                                     DateFormat.yMMMd().format(DateTime.now())
+//                                 ? "Select Date"
+//                                 : DateFormat('dd/MM/yyyy')
+//                                     // DateFormat.yMMMEd()
+//                                     .format(selectedDate),
+//                         ontap: () async {
+//                           final DateTime? picked = await showDatePicker(
+//                             context: context,
+//                             initialDate: selectedDate,
+//                             firstDate: DateTime(1924, 8),
+
+//                             //  firstDate: DateTime(2015, 8),
+//                             lastDate: DateTime(2025, 8),
+//                             //  lastDate: DateTime.now(),
+//                             builder: (context, child) {
+//                               return Theme(
+//                                 data: Theme.of(context).copyWith(
+//                                   colorScheme: const ColorScheme.light(
+//                                     // background: white,
+//                                     primary: Kform_border_twg,
+//                                     //onPrimary: white,
+//                                     onSurface: Colors.black,
+//                                   ),
+//                                   textButtonTheme: TextButtonThemeData(
+//                                     style: TextButton.styleFrom(
+//                                         // primary: Kbluedark,
+//                                         ),
+//                                   ),
+//                                 ),
+//                                 child: child!,
+//                               );
+//                             },
+//                           );
+
+//                           if (picked != null && picked != selectedDate) {
+//                             setState(() {
+//                               selectedDate = picked;
+//                               choosenDate = selectedDate;
+//                               selectDate.value = DateFormat('MM/dd/yyyy')
+//                                   // DateFormat.yMMMEd()
+//                                   .format(selectedDate);
+//                             });
+//                             //  }
+//                             // setState(() {
+//                             //   selectedDate = picked;
+//                             //   choosenDate = selectedDate;
+//                             // }
+//                             // );
+//                           }
+//                         },
+//                         enabled: true,
+//                         readOnly: true,
+// //keyboardType: TextInput.ke,
+//                         labelColor: KText,
+//                         onChanged: (Value) {
+//                           setState(() {});
+//                         },
+//                         obscureText: false,
+//                         contentPadding: const EdgeInsets.symmetric(
+//                             vertical: 16, horizontal: 8),
+//                         fontSize: kFourteenFont,
+//                         prefix: Image.asset(
+//                           "assets/images/black_clock.png",
+//                           height: 10.h,
+//                           width: 10.w,
+//                         ),
+//                         fontWeight: FontWeight.w500,
+//                         hintColor: DateFormat.yMMMd().format(selectedDate) ==
+//                                 DateFormat.yMMMd().format(DateTime.now())
+//                             ? KTextgery.withOpacity(0.5)
+//                             : KdarkText,
+//                         maxLines: 1,
+
+//                         label: "Schedule Global",
+//                         validator: (value) {
+//                           if (value!.isEmpty) {
+//                             return 'Please  Schedule';
+//                           }
+//                           return null;
+//                         },
+//                       ),
+//                     ),
+                    ,
                     CustomButton(
                         borderRadius: BorderRadius.circular(5.r),
                         Color: Kform_border_twg,
@@ -1331,6 +1733,7 @@ class _CustomPostState extends State<CustomPost> {
               ],
             ),
           ),
+
           // SizedBox(
           //   height: 80.h,
           // )

@@ -17,6 +17,7 @@ class DashboardController extends GetxController {
   var selectedPublishedorScheduled = "Published".obs;
   var selectedMediaType = "".obs;
   var selectedSocialPlatform = "General".obs;
+  var selectedSocialMediaGraph = "".obs;
   var autoPostUploadType = "image".obs;
   var selectappmethidType = "appmethod".obs;
   var choosenAutoCRMTool = "".obs;

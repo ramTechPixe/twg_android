@@ -17,14 +17,14 @@ import 'package:image_pickers/image_pickers.dart';
 import 'dart:ui' as ui;
 import 'package:expandable_section/expandable_section.dart';
 
-class AiPost extends StatefulWidget {
-  const AiPost({super.key});
+class EditAiPost extends StatefulWidget {
+  const EditAiPost({super.key});
 
   @override
-  State<AiPost> createState() => _AiPostState();
+  State<EditAiPost> createState() => _EditAiPostState();
 }
 
-class _AiPostState extends State<AiPost> {
+class _EditAiPostState extends State<EditAiPost> {
   DashboardController dashboardcontroller = Get.put(DashboardController());
   GlobalKey? globalKey;
   int _characterCount = 0;
@@ -88,11 +88,23 @@ class _AiPostState extends State<AiPost> {
     }
   }
 
+  List<String> selectedCheckBoxValue = [];
   final List<String> CompanyList = [
     'Ram',
     'Suresh',
   ];
-
+  List<String> variantsList = [
+    'Ram',
+    "Komal",
+    "Usha",
+    "Raju",
+    "Bihar",
+    "Bangalore",
+    "UP",
+    "Pune",
+    "Surat",
+    "Nashik"
+  ];
   String? selectedUserValue;
 ////////
   @override
@@ -106,19 +118,6 @@ class _AiPostState extends State<AiPost> {
     globalKey = GlobalKey();
   }
 
-  List<String> variantsList = [
-    'Ram',
-    "Komal",
-    "Usha",
-    "Raju",
-    "Bihar",
-    "Bangalore",
-    "UP",
-    "Pune",
-    "Surat",
-    "Nashik"
-  ];
-  List<String> selectedCheckBoxValue = [];
   List<Media> _listImagePaths = [];
   List<Media> _listVideoPaths = [];
   List<Media> _listImageVideoPaths = [];
@@ -1686,4 +1685,5 @@ class _AiPostState extends State<AiPost> {
       ),
     );
   }
+
 }
