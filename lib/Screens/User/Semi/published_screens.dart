@@ -485,10 +485,16 @@ class _PublishedScreensState extends State<PublishedScreens> {
                                             SizedBox(height: 8.h),
                                             Row(
                                               children: [
-                                                Image.asset(
-                                                  "assets/images/edit-outline.png",
-                                                  height: 23.h,
-                                                  width: 23.h,
+                                                InkWell(
+                                                  onTap: () {
+                                                    Get.toNamed(
+                                                        kEditScheduleScreen);
+                                                  },
+                                                  child: Image.asset(
+                                                    "assets/images/edit-outline.png",
+                                                    height: 23.h,
+                                                    width: 23.h,
+                                                  ),
                                                 ),
                                                 SizedBox(
                                                   width: 10.w,

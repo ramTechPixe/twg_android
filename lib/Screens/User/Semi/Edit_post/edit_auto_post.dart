@@ -17,14 +17,14 @@ import 'package:image_pickers/image_pickers.dart';
 import 'dart:ui' as ui;
 import 'package:expandable_section/expandable_section.dart';
 
-class AiPost extends StatefulWidget {
-  const AiPost({super.key});
+class EditAutoPost extends StatefulWidget {
+  const EditAutoPost({super.key});
 
   @override
-  State<AiPost> createState() => _AiPostState();
+  State<EditAutoPost> createState() => _EditAutoPostState();
 }
 
-class _AiPostState extends State<AiPost> {
+class _EditAutoPostState extends State<EditAutoPost> {
   DashboardController dashboardcontroller = Get.put(DashboardController());
   GlobalKey? globalKey;
   int _characterCount = 0;
@@ -106,6 +106,11 @@ class _AiPostState extends State<AiPost> {
     globalKey = GlobalKey();
   }
 
+  List<String> selectedCheckBoxValue = [];
+  List<Media> _listImagePaths = [];
+  List<Media> _listVideoPaths = [];
+  List<Media> _listImageVideoPaths = [];
+  String? dataImagePath = "";
   List<String> variantsList = [
     'Ram',
     "Komal",
@@ -118,12 +123,6 @@ class _AiPostState extends State<AiPost> {
     "Surat",
     "Nashik"
   ];
-  List<String> selectedCheckBoxValue = [];
-  List<Media> _listImagePaths = [];
-  List<Media> _listVideoPaths = [];
-  List<Media> _listImageVideoPaths = [];
-  String? dataImagePath = "";
-
   String? selectedOption;
   bool showimagenullMessage = false;
   File? selectedImage;
@@ -151,9 +150,13 @@ class _AiPostState extends State<AiPost> {
       image = await ImagePicker()
           .pickImage(source: ImageSource.gallery, imageQuality: 10);
     }
+    ////
+    // controller.setSelectedImage(File(image.path));
+    /////
     if (image != null) {
       setState(() {
         selectedImage = File(image.path);
+        dashboardcontroller.setSelectedImage(selectedImage);
         base64Image = base64Encode(selectedImage!.readAsBytesSync());
         // profilecontroller.editProfilePicture(selectedImage!); //
         print(selectedImage!.readAsBytesSync().lengthInBytes);
@@ -169,7 +172,8 @@ class _AiPostState extends State<AiPost> {
 
   @override
   Widget build(BuildContext context) {
-    return Obx(
+    return 
+    Obx(
       () => Column(
         children: [
           Container(
@@ -593,7 +597,62 @@ class _AiPostState extends State<AiPost> {
               ],
             ),
           ),
+          Container(
+            margin: EdgeInsets.only(top: 20),
+            width: double.infinity,
+            padding: EdgeInsets.all(14),
+            decoration: BoxDecoration(
+              border: GradientBoxBorder(
+                gradient: LinearGradient(colors: [
+                  Klight_grey_twg,
+                  Klight_grey_twg,
+                  Klight_grey_twg,
+                  Klight_grey_twg,
+                  Klight_grey_twg,
+                  Klight_grey_twg
+                ], begin: Alignment.topCenter, end: Alignment.bottomCenter),
+                width: 1,
+              ),
+              color: Kwhite,
+              borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(5),
+                  topRight: Radius.circular(5),
+                  bottomLeft: Radius.circular(5),
+                  bottomRight: Radius.circular(5)),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                CustomFormFields(
+                  ontap: () {
+                    //  Get.toNamed(kSearchPlaces); // kForgotPassword
+                  },
+                  enabled: true,
+                  labelColor: KText,
+                  onChanged: (Value) {
+                    setState(() {});
+                  },
+                  obscureText: false,
+                  contentPadding:
+                      const EdgeInsets.symmetric(vertical: 16, horizontal: 8),
+                  fontSize: kFourteenFont,
+                  fontWeight: FontWeight.w500,
+                  hintText: "Enter Content Link",
+                  maxLines: 1,
+                  readOnly: false,
+                  label: "Link",
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return 'Please enter Link';
+                    }
+                    return null;
+                  },
+                ),
 
+                //
+              ],
+            ),
+          ),
           Container(
             margin: EdgeInsets.only(top: 20),
             width: double.infinity,
@@ -1445,7 +1504,7 @@ class _AiPostState extends State<AiPost> {
               ],
             ),
           ),
-
+         
           Container(
             margin: EdgeInsets.only(top: 20),
             width: double.infinity,
@@ -1678,7 +1737,7 @@ class _AiPostState extends State<AiPost> {
               ],
             ),
           ),
-
+         
           // SizedBox(
           //   height: 80.h,
           // )
@@ -1686,4 +1745,6 @@ class _AiPostState extends State<AiPost> {
       ),
     );
   }
+
 }
+

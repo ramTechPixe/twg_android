@@ -78,6 +78,7 @@ class AuthController extends GetxController {
 
   //
   TextEditingController autoPostMessageController = TextEditingController();
+  TextEditingController autoPostHeadingController = TextEditingController();
   TextEditingController signUpCouponController = TextEditingController();
   ////////Coupons Api
   var signUpCouponLoading = false.obs;

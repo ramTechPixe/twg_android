@@ -189,7 +189,8 @@ class _Bottom_navigationState extends State<Bottom_navigation> {
       UserDashboard(),
       QuickPosting(),
       QuickPosting(),
-      QuickPosting(),
+      Reports(),
+      // QuickPosting(),
       SettingsScreen(),
     ];
   }

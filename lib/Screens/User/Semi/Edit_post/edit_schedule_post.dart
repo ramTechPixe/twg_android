@@ -1,13 +1,13 @@
 import 'package:twg/untils/export_file.dart';
 
-class QuickPosting extends StatefulWidget {
-  const QuickPosting({super.key});
+class EditSchedulePost extends StatefulWidget {
+  const EditSchedulePost({super.key});
 
   @override
-  State<QuickPosting> createState() => _QuickPostingState();
+  State<EditSchedulePost> createState() => _EditSchedulePostState();
 }
 
-class _QuickPostingState extends State<QuickPosting> {
+class _EditSchedulePostState extends State<EditSchedulePost> {
   DashboardController dashboardcontroller = Get.put(DashboardController());
   AuthController authcontroller = Get.put(AuthController());
   int _characterCount = 0;
@@ -27,100 +27,27 @@ class _QuickPostingState extends State<QuickPosting> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Kwhite,
-        floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
-        floatingActionButton: InkWell(
-          onTap: () {
-            Get.toNamed(kPublishedScreens);
-          },
-          child: Container(
-            margin: EdgeInsets.only(bottom: 100.h),
-            padding: EdgeInsets.only(left: 20.w, right: 20.w),
-            height: 52,
-            width: 160.w,
-            alignment: Alignment.center,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(50.r),
-              color: Kform_border_twg,
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  "Published",
-                  textAlign: TextAlign.center,
-                  style: GoogleFonts.poppins(
-                    fontSize: kFourteenFont,
-                    color: Kwhite,
-                    fontWeight: kFW600,
-                  ),
-                ),
-                CircleAvatar(
-                  radius: 12,
-                  backgroundColor: Kwhite,
-                  child: Icon(
-                    Icons.arrow_forward,
-                    color: Kform_border_twg,
-                    size: 18.sp,
-                  ),
-                )
-              ],
-            ),
-          ),
-        ),
         appBar: AppBar(
           elevation: 3,
           shadowColor: kblack,
           backgroundColor: Kblue_twg,
           automaticallyImplyLeading: false,
-          // titleSpacing: 0,
+          titleSpacing: 0,
+          leading: InkWell(
+            onTap: () {
+              Get.back();
+            },
+            child: Icon(
+              Icons.arrow_back_ios,
+              color: Kwhite,
+              size: 23.sp,
+            ),
+          ),
           title: Text(
-            "Quick Posting",
+            "Edit Scheduled Post",
             style: GoogleFonts.poppins(
                 color: Kwhite, fontSize: kTwentyFont, fontWeight: kFW600),
           ),
-          actions: [
-            InkWell(
-              onTap: () {
-                Get.toNamed(kPreviewScreen);
-              },
-              child: Container(
-                padding: EdgeInsets.only(left: 12.w, right: 12.w),
-                height: 38.h,
-                margin: EdgeInsets.only(right: 10.w),
-                // width: 160.w,
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(50.r),
-                  color: Kwhite,
-                ),
-                child: Row(
-                  children: [
-                    Text(
-                      "Preview",
-                      textAlign: TextAlign.center,
-                      style: GoogleFonts.poppins(
-                        fontSize: kTwelveFont,
-                        color: kblack,
-                        fontWeight: kFW600,
-                      ),
-                    ),
-                    SizedBox(
-                      width: 3.w,
-                    ),
-                    CircleAvatar(
-                      radius: 12,
-                      backgroundColor: Kwhite,
-                      child: Icon(
-                        Icons.arrow_forward_ios,
-                        color: kblack,
-                        size: 14.sp,
-                      ),
-                    )
-                  ],
-                ),
-              ),
-            ),
-          ],
         ),
         body: SingleChildScrollView(
           child: Obx(
@@ -167,7 +94,7 @@ class _QuickPostingState extends State<QuickPosting> {
                                     CustomFormFields(
                                       ontap: () {},
                                       controller: authcontroller
-                                          .autoPostHeadingController,
+                                          .autoPostMessageController,
                                       enabled: true,
                                       labelColor: KText,
                                       onChanged: (Value) {
@@ -235,87 +162,86 @@ class _QuickPostingState extends State<QuickPosting> {
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
                                       children: [
-                                        // Column(
-                                        //   children: [
-                                        //     Container(
-                                        //         //  height: 50.h,
-                                        //         height: 45,
-                                        //         // width: 155.w,
-                                        //         decoration: BoxDecoration(
-                                        //             border: Border.all(
-                                        //                 color: Ktextcolor
-                                        //                     .withOpacity(0.4)),
-                                        //             borderRadius:
-                                        //                 BorderRadius.circular(
-                                        //                     10.r)),
-                                        //         padding: EdgeInsets.only(
-                                        //             left: 15.w,
-                                        //             right: 15.w,
-                                        //             top: 6.h,
-                                        //             bottom: 6.h),
-                                        //         child: Row(
-                                        //           children: <Widget>[
-                                        //             // _itemCount !=
-                                        //             //         0
-                                        //             //     ?
-                                        //             authcontroller.counter <= 0
-                                        //                 ? SizedBox()
-                                        //                 : InkWell(
-                                        //                     onTap: () {
-                                        //                       authcontroller
-                                        //                           .decrement();
-                                        //                     },
-                                        //                     child: const Icon(
-                                        //                         Icons
-                                        //                             .arrow_left)
-                                        //                     // Icon(
-                                        //                     //   Icons.remove,
-                                        //                     //   color: KdarkText,
-                                        //                     // )
-                                        //                     ),
+                                        Column(
+                                          children: [
+                                            Container(
+                                                //  height: 50.h,
+                                                height: 45,
+                                                // width: 155.w,
+                                                decoration: BoxDecoration(
+                                                    border: Border.all(
+                                                        color: Ktextcolor
+                                                            .withOpacity(0.4)),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10.r)),
+                                                padding: EdgeInsets.only(
+                                                    left: 15.w,
+                                                    right: 15.w,
+                                                    top: 6.h,
+                                                    bottom: 6.h),
+                                                child: Row(
+                                                  children: <Widget>[
+                                                    // _itemCount !=
+                                                    //         0
+                                                    //     ?
+                                                    authcontroller.counter <= 0
+                                                        ? SizedBox()
+                                                        : InkWell(
+                                                            onTap: () {
+                                                              authcontroller
+                                                                  .decrement();
+                                                            },
+                                                            child: const Icon(
+                                                                Icons
+                                                                    .arrow_left)
+                                                            // Icon(
+                                                            //   Icons.remove,
+                                                            //   color: KdarkText,
+                                                            // )
+                                                            ),
 
-                                        //             SizedBox(
-                                        //               width: 10.w,
-                                        //             ),
-                                        //             Obx(
-                                        //               () => Padding(
-                                        //                 padding:
-                                        //                     const EdgeInsets
-                                        //                         .only(
-                                        //                         left: 5,
-                                        //                         right: 5),
-                                        //                 child: Text(
-                                        //                   '${authcontroller.counter}',
-                                        //                   style: GoogleFonts
-                                        //                       .roboto(
-                                        //                           color:
-                                        //                               KdarkText,
-                                        //                           fontWeight:
-                                        //                               kFW700),
-                                        //                 ),
-                                        //               ),
-                                        //             ),
-                                        //             SizedBox(
-                                        //               width: 10.w,
-                                        //             ),
-                                        //             InkWell(
-                                        //                 onTap: () {
-                                        //                   authcontroller
-                                        //                       .increment();
-                                        //                 },
-                                        //                 // onTap: () {
-                                        //                 //   setState(
-                                        //                 //       () => apiController.range++);
-                                        //                 // },
-                                        //                 child: const Icon(
-                                        //                   Icons.arrow_right,
-                                        //                   color: KdarkText,
-                                        //                 )),
-                                        //           ],
-                                        //         )),
-                                        //   ],
-                                        // ),
-
+                                                    SizedBox(
+                                                      width: 10.w,
+                                                    ),
+                                                    Obx(
+                                                      () => Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .only(
+                                                                left: 5,
+                                                                right: 5),
+                                                        child: Text(
+                                                          '${authcontroller.counter}',
+                                                          style: GoogleFonts
+                                                              .roboto(
+                                                                  color:
+                                                                      KdarkText,
+                                                                  fontWeight:
+                                                                      kFW700),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    SizedBox(
+                                                      width: 10.w,
+                                                    ),
+                                                    InkWell(
+                                                        onTap: () {
+                                                          authcontroller
+                                                              .increment();
+                                                        },
+                                                        // onTap: () {
+                                                        //   setState(
+                                                        //       () => apiController.range++);
+                                                        // },
+                                                        child: const Icon(
+                                                          Icons.arrow_right,
+                                                          color: KdarkText,
+                                                        )),
+                                                  ],
+                                                )),
+                                          ],
+                                        ),
                                         CustomButton(
                                           // margin: EdgeInsets.only(top: 36.h),
                                           borderRadius:
@@ -460,91 +386,90 @@ class _QuickPostingState extends State<QuickPosting> {
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceBetween,
                                           children: [
-                                            // Column(
-                                            //   children: [
-                                            //     Container(
-                                            //         //  height: 50.h,
-                                            //         height: 45,
-                                            //         // width: 155.w,
-                                            //         decoration: BoxDecoration(
-                                            //             border: Border.all(
-                                            //                 color: Ktextcolor
-                                            //                     .withOpacity(
-                                            //                         0.4)),
-                                            //             borderRadius:
-                                            //                 BorderRadius
-                                            //                     .circular(
-                                            //                         10.r)),
-                                            //         padding: EdgeInsets.only(
-                                            //             left: 15.w,
-                                            //             right: 15.w,
-                                            //             top: 6.h,
-                                            //             bottom: 6.h),
-                                            //         child: Row(
-                                            //           children: <Widget>[
-                                            //             // _itemCount !=
-                                            //             //         0
-                                            //             //     ?
-                                            //             authcontroller
-                                            //                         .counter <=
-                                            //                     0
-                                            //                 ? SizedBox()
-                                            //                 : InkWell(
-                                            //                     onTap: () {
-                                            //                       authcontroller
-                                            //                           .decrement();
-                                            //                     },
-                                            //                     child: const Icon(
-                                            //                         Icons
-                                            //                             .arrow_left)
-                                            //                     // Icon(
-                                            //                     //   Icons.remove,
-                                            //                     //   color: KdarkText,
-                                            //                     // )
-                                            //                     ),
+                                            Column(
+                                              children: [
+                                                Container(
+                                                    //  height: 50.h,
+                                                    height: 45,
+                                                    // width: 155.w,
+                                                    decoration: BoxDecoration(
+                                                        border: Border.all(
+                                                            color: Ktextcolor
+                                                                .withOpacity(
+                                                                    0.4)),
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(
+                                                                    10.r)),
+                                                    padding: EdgeInsets.only(
+                                                        left: 15.w,
+                                                        right: 15.w,
+                                                        top: 6.h,
+                                                        bottom: 6.h),
+                                                    child: Row(
+                                                      children: <Widget>[
+                                                        // _itemCount !=
+                                                        //         0
+                                                        //     ?
+                                                        authcontroller
+                                                                    .counter <=
+                                                                0
+                                                            ? SizedBox()
+                                                            : InkWell(
+                                                                onTap: () {
+                                                                  authcontroller
+                                                                      .decrement();
+                                                                },
+                                                                child: const Icon(
+                                                                    Icons
+                                                                        .arrow_left)
+                                                                // Icon(
+                                                                //   Icons.remove,
+                                                                //   color: KdarkText,
+                                                                // )
+                                                                ),
 
-                                            //             SizedBox(
-                                            //               width: 10.w,
-                                            //             ),
-                                            //             Obx(
-                                            //               () => Padding(
-                                            //                 padding:
-                                            //                     const EdgeInsets
-                                            //                         .only(
-                                            //                         left: 5,
-                                            //                         right: 5),
-                                            //                 child: Text(
-                                            //                   '${authcontroller.counter}',
-                                            //                   style: GoogleFonts
-                                            //                       .roboto(
-                                            //                           color:
-                                            //                               KdarkText,
-                                            //                           fontWeight:
-                                            //                               kFW700),
-                                            //                 ),
-                                            //               ),
-                                            //             ),
-                                            //             SizedBox(
-                                            //               width: 10.w,
-                                            //             ),
-                                            //             InkWell(
-                                            //                 onTap: () {
-                                            //                   authcontroller
-                                            //                       .increment();
-                                            //                 },
-                                            //                 // onTap: () {
-                                            //                 //   setState(
-                                            //                 //       () => apiController.range++);
-                                            //                 // },
-                                            //                 child: const Icon(
-                                            //                   Icons.arrow_right,
-                                            //                   color: KdarkText,
-                                            //                 )),
-                                            //           ],
-                                            //         )),
-                                            //   ],
-                                            // ),
-
+                                                        SizedBox(
+                                                          width: 10.w,
+                                                        ),
+                                                        Obx(
+                                                          () => Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                    .only(
+                                                                    left: 5,
+                                                                    right: 5),
+                                                            child: Text(
+                                                              '${authcontroller.counter}',
+                                                              style: GoogleFonts
+                                                                  .roboto(
+                                                                      color:
+                                                                          KdarkText,
+                                                                      fontWeight:
+                                                                          kFW700),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        SizedBox(
+                                                          width: 10.w,
+                                                        ),
+                                                        InkWell(
+                                                            onTap: () {
+                                                              authcontroller
+                                                                  .increment();
+                                                            },
+                                                            // onTap: () {
+                                                            //   setState(
+                                                            //       () => apiController.range++);
+                                                            // },
+                                                            child: const Icon(
+                                                              Icons.arrow_right,
+                                                              color: KdarkText,
+                                                            )),
+                                                      ],
+                                                    )),
+                                              ],
+                                            ),
                                             CustomButton(
                                               // margin: EdgeInsets.only(top: 36.h),
                                               borderRadius:
@@ -767,11 +692,11 @@ class _QuickPostingState extends State<QuickPosting> {
                     ],
                   ),
                   dashboardcontroller.selectedQuickPost == "Auto Post"
-                      ? AutoPost()
+                      ? EditAutoPost()
                       : dashboardcontroller.selectedQuickPost ==
                               "Custom Message"
-                          ? CustomPost()
-                          : AiPost(),
+                          ? EditCustomPost()
+                          : EditAiPost(),
                   // Row(
                   //   mainAxisAlignment: MainAxisAlignment.end,
                   //   children: [
@@ -850,4 +775,5 @@ class _QuickPostingState extends State<QuickPosting> {
           ),
         ));
   }
+
 }

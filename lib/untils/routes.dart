@@ -116,5 +116,10 @@ class Routes {
         name: kPreviewScreen,
         transition: Transition.rightToLeft,
         page: () => const PreviewScreen()),
+    GetPage(
+        name: kEditScheduleScreen,
+        transition: Transition.rightToLeft,
+        page: () => EditSchedulePost()),
+    //
   ];
 }

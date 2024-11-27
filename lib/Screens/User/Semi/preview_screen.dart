@@ -21,10 +21,28 @@ class _PreviewScreenState extends State<PreviewScreen> {
   int _characterCount = 0;
   bool value = false;
   List social = [
-    "facebook",
-    "twitter",
-    "linkedIn",
-    "instagram",
+    {
+      "name": "facebook",
+      "image_blue": "assets/images/fb_blue.png",
+      "image_black": "assets/images/fb_black.png",
+    },
+    {
+      "name": "twitter",
+      "image_blue": "assets/images/tweet_blue.png",
+      "image_black": "assets/images/twitter_black.png",
+    },
+    {
+      "name": "linkedIn",
+      "image_blue": "assets/images/in_blue.png",
+      "image_black": "assets/images/in_black.png",
+    },
+    {
+      // "assets/images/repost_black.png",
+      "name": "instagram",
+      "image_blue": "assets/images/insta_blue.png",
+      "image_black": "assets/images/insta_black.png",
+    },
+
     // "tumbler",
     // "pinterest",
     // "Google Business Profile",
@@ -37,7 +55,7 @@ class _PreviewScreenState extends State<PreviewScreen> {
   void initState() {
     super.initState();
     setState(() {
-      dashboardcontroller.selectedMediaType.value = social[0];
+      dashboardcontroller.selectedMediaType.value = social[0]["name"];
     });
   }
 
@@ -86,38 +104,50 @@ class _PreviewScreenState extends State<PreviewScreen> {
                             onTap: () {
                               setState(() {
                                 dashboardcontroller.selectedMediaType.value =
-                                    social[index];
+                                    social[index]["name"];
                               });
                               print("object");
                             },
-                            child: Container(
-                              margin: EdgeInsets.only(right: 10.w),
-                              padding: EdgeInsets.only(
-                                  left: 15.w,
-                                  right: 15.w,
-                                  top: 8.h,
-                                  bottom: 8.h),
-                              decoration: BoxDecoration(
-                                  border:
-                                      Border.all(color: Kblue_twg, width: 1),
-                                  color:
-                                      dashboardcontroller.selectedMediaType ==
-                                              social[index]
-                                          ? Kblue_twg
-                                          : Kwhite,
-                                  borderRadius: BorderRadius.circular(10.r)),
-                              child: Text(
-                                social[index],
-                                style: GoogleFonts.poppins(
-                                    color:
-                                        dashboardcontroller.selectedMediaType ==
-                                                social[index]
-                                            ? Kwhite
-                                            : kblack,
-                                    fontSize: kFourteenFont,
-                                    fontWeight: kFW500),
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Image.asset(
+                                dashboardcontroller.selectedMediaType ==
+                                        social[index]["name"]
+                                    ? social[index]["image_blue"]
+                                    : social[index]["image_black"],
+                                // "assets/images/fb_black.png",
+                                height: 25.h,
+                                fit: BoxFit.cover,
                               ),
                             ),
+                            // Container(
+                            //   margin: EdgeInsets.only(right: 10.w),
+                            //   padding: EdgeInsets.only(
+                            //       left: 15.w,
+                            //       right: 15.w,
+                            //       top: 8.h,
+                            //       bottom: 8.h),
+                            //   decoration: BoxDecoration(
+                            //       border:
+                            //           Border.all(color: Kblue_twg, width: 1),
+                            //       color:
+                            //           dashboardcontroller.selectedMediaType ==
+                            //                   social[index]
+                            //               ? Kblue_twg
+                            //               : Kwhite,
+                            //       borderRadius: BorderRadius.circular(10.r)),
+                            //   child: Text(
+                            //     social[index],
+                            //     style: GoogleFonts.poppins(
+                            //         color:
+                            //             dashboardcontroller.selectedMediaType ==
+                            //                     social[index]
+                            //                 ? Kwhite
+                            //                 : kblack,
+                            //         fontSize: kFourteenFont,
+                            //         fontWeight: kFW500),
+                            //   ),
+                            // ),
                           ),
                         ],
                       );
@@ -435,14 +465,32 @@ class _PreviewScreenState extends State<PreviewScreen> {
                                   SizedBox(
                                     height: 10.h,
                                   ),
-                                  Image.asset(
-                                    "assets/images/fb_samplephoto.png",
-                                    width: 300.w,
-                                    height: 300.h,
-                                    //  width: MediaQuery.of(context).size.width / 1.2,
-                                    // height: 25.h,
-                                    fit: BoxFit.cover,
-                                  ),
+                                  Obx(() {
+                                    // Display the selected image if available
+                                    if (dashboardcontroller
+                                            .selectedImageobss.value !=
+                                        null) {
+                                      return Image.file(
+                                        dashboardcontroller
+                                            .selectedImageobss.value!,
+                                        width: 300.w,
+                                        height: 300.h,
+                                        //  width: MediaQuery.of(context).size.width / 1.2,
+                                        // height: 25.h,
+                                        fit: BoxFit.cover,
+                                      );
+                                    } else {
+                                      return Text("No image selected");
+                                    }
+                                  }),
+                                  // Image.asset(
+                                  //   "assets/images/fb_samplephoto.png",
+                                  //   width: 300.w,
+                                  //   height: 300.h,
+                                  //   //  width: MediaQuery.of(context).size.width / 1.2,
+                                  //   // height: 25.h,
+                                  //   fit: BoxFit.cover,
+                                  // ),
                                   SizedBox(
                                     height: 10.h,
                                   ),
@@ -646,14 +694,32 @@ class _PreviewScreenState extends State<PreviewScreen> {
                                       SizedBox(
                                         height: 10.h,
                                       ),
-                                      Image.asset(
-                                        "assets/images/fb_samplephoto.png",
-                                        width: 300.w,
-                                        height: 300.h,
-                                        //  width: MediaQuery.of(context).size.width / 1.2,
-                                        // height: 25.h,
-                                        fit: BoxFit.cover,
-                                      ),
+                                      Obx(() {
+                                        // Display the selected image if available
+                                        if (dashboardcontroller
+                                                .selectedImageobss.value !=
+                                            null) {
+                                          return Image.file(
+                                            dashboardcontroller
+                                                .selectedImageobss.value!,
+                                            width: 300.w,
+                                            height: 300.h,
+                                            //  width: MediaQuery.of(context).size.width / 1.2,
+                                            // height: 25.h,
+                                            fit: BoxFit.cover,
+                                          );
+                                        } else {
+                                          return Text("No image selected");
+                                        }
+                                      }),
+                                      // Image.asset(
+                                      //   "assets/images/fb_samplephoto.png",
+                                      //   width: 300.w,
+                                      //   height: 300.h,
+                                      //   //  width: MediaQuery.of(context).size.width / 1.2,
+                                      //   // height: 25.h,
+                                      //   fit: BoxFit.cover,
+                                      // ),
                                       SizedBox(
                                         height: 10.h,
                                       ),
@@ -839,14 +905,32 @@ class _PreviewScreenState extends State<PreviewScreen> {
                                           SizedBox(
                                             height: 10.h,
                                           ),
-                                          Image.asset(
-                                            "assets/images/fb_samplephoto.png",
-                                            width: 300.w,
-                                            height: 300.h,
-                                            //  width: MediaQuery.of(context).size.width / 1.2,
-                                            // height: 25.h,
-                                            fit: BoxFit.cover,
-                                          ),
+                                          Obx(() {
+                                            // Display the selected image if available
+                                            if (dashboardcontroller
+                                                    .selectedImageobss.value !=
+                                                null) {
+                                              return Image.file(
+                                                dashboardcontroller
+                                                    .selectedImageobss.value!,
+                                                width: 300.w,
+                                                height: 300.h,
+                                                //  width: MediaQuery.of(context).size.width / 1.2,
+                                                // height: 25.h,
+                                                fit: BoxFit.cover,
+                                              );
+                                            } else {
+                                              return Text("No image selected");
+                                            }
+                                          }),
+                                          // Image.asset(
+                                          //   "assets/images/fb_samplephoto.png",
+                                          //   width: 300.w,
+                                          //   height: 300.h,
+                                          //   //  width: MediaQuery.of(context).size.width / 1.2,
+                                          //   // height: 25.h,
+                                          //   fit: BoxFit.cover,
+                                          // ),
                                           SizedBox(
                                             height: 10.h,
                                           ),
