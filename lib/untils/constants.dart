@@ -35,7 +35,14 @@ String kWebAddDemoScreen = "/Screens/User/Tools/crm_tool_website_demo.dart";
 String kPreviewScreen = "/Screens/User/Semi/preview_screen.dart";
 String kEditScheduleScreen =
     "/Screens/User/Semi/Edit_post/edit_schedule_post.dart";
-
+String kPostingLogsScreen = "/Screens/User/PostingLogs/posting_logs_list.dart";
+String kPostingLogView = "/Screens/User/PostingLogs/posting_log_view.dart";
+String kWebSiteSeo = "/Screens/User/Menu/website_seo_screen.dart";
+String kCallAgent = "/Screens/User/Menu/call_an_agent.dart";
+String kAutoComments = "/Screens/User/Auto_Comments/auto_comments_screen.dart";
+String kTotal_list = "/Screens/User/Auto_Comments/total_list.dart";
+//  export 'package:twg/';
+// export 'package:twg/Screens/';
 ////////// Fonts Size
 double kTenFont = MediaQueryData.fromWindow(WidgetsBinding.instance.window)
             .size

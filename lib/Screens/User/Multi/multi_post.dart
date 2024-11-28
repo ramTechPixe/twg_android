@@ -13,7 +13,11 @@ class MultiPostScreen extends StatefulWidget {
 class _MultiPostScreenState extends State<MultiPostScreen> {
   DashboardController dashboardcontroller = Get.put(DashboardController());
   AuthController authcontroller = Get.put(AuthController());
+// for code change
+  bool isSelectAll = false; // Tracks Select All state
+  List<String> selectedPostIds = []; // Tracks selected post IDs
 
+//
   MultPostingsController multiPostcontroller =
       Get.put(MultPostingsController());
 
@@ -35,27 +39,52 @@ class _MultiPostScreenState extends State<MultiPostScreen> {
     return Scaffold(
         backgroundColor: Kwhite,
         appBar: AppBar(
-            elevation: 3,
-            shadowColor: kblack,
-            backgroundColor: Kblue_twg,
-            automaticallyImplyLeading: false,
-            titleSpacing: 0,
-            leading: InkWell(
-              onTap: () {
-                Get.back();
-                Get.back();
-              },
-              child: Icon(
-                Icons.arrow_back_ios,
-                color: Kwhite,
-                size: 23.sp,
-              ),
+          elevation: 3,
+          shadowColor: kblack,
+          backgroundColor: Kblue_twg,
+          automaticallyImplyLeading: false,
+          titleSpacing: 0,
+          leading: InkWell(
+            onTap: () {
+              Get.back();
+              Get.back();
+            },
+            child: Icon(
+              Icons.arrow_back_ios,
+              color: Kwhite,
+              size: 23.sp,
             ),
-            title: Text(
-              "Multi Posting",
-              style: GoogleFonts.poppins(
-                  color: Kwhite, fontSize: kTwentyFont, fontWeight: kFW600),
-            )),
+          ),
+          title: Text(
+            "Multi Posting",
+            style: GoogleFonts.poppins(
+                color: Kwhite, fontSize: kTwentyFont, fontWeight: kFW600),
+          ),
+          // actions: [
+          //   Row(
+          //     children: [
+          //       Text("Select All"),
+          //       Checkbox(
+          //         value: isSelectAll,
+          //         onChanged: (value) {
+          //           setState(() {
+          //             isSelectAll = value ?? false;
+          //             if (isSelectAll) {
+          //               // Select all post IDs when Select All is checked
+          //               selectedPostIds = multiPostcontroller.mutiPostList
+          //                   .map<String>((post) => post['post_id'] as String)
+          //                   .toList();
+          //             } else {
+          //               // Clear all selections when Select All is unchecked
+          //               selectedPostIds.clear();
+          //             }
+          //           });
+          //         },
+          //       ),
+          //     ],
+          //   ),
+          // ],
+        ),
         floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
         floatingActionButton: CustomButton(
             margin: EdgeInsets.only(bottom: 36.h),
@@ -135,16 +164,36 @@ class _MultiPostScreenState extends State<MultiPostScreen> {
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       Checkbox(
+                        value: isSelectAll,
                         activeColor: Kblue_twg,
                         checkColor: Kwhite,
-                        value: value,
                         onChanged: (value) {
                           setState(() {
-                            this.value = value!;
+                            isSelectAll = value ?? false;
+                            if (isSelectAll) {
+                              // Select all post IDs when Select All is checked
+                              selectedPostIds = multiPostcontroller.mutiPostList
+                                  .map<String>(
+                                      (post) => post['post_id'] as String)
+                                  .toList();
+                            } else {
+                              // Clear all selections when Select All is unchecked
+                              selectedPostIds.clear();
+                            }
                           });
-                          // print(value);
                         },
                       ),
+                      // Checkbox(
+                      //   activeColor: Kblue_twg,
+                      //   checkColor: Kwhite,
+                      //   value: value,
+                      //   onChanged: (value) {
+                      //     setState(() {
+                      //       this.value = value!;
+                      //     });
+                      //     // print(value);
+                      //   },
+                      // ),
                       Text(
                         "Select All",
                         style: GoogleFonts.poppins(
@@ -177,8 +226,12 @@ class _MultiPostScreenState extends State<MultiPostScreen> {
                               itemCount:
                                   multiPostcontroller.mutiPostList.length,
                               itemBuilder: (context, index) {
+                                var post =
+                                    multiPostcontroller.mutiPostList[index];
+                                String postId = post['post_id'];
                                 // var post =
                                 //     multiPostcontroller.mutiPostList[index];
+
                                 return Container(
                                   margin: EdgeInsets.only(
                                       bottom: 13.h, left: 2.w, right: 2.w),
@@ -278,17 +331,36 @@ class _MultiPostScreenState extends State<MultiPostScreen> {
                                           Positioned(
                                             bottom: 3.h,
                                             right: 3.w,
-                                            child: Checkbox(
-                                              activeColor: Kblue_twg,
-                                              checkColor: Kwhite,
-                                              value: value,
-                                              onChanged: (value) {
-                                                setState(() {
-                                                  this.value = value!;
-                                                });
-                                                // print(value);
-                                              },
-                                            ),
+                                            child: isSelectAll
+                                                ? Checkbox(
+                                                    value: selectedPostIds
+                                                        .contains(postId),
+                                                    activeColor: Kblue_twg,
+                                                    checkColor: Kwhite,
+                                                    onChanged: (value) {
+                                                      setState(() {
+                                                        if (value == true) {
+                                                          selectedPostIds
+                                                              .add(postId);
+                                                        } else {
+                                                          selectedPostIds
+                                                              .remove(postId);
+                                                        }
+                                                      });
+                                                    },
+                                                  )
+                                                : SizedBox(),
+                                            // Checkbox(
+                                            //   activeColor: Kblue_twg,
+                                            //   checkColor: Kwhite,
+                                            //   value: value,
+                                            //   onChanged: (value) {
+                                            //     setState(() {
+                                            //       this.value = value!;
+                                            //     });
+                                            //     // print(value);
+                                            //   },
+                                            // ),
                                           ),
                                         ],
                                       ),
@@ -388,16 +460,7 @@ class _MultiPostScreenState extends State<MultiPostScreen> {
                                                               index]
                                                           ["created_date"],
                                                     ),
-                                                  )
-                                            // DateFormat.yMMMd().format(
-                                            //     DateTime.parse(
-                                            //         multiPostcontroller
-                                            //                     .mutiPostList[
-                                            //                 index]
-                                            //             ["created_date"]))
-                                            ,
-
-                                            //  "Sep 9, 2024 11:05 am",
+                                                  ),
                                             style: GoogleFonts.poppins(
                                                 color: kblack,
                                                 fontSize: kTenFont,
@@ -407,27 +470,6 @@ class _MultiPostScreenState extends State<MultiPostScreen> {
                                       ),
                                     ],
                                   ),
-                                  // Row(
-                                  //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  //   children: [
-                                  //     Icon(Icons.check_box),
-                                  //     SizedBox(
-                                  //       width: 250.w,
-                                  //       child: Text(
-                                  //         "100",
-                                  //         style: GoogleFonts.poppins(
-                                  //             color: kblack,
-                                  //             fontSize: kFourteenFont,
-                                  //             fontWeight: kFW400),
-                                  //       ),
-                                  //     ),
-                                  //     Image.asset(
-                                  //       "assets/images/deleted_image.png",
-                                  //       height: 25.h,
-                                  //       width: 25.h,
-                                  //     ),
-                                  //   ],
-                                  // ),
                                 );
                               })
                 ],
@@ -510,43 +552,3 @@ class _VideoWidgetState extends State<VideoWidget> {
     );
   }
 }
-
-// Video Player
-
-// class VideoWidget extends StatefulWidget {
-//   final String videoUrl;
-
-//   const VideoWidget({Key? key, required this.videoUrl}) : super(key: key);
-
-//   @override
-//   State<VideoWidget> createState() => _VideoWidgetState();
-// }
-
-// class _VideoWidgetState extends State<VideoWidget> {
-//   late VideoPlayerController _controller;
-
-//   @override
-//   void initState() {
-//     super.initState();
-//     _controller = VideoPlayerController.network(widget.videoUrl)
-//       ..initialize().then((_) {
-//         setState(() {});
-//       });
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return _controller.value.isInitialized
-//         ? AspectRatio(
-//             aspectRatio: _controller.value.aspectRatio,
-//             child: VideoPlayer(_controller),
-//           )
-//         : Center(child: CircularProgressIndicator());
-//   }
-
-//   @override
-//   void dispose() {
-//     _controller.dispose();
-//     super.dispose();
-//   }
-// }

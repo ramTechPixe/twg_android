@@ -184,22 +184,27 @@ Widget leftDrawerMenu(
         SizedBox(
           height: 20.h,
         ),
-        Row(
-          children: [
-            Image.asset(
-              "assets/images/posting.png",
-              height: 30.h,
-              width: 30.w,
-            ),
-            SizedBox(
-              width: 15.w,
-            ),
-            Text(
-              "Posting Logs",
-              style: GoogleFonts.poppins(
-                  color: kblack, fontSize: kSixteenFont, fontWeight: kFW500),
-            ),
-          ],
+        InkWell(
+          onTap: () {
+            Get.toNamed(kPostingLogsScreen);
+          },
+          child: Row(
+            children: [
+              Image.asset(
+                "assets/images/posting.png",
+                height: 30.h,
+                width: 30.w,
+              ),
+              SizedBox(
+                width: 15.w,
+              ),
+              Text(
+                "Posting Logs",
+                style: GoogleFonts.poppins(
+                    color: kblack, fontSize: kSixteenFont, fontWeight: kFW500),
+              ),
+            ],
+          ),
         ),
         SizedBox(
           height: 20.h,
@@ -224,42 +229,77 @@ Widget leftDrawerMenu(
         SizedBox(
           height: 20.h,
         ),
-        Row(
-          children: [
-            Image.asset(
-              "assets/images/auto.png",
-              height: 30.h,
-              width: 30.w,
-            ),
-            SizedBox(
-              width: 15.w,
-            ),
-            Text(
-              "Auto Comments",
-              style: GoogleFonts.poppins(
-                  color: kblack, fontSize: kSixteenFont, fontWeight: kFW500),
-            ),
-          ],
+        InkWell(
+          onTap: () {
+            Get.toNamed(kAutoComments);
+          },
+          child: Row(
+            children: [
+              Image.asset(
+                "assets/images/auto.png",
+                height: 30.h,
+                width: 30.w,
+              ),
+              SizedBox(
+                width: 15.w,
+              ),
+              Text(
+                "Auto Comments",
+                style: GoogleFonts.poppins(
+                    color: kblack, fontSize: kSixteenFont, fontWeight: kFW500),
+              ),
+            ],
+          ),
         ),
         SizedBox(
           height: 20.h,
         ),
-        Row(
-          children: [
-            Image.asset(
-              "assets/images/website.png",
-              height: 30.h,
-              width: 30.w,
-            ),
-            SizedBox(
-              width: 15.w,
-            ),
-            Text(
-              "Website Seo Audit",
-              style: GoogleFonts.poppins(
-                  color: kblack, fontSize: kSixteenFont, fontWeight: kFW500),
-            ),
-          ],
+        InkWell(
+          onTap: () {
+            Get.toNamed(kWebSiteSeo);
+          },
+          child: Row(
+            children: [
+              Image.asset(
+                "assets/images/website.png",
+                height: 30.h,
+                width: 30.w,
+              ),
+              SizedBox(
+                width: 15.w,
+              ),
+              Text(
+                "Website Seo Audit",
+                style: GoogleFonts.poppins(
+                    color: kblack, fontSize: kSixteenFont, fontWeight: kFW500),
+              ),
+            ],
+          ),
+        ),
+        SizedBox(
+          height: 20.h,
+        ),
+        InkWell(
+          onTap: () {
+            Get.toNamed(kCallAgent);
+          },
+          child: Row(
+            children: [
+              Image.asset(
+                "assets/images/website.png",
+                height: 30.h,
+                width: 30.w,
+              ),
+              SizedBox(
+                width: 15.w,
+              ),
+              Text(
+                "Call an Agent",
+                style: GoogleFonts.poppins(
+                    color: kblack, fontSize: kSixteenFont, fontWeight: kFW500),
+              ),
+            ],
+          ),
         ),
         SizedBox(
           height: 20.h,

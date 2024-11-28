@@ -104,3 +104,15 @@ export 'package:twg/Screens/no_internet_screen.dart';
 // Reports
 export 'package:twg/Screens/User/Reports/reports_screen.dart';
 export 'package:twg/Screens/User/Reports/bargraph.dart';
+
+// Posting Logs
+export 'package:twg/Screens/User/PostingLogs/posting_logs_list.dart';
+export 'package:twg/Screens/User/PostingLogs/posting_log_view.dart';
+
+//Menu
+export 'package:twg/Screens/User/Menu/website_seo_screen.dart';
+export 'package:twg/Screens/User/Menu/call_an_agent.dart';
+
+// Auto Comments
+export 'package:twg/Screens/User/Auto_Comments/auto_comments_screen.dart';
+export 'package:twg/Screens/User/Auto_Comments/total_list.dart';
