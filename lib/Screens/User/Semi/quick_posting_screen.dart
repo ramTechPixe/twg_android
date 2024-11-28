@@ -46,7 +46,7 @@ class _QuickPostingState extends State<QuickPosting> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "Published",
+                  "Scheduled",
                   textAlign: TextAlign.center,
                   style: GoogleFonts.poppins(
                     fontSize: kFourteenFont,
@@ -72,7 +72,6 @@ class _QuickPostingState extends State<QuickPosting> {
           shadowColor: kblack,
           backgroundColor: Kblue_twg,
           automaticallyImplyLeading: false,
-          // titleSpacing: 0,
           title: Text(
             "Quick Posting",
             style: GoogleFonts.poppins(

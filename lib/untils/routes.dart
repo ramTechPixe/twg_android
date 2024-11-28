@@ -120,6 +120,30 @@ class Routes {
         name: kEditScheduleScreen,
         transition: Transition.rightToLeft,
         page: () => EditSchedulePost()),
+    GetPage(
+        name: kPostingLogsScreen,
+        transition: Transition.rightToLeft,
+        page: () => PostingLogsList()),
+    GetPage(
+        name: kPostingLogView,
+        transition: Transition.rightToLeft,
+        page: () => PostingLogView()),
+    GetPage(
+        name: kWebSiteSeo,
+        transition: Transition.rightToLeft,
+        page: () => WebSiteSeo()),
+    GetPage(
+        name: kCallAgent,
+        transition: Transition.rightToLeft,
+        page: () => CallAgent()),
+    GetPage(
+        name: kAutoComments,
+        transition: Transition.rightToLeft,
+        page: () => AutoCommentsScreen()),
+    GetPage(
+        name: kTotal_list,
+        transition: Transition.rightToLeft,
+        page: () => TotalsList()),
     //
   ];
 }
