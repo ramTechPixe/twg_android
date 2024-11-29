@@ -2,8 +2,6 @@ import 'package:intl/intl.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:twg/untils/export_file.dart';
 
-import 'package:twg/untils/export_file.dart';
-
 class PublishedScreens extends StatefulWidget {
   const PublishedScreens({super.key});
 
@@ -15,15 +13,21 @@ class _PublishedScreensState extends State<PublishedScreens> {
   DashboardController dashboardcontroller = Get.put(DashboardController());
   AuthController authcontroller = Get.put(AuthController());
   SemiController semicontroller = Get.put(SemiController());
-  MultPostingsController multiPostcontroller =
-      Get.put(MultPostingsController());
+
   int _characterCount = 0;
   bool value = false;
+  //
+  bool isSelectAll = false; // Tracks Select All state
+  List<String> selectedPostIds = []; // Tracks selected post IDs
 
   @override
   void initState() {
     super.initState();
     semicontroller.userScheduledPost();
+    setState(() {
+      semicontroller.scheduledList.value = semicontroller.originalscheduledList;
+      semicontroller.scheduledList.value = semicontroller.filterscheduledList;
+    });
   }
 
   @override
@@ -257,6 +261,32 @@ class _PublishedScreensState extends State<PublishedScreens> {
                   // SizedBox(
                   //   height: 10,
                   // ),
+                  //
+                  // CustomFormFields(
+                  //   ontap: () {},
+                  //   enabled: true,
+                  //   labelColor: KText,
+                  //   obscureText: false,
+                  //   suffix: Icon(
+                  //     Icons.search,
+                  //     color: kblack,
+                  //     size: 25.sp,
+                  //   ),
+                  //   contentPadding:
+                  //       const EdgeInsets.symmetric(vertical: 14, horizontal: 8),
+                  //   fontSize: kFourteenFont,
+                  //   fontWeight: FontWeight.w500,
+                  //   hintText: "Search..",
+                  //   maxLines: 1,
+                  //   readOnly: false,
+                  //   label: "",
+                  //   validator: (value) {
+                  //     if (value!.isEmpty) {
+                  //       return 'Please enter data';
+                  //     }
+                  //     return null;
+                  //   },
+                  // ),
                   CustomFormFields(
                     ontap: () {},
                     enabled: true,
@@ -275,38 +305,107 @@ class _PublishedScreensState extends State<PublishedScreens> {
                     maxLines: 1,
                     readOnly: false,
                     label: "",
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'Please enter data';
+                    validator: (value) {},
+                    onChanged: (value) {
+                      setState(() {
+                        //                                   apiController.assetsData = apiController.OriginalassetsData;
+                        // apiController.assetsData = apiController.assetsDatafilter;
+                        semicontroller.scheduledList.value = semicontroller
+                            .filterscheduledList
+                            .where((element) => element["message"]
+                                .toString()
+                                .toLowerCase()
+                                .contains(value.toString().toLowerCase()))
+                            .toList();
+                      });
+                      if (value == "") {
+                        //  apiController.getRceiversLocationforBank();
+                        setState(() {
+                          semicontroller.scheduledList.value =
+                              semicontroller.originalscheduledList;
+                        });
                       }
-                      return null;
+                      if (semicontroller.scheduledList.isEmpty && value != "") {
+                        Fluttertoast.showToast(
+                            msg: "No posts Available ,Search Again");
+                        semicontroller.userScheduledPost();
+                        // setState(() {
+                        //   multiPostcontroller.userMultiPost();
+                        // });
+                      }
                     },
+                    // onChanged: ,
                   ),
-                  Container(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        Checkbox(
-                          activeColor: Kblue_twg,
-                          checkColor: Kwhite,
-                          value: value,
-                          onChanged: (value) {
-                            setState(() {
-                              this.value = value!;
-                            });
-                            print(value);
-                          },
-                        ),
-                        Text(
-                          "Select All",
-                          style: GoogleFonts.poppins(
-                              color: kblack,
-                              fontSize: kSixteenFont,
-                              fontWeight: kFW400),
-                        ),
-                      ],
-                    ),
+
+                  // Container(
+                  //   child: Row(
+                  //     mainAxisAlignment: MainAxisAlignment.end,
+                  //     children: [
+                  //       Checkbox(
+                  //         activeColor: Kblue_twg,
+                  //         checkColor: Kwhite,
+                  //         value: value,
+                  //         onChanged: (value) {
+                  //           setState(() {
+                  //             this.value = value!;
+                  //           });
+                  //           print(value);
+                  //         },
+                  //       ),
+                  //       Text(
+                  //         "Select All",
+                  //         style: GoogleFonts.poppins(
+                  //             color: kblack,
+                  //             fontSize: kSixteenFont,
+                  //             fontWeight: kFW400),
+                  //       ),
+                  //     ],
+                  //   ),
+                  // ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Checkbox(
+                        value: isSelectAll,
+                        activeColor: Kblue_twg,
+                        checkColor: Kwhite,
+                        onChanged: (value) {
+                          setState(() {
+                            isSelectAll = value ?? false;
+                            if (isSelectAll) {
+                              // Select all post IDs when Select All is checked
+                              selectedPostIds = semicontroller.scheduledList
+                                  .map<String>(
+                                      (post) => post['post_id'] as String)
+                                  .toList();
+                            } else {
+                              // Clear all selections when Select All is unchecked
+                              selectedPostIds.clear();
+                            }
+                          });
+                        },
+                      ),
+                      // Checkbox(
+                      //   activeColor: Kblue_twg,
+                      //   checkColor: Kwhite,
+                      //   value: value,
+                      //   onChanged: (value) {
+                      //     setState(() {
+                      //       this.value = value!;
+                      //     });
+                      //     // print(value);
+                      //   },
+                      // ),
+                      Text(
+                        "Select All",
+                        style: GoogleFonts.poppins(
+                            color: kblack,
+                            fontSize: kSixteenFont,
+                            fontWeight: kFW400),
+                      ),
+                    ],
                   ),
+
                   const SizedBox(
                     height: 15,
                   ),
@@ -331,6 +430,8 @@ class _PublishedScreensState extends State<PublishedScreens> {
                               physics: const NeverScrollableScrollPhysics(),
                               itemCount: semicontroller.scheduledList.length,
                               itemBuilder: (context, index) {
+                                var post = semicontroller.scheduledList[index];
+                                String postId = post['post_id'];
                                 return InkWell(
                                   onTap: () {
                                     setState(() {
@@ -444,18 +545,52 @@ class _PublishedScreensState extends State<PublishedScreens> {
                                             Positioned(
                                               bottom: 3.h,
                                               right: 3.w,
-                                              child: Checkbox(
-                                                activeColor: Kblue_twg,
-                                                checkColor: Kwhite,
-                                                value: value,
-                                                onChanged: (value) {
-                                                  setState(() {
-                                                    this.value = value!;
-                                                  });
-                                                  // print(value);
-                                                },
-                                              ),
+                                              child: isSelectAll
+                                                  ? Checkbox(
+                                                      value: selectedPostIds
+                                                          .contains(postId),
+                                                      activeColor: Kblue_twg,
+                                                      checkColor: Kwhite,
+                                                      onChanged: (value) {
+                                                        setState(() {
+                                                          if (value == true) {
+                                                            selectedPostIds
+                                                                .add(postId);
+                                                          } else {
+                                                            selectedPostIds
+                                                                .remove(postId);
+                                                          }
+                                                        });
+                                                      },
+                                                    )
+                                                  : SizedBox(),
+                                              // Checkbox(
+                                              //   activeColor: Kblue_twg,
+                                              //   checkColor: Kwhite,
+                                              //   value: value,
+                                              //   onChanged: (value) {
+                                              //     setState(() {
+                                              //       this.value = value!;
+                                              //     });
+                                              //     // print(value);
+                                              //   },
+                                              // ),
                                             ),
+                                            // Positioned(
+                                            //   bottom: 3.h,
+                                            //   right: 3.w,
+                                            //   child: Checkbox(
+                                            //     activeColor: Kblue_twg,
+                                            //     checkColor: Kwhite,
+                                            //     value: value,
+                                            //     onChanged: (value) {
+                                            //       setState(() {
+                                            //         this.value = value!;
+                                            //       });
+                                            //       // print(value);
+                                            //     },
+                                            //   ),
+                                            // ),
                                           ],
                                         ),
                                         SizedBox(

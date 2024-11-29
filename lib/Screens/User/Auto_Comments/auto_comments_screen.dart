@@ -1,22 +1,6 @@
 import 'package:intl/intl.dart';
 import 'package:twg/untils/export_file.dart';
 
-// class AutoCommentsScreen extends StatefulWidget {
-//   const AutoCommentsScreen({super.key});
-
-//   @override
-//   State<AutoCommentsScreen> createState() => _AutoCommentsScreenState();
-// }
-
-// class _AutoCommentsScreenState extends State<AutoCommentsScreen> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold();
-//   }
-// }
-
-import 'package:twg/untils/export_file.dart';
-
 class AutoCommentsScreen extends StatefulWidget {
   const AutoCommentsScreen({super.key});
 
@@ -52,6 +36,47 @@ class _AutoCommentsScreenState extends State<AutoCommentsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Kwhite,
+        floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
+        floatingActionButton: InkWell(
+          onTap: () {
+            Get.toNamed(kTotal_list);
+            // Get.toNamed(kPublishedScreens);
+          },
+          child: Container(
+            margin: EdgeInsets.only(bottom: 100.h),
+            padding: EdgeInsets.only(left: 20.w, right: 20.w),
+            height: 52,
+            width: 100.w,
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(50.r),
+              color: Kform_border_twg,
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                CircleAvatar(
+                  radius: 12,
+                  backgroundColor: Kwhite,
+                  child: Icon(
+                    Icons.add,
+                    color: Kform_border_twg,
+                    size: 18.sp,
+                  ),
+                ),
+                Text(
+                  "List",
+                  textAlign: TextAlign.center,
+                  style: GoogleFonts.poppins(
+                    fontSize: kFourteenFont,
+                    color: Kwhite,
+                    fontWeight: kFW600,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
         appBar: AppBar(
             elevation: 3,
             shadowColor: kblack,
@@ -486,7 +511,7 @@ class _AutoCommentsScreenState extends State<AutoCommentsScreen> {
                                   fontWeight: kFW700,
                                   isLoading: false,
                                   onTap: () {
-                                    Get.toNamed(kTotal_list);
+                                    // Get.toNamed(kTotal_list);
                                   }),
                             ],
                           )),
