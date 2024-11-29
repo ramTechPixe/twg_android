@@ -42,6 +42,12 @@ class _PreviewScreenState extends State<PreviewScreen> {
       "image_blue": "assets/images/insta_blue.png",
       "image_black": "assets/images/insta_black.png",
     },
+    {
+      // "assets/images/repost_black.png",
+      "name": "youtube",
+      "image_blue": "assets/images/utube_blue.png",
+      "image_black": "assets/images/utube_black.png",
+    },
 
     // "tumbler",
     // "pinterest",
@@ -1018,7 +1024,163 @@ class _PreviewScreenState extends State<PreviewScreen> {
                                     ),
                                   ],
                                 )
-                              : SizedBox()
+                              : dashboardcontroller.selectedMediaType ==
+                                      "youtube"
+                                  ? Column(
+                                      children: [
+                                        Row(
+                                          children: [
+                                            Image.asset(
+                                              "assets/images/utube_black.png",
+                                              height: 25.h,
+                                              fit: BoxFit.cover,
+                                            ),
+                                            SizedBox(
+                                              width: 5.w,
+                                            ),
+                                            Text(
+                                              "Youtube",
+                                              style: GoogleFonts.poppins(
+                                                  color: kblack,
+                                                  fontSize: kSixteenFont,
+                                                  fontWeight: kFW400),
+                                            ),
+                                          ],
+                                        ),
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            // Text(
+                                            //   authcontroller
+                                            //       .autoPostMessageController
+                                            //       .text,
+
+                                            //   style: GoogleFonts.poppins(
+                                            //       color: kblack,
+                                            //       fontSize: kTwelveFont,
+                                            //       fontWeight: kFW400),
+                                            // ),
+                                            SizedBox(
+                                              height: 10.h,
+                                            ),
+                                            Obx(() {
+                                              if (dashboardcontroller
+                                                      .selectedImageobss
+                                                      .value !=
+                                                  null) {
+                                                return Image.file(
+                                                  dashboardcontroller
+                                                      .selectedImageobss.value!,
+                                                  width: double.infinity,
+                                                  height: 200.h,
+                                                  fit: BoxFit.cover,
+                                                );
+                                              } else {
+                                                return Text(
+                                                    "No image selected");
+                                              }
+                                            }),
+                                            SizedBox(
+                                              height: 10.h,
+                                            ),
+                                            Text(
+                                              authcontroller
+                                                  .autoPostMessageController
+                                                  .text,
+                                              //    "Bujji Thalli Lyrical | Thandel |Naga Chaitanya, Sai Pallavi | Javed Ali |Shree Mani |Devi Sri Prasad",
+                                              maxLines: 2,
+                                              overflow: TextOverflow.ellipsis,
+                                              style: GoogleFonts.poppins(
+                                                  color: kblack,
+                                                  fontSize: kSixteenFont,
+                                                  fontWeight: kFW500),
+                                            ),
+
+                                            ///
+
+                                            /////
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Row(
+                                                  children: [
+                                                    Image.asset(
+                                                      "assets/images/ok.png",
+                                                      height: 20.h,
+                                                      width: 20.w,
+                                                      fit: BoxFit.cover,
+                                                    ),
+                                                    SizedBox(
+                                                      width: 5.w,
+                                                    ),
+                                                    Text(
+                                                      "Like",
+                                                      style:
+                                                          GoogleFonts.poppins(
+                                                              color: kblack,
+                                                              fontSize:
+                                                                  kTwelveFont,
+                                                              fontWeight:
+                                                                  kFW400),
+                                                    ),
+                                                  ],
+                                                ),
+                                                Row(
+                                                  children: [
+                                                    Image.asset(
+                                                      "assets/images/fb_share.png",
+                                                      height: 20.h,
+                                                      width: 20.w,
+                                                      fit: BoxFit.cover,
+                                                    ),
+                                                    SizedBox(
+                                                      width: 5.w,
+                                                    ),
+                                                    Text(
+                                                      "Share",
+                                                      style:
+                                                          GoogleFonts.poppins(
+                                                              color: kblack,
+                                                              fontSize:
+                                                                  kTwelveFont,
+                                                              fontWeight:
+                                                                  kFW400),
+                                                    ),
+                                                  ],
+                                                ),
+                                                Row(
+                                                  children: [
+                                                    Image.asset(
+                                                      "assets/images/comment.png",
+                                                      height: 20.h,
+                                                      width: 20.w,
+                                                      fit: BoxFit.cover,
+                                                    ),
+                                                    SizedBox(
+                                                      width: 5.w,
+                                                    ),
+                                                    Text(
+                                                      "Comment",
+                                                      style:
+                                                          GoogleFonts.poppins(
+                                                              color: kblack,
+                                                              fontSize:
+                                                                  kTwelveFont,
+                                                              fontWeight:
+                                                                  kFW400),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    )
+                                  : SizedBox()
             ],
           ),
         ),

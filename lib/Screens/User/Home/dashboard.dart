@@ -11,6 +11,7 @@ class UserDashboard extends StatefulWidget {
 class _UserDashboardState extends State<UserDashboard> {
   ProfileController userprofilecontroller = Get.put(ProfileController());
   DashboardController dashboardcontroller = Get.put(DashboardController());
+  SemiController semicontroller = Get.put(SemiController());
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   void checkInternet() async {
     bool isConnected = await InternetConnection().hasInternetAccess;
@@ -30,6 +31,7 @@ class _UserDashboardState extends State<UserDashboard> {
     // dashboardcontroller.dashboardTotalSocialPostAPI();
     dashboardcontroller.dashboardTotalSocialPostAPI();
     dashboardcontroller.dashboardTotalPostAPI();
+    semicontroller.userScheduledPost();
     // userprofilecontroller.userProfile();
 
     super.initState();

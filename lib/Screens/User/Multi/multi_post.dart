@@ -25,8 +25,12 @@ class _MultiPostScreenState extends State<MultiPostScreen> {
   @override
   void initState() {
     multiPostcontroller.userMultiPost();
-    multiPostcontroller.mutiPostList = multiPostcontroller.originalmutiPostList;
-    multiPostcontroller.mutiPostList = multiPostcontroller.filtermutiPostList;
+    setState(() {
+      multiPostcontroller.mutiPostList.value =
+          multiPostcontroller.originalmutiPostList;
+      multiPostcontroller.mutiPostList.value =
+          multiPostcontroller.filtermutiPostList;
+    });
 
     super.initState();
   }
@@ -141,7 +145,7 @@ class _MultiPostScreenState extends State<MultiPostScreen> {
                       if (value == "") {
                         //  apiController.getRceiversLocationforBank();
                         setState(() {
-                          multiPostcontroller.mutiPostList =
+                          multiPostcontroller.mutiPostList.value =
                               multiPostcontroller.originalmutiPostList;
                         });
                       }

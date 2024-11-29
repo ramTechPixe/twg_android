@@ -14,6 +14,10 @@ class SemiController extends GetxController {
   ProfileController userprofilecontroller = Get.put(ProfileController());
   var selectedSchedulePostID = "".obs;
   var scheduledList = [].obs;
+  var filterscheduledList = [].obs;
+  var originalscheduledList = [].obs;
+
+//  mutiPostList
   var scheduledListLoading = false.obs;
   Future<void> userScheduledPost() async {
     scheduledListLoading(true);
@@ -28,7 +32,8 @@ class SemiController extends GetxController {
       print(data);
       if (data["status"] == "success") {
         scheduledList.value = data["data"];
-
+        originalscheduledList.value = data["data"];
+        filterscheduledList.value = data["data"];
         print("object");
       } else if (data["message"] == "Invalid session token") {
         Fluttertoast.showToast(
