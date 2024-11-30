@@ -9,6 +9,8 @@ import 'package:intl/intl.dart';
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:video_player/video_player.dart';
+
 class DashboardController extends GetxController {
   final apiService = Get.put(ApiService());
   var isFormselected = false.obs;
@@ -18,6 +20,7 @@ class DashboardController extends GetxController {
   var selectedMediaType = "".obs;
   var selectedSocialPlatform = "General".obs;
   var selectedSocialMediaGraph = "".obs;
+  var isCustomSelected = false.obs;
   var autoPostUploadType = "image".obs;
   var selectappmethidType = "appmethod".obs;
   var choosenAutoCRMTool = "".obs;
@@ -30,6 +33,90 @@ class DashboardController extends GetxController {
   void setSelectedImage(File? imageFile) {
     selectedImageobss.value = imageFile;
   }
+
+  // Forvideo
+
+  Rxn<File> selectedVideo = Rxn<File>(); // Store selected video file
+  VideoPlayerController? _videoPlayerController; // Video player controller
+  var isPlaying = false.obs; // Track if the video is playing
+
+  // Getter for the private video player controller
+  VideoPlayerController? get videoPlayerController => _videoPlayerController;
+
+  // Function to set the selected video
+  void setSelectedVideo(File? videoFile) {
+    selectedVideo.value = videoFile;
+    if (videoFile != null) {
+      _initializeVideoPlayer(videoFile);
+    }
+  }
+
+  // Function to initialize the video player
+  void _initializeVideoPlayer(File videoFile) {
+    _videoPlayerController = VideoPlayerController.file(videoFile)
+      ..initialize().then((_) {
+        update(); // Notify listeners when the video is initialized
+      });
+  }
+
+  // Play or pause the video
+  void togglePlayPause() {
+    if (_videoPlayerController != null) {
+      if (isPlaying.value) {
+        _videoPlayerController!.pause();
+      } else {
+        _videoPlayerController!.play();
+      }
+      isPlaying.value = !isPlaying.value; // Toggle play/pause state
+    }
+  }
+
+  @override
+  void onClose() {
+    // Dispose of the controller when the widget is disposed
+    _videoPlayerController?.dispose();
+    super.onClose();
+  }
+
+  // var selectedVideo = Rxn<File>();
+
+  // void setSelectedVideo(File? videoFile) {
+  //   selectedVideo.value = videoFile;
+  // }
+
+  // void clearSelectedVideo() {
+  //   selectedVideo.value = null;
+  // }
+
+  // video play
+
+  // Rxn<File> selectedVideo = Rxn<File>();
+  // VideoPlayerController? _videoPlayerController;
+
+  // // Function to set the selected video
+  // void setSelectedVideo(File? videoFile) {
+  //   selectedVideo.value = videoFile;
+  //   if (videoFile != null) {
+  //     _initializeVideoPlayer(videoFile);
+  //   }
+  // }
+
+  // // Function to initialize the video player
+
+  // void _initializeVideoPlayer(File videoFile) {
+  //   _videoPlayerController = VideoPlayerController.file(videoFile)
+  //     ..initialize().then((_) {
+  //       // Ensure the video is ready to play
+  //       update();
+  //     });
+  // }
+
+  // @override
+  // void onClose() {
+  //   // Dispose the controller when the widget is disposed
+  //   _videoPlayerController?.dispose();
+  //   super.onClose();
+  // }
 
   /////
   TextEditingController v1 = TextEditingController();

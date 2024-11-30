@@ -621,7 +621,8 @@ class _SignUPSState extends State<SignUPS> {
                           // authcontroller.selectedSuscribtionData == {}
                           //authcontroller.selectedSuscribtionData == {}
                           ? SizedBox()
-                          : Container(
+                          : 
+                          Container(
                               padding: EdgeInsets.all(14),
                               margin: EdgeInsets.only(top: 20.h),
                               decoration: BoxDecoration(
@@ -868,6 +869,7 @@ class _SignUPSState extends State<SignUPS> {
                                 ],
                               ),
                             ),
+                     
                       ///////////////////////////
                       SizedBox(
                         height: 20.h,

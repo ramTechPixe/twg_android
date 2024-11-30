@@ -1,3 +1,4 @@
+import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:twg/untils/export_file.dart';
@@ -410,17 +411,82 @@ class _MultiPostScreenState extends State<MultiPostScreen> {
                                                 width: 10.w,
                                               ),
                                               InkWell(
-                                                onTap: () {
-                                                  setState(() {
-                                                    multiPostcontroller
-                                                            .toDeletePostID
-                                                            .value =
-                                                        multiPostcontroller
-                                                                .mutiPostList[
-                                                            index]["post_id"];
-                                                  });
-                                                  multiPostcontroller
-                                                      .quickPostDelete();
+                                                onTap: () async {
+                                                  await showDialog(
+                                                    context: context,
+                                                    builder: (context) =>
+                                                        AlertDialog(
+                                                      title: Text(
+                                                        'Are you sure?',
+                                                        style:
+                                                            GoogleFonts.roboto(
+                                                                fontSize: 18,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w600,
+                                                                color: Colors
+                                                                    .black),
+                                                      ),
+                                                      content: Text(
+                                                        'Do you want to delete post',
+                                                        style:
+                                                            GoogleFonts.roboto(
+                                                                fontSize: 13,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w600,
+                                                                color: Colors
+                                                                    .black),
+                                                      ),
+                                                      actions: <Widget>[
+                                                        TextButton(
+                                                          onPressed: () =>
+                                                              Navigator.of(
+                                                                      context)
+                                                                  .pop(false),
+                                                          child: Text(
+                                                            'No',
+                                                            style: GoogleFonts
+                                                                .roboto(
+                                                                    fontSize:
+                                                                        12,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w600,
+                                                                    color: Colors
+                                                                        .black),
+                                                          ),
+                                                        ),
+                                                        TextButton(
+                                                          onPressed: () {
+                                                            setState(() {
+                                                              multiPostcontroller
+                                                                  .toDeletePostID
+                                                                  .value = multiPostcontroller
+                                                                      .mutiPostList[
+                                                                  index]["post_id"];
+                                                            });
+                                                            multiPostcontroller
+                                                                .quickPostDelete();
+                                                            Get.back();
+                                                          },
+                                                          // onPressed: () =>
+                                                          //     SystemNavigator
+                                                          //         .pop(),
+                                                          child: Text(
+                                                            'Yes',
+                                                            style: GoogleFonts.roboto(
+                                                                fontSize: 12,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w600,
+                                                                color:
+                                                                    Kblue_twg),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  );
                                                 },
                                                 child: Image.asset(
                                                   "assets/images/deleted_image.png",

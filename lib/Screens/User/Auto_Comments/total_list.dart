@@ -132,7 +132,8 @@ class _TotalsListState extends State<TotalsList> {
                   itemBuilder: (context, index) {
                     return InkWell(
                       onTap: () {},
-                      child: Container(
+                      child: 
+                      Container(
                         margin: EdgeInsets.only(
                             bottom: 15.h, left: 2.w, right: 2.w),
                         padding: const EdgeInsets.all(10),

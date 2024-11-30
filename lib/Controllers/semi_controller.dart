@@ -13,6 +13,7 @@ class SemiController extends GetxController {
   final apiService = Get.put(ApiService());
   ProfileController userprofilecontroller = Get.put(ProfileController());
   var selectedSchedulePostID = "".obs;
+  var toDeletePostID = "".obs;
   var scheduledList = [].obs;
   var filterscheduledList = [].obs;
   var originalscheduledList = [].obs;
@@ -87,6 +88,43 @@ class SemiController extends GetxController {
       );
     } finally {
       scheduledViewLoading(false);
+    }
+  }
+
+  // delete post
+  var quickPostDeleteLoading = false.obs;
+  Future<void> schedulePostDelete() async {
+    quickPostDeleteLoading(true);
+    var payload = {"post_id": toDeletePostID.value};
+    try {
+      var response = await apiService.postRequestScheduleViewData(
+          endpoint: "quick-post-api/delete-api/", payload: payload);
+
+      Map data = jsonDecode(response);
+      print(data);
+      // {"status":"1","message":"Post and associated files deleted successfully"}
+      if (data["status"] == "1") {
+        userScheduledPost();
+        Fluttertoast.showToast(
+          msg: data["message"],
+        );
+        print("object");
+      } else if (data["message"] == "Invalid session token") {
+        Fluttertoast.showToast(
+          msg: data["message"],
+        );
+        Get.toNamed(kSignIns);
+      } else {
+        Fluttertoast.showToast(
+          msg: data["message"],
+        );
+      }
+    } catch (e) {
+      Fluttertoast.showToast(
+        msg: "Something went wrong",
+      );
+    } finally {
+      quickPostDeleteLoading(false);
     }
   }
 }

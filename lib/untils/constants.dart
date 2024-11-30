@@ -41,6 +41,8 @@ String kWebSiteSeo = "/Screens/User/Menu/website_seo_screen.dart";
 String kCallAgent = "/Screens/User/Menu/call_an_agent.dart";
 String kAutoComments = "/Screens/User/Auto_Comments/auto_comments_screen.dart";
 String kTotal_list = "/Screens/User/Auto_Comments/total_list.dart";
+String kSuscribtion = "/Screens/User/Menu/suscribtion.dart";
+
 //  export 'package:twg/';
 // export 'package:twg/Screens/';
 ////////// Fonts Size
@@ -115,6 +117,10 @@ const FontWeight kFW900 = FontWeight.w900;
 /// Basic Colors
 /// Color(0xFF636363)
 /// twg
+/// # #
+const Color kBLur_pink = Color(0xffE5E4E2);
+const Color kBLur_blue = Color(0xffB0D0F9);
+const Color Kplatinum = Color(0xffE5E4E2);
 const Color KGradientPurple_twg = Color(0xff9341D4); // #9341D4
 const Color KGradientPink_twg = Color(0xffE83E8C); // #E83E8C
 const Color KLightPurple_twg = Color(0xffD98EFB);

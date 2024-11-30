@@ -43,6 +43,7 @@ class _ReportsState extends State<Reports> {
   void initState() {
     setState(() {
       dashboardcontroller.selectedSocialMediaGraph.value = "This Month";
+      dashboardcontroller.isCustomSelected.value = false;
     });
 
     super.initState();
@@ -234,7 +235,28 @@ class _ReportsState extends State<Reports> {
                                 dashboardcontroller.selectedSocialMediaGraph
                                     .value = social[index];
                               });
-                              print("object");
+
+                              if (dashboardcontroller
+                                      .selectedSocialMediaGraph ==
+                                  "Custom") {
+                                if (dashboardcontroller.isCustomSelected ==
+                                    true) {
+                                  setState(() {
+                                    dashboardcontroller.isCustomSelected.value =
+                                        false;
+                                  });
+                                } else {
+                                  setState(() {
+                                    dashboardcontroller.isCustomSelected.value =
+                                        true;
+                                  });
+                                }
+                              } else {
+                                setState(() {
+                                  dashboardcontroller.isCustomSelected.value =
+                                      false;
+                                });
+                              }
                             },
                             child: Container(
                               margin: EdgeInsets.only(right: 10.w),
@@ -269,7 +291,8 @@ class _ReportsState extends State<Reports> {
                       );
                     }),
               ),
-              dashboardcontroller.selectedSocialMediaGraph == "Custom"
+              dashboardcontroller.isCustomSelected == true
+                  //  dashboardcontroller.selectedSocialMediaGraph == "Custom"
                   ? Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.center,
