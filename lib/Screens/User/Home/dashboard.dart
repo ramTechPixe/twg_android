@@ -416,6 +416,31 @@ Widget leftDrawerMenu(
         SizedBox(
           height: 20.h,
         ),
+        InkWell(
+          onTap: () {
+            Get.toNamed(kSuscribtion);
+          },
+          child: Row(
+            children: [
+              Image.asset(
+                "assets/images/video_template.png",
+                height: 30.h,
+                width: 30.w,
+              ),
+              SizedBox(
+                width: 15.w,
+              ),
+              Text(
+                "Suscribtion",
+                style: GoogleFonts.poppins(
+                    color: kblack, fontSize: kSixteenFont, fontWeight: kFW500),
+              ),
+            ],
+          ),
+        ),
+        SizedBox(
+          height: 20.h,
+        ),
         GestureDetector(
           onTap: () {
             showModalBottomSheet(

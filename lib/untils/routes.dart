@@ -144,6 +144,10 @@ class Routes {
         name: kTotal_list,
         transition: Transition.rightToLeft,
         page: () => TotalsList()),
+    GetPage(
+        name: kSuscribtion,
+        transition: Transition.rightToLeft,
+        page: () => Suscribtion()),
     //
   ];
 }

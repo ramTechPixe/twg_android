@@ -502,6 +502,8 @@ class _AutoPostState extends State<AutoPost> {
                                         onTap: () {
                                           setState(() {
                                             _listVideoPaths.clear();
+                                            dashboardcontroller
+                                                .selectedVideo.value = null;
                                           });
                                           setState(() {});
                                         },
@@ -526,6 +528,8 @@ class _AutoPostState extends State<AutoPost> {
                                       onTap: () {
                                         setState(() {
                                           _listVideoPaths.clear();
+                                          dashboardcontroller
+                                              .selectedVideo.value = null;
                                         });
                                         setState(() {});
                                       },
@@ -577,17 +581,82 @@ class _AutoPostState extends State<AutoPost> {
                                 fontWeight: kFW600,
                                 isLoading: false,
                                 onTap: () async {
-                                  _listVideoPaths =
-                                      await ImagePickers.pickerPaths(
-                                    galleryMode: GalleryMode.video,
-                                    selectCount:
-                                        1, // Allow selecting up to 5 videos
-                                    showCamera:
-                                        false, // Option to record a video
-                                  );
-                                  setState(() {});
-                                  print(_listVideoPaths);
+                                  try {
+                                    // Use the ImagePickers library to select a video
+                                    _listVideoPaths =
+                                        await ImagePickers.pickerPaths(
+                                      galleryMode: GalleryMode.video,
+                                      selectCount: 1,
+                                      showCamera: false,
+                                    );
+
+                                    // Update the UI
+                                    setState(() {});
+
+                                    if (_listVideoPaths.isNotEmpty) {
+                                      final String? videoPath =
+                                          _listVideoPaths[0].path;
+
+                                      if (videoPath != null) {
+                                        // Pass the selected video file to the controller
+                                        dashboardcontroller
+                                            .setSelectedVideo(File(videoPath));
+                                        print(
+                                            "Selected video path: $videoPath");
+                                      } else {
+                                        print("Video path is null");
+                                      }
+                                    } else {
+                                      print("No videos selected");
+                                    }
+                                  } catch (e) {
+                                    print("Error picking video: $e");
+                                  }
                                 },
+
+                                // onTap: () async {
+                                //   try {
+                                //     // Use the ImagePickers library to select a video
+                                //     _listVideoPaths =
+                                //         await ImagePickers.pickerPaths(
+                                //       galleryMode: GalleryMode.video,
+                                //       selectCount: 1,
+                                //       showCamera: false,
+                                //     );
+
+                                //     setState(() {});
+
+                                //     if (_listVideoPaths.isNotEmpty) {
+                                //       String? videoPath =
+                                //           _listVideoPaths[0].path;
+
+                                //       if (videoPath != null) {
+                                //         dashboardcontroller
+                                //             .setSelectedVideo(File(videoPath));
+                                //       } else {
+                                //         print("Video path is null");
+                                //       }
+
+                                //       print(_listVideoPaths);
+                                //     } else {
+                                //       print("No videos selected");
+                                //     }
+                                //   } catch (e) {
+                                //     print("Error picking video: $e");
+                                //   }
+                                // },
+
+                                // onTap: () async {
+                                //   _listVideoPaths =
+                                //       await ImagePickers.pickerPaths(
+                                //     galleryMode: GalleryMode.video,
+                                //     selectCount: 1,
+                                //     showCamera: false,
+                                //   );
+                                //   setState(() {});
+                                // videoController.setSelectedVideo(File(_listVideoPaths[0]));
+                                //   print(_listVideoPaths);
+                                // },
                               ),
                             ],
                           ),

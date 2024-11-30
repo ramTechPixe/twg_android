@@ -66,6 +66,7 @@ export 'package:twg/Screens/User/Semi/Edit_post/edit_schedule_post.dart';
 export 'package:twg/Screens/User/Semi/Edit_post/edit_auto_post.dart';
 export 'package:twg/Screens/User/Semi/Edit_post/edit_custom_post.dart';
 export 'package:twg/Screens/User/Semi/Edit_post/edit_Ai_post.dart';
+export 'package:twg/Screens/User/Semi/you_tube_preview.dart';
 //Profile
 export 'package:twg/Screens/User/Profile/edit_profile.dart';
 
@@ -112,6 +113,7 @@ export 'package:twg/Screens/User/PostingLogs/posting_log_view.dart';
 //Menu
 export 'package:twg/Screens/User/Menu/website_seo_screen.dart';
 export 'package:twg/Screens/User/Menu/call_an_agent.dart';
+export 'package:twg/Screens/User/Menu/suscribtion.dart';
 
 // Auto Comments
 export 'package:twg/Screens/User/Auto_Comments/auto_comments_screen.dart';
