@@ -172,8 +172,7 @@ class _EditAutoPostState extends State<EditAutoPost> {
 
   @override
   Widget build(BuildContext context) {
-    return 
-    Obx(
+    return Obx(
       () => Column(
         children: [
           Container(
@@ -1504,7 +1503,7 @@ class _EditAutoPostState extends State<EditAutoPost> {
               ],
             ),
           ),
-         
+
           Container(
             margin: EdgeInsets.only(top: 20),
             width: double.infinity,
@@ -1737,7 +1736,7 @@ class _EditAutoPostState extends State<EditAutoPost> {
               ],
             ),
           ),
-         
+
           // SizedBox(
           //   height: 80.h,
           // )
@@ -1745,6 +1744,4 @@ class _EditAutoPostState extends State<EditAutoPost> {
       ),
     );
   }
-
 }
-

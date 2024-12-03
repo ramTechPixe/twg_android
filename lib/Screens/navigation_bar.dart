@@ -188,7 +188,8 @@ class _Bottom_navigationState extends State<Bottom_navigation> {
     return <Widget>[
       UserDashboard(),
       QuickPosting(),
-      QuickPosting(),
+      FullAutomation(),
+      // QuickPosting(),
       Reports(),
       // QuickPosting(),
       SettingsScreen(),

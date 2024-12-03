@@ -43,8 +43,11 @@ String kAutoComments = "/Screens/User/Auto_Comments/auto_comments_screen.dart";
 String kTotal_list = "/Screens/User/Auto_Comments/total_list.dart";
 String kSuscribtion = "/Screens/User/Menu/suscribtion.dart";
 String kInvoiceScreen = "/Screens/User/Menu/invoice_screen.dart";
-//  export 'package:twg/';
-// export 'package:twg/Screens/';
+String kVideoTemplateScreen = "/Screens/User/VideoTemp/video_templates.dart";
+String kVideoTemplateView =
+    "/Screens/User/VideoTemp/video_description_view.dart";
+//
+//
 ////////// Fonts Size
 double kTenFont = MediaQueryData.fromWindow(WidgetsBinding.instance.window)
             .size
@@ -158,7 +161,8 @@ const Color Kgoogledark_green_twg = Color(0xff587DBD);
 const Color KInsta_orange_twg = Color(0xffFF7944);
 const Color Kyou_tube_red = Color(0xffFF0000);
 const Color KGreen = Color(0xff00A65A);
-//
+const Color KGradientPink = Color(0xff00A65A);
+// #F8E1FC
 
 //
 //
@@ -195,7 +199,8 @@ const Color kbloodredopacity = Color.fromARGB(255, 238, 162, 156);
 const Color kblack = Color(0xff0C1A1A);
 const Color KdarkText = Color(0xff0C1A1A);
 
-//
+// #1958F4
+//#E13E9380 // #1958F4
 // #F4F4F4
 const Color KTextdark = Color(0xff000000);
 const Color KTextgery = Color(0xff9796A1);
