@@ -82,6 +82,7 @@ class AuthController extends GetxController {
   TextEditingController signUpCouponController = TextEditingController();
   ////////Coupons Api
   var signUpCouponLoading = false.obs;
+  var isCouponApplied = false.obs;
   var signUpCoupondata = {}.obs;
   Future<void> SignUpCoupon(Map payload) async {
     signUpCouponLoading(true);
@@ -97,11 +98,12 @@ class AuthController extends GetxController {
 
       if (data["message"] == "Coupon code is applied successfully") {
         signUpCoupondata.value = data["data"];
+        isCouponApplied.value = true;
         Fluttertoast.showToast(
           msg: data["message"],
         );
 
-        print("object");
+        debugPrint("object");
       } else {
         Fluttertoast.showToast(
           msg: data["message"],

@@ -148,6 +148,11 @@ class Routes {
         name: kSuscribtion,
         transition: Transition.rightToLeft,
         page: () => Suscribtion()),
+    GetPage(
+        name: kInvoiceScreen,
+        transition: Transition.rightToLeft,
+        page: () => InvoiceScreen()),
+//String  = "/Screens/User/Menu/invoice_screen.dart";
     //
   ];
 }

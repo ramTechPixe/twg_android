@@ -102,11 +102,14 @@ class _YouTubePreviewState extends State<YouTubePreview> {
                       ? SizedBox()
                       : Stack(
                           children: [
-                            AspectRatio(
-                              aspectRatio: dashboardcontroller
-                                  .videoPlayerController!.value.aspectRatio,
-                              child: VideoPlayer(
-                                  dashboardcontroller.videoPlayerController!),
+                            SizedBox(
+                              height: 200.h,
+                              width: double.infinity,
+                              child: AspectRatio(
+                                aspectRatio: 2,
+                                child: VideoPlayer(
+                                    dashboardcontroller.videoPlayerController!),
+                              ),
                             ),
                             Positioned(
                               top: 0,
