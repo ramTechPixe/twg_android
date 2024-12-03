@@ -152,7 +152,15 @@ class Routes {
         name: kInvoiceScreen,
         transition: Transition.rightToLeft,
         page: () => InvoiceScreen()),
-//String  = "/Screens/User/Menu/invoice_screen.dart";
+    GetPage(
+        name: kVideoTemplateScreen,
+        transition: Transition.rightToLeft,
+        page: () => VideoTemplate()),
+    GetPage(
+        name: kVideoTemplateView,
+        transition: Transition.rightToLeft,
+        page: () => VideoTemplateDescription()),
+//
     //
   ];
 }

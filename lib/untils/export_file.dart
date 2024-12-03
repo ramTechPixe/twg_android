@@ -119,3 +119,10 @@ export 'package:twg/Screens/User/Menu/invoice_screen.dart';
 // Auto Comments
 export 'package:twg/Screens/User/Auto_Comments/auto_comments_screen.dart';
 export 'package:twg/Screens/User/Auto_Comments/total_list.dart';
+
+// Full Automation
+export 'package:twg/Screens/User/Full_auto/full_automation.dart';
+
+// VIdeo Template
+export 'package:twg/Screens/User/VideoTemp/video_templates.dart';
+export 'package:twg/Screens/User/VideoTemp/video_description_view.dart';
