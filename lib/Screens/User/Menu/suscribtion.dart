@@ -40,9 +40,6 @@ class _SuscribtionState extends State<Suscribtion> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
-                    // margin: margin,
-                    // padding: Padding,
-
                     width: double.infinity,
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
@@ -120,7 +117,6 @@ class _SuscribtionState extends State<Suscribtion> {
                       children: [
                         SizedBox(
                           width: MediaQuery.of(context).size.width / 2.3,
-                          // MediaQuery.of(context).size.width / 2.5,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -598,13 +594,14 @@ class _SuscribtionState extends State<Suscribtion> {
                               SizedBox(
                                   child: CustomButtonOutlined(
                                 width: MediaQuery.of(context).size.width / 2.9,
-                                //  margin: EdgeInsets.only(top: 20.h),
                                 label: "View Invoice",
                                 borderColor: Kform_border_twg,
                                 isLoading: false,
                                 fontSize: kTwelveFont,
                                 textColor: KBlack_twg,
-                                onTap: () {},
+                                onTap: () {
+                                  Get.toNamed(kInvoiceScreen);
+                                },
                                 fontWeight: kFW500,
                                 Padding: EdgeInsets.symmetric(
                                     vertical: 8, horizontal: 5),
@@ -615,7 +612,6 @@ class _SuscribtionState extends State<Suscribtion> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      // "Mobile Number",
                                       "             ",
                                       maxLines: 1,
                                       overflow: TextOverflow.ellipsis,
@@ -628,7 +624,6 @@ class _SuscribtionState extends State<Suscribtion> {
                                       height: 3.h,
                                     ),
                                     Text(
-                                      // "9381022559",
                                       "          ",
                                       maxLines: 1,
                                       overflow: TextOverflow.ellipsis,

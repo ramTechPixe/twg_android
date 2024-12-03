@@ -36,7 +36,7 @@ class _SignUPSState extends State<SignUPS> {
     //   authcontroller.selectedSuscribtionCardIndex.value = 1000000000;
     //   // authcontroller.selectedSuscribtionData.value = {};
     // });
-    // TODO: implement initState
+
     super.initState();
   }
 
@@ -621,8 +621,7 @@ class _SignUPSState extends State<SignUPS> {
                           // authcontroller.selectedSuscribtionData == {}
                           //authcontroller.selectedSuscribtionData == {}
                           ? SizedBox()
-                          : 
-                          Container(
+                          : Container(
                               padding: EdgeInsets.all(14),
                               margin: EdgeInsets.only(top: 20.h),
                               decoration: BoxDecoration(
@@ -869,7 +868,7 @@ class _SignUPSState extends State<SignUPS> {
                                 ],
                               ),
                             ),
-                     
+
                       ///////////////////////////
                       SizedBox(
                         height: 20.h,
@@ -945,6 +944,160 @@ class _SignUPSState extends State<SignUPS> {
                                 ],
                               ),
                             )),
+                      SizedBox(
+                        height: 20.h,
+                      ),
+                      // Container(
+                      //     width: 50,
+                      //     height: 100,
+                      //     decoration: const BoxDecoration(
+                      //         color: Colors.black,
+                      //         borderRadius: BorderRadius.only(
+                      //           bottomLeft: Radius.circular(100),
+                      //           topLeft: Radius.circular(100),
+                      //         ))),
+// signUpCoupondata.value
+                      authcontroller.isCouponApplied == false
+                          ? SizedBox()
+                          : Stack(
+                              children: [
+                                Container(
+                                  height: 180.h,
+                                  width: double.infinity,
+                                  padding:
+                                      EdgeInsets.only(left: 27.w, right: 27.w),
+                                  decoration: BoxDecoration(
+                                      color: KCouponBlue,
+                                      borderRadius: BorderRadius.circular(15)),
+                                  child: Row(
+                                    children: [
+                                      Image.asset(
+                                        "assets/images/coupon_image.png",
+                                        height: 95.h,
+                                        width: 95.w,
+                                      ),
+                                      RotatedBox(
+                                        quarterTurns: 1,
+                                        child: SizedBox(
+                                          width: 160.w,
+                                          child: Text(
+                                            "  -------------------------------",
+                                            maxLines: 1,
+                                            style: GoogleFonts.poppins(
+                                                fontSize: kSixteenFont,
+                                                //  letterSpacing: 1,
+                                                color: Kwhite,
+                                                fontWeight: kFW400),
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        width: 10.w,
+                                      ),
+                                      Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            authcontroller.signUpCoupondata[
+                                                    "coupon_code"] ??
+                                                "",
+                                            style: GoogleFonts.oleoScript(
+                                                fontSize: kTwentyFont,
+                                                fontWeight: kFW400,
+                                                color: kblack),
+                                          ),
+                                          SizedBox(
+                                            height: 15.h,
+                                          ),
+                                          Text(
+                                            authcontroller.signUpCoupondata[
+                                                        "coupon_amount"] !=
+                                                    null
+                                                ? "Rs. ${authcontroller.signUpCoupondata["coupon_amount"]} OFF"
+                                                : "No data",
+                                            style: GoogleFonts.poppins(
+                                                fontSize: 20.sp,
+                                                color: Kwhite,
+                                                fontWeight: kFW600),
+                                          ),
+                                          SizedBox(
+                                            height: 5.h,
+                                          ),
+                                          Text(
+                                            authcontroller.signUpCoupondata[
+                                                    "coupon_type"] ??
+                                                "no data",
+                                            style: GoogleFonts.poppins(
+                                                fontSize: kFourteenFont,
+                                                color: Kwhite,
+                                                fontWeight: kFW500),
+                                          ),
+                                          SizedBox(
+                                            height: 5.h,
+                                          ),
+                                          Container(
+                                            decoration: BoxDecoration(
+                                                color: Kwhite,
+                                                borderRadius:
+                                                    BorderRadius.circular(
+                                                        30.r)),
+                                            padding: EdgeInsets.only(
+                                                left: 25.w,
+                                                right: 25.w,
+                                                top: 2.h,
+                                                bottom: 2.h),
+                                            child: Text(
+                                              authcontroller.signUpCoupondata[
+                                                      "coupon_status"] ??
+                                                  "no status",
+                                              style: GoogleFonts.poppins(
+                                                  fontSize: kTwelveFont,
+                                                  color: kblack,
+                                                  fontWeight: kFW400),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Positioned(
+                                  top: 0.h,
+                                  bottom: 0.h,
+                                  left: 0.w,
+                                  right: 0.w,
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      Container(
+                                          width: 20.w,
+                                          height: 40.h,
+                                          decoration: const BoxDecoration(
+                                              color: Kwhite,
+                                              borderRadius: BorderRadius.only(
+                                                bottomRight:
+                                                    Radius.circular(100),
+                                                topRight: Radius.circular(100),
+                                              ))),
+                                      Container(
+                                          width: 20.w,
+                                          height: 40.h,
+                                          decoration: const BoxDecoration(
+                                              color: Kwhite,
+                                              borderRadius: BorderRadius.only(
+                                                bottomLeft:
+                                                    Radius.circular(100),
+                                                topLeft: Radius.circular(100),
+                                              ))),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
                       SizedBox(
                         height: 20.h,
                       ),

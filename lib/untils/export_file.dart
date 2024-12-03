@@ -114,6 +114,7 @@ export 'package:twg/Screens/User/PostingLogs/posting_log_view.dart';
 export 'package:twg/Screens/User/Menu/website_seo_screen.dart';
 export 'package:twg/Screens/User/Menu/call_an_agent.dart';
 export 'package:twg/Screens/User/Menu/suscribtion.dart';
+export 'package:twg/Screens/User/Menu/invoice_screen.dart';
 
 // Auto Comments
 export 'package:twg/Screens/User/Auto_Comments/auto_comments_screen.dart';

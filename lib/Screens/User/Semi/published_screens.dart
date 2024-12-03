@@ -479,7 +479,7 @@ class _PublishedScreensState extends State<PublishedScreens> {
                                                                 index]["video"]),
                                                   )
 
-                                                // SizedBox()
+                                                //
                                                 : ClipRRect(
                                                     borderRadius:
                                                         BorderRadius.circular(
@@ -504,8 +504,6 @@ class _PublishedScreensState extends State<PublishedScreens> {
                                                           child: Container(
                                                             decoration:
                                                                 BoxDecoration(
-                                                              shape: BoxShape
-                                                                  .circle,
                                                               color: Kwhite
                                                                   .withOpacity(
                                                                       0.5),
