@@ -75,9 +75,7 @@ class _UserDashboardState extends State<UserDashboard> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 InkWell(
-                                  onTap: () {
-                                    // Get.toNamed(kNointernetScreen);
-                                  },
+                                  onTap: () {},
                                   child: Text(
                                     "Welcome",
                                     style: GoogleFonts.poppins(
@@ -211,22 +209,27 @@ Widget leftDrawerMenu(
         SizedBox(
           height: 20.h,
         ),
-        Row(
-          children: [
-            Image.asset(
-              "assets/images/debug.png",
-              height: 30.h,
-              width: 30.w,
-            ),
-            SizedBox(
-              width: 15.w,
-            ),
-            Text(
-              "Debug Logs",
-              style: GoogleFonts.poppins(
-                  color: kblack, fontSize: kSixteenFont, fontWeight: kFW500),
-            ),
-          ],
+        InkWell(
+          onTap: () {
+            Get.toNamed(kAnalitics);
+          },
+          child: Row(
+            children: [
+              Image.asset(
+                "assets/images/debug.png",
+                height: 30.h,
+                width: 30.w,
+              ),
+              SizedBox(
+                width: 15.w,
+              ),
+              Text(
+                "Analitics",
+                style: GoogleFonts.poppins(
+                    color: kblack, fontSize: kSixteenFont, fontWeight: kFW500),
+              ),
+            ],
+          ),
         ),
         SizedBox(
           height: 20.h,

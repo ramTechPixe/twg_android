@@ -17,7 +17,7 @@ export 'package:sliding_sheet_new/sliding_sheet_new.dart';
 export 'package:curved_navigation_bar/curved_navigation_bar.dart';
 export 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
 export 'package:cached_network_image/cached_network_image.dart';
-
+export 'package:syncfusion_flutter_datepicker/datepicker.dart';
 export 'package:twg/untils/constants.dart';
 export 'package:twg/untils/routes.dart';
 export 'package:twg/untils/user_simple_preferences.dart';
@@ -123,6 +123,10 @@ export 'package:twg/Screens/User/Auto_Comments/total_list.dart';
 // Full Automation
 export 'package:twg/Screens/User/Full_auto/full_automation.dart';
 
-// VIdeo Template
+// Video Template
 export 'package:twg/Screens/User/VideoTemp/video_templates.dart';
 export 'package:twg/Screens/User/VideoTemp/video_description_view.dart';
+
+// Analitics
+export 'package:twg/Screens/User/Analitics/analitics_screen.dart';
+export 'package:twg/Screens/User/Analitics/all_fb_analytics.dart';

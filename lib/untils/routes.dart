@@ -160,6 +160,10 @@ class Routes {
         name: kVideoTemplateView,
         transition: Transition.rightToLeft,
         page: () => VideoTemplateDescription()),
+    GetPage(
+        name: kAnalitics,
+        transition: Transition.rightToLeft,
+        page: () => AnalyticsScreen()),
 //
     //
   ];
