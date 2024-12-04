@@ -46,7 +46,8 @@ String kInvoiceScreen = "/Screens/User/Menu/invoice_screen.dart";
 String kVideoTemplateScreen = "/Screens/User/VideoTemp/video_templates.dart";
 String kVideoTemplateView =
     "/Screens/User/VideoTemp/video_description_view.dart";
-//
+String kAnalitics = "/Screens/User/Analitics/analitics_screen.dart";
+//   export 'package:twg/';
 //
 ////////// Fonts Size
 double kTenFont = MediaQueryData.fromWindow(WidgetsBinding.instance.window)

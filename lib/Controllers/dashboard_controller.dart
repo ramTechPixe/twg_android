@@ -19,6 +19,8 @@ class DashboardController extends GetxController {
   var selectedPublishedorScheduled = "Published".obs;
   var selectedMediaType = "".obs;
   var selectedSocialPlatform = "General".obs;
+  var selectedAllItem = "".obs;
+  var selectedAnaliyics = "All".obs;
   var selectedSocialMediaGraph = "".obs;
   var isCustomSelected = false.obs;
   var autoPostUploadType = "image".obs;
