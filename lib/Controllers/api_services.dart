@@ -22,7 +22,8 @@ class ApiService extends GetxService {
 //  http://192.168.1.197:5000
 
 //  String baseUrl = "http://192.168.1.197:5000/";
-  String baseUrl = "https://dev.thewisguystech.com/";
+  String baseUrl = "https://thewisguystech.com/";
+  //  String baseUrl = "https://dev.thewisguystech.com/";  //old
   String live_baseUrl = "https://thewisguystech.com/uploads/twg-api/";
 //  String baseUrl = "http://192.168.1.197:5000/"; // main
   // main

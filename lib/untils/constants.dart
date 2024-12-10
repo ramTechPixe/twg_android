@@ -163,7 +163,8 @@ const Color KInsta_orange_twg = Color(0xffFF7944);
 const Color Kyou_tube_red = Color(0xffFF0000);
 const Color KGreen = Color(0xff00A65A);
 const Color KGradientPink = Color(0xff00A65A);
-// #F8E1FC
+const Color KCustomGreen = Color(0xff0D8D22);
+//#  0D8D22
 
 //
 //
@@ -199,7 +200,7 @@ const Color kbloodred = Color(0xffEB1202);
 const Color kbloodredopacity = Color.fromARGB(255, 238, 162, 156);
 const Color kblack = Color(0xff0C1A1A);
 const Color KdarkText = Color(0xff0C1A1A);
-
+// #00A65A
 // #1958F4
 //#E13E9380 // #1958F4
 // #F4F4F4

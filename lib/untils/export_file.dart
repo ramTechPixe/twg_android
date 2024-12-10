@@ -130,3 +130,4 @@ export 'package:twg/Screens/User/VideoTemp/video_description_view.dart';
 // Analitics
 export 'package:twg/Screens/User/Analitics/analitics_screen.dart';
 export 'package:twg/Screens/User/Analitics/all_fb_analytics.dart';
+export 'package:twg/Screens/User/Analitics/all_insta_analitics.dart';
