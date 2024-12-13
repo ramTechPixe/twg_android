@@ -132,7 +132,6 @@ class LogsController extends GetxController {
       Map<String, dynamic> data = jsonDecode(response);
 
       if (data["status"] == "success") {
-        // Parse and transform logs
         List<dynamic> processedLogs =
             (data["data"] as List<dynamic>).map((log) {
           if (log.containsKey("social_source")) {
@@ -140,7 +139,6 @@ class LogsController extends GetxController {
               Map<String, dynamic> deserializedSource =
                   phpDeserialize(log["social_source"]);
 
-              // Transform to the desired format
               log["social_source"] = {
                 "image": deserializedSource["image"] ?? "",
                 "message": deserializedSource["message"] ?? "",
@@ -149,7 +147,7 @@ class LogsController extends GetxController {
               };
             } catch (e) {
               print("Error deserializing social_source: $e");
-              log["social_source"] = null; // Handle broken deserialization
+              log["social_source"] = null;
             }
           }
           return log;
