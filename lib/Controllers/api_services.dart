@@ -164,6 +164,106 @@ class ApiService extends GetxService {
     }
   }
 
+//// ai text
+  Future postRequestAiTextData({
+    required String endpoint,
+    required Map<dynamic, dynamic> payload,
+    Map<String, String>? customHeaders,
+  }) async {
+    Uri url = Uri.parse(baseUrl + endpoint);
+//  "user_id": userprofilecontroller.profileData["user_details"]["id"],
+    //    "custom_message": paylodd["customMesg"]
+    try {
+      var request = http.MultipartRequest('POST', url)
+        ..fields['user_id'] = payload['user_id']
+        ..fields['custom_message'] = payload['custom_message'];
+
+      var streamedResponse = await request.send();
+      var response = await http.Response.fromStream(streamedResponse);
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        return response.body;
+      }
+    } on DioError catch (e) {
+      debugPrint("$e");
+      if (e.response?.statusCode == 404) {
+        return e.response?.data;
+      } else if (e.response?.statusCode == 401) {
+        return e.response?.data;
+      } else if (e.response?.statusCode == 400) {
+        return e.response?.data;
+      } else {
+        return {"message": "Something went wrong!"};
+      }
+    }
+  }
+
+/////
+  // post view
+  Future postRequestPostViewData({
+    required String endpoint,
+    required Map<dynamic, dynamic> payload,
+    Map<String, String>? customHeaders,
+  }) async {
+    Uri url = Uri.parse(baseUrl + endpoint);
+
+    try {
+      var request = http.MultipartRequest('POST', url)
+        ..fields['log_id'] = payload['log_id'];
+
+      var streamedResponse = await request.send();
+      var response = await http.Response.fromStream(streamedResponse);
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        return response.body;
+      }
+    } on DioError catch (e) {
+      debugPrint("$e");
+      if (e.response?.statusCode == 404) {
+        return e.response?.data;
+      } else if (e.response?.statusCode == 401) {
+        return e.response?.data;
+      } else if (e.response?.statusCode == 400) {
+        return e.response?.data;
+      } else {
+        return {"message": "Something went wrong!"};
+      }
+    }
+  }
+
+  // multipost pagenation
+  Future postRequestMultipostPagenation({
+    required String endpoint,
+    required Map<dynamic, dynamic> payload,
+    Map<String, String>? customHeaders,
+  }) async {
+    Uri url = Uri.parse(baseUrl + endpoint);
+
+    try {
+      var request = http.MultipartRequest('POST', url)
+        ..fields['user_id'] = payload['user_id']
+        ..fields['page'] = payload['page']
+        ..fields['limit'] = payload['limit'];
+      var streamedResponse = await request.send();
+      var response = await http.Response.fromStream(streamedResponse);
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        return response.body;
+      }
+    } on DioError catch (e) {
+      debugPrint("$e");
+      if (e.response?.statusCode == 404) {
+        return e.response?.data;
+      } else if (e.response?.statusCode == 401) {
+        return e.response?.data;
+      } else if (e.response?.statusCode == 400) {
+        return e.response?.data;
+      } else {
+        return {"message": "Something went wrong!"};
+      }
+    }
+  }
+
   // post view
   Future postRequestScheduleViewData({
     required String endpoint,
@@ -175,6 +275,39 @@ class ApiService extends GetxService {
     try {
       var request = http.MultipartRequest('POST', url)
         ..fields['post_id'] = payload['post_id'];
+
+      var streamedResponse = await request.send();
+      var response = await http.Response.fromStream(streamedResponse);
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        return response.body;
+      }
+    } on DioError catch (e) {
+      debugPrint("$e");
+      if (e.response?.statusCode == 404) {
+        return e.response?.data;
+      } else if (e.response?.statusCode == 401) {
+        return e.response?.data;
+      } else if (e.response?.statusCode == 400) {
+        return e.response?.data;
+      } else {
+        return {"message": "Something went wrong!"};
+      }
+    }
+  }
+
+  ///
+  ///
+  Future postRequestDeleteLogData({
+    required String endpoint,
+    required Map<dynamic, dynamic> payload,
+    Map<String, String>? customHeaders,
+  }) async {
+    Uri url = Uri.parse(baseUrl + endpoint);
+
+    try {
+      var request = http.MultipartRequest('POST', url)
+        ..fields['log_id'] = payload['log_id'];
 
       var streamedResponse = await request.send();
       var response = await http.Response.fromStream(streamedResponse);

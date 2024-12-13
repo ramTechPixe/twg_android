@@ -1,3 +1,5 @@
+import 'package:intl/intl.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:twg/untils/export_file.dart';
 
 class PostingLogsList extends StatefulWidget {
@@ -10,29 +12,29 @@ class PostingLogsList extends StatefulWidget {
 class _PostingLogsListState extends State<PostingLogsList> {
   DashboardController dashboardcontroller = Get.put(DashboardController());
   AuthController authcontroller = Get.put(AuthController());
-  SemiController semicontroller = Get.put(SemiController());
-  MultPostingsController multiPostcontroller =
-      Get.put(MultPostingsController());
+  // SemiController semicontroller = Get.put(SemiController());
+  LogsController logsPostcontroller = Get.put(LogsController());
   int _characterCount = 0;
   bool value = false;
 
   @override
   void initState() {
     super.initState();
+    logsPostcontroller.userLogsPost();
   }
 
   String? selectedVariant;
 
   // Your dropdown data
   final List<String> variantsList = [
-    'Social Type',
-    'Facebook',
-    'Twitter',
-    'Linked In',
-    'Instagram',
+    'facebook',
+    'twitter',
+    'linkedIn',
+    'instagram',
   ];
   @override
   Widget build(BuildContext context) {
+    String baseUrl = "https://my.thewisguystech.com";
     return Scaffold(
       backgroundColor: Kwhite,
       appBar: AppBar(
@@ -57,7 +59,10 @@ class _PostingLogsListState extends State<PostingLogsList> {
                 color: Kwhite, fontSize: kTwentyFont, fontWeight: kFW600),
           )),
       body: SingleChildScrollView(
-        child: Container(
+          child:
+              // logsListLoading
+              Obx(
+        () => Container(
           margin: EdgeInsets.all(16),
           child: Column(
             children: [
@@ -80,6 +85,38 @@ class _PostingLogsListState extends State<PostingLogsList> {
                     ),
                   ),
                 ),
+                /////////////////////////////////////////
+                //              originalLogsList.value = processedLogs;
+                // filterLogsList.value = processedLogs;
+                ////////////////////////////////////
+                onChanged: (value) {
+                  setState(() {
+                    logsPostcontroller.logsList.value = logsPostcontroller
+                        .filterLogsList
+                        .where((element) =>
+                            // element["message"]
+                            element["social_source"]["message"]
+                                .toString()
+                                .toLowerCase()
+                                .contains(value.toString().toLowerCase()))
+                        .toList();
+                  });
+                  if (value == "") {
+                    //  apiController.getRceiversLocationforBank();
+                    setState(() {
+                      logsPostcontroller.logsList.value =
+                          logsPostcontroller.originalLogsList;
+                    });
+                  }
+                  if (logsPostcontroller.logsList.isEmpty && value != "") {
+                    Fluttertoast.showToast(
+                        msg: "No posts Available ,Search Again");
+                    logsPostcontroller.userLogsPost();
+                    // setState(() {
+                    //   multiPostcontroller.userMultiPost();
+                    // });
+                  }
+                },
                 contentPadding:
                     const EdgeInsets.symmetric(vertical: 14, horizontal: 8),
                 fontSize: 14,
@@ -167,205 +204,327 @@ class _PostingLogsListState extends State<PostingLogsList> {
                 height: 15,
               ),
               // ram
-              ListView.builder(
-                  padding: EdgeInsets.zero,
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemCount: 10,
-                  itemBuilder: (context, index) {
-                    return InkWell(
-                      onTap: () {
-                        // setState(() {
-                        //   semicontroller
-                        //           .selectedSchedulePostID.value =
-                        //       semicontroller.scheduledList[index]
-                        //           ["post_id"];
-                        // });
-
-                        Get.toNamed(kPostingLogView);
-                      },
-                      child:
-                          // Column(
-                          //   children: [
-                          Container(
-                        margin: EdgeInsets.only(
-                            bottom: 13.h, left: 2.w, right: 2.w),
-                        padding: const EdgeInsets.all(10),
-                        decoration: BoxDecoration(
-                          boxShadow: [
-                            BoxShadow(
-                              color: kblack.withOpacity(0.1),
-                              blurRadius: 2.r,
-                              offset: const Offset(0, 1),
-                              spreadRadius: 2.r,
-                            )
-                          ],
-                          color: Kwhite,
-                          borderRadius: BorderRadius.circular(8.r),
-                        ),
-                        child: Column(
-                          children: [
-                            Stack(
-                              children: [
-                                Image.asset(
-                                  "assets/images/bharath_sports.png",
-                                  height: 200.h,
-                                  width: double.infinity,
-                                  fit: BoxFit.cover,
-                                  // width: 25.h,
-                                ),
-                                Positioned(
-                                  bottom: 3.h,
-                                  right: 3.w,
-                                  child: Checkbox(
-                                    activeColor: Kblue_twg,
-                                    checkColor: Kwhite,
-                                    value: value,
-                                    onChanged: (value) {
-                                      setState(() {
-                                        this.value = value!;
-                                      });
-                                      // print(value);
-                                    },
-                                  ),
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              height: 10.h,
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                SizedBox(
-                                  width: MediaQuery.of(context).size.width / 2,
-                                  child: Text(
-                                    "Discover how social media automation can transform your....",
-                                    maxLines: 1,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: GoogleFonts.poppins(
-                                        color: kblack,
-                                        fontSize: kSixteenFont,
-                                        fontWeight: kFW500),
-                                  ),
-                                ),
-                                SizedBox(height: 8.h),
-                                InkWell(
-                                  onTap: () {
-                                    // setState(() {
-                                    //   multiPostcontroller
-                                    //           .toDeletePostID
-                                    //           .value =
-                                    //       multiPostcontroller
-                                    //               .mutiPostList[
-                                    //           0]["post_id"];
-                                    // });
-                                    // multiPostcontroller
-                                    //     .quickPostDelete();
-                                  },
-                                  child: Image.asset(
-                                    "assets/images/deleted_image.png",
-                                    height: 25.h,
-                                    width: 25.h,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            SizedBox(height: 8.h),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  "Instagram",
-                                  style: GoogleFonts.poppins(
-                                      color: Kblue_twg,
-                                      fontSize: kFourteenFont,
-                                      fontWeight: kFW400),
-                                ),
-                                Text(
-                                  "Nov 30, 2024 11:05 am",
-                                  // semicontroller.scheduledList[index]
-                                  //             ["created_date"] ==
-                                  //         null
-                                  //     ?
-                                  //     : DateFormat('MMM d, yyyy hh:mm a')
-                                  //         .format(
-                                  //         DateTime.parse(
-                                  //           semicontroller
-                                  //                   .scheduledList[index]
-                                  //               ["created_date"],
-                                  //         ),
-
-                                  //  "Sep 9, 2024 11:05 am",
-                                  style: GoogleFonts.poppins(
-                                      color: kblack,
-                                      fontSize: kTenFont,
-                                      fontWeight: kFW400),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                        // Row(
-                        //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        //   children: [
-                        //     Icon(Icons.check_box),
-                        //     SizedBox(
-                        //       width: 250.w,
-                        //       child: Text(
-                        //         "100",
-                        //         style: GoogleFonts.poppins(
-                        //             color: kblack,
-                        //             fontSize: kFourteenFont,
-                        //             fontWeight: kFW400),
-                        //       ),
-                        //     ),
-                        //     Image.asset(
-                        //       "assets/images/deleted_image.png",
-                        //       height: 25.h,
-                        //       width: 25.h,
-                        //     ),
-                        //   ],
-                        // ),
+              logsPostcontroller.logsListLoading == true
+                  ? Center(
+                      child: CircularProgressIndicator(
+                        color: Kform_border_twg,
                       ),
-                      //   Container(
-                      //     margin: EdgeInsets.only(bottom: 10.h),
-                      //     padding: EdgeInsets.all(5),
-                      //     child: Row(
-                      //       mainAxisAlignment:
-                      //           MainAxisAlignment.spaceBetween,
-                      //       children: [
-                      //         Icon(Icons.check_box),
-                      //         SizedBox(
-                      //           width: 250.w,
-                      //           child: Text(
-                      //             semicontroller.scheduledList[
-                      //                     index]["message"] ??
-                      //                 "",
+                    )
+                  : logsPostcontroller.logsList.isEmpty ||
+                          logsPostcontroller.logsList == null
+                      ? Text(
+                          "No Posts",
+                          style: GoogleFonts.poppins(
+                              fontSize: kSixteenFont,
+                              color: KdarkText,
+                              fontWeight: kFW500),
+                        )
+                      : ListView.builder(
+                          padding: EdgeInsets.zero,
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          itemCount: logsPostcontroller.logsList.length,
+                          itemBuilder: (context, index) {
+                            String imageUrl = logsPostcontroller.logsList[index]
+                                    ["social_source"]["image"] ??
+                                "";
+                            String newUrl = imageUrl.contains(baseUrl)
+                                ? imageUrl.substring(baseUrl.length)
+                                : "URL not found";
+                            return logsPostcontroller.filteredSocialCategory !=
+                                        "" &&
+                                    logsPostcontroller.filteredSocialCategory !=
+                                        logsPostcontroller.logsList[index]
+                                            ["social_type"]
+                                ? SizedBox()
+                                : InkWell(
+                                    onTap: () {
+                                      setState(() {
+                                        logsPostcontroller.selectedlogId.value =
+                                            logsPostcontroller.logsList[index]
+                                                ["id"];
+                                        // logsPostcontroller.logsList[index]["id"];
+                                        // semicontroller
+                                        //         .selectedSchedulePostID.value =
+                                        //     semicontroller.scheduledList[index]
+                                        //         ["id"];
+                                      });
 
-                      //             //    "Discover how social media automation can transform your....",
-                      //             style: GoogleFonts.poppins(
-                      //                 color: kblack,
-                      //                 fontSize: kFourteenFont,
-                      //                 fontWeight: kFW400),
-                      //           ),
-                      //         ),
-                      //         Image.asset(
-                      //           "assets/images/deleted_image.png",
-                      //           height: 25.h,
-                      //           width: 25.h,
-                      //         ),
-                      //       ],
-                      //     ),
-                      //   ),
-                      // ],
-                      // ),
-                    );
-                  })
+                                      Get.toNamed(kPostingLogView);
+                                    },
+                                    child:
+                                        // Column(
+                                        //   children: [
+                                        Container(
+                                      margin: EdgeInsets.only(
+                                          bottom: 13.h, left: 2.w, right: 2.w),
+                                      padding: const EdgeInsets.all(10),
+                                      decoration: BoxDecoration(
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: kblack.withOpacity(0.1),
+                                            blurRadius: 2.r,
+                                            offset: const Offset(0, 1),
+                                            spreadRadius: 2.r,
+                                          )
+                                        ],
+                                        color: Kwhite,
+                                        borderRadius:
+                                            BorderRadius.circular(8.r),
+                                      ),
+                                      child: Column(
+                                        children: [
+                                          Stack(
+                                            children: [
+                                              logsPostcontroller.logsList[index]
+                                                              ["social_source"]
+                                                          ["image"] ==
+                                                      null
+                                                  ? Image.asset(
+                                                      "assets/images/bharath_sports.png",
+                                                      height: 200.h,
+                                                      width: double.infinity,
+                                                      fit: BoxFit.cover,
+                                                      // width: 25.h,
+                                                    )
+                                                  : ClipRRect(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              8.r),
+                                                      child: CachedNetworkImage(
+                                                        imageUrl:
+                                                            "https://thewisguystech.com" +
+                                                                newUrl,
+                                                        // logsPostcontroller
+                                                        //             .logsList[index]
+                                                        //         ["social_source"]
+                                                        //     ["image"],
+                                                        placeholder:
+                                                            (context, url) =>
+                                                                SizedBox(
+                                                          height: 200.h,
+                                                          width:
+                                                              double.infinity,
+                                                          child: Shimmer
+                                                              .fromColors(
+                                                            baseColor:
+                                                                Colors.black12,
+                                                            highlightColor:
+                                                                Colors.white
+                                                                    .withOpacity(
+                                                                        0.5),
+                                                            child: Container(
+                                                              decoration:
+                                                                  BoxDecoration(
+                                                                color: Kwhite
+                                                                    .withOpacity(
+                                                                        0.5),
+                                                              ),
+                                                              height: 200.h,
+                                                              width: double
+                                                                  .infinity,
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        errorWidget: (context,
+                                                                url, error) =>
+                                                            Image.asset(
+                                                          // kBaseImageUrl
+                                                          "assets/images/bharath_sports.png",
+                                                          height: 200.h,
+                                                          width:
+                                                              double.infinity,
+                                                          fit: BoxFit.cover,
+                                                          // width: 25.h,
+                                                        ),
+                                                        height: 200.h,
+                                                        width: double.infinity,
+                                                        fit: BoxFit.cover,
+                                                      ),
+                                                    ),
+                                              Positioned(
+                                                bottom: 3.h,
+                                                right: 3.w,
+                                                child: Checkbox(
+                                                  activeColor: Kblue_twg,
+                                                  checkColor: Kwhite,
+                                                  value: value,
+                                                  onChanged: (value) {
+                                                    setState(() {
+                                                      this.value = value!;
+                                                    });
+                                                    // print(value);
+                                                  },
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          SizedBox(
+                                            height: 10.h,
+                                          ),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              SizedBox(
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width /
+                                                    2,
+                                                child: Text(
+                                                  logsPostcontroller.logsList[
+                                                                  index]
+                                                              ["social_source"]
+                                                          ["message"] ??
+                                                      "no message",
+                                                  // logsPostcontroller.logsList[index]
+                                                  //     ["posting_type"],
+                                                  //  "Discover how social media automation can transform your....",
+                                                  maxLines: 1,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                  style: GoogleFonts.poppins(
+                                                      color: kblack,
+                                                      fontSize: kSixteenFont,
+                                                      fontWeight: kFW500),
+                                                ),
+                                              ),
+                                              SizedBox(height: 8.h),
+                                              InkWell(
+                                                onTap: () async {
+                                                  await showDialog(
+                                                    context: context,
+                                                    builder: (context) =>
+                                                        AlertDialog(
+                                                      title: Text(
+                                                        'Are you sure?',
+                                                        style:
+                                                            GoogleFonts.roboto(
+                                                                fontSize: 18,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w600,
+                                                                color: Colors
+                                                                    .black),
+                                                      ),
+                                                      content: Text(
+                                                        'Do you want to delete post',
+                                                        style:
+                                                            GoogleFonts.roboto(
+                                                                fontSize: 13,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w600,
+                                                                color: Colors
+                                                                    .black),
+                                                      ),
+                                                      actions: <Widget>[
+                                                        TextButton(
+                                                          onPressed: () =>
+                                                              Navigator.of(
+                                                                      context)
+                                                                  .pop(false),
+                                                          child: Text(
+                                                            'No',
+                                                            style: GoogleFonts
+                                                                .roboto(
+                                                                    fontSize:
+                                                                        12,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w600,
+                                                                    color: Colors
+                                                                        .black),
+                                                          ),
+                                                        ),
+                                                        TextButton(
+                                                          onPressed: () {
+                                                            setState(() {
+                                                              logsPostcontroller
+                                                                  .toDeletePostID
+                                                                  .value = logsPostcontroller
+                                                                      .logsList[
+                                                                  index]["id"];
+                                                            });
+                                                            logsPostcontroller
+                                                                .logPostDelete();
+                                                            Get.back();
+                                                          },
+                                                          // onPressed: () =>
+                                                          //     SystemNavigator
+                                                          //         .pop(),
+                                                          child: Text(
+                                                            'Yes',
+                                                            style: GoogleFonts.roboto(
+                                                                fontSize: 12,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w600,
+                                                                color:
+                                                                    Kblue_twg),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  );
+                                                },
+                                                child: Image.asset(
+                                                  "assets/images/deleted_image.png",
+                                                  height: 25.h,
+                                                  width: 25.h,
+                                                ),
+                                              )
+                                            ],
+                                          ),
+                                          SizedBox(height: 8.h),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Text(
+                                                logsPostcontroller
+                                                                .logsList[index]
+                                                            ["social_source"]
+                                                        ["display_name"] ??
+                                                    "no name",
+
+                                                // "Instagram",
+                                                style: GoogleFonts.poppins(
+                                                    color: Kblue_twg,
+                                                    fontSize: kFourteenFont,
+                                                    fontWeight: kFW400),
+                                              ),
+                                              Text(
+                                                logsPostcontroller
+                                                                .logsList[index]
+                                                            ["created"] ==
+                                                        null
+                                                    ? "No Date"
+                                                    : DateFormat(
+                                                            'MMM d, yyyy hh:mm a')
+                                                        .format(
+                                                        DateTime.parse(
+                                                          logsPostcontroller
+                                                                  .logsList[
+                                                              index]["created"],
+                                                        ),
+                                                      ),
+                                                style: GoogleFonts.poppins(
+                                                    color: kblack,
+                                                    fontSize: kTenFont,
+                                                    fontWeight: kFW400),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  );
+                          })
             ],
           ),
         ),
-      ),
+      )),
     );
   }
 
@@ -387,8 +546,9 @@ class _PostingLogsListState extends State<PostingLogsList> {
       if (value != null) {
         setState(() {
           selectedVariant = value;
+          logsPostcontroller.filteredSocialCategory.value = selectedVariant!;
         });
-        // Handle item selection
+
         print("Selected Variant: $selectedVariant");
       }
     });

@@ -447,14 +447,15 @@ class _AllFbAnaliticsState extends State<AllFbAnalitics> {
               SizedBox(
                 height: 5.h,
               ),
-              Container(
-                height: 21.h,
-                width: double.infinity,
-                padding: EdgeInsets.all(8),
-                decoration: BoxDecoration(
-                  color: Kblue_twg,
-                ),
-              ),
+              // Container(
+              //   height: 21.h,
+              //   width: double.infinity,
+              //   padding: EdgeInsets.all(8),
+              //   decoration: BoxDecoration(
+              //     color: Kblue_twg,
+              //   ),
+              // ),
+              
 
               ///
               SizedBox(

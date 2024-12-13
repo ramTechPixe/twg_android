@@ -12,6 +12,62 @@ import 'dart:io';
 class SemiController extends GetxController {
   final apiService = Get.put(ApiService());
   ProfileController userprofilecontroller = Get.put(ProfileController());
+  // ai text
+  TextEditingController autoPostHeadingController = TextEditingController();
+  TextEditingController autoPostMessageController = TextEditingController();
+  var aiTextLoading = false.obs;
+  Future<void> autoPostAIText(Map paylodd) async {
+    aiTextLoading(true);
+    var payload = {
+      "user_id": userprofilecontroller.profileData["user_details"]["id"],
+      "custom_message": paylodd["custom_message"]
+    };
+    try {
+      var response = await apiService.postRequestAiTextData(
+          endpoint: "ai-text-content/", payload: payload);
+// https://thewisguystech.com/ai-text-content/
+      Map data = jsonDecode(response);
+      print(data);
+      if (data["status"] == "success") {
+        // scheduledList.value = data["data"];
+        autoPostMessageController.text = data["data"]["curl_response"];
+        //data["data"]["curl_response"]
+        //  data["data"]["data"]["curl_response"] ?? "";
+        // userprofilecontroller.profileData["user_details"]["first_name"] ?? "";
+
+        Fluttertoast.showToast(
+          msg: data["message"],
+        );
+        //////////////
+//         "data": {
+//         "user_id": "3",
+//         "custom_message": "test",
+//         "image_url": "No image URL",
+//         "curl_response": "Webhook is no longer active."
+//     }
+// }
+        ////////
+        print("object");
+      } else if (data["message"] == "Invalid session token") {
+        Fluttertoast.showToast(
+          msg: data["message"],
+        );
+        Get.toNamed(kSignIns);
+      } else {
+        Fluttertoast.showToast(
+          msg: data["message"],
+        );
+      }
+    } catch (e) {
+      Fluttertoast.showToast(
+        msg: "Something went wrong",
+      );
+    } finally {
+      aiTextLoading(false);
+    }
+  }
+
+  //
   var selectedSchedulePostID = "".obs;
   var toDeletePostID = "".obs;
   var scheduledList = [].obs;

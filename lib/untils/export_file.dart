@@ -24,6 +24,7 @@ export 'package:twg/untils/user_simple_preferences.dart';
 // export 'package:eattendance/Screens/splash_screen.dart';
 export 'package:twg/Screens/splash.dart';
 export 'package:twg/Screens/onboarding_screen.dart';
+export 'package:linear_progress_bar/linear_progress_bar.dart';
 
 // components
 export 'package:twg/components/custom_appbar.dart';
@@ -52,7 +53,8 @@ export 'package:twg/Controllers/dashboard_controller.dart';
 export 'package:twg/Controllers/profile_controller.dart';
 export 'package:twg/Controllers/semi_controller.dart';
 export 'package:twg/Controllers/multi_posting_controller.dart';
-
+export 'package:twg/Controllers/logs_controller.dart';
+export 'package:twg/Controllers/suscribtion_controller.dart';
 // Semi Automation
 export 'package:twg/Screens/User/Semi/quick_posting_screen.dart';
 export 'package:twg/Screens/User/Semi/auto_post.dart';

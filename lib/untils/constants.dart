@@ -214,8 +214,9 @@ const Color KRed = Color(0xffEB1202);
 
 //eattendance
 const Color KOrange = Color(0xffFF7A00);
-
-const String kBaseImageUrl = "https://dev.thewisguystech.com/uploads/";
+// /
+// const String kBaseImageUrl = "https://dev.thewisguystech.com/uploads/";
+const String kBaseImageUrl = "https://thewisguystech.com/uploads/";
 const String staticToken = "fac9c5a8e589874def312d5084c802c6";
 
 const List<Color> colorPallet = [
