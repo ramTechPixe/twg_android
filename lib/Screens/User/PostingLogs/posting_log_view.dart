@@ -36,14 +36,11 @@ class _PostingLogViewState extends State<PostingLogView> {
   }
 
   String imageUrlFromHtml(String html) {
-    // Regular expression to extract the src URL from the img tag
     RegExp regExp = RegExp(
         r'img class="img-responsive img-thumbnail" src="(https://[^"]+)"');
 
-    // Match the pattern in the HTML string
     var match = regExp.firstMatch(html);
 
-    // If a match is found, return the URL
     if (match != null) {
       return match.group(1) ?? "No Image URL found";
     } else {

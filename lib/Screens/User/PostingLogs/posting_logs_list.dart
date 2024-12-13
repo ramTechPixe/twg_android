@@ -94,8 +94,8 @@ class _PostingLogsListState extends State<PostingLogsList> {
                     logsPostcontroller.logsList.value = logsPostcontroller
                         .filterLogsList
                         .where((element) =>
-                            // element["message"]
-                            element["social_source"]["message"]
+                             element
+                           // element["social_source"]["message"]
                                 .toString()
                                 .toLowerCase()
                                 .contains(value.toString().toLowerCase()))
@@ -372,11 +372,15 @@ class _PostingLogsListState extends State<PostingLogsList> {
                                                         .width /
                                                     2,
                                                 child: Text(
-                                                  logsPostcontroller.logsList[
-                                                                  index]
-                                                              ["social_source"]
-                                                          ["message"] ??
-                                                      "no message",
+                                                  logsPostcontroller
+                                                              .logsList[index]
+                                                          ["social_type"] ??
+                                                      "     ",
+                                                  // logsPostcontroller.logsList[
+                                                  //                 index]
+                                                  //             ["social_source"]
+                                                  //         ["message"] ??
+                                                  //     "no message",
                                                   // logsPostcontroller.logsList[index]
                                                   //     ["posting_type"],
                                                   //  "Discover how social media automation can transform your....",
@@ -483,10 +487,14 @@ class _PostingLogsListState extends State<PostingLogsList> {
                                             children: [
                                               Text(
                                                 logsPostcontroller
-                                                                .logsList[index]
-                                                            ["social_source"]
-                                                        ["display_name"] ??
-                                                    "no name",
+                                                            .logsList[index]
+                                                        ["posting_type"] ??
+                                                    "     ",
+                                                // logsPostcontroller
+                                                //                 .logsList[index]
+                                                //             ["social_source"]
+                                                //         ["display_name"] ??
+                                                //     "no name",
 
                                                 // "Instagram",
                                                 style: GoogleFonts.poppins(
