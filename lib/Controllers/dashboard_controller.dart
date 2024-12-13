@@ -18,6 +18,7 @@ class DashboardController extends GetxController {
 
   var selectedPublishedorScheduled = "Published".obs;
   var selectedMediaType = "".obs;
+  var selectedMediaChannels = "".obs;
   var selectedSocialPlatform = "General".obs;
   var selectedAllItem = "".obs;
   var selectedAnaliyics = "All".obs;

@@ -10,6 +10,7 @@ class QuickPosting extends StatefulWidget {
 class _QuickPostingState extends State<QuickPosting> {
   DashboardController dashboardcontroller = Get.put(DashboardController());
   AuthController authcontroller = Get.put(AuthController());
+  SemiController semicontroller = Get.put(SemiController());
   int _characterCount = 0;
 
   @override
@@ -194,8 +195,10 @@ class _QuickPostingState extends State<QuickPosting> {
                                     ),
                                     CustomFormFields(
                                       ontap: () {},
-                                      controller: authcontroller
+                                      controller: semicontroller
                                           .autoPostMessageController,
+                                      // controller: authcontroller
+                                      //     .autoPostMessageController,
                                       enabled: true,
                                       labelColor: KText,
                                       onChanged: (Value) {
@@ -314,21 +317,44 @@ class _QuickPostingState extends State<QuickPosting> {
                                         //         )),
                                         //   ],
                                         // ),
-
-                                        CustomButton(
-                                          // margin: EdgeInsets.only(top: 36.h),
-                                          borderRadius:
-                                              BorderRadius.circular(5.r),
-                                          Color: Kform_border_twg,
-                                          textColor: Kwhite,
-                                          height: 45,
-                                          width: 155.w,
-                                          label: "Generate Caption",
-                                          fontSize: 15.sp,
-                                          fontWeight: kFW600,
-                                          isLoading: false,
-                                          onTap: () async {},
-                                        ),
+                                        Obx(() => semicontroller
+                                                    .aiTextLoading ==
+                                                true
+                                            ? Row(
+                                                children: [
+                                                  SizedBox(
+                                                    height: 50.w,
+                                                  ),
+                                                  Center(
+                                                    child:
+                                                        CircularProgressIndicator(
+                                                      color: Kform_border_twg,
+                                                    ),
+                                                  ),
+                                                ],
+                                              )
+                                            : CustomButton(
+                                                // margin: EdgeInsets.only(top: 36.h),
+                                                borderRadius:
+                                                    BorderRadius.circular(5.r),
+                                                Color: Kform_border_twg,
+                                                textColor: Kwhite,
+                                                height: 45,
+                                                width: 155.w,
+                                                label: "Generate Caption",
+                                                fontSize: 15.sp,
+                                                fontWeight: kFW600,
+                                                isLoading: false,
+                                                onTap: () async {
+                                                  var paylodd = {
+                                                    "custom_message": authcontroller
+                                                        .autoPostHeadingController
+                                                        .text,
+                                                  };
+                                                  semicontroller
+                                                      .autoPostAIText(paylodd);
+                                                },
+                                              )),
                                       ],
                                     ),
                                   ],

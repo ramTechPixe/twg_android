@@ -177,7 +177,8 @@ class _EditMultiScreenState extends State<EditMultiScreen> {
                       Column(
                         children: [
                           selectedImage != null
-                              ? Container(
+                              ? 
+                              Container(
                                   padding: EdgeInsets.all(12),
                                   margin: EdgeInsets.only(bottom: 10),
                                   decoration: BoxDecoration(
@@ -392,6 +393,7 @@ class _EditMultiScreenState extends State<EditMultiScreen> {
                                   }),
                             ],
                           ),
+                      
                         ],
                       )
 
