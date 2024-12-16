@@ -273,307 +273,321 @@ class _MultiPostScreenState extends State<MultiPostScreen> {
 
                                 return Column(
                                   children: [
-                                    Container(
-                                      margin: EdgeInsets.only(
-                                          bottom: 13.h, left: 2.w, right: 2.w),
-                                      padding: const EdgeInsets.all(10),
-                                      decoration: BoxDecoration(
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color: kblack.withOpacity(0.1),
-                                            blurRadius: 2.r,
-                                            offset: const Offset(0, 1),
-                                            spreadRadius: 2.r,
-                                          )
-                                        ],
-                                        color: Kwhite,
-                                        borderRadius:
-                                            BorderRadius.circular(8.r),
-                                      ),
-                                      child: Column(
-                                        children: [
-                                          Stack(
-                                            children: [
-                                              multiPostcontroller.mutiPostList[
-                                                          index]["image"] ==
-                                                      "0"
-                                                  ? SizedBox(
-                                                      height: 200.h,
-                                                      width: double.infinity,
-                                                      child: VideoWidget(
-                                                          videoUrl: kBaseImageUrl +
+                                    InkWell(
+                                      onTap: () {
+                                        Get.toNamed(kMultiPostView,
+                                            arguments: multiPostcontroller
+                                                .mutiPostList[index]);
+                                      },
+                                      child: Container(
+                                        margin: EdgeInsets.only(
+                                            bottom: 13.h,
+                                            left: 2.w,
+                                            right: 2.w),
+                                        padding: const EdgeInsets.all(10),
+                                        decoration: BoxDecoration(
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color: kblack.withOpacity(0.1),
+                                              blurRadius: 2.r,
+                                              offset: const Offset(0, 1),
+                                              spreadRadius: 2.r,
+                                            )
+                                          ],
+                                          color: Kwhite,
+                                          borderRadius:
+                                              BorderRadius.circular(8.r),
+                                        ),
+                                        child: Column(
+                                          children: [
+                                            Stack(
+                                              children: [
+                                                multiPostcontroller
+                                                                .mutiPostList[
+                                                            index]["image"] ==
+                                                        "0"
+                                                    ? SizedBox(
+                                                        height: 200.h,
+                                                        width: double.infinity,
+                                                        child: VideoWidget(
+                                                            videoUrl: kBaseImageUrl +
+                                                                multiPostcontroller
+                                                                            .mutiPostList[
+                                                                        index]
+                                                                    ["video"]),
+                                                      )
+
+                                                    // SizedBox()
+                                                    : ClipRRect(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(8.r),
+                                                        child:
+                                                            CachedNetworkImage(
+                                                          imageUrl: kBaseImageUrl +
                                                               multiPostcontroller
                                                                       .mutiPostList[
-                                                                  index]["video"]),
-                                                    )
-
-                                                  // SizedBox()
-                                                  : ClipRRect(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              8.r),
-                                                      child: CachedNetworkImage(
-                                                        imageUrl: kBaseImageUrl +
-                                                            multiPostcontroller
-                                                                    .mutiPostList[
-                                                                index]["image"],
-                                                        placeholder:
-                                                            (context, url) =>
-                                                                SizedBox(
-                                                          height: 200.h,
-                                                          width:
-                                                              double.infinity,
-                                                          child: Shimmer
-                                                              .fromColors(
-                                                            baseColor:
-                                                                Colors.black12,
-                                                            highlightColor:
-                                                                Colors.white
-                                                                    .withOpacity(
-                                                                        0.5),
-                                                            child: Container(
-                                                              decoration:
-                                                                  BoxDecoration(
-                                                                color: Kwhite
-                                                                    .withOpacity(
-                                                                        0.5),
+                                                                  index]["image"],
+                                                          placeholder:
+                                                              (context, url) =>
+                                                                  SizedBox(
+                                                            height: 200.h,
+                                                            width:
+                                                                double.infinity,
+                                                            child: Shimmer
+                                                                .fromColors(
+                                                              baseColor: Colors
+                                                                  .black12,
+                                                              highlightColor:
+                                                                  Colors
+                                                                      .white
+                                                                      .withOpacity(
+                                                                          0.5),
+                                                              child: Container(
+                                                                decoration:
+                                                                    BoxDecoration(
+                                                                  color: Kwhite
+                                                                      .withOpacity(
+                                                                          0.5),
+                                                                ),
+                                                                height: 200.h,
+                                                                width: double
+                                                                    .infinity,
                                                               ),
-                                                              height: 200.h,
-                                                              width: double
-                                                                  .infinity,
                                                             ),
                                                           ),
-                                                        ),
-                                                        errorWidget: (context,
-                                                                url, error) =>
-                                                            Image.asset(
-                                                          // kBaseImageUrl
-                                                          "assets/images/multipost_image.png",
+                                                          errorWidget: (context,
+                                                                  url, error) =>
+                                                              Image.asset(
+                                                            // kBaseImageUrl
+                                                            "assets/images/multipost_image.png",
+                                                            height: 200.h,
+                                                            width:
+                                                                double.infinity,
+                                                            fit: BoxFit.cover,
+                                                            // width: 25.h,
+                                                          ),
                                                           height: 200.h,
                                                           width:
                                                               double.infinity,
                                                           fit: BoxFit.cover,
-                                                          // width: 25.h,
                                                         ),
-                                                        height: 200.h,
-                                                        width: double.infinity,
-                                                        fit: BoxFit.cover,
+                                                      ),
+                                                Positioned(
+                                                  bottom: 3.h,
+                                                  right: 3.w,
+                                                  child: isSelectAll
+                                                      ? Checkbox(
+                                                          value: selectedPostIds
+                                                              .contains(postId),
+                                                          activeColor:
+                                                              Kblue_twg,
+                                                          checkColor: Kwhite,
+                                                          onChanged: (value) {
+                                                            setState(() {
+                                                              if (value ==
+                                                                  true) {
+                                                                selectedPostIds
+                                                                    .add(
+                                                                        postId);
+                                                              } else {
+                                                                selectedPostIds
+                                                                    .remove(
+                                                                        postId);
+                                                              }
+                                                            });
+                                                          },
+                                                        )
+                                                      : SizedBox(),
+                                                  // Checkbox(
+                                                  //   activeColor: Kblue_twg,
+                                                  //   checkColor: Kwhite,
+                                                  //   value: value,
+                                                  //   onChanged: (value) {
+                                                  //     setState(() {
+                                                  //       this.value = value!;
+                                                  //     });
+                                                  //     // print(value);
+                                                  //   },
+                                                  // ),
+                                                ),
+                                              ],
+                                            ),
+                                            SizedBox(
+                                              height: 10.h,
+                                            ),
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                SizedBox(
+                                                  width: MediaQuery.of(context)
+                                                          .size
+                                                          .width /
+                                                      2,
+                                                  child: Text(
+                                                    multiPostcontroller
+                                                                .mutiPostList[
+                                                            index]["message"] ??
+                                                        "No Message",
+                                                    maxLines: 1,
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
+                                                    style: GoogleFonts.poppins(
+                                                        color: kblack,
+                                                        fontSize: kSixteenFont,
+                                                        fontWeight: kFW500),
+                                                  ),
+                                                ),
+                                                SizedBox(height: 8.h),
+                                                Row(
+                                                  children: [
+                                                    InkWell(
+                                                      onTap: () {
+                                                        Get.toNamed(
+                                                            kEditMultiPost);
+                                                      },
+                                                      child: Image.asset(
+                                                        "assets/images/edit-outline.png",
+                                                        height: 23.h,
+                                                        width: 23.h,
                                                       ),
                                                     ),
-                                              Positioned(
-                                                bottom: 3.h,
-                                                right: 3.w,
-                                                child: isSelectAll
-                                                    ? Checkbox(
-                                                        value: selectedPostIds
-                                                            .contains(postId),
-                                                        activeColor: Kblue_twg,
-                                                        checkColor: Kwhite,
-                                                        onChanged: (value) {
-                                                          setState(() {
-                                                            if (value == true) {
-                                                              selectedPostIds
-                                                                  .add(postId);
-                                                            } else {
-                                                              selectedPostIds
-                                                                  .remove(
-                                                                      postId);
-                                                            }
-                                                          });
-                                                        },
-                                                      )
-                                                    : SizedBox(),
-                                                // Checkbox(
-                                                //   activeColor: Kblue_twg,
-                                                //   checkColor: Kwhite,
-                                                //   value: value,
-                                                //   onChanged: (value) {
-                                                //     setState(() {
-                                                //       this.value = value!;
-                                                //     });
-                                                //     // print(value);
-                                                //   },
-                                                // ),
-                                              ),
-                                            ],
-                                          ),
-                                          SizedBox(
-                                            height: 10.h,
-                                          ),
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              SizedBox(
-                                                width: MediaQuery.of(context)
-                                                        .size
-                                                        .width /
-                                                    2,
-                                                child: Text(
+                                                    SizedBox(
+                                                      width: 10.w,
+                                                    ),
+                                                    InkWell(
+                                                      onTap: () async {
+                                                        await showDialog(
+                                                          context: context,
+                                                          builder: (context) =>
+                                                              AlertDialog(
+                                                            title: Text(
+                                                              'Are you sure?',
+                                                              style: GoogleFonts.roboto(
+                                                                  fontSize: 18,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w600,
+                                                                  color: Colors
+                                                                      .black),
+                                                            ),
+                                                            content: Text(
+                                                              'Do you want to delete post',
+                                                              style: GoogleFonts.roboto(
+                                                                  fontSize: 13,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w600,
+                                                                  color: Colors
+                                                                      .black),
+                                                            ),
+                                                            actions: <Widget>[
+                                                              TextButton(
+                                                                onPressed: () =>
+                                                                    Navigator.of(
+                                                                            context)
+                                                                        .pop(
+                                                                            false),
+                                                                child: Text(
+                                                                  'No',
+                                                                  style: GoogleFonts.roboto(
+                                                                      fontSize:
+                                                                          12,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w600,
+                                                                      color: Colors
+                                                                          .black),
+                                                                ),
+                                                              ),
+                                                              TextButton(
+                                                                onPressed: () {
+                                                                  setState(() {
+                                                                    multiPostcontroller
+                                                                        .toDeletePostID
+                                                                        .value = multiPostcontroller
+                                                                            .mutiPostList[index]
+                                                                        [
+                                                                        "post_id"];
+                                                                  });
+                                                                  multiPostcontroller
+                                                                      .quickPostDelete();
+                                                                  Get.back();
+                                                                },
+                                                                // onPressed: () =>
+                                                                //     SystemNavigator
+                                                                //         .pop(),
+                                                                child: Text(
+                                                                  'Yes',
+                                                                  style: GoogleFonts.roboto(
+                                                                      fontSize:
+                                                                          12,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w600,
+                                                                      color:
+                                                                          Kblue_twg),
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        );
+                                                      },
+                                                      child: Image.asset(
+                                                        "assets/images/deleted_image.png",
+                                                        height: 25.h,
+                                                        width: 25.h,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
+                                            SizedBox(height: 8.h),
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Text(
                                                   multiPostcontroller
-                                                              .mutiPostList[
-                                                          index]["message"] ??
-                                                      "No Message",
-                                                  maxLines: 1,
-                                                  overflow:
-                                                      TextOverflow.ellipsis,
+                                                                  .mutiPostList[
+                                                              index]["status"] ==
+                                                          "1"
+                                                      ? "Published"
+                                                      : "Scheduled",
+                                                  style: GoogleFonts.poppins(
+                                                      color: KGreen,
+                                                      fontSize: kFourteenFont,
+                                                      fontWeight: kFW400),
+                                                ),
+                                                Text(
+                                                  multiPostcontroller.mutiPostList[
+                                                                  index][
+                                                              "created_date"] ==
+                                                          null
+                                                      ? "No Date"
+                                                      : DateFormat(
+                                                              'MMM d, yyyy hh:mm a')
+                                                          .format(
+                                                          DateTime.parse(
+                                                            multiPostcontroller
+                                                                        .mutiPostList[
+                                                                    index][
+                                                                "created_date"],
+                                                          ),
+                                                        ),
                                                   style: GoogleFonts.poppins(
                                                       color: kblack,
-                                                      fontSize: kSixteenFont,
-                                                      fontWeight: kFW500),
+                                                      fontSize: kTenFont,
+                                                      fontWeight: kFW400),
                                                 ),
-                                              ),
-                                              SizedBox(height: 8.h),
-                                              Row(
-                                                children: [
-                                                  InkWell(
-                                                    onTap: () {
-                                                      Get.toNamed(
-                                                          kEditMultiPost);
-                                                    },
-                                                    child: Image.asset(
-                                                      "assets/images/edit-outline.png",
-                                                      height: 23.h,
-                                                      width: 23.h,
-                                                    ),
-                                                  ),
-                                                  SizedBox(
-                                                    width: 10.w,
-                                                  ),
-                                                  InkWell(
-                                                    onTap: () async {
-                                                      await showDialog(
-                                                        context: context,
-                                                        builder: (context) =>
-                                                            AlertDialog(
-                                                          title: Text(
-                                                            'Are you sure?',
-                                                            style: GoogleFonts
-                                                                .roboto(
-                                                                    fontSize:
-                                                                        18,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w600,
-                                                                    color: Colors
-                                                                        .black),
-                                                          ),
-                                                          content: Text(
-                                                            'Do you want to delete post',
-                                                            style: GoogleFonts
-                                                                .roboto(
-                                                                    fontSize:
-                                                                        13,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w600,
-                                                                    color: Colors
-                                                                        .black),
-                                                          ),
-                                                          actions: <Widget>[
-                                                            TextButton(
-                                                              onPressed: () =>
-                                                                  Navigator.of(
-                                                                          context)
-                                                                      .pop(
-                                                                          false),
-                                                              child: Text(
-                                                                'No',
-                                                                style: GoogleFonts.roboto(
-                                                                    fontSize:
-                                                                        12,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w600,
-                                                                    color: Colors
-                                                                        .black),
-                                                              ),
-                                                            ),
-                                                            TextButton(
-                                                              onPressed: () {
-                                                                setState(() {
-                                                                  multiPostcontroller
-                                                                      .toDeletePostID
-                                                                      .value = multiPostcontroller
-                                                                              .mutiPostList[
-                                                                          index]
-                                                                      [
-                                                                      "post_id"];
-                                                                });
-                                                                multiPostcontroller
-                                                                    .quickPostDelete();
-                                                                Get.back();
-                                                              },
-                                                              // onPressed: () =>
-                                                              //     SystemNavigator
-                                                              //         .pop(),
-                                                              child: Text(
-                                                                'Yes',
-                                                                style: GoogleFonts.roboto(
-                                                                    fontSize:
-                                                                        12,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w600,
-                                                                    color:
-                                                                        Kblue_twg),
-                                                              ),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      );
-                                                    },
-                                                    child: Image.asset(
-                                                      "assets/images/deleted_image.png",
-                                                      height: 25.h,
-                                                      width: 25.h,
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ],
-                                          ),
-                                          SizedBox(height: 8.h),
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Text(
-                                                multiPostcontroller
-                                                                .mutiPostList[
-                                                            index]["status"] ==
-                                                        "1"
-                                                    ? "Published"
-                                                    : "Scheduled",
-                                                style: GoogleFonts.poppins(
-                                                    color: KGreen,
-                                                    fontSize: kFourteenFont,
-                                                    fontWeight: kFW400),
-                                              ),
-                                              Text(
-                                                multiPostcontroller.mutiPostList[
-                                                                index]
-                                                            ["created_date"] ==
-                                                        null
-                                                    ? "No Date"
-                                                    : DateFormat(
-                                                            'MMM d, yyyy hh:mm a')
-                                                        .format(
-                                                        DateTime.parse(
-                                                          multiPostcontroller
-                                                                      .mutiPostList[
-                                                                  index]
-                                                              ["created_date"],
-                                                        ),
-                                                      ),
-                                                style: GoogleFonts.poppins(
-                                                    color: kblack,
-                                                    fontSize: kTenFont,
-                                                    fontWeight: kFW400),
-                                              ),
-                                            ],
-                                          ),
-                                        ],
+                                              ],
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                     ),
                                     index ==

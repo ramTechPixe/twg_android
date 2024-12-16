@@ -17,6 +17,7 @@ String kSettingsScreens = "/Screens/User/Settings/user_settings.dart";
 String kScheduledPostScreens = "/Screens/User/Semi/schedule_post_view.dart";
 String kCreateBannersScreens = "/Screens/User/Home/customize_banners.dart";
 String kMultiPostScreens = "/Screens/User/Multi/multi_post.dart";
+String kMultiPostView = "/Screens/User/Multi/mutli_post_view.dart";
 String kAddMultiPost = "/Screens/User/Multi/add_multi_post.dart";
 String kEditMultiPost = "/Screens/User/Multi/edit_post.dart";
 String kToolsScreen = "/Screens/User/Tools/tools_screen.dart";
