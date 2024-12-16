@@ -87,6 +87,7 @@ export 'package:twg/Screens/User/Settings/you_tube.dart';
 export 'package:twg/Screens/User/Multi/multi_post.dart';
 export 'package:twg/Screens/User/Multi/add_multi_post.dart';
 export 'package:twg/Screens/User/Multi/edit_post.dart';
+export 'package:twg/Screens/User/Multi/mutli_post_view.dart';
 
 // Tools
 export 'package:twg/Screens/User/Tools/tools_screen.dart';

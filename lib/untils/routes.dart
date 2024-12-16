@@ -164,7 +164,11 @@ class Routes {
         name: kAnalitics,
         transition: Transition.rightToLeft,
         page: () => AnalyticsScreen()),
-//
+    GetPage(
+        name: kMultiPostView,
+        transition: Transition.rightToLeft,
+        page: () => MultiPostView()),
+
     //
   ];
 }

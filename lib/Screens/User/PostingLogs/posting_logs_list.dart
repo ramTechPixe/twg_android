@@ -91,15 +91,14 @@ class _PostingLogsListState extends State<PostingLogsList> {
                 ////////////////////////////////////
                 onChanged: (value) {
                   setState(() {
-                    logsPostcontroller.logsList.value = logsPostcontroller
-                        .filterLogsList
-                        .where((element) =>
-                             element
-                           // element["social_source"]["message"]
+                    logsPostcontroller.logsList.value =
+                        logsPostcontroller.filterLogsList
+                            .where((element) => element
+                                // element["social_source"]["message"]
                                 .toString()
                                 .toLowerCase()
                                 .contains(value.toString().toLowerCase()))
-                        .toList();
+                            .toList();
                   });
                   if (value == "") {
                     //  apiController.getRceiversLocationforBank();
