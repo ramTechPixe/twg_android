@@ -65,6 +65,8 @@ class LogsController extends GetxController {
   var toDeletePostID = "".obs;
   Future<void> userLogPostID() async {
     logIDLoading(true);
+
+    imageUrl.value = "";
     var payload = {"log_id": selectedlogId.value};
     try {
       var response = await apiService.postRequestPostViewData(
@@ -135,6 +137,7 @@ class LogsController extends GetxController {
         List<dynamic> processedLogs =
             (data["data"] as List<dynamic>).map((log) {
           if (log.containsKey("social_source")) {
+            String originalSocialSource = log["social_source"];
             try {
               Map<String, dynamic> deserializedSource =
                   phpDeserialize(log["social_source"]);
@@ -145,13 +148,22 @@ class LogsController extends GetxController {
                 "account_id": deserializedSource["account_id"] ?? "",
                 "display_name": deserializedSource["display_name"] ?? ""
               };
+              log["old_social_source"] = originalSocialSource;
             } catch (e) {
               print("Error deserializing social_source: $e");
               log["social_source"] = null;
+              log["old_social_source"] = originalSocialSource;
             }
           }
           return log;
         }).toList();
+        ////////////////////////////////////////
+        for (var i = 0; i < processedLogs.length; i++) {
+          String socialSource = processedLogs[i]["old_social_source"];
+          String extractedMessage = _extractMessage(socialSource);
+          processedLogs[i]["newMessage"] = extractedMessage;
+        }
+        ///////////////////////////////////////////////////
 
         logsList.value = processedLogs;
         originalLogsList.value = processedLogs;
@@ -173,6 +185,15 @@ class LogsController extends GetxController {
     }
   }
 
+  /////////////
+  String _extractMessage(String input) {
+    int startIndex = input.indexOf("message\";") + "message\";".length;
+    startIndex = input.indexOf('\"', startIndex) + 1;
+    int endIndex = input.indexOf(";s:10:\"account_id\"");
+    return input.substring(startIndex, endIndex).trim();
+  }
+
+  //////
 // Function to deserialize PHP serialized data
   Map<String, dynamic> phpDeserialize(String input) {
     try {

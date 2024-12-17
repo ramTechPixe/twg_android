@@ -91,14 +91,15 @@ class _PostingLogsListState extends State<PostingLogsList> {
                 ////////////////////////////////////
                 onChanged: (value) {
                   setState(() {
-                    logsPostcontroller.logsList.value =
-                        logsPostcontroller.filterLogsList
-                            .where((element) => element
-                                // element["social_source"]["message"]
-                                .toString()
-                                .toLowerCase()
-                                .contains(value.toString().toLowerCase()))
-                            .toList();
+                    //                                   apiController.assetsData = apiController.OriginalassetsData;
+                    // apiController.assetsData = apiController.assetsDatafilter;
+                    logsPostcontroller.logsList.value = logsPostcontroller
+                        .filterLogsList
+                        .where((element) => element["newMessage"]
+                            .toString()
+                            .toLowerCase()
+                            .contains(value.toString().toLowerCase()))
+                        .toList();
                   });
                   if (value == "") {
                     //  apiController.getRceiversLocationforBank();
@@ -373,7 +374,8 @@ class _PostingLogsListState extends State<PostingLogsList> {
                                                 child: Text(
                                                   logsPostcontroller
                                                               .logsList[index]
-                                                          ["social_type"] ??
+                                                          ["newMessage"] ??
+                                                      //  ["social_type"] ??
                                                       "     ",
                                                   // logsPostcontroller.logsList[
                                                   //                 index]
