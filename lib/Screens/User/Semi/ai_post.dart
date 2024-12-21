@@ -251,7 +251,8 @@ class _AiPostState extends State<AiPost> {
                   ],
                 ),
                 dashboardcontroller.autoPostUploadType.value == "image"
-                    ? Column(
+                    ? 
+                    Column(
                         children: [
                           selectedImage != null
                               ? Container(

@@ -16,7 +16,11 @@ class _PostingLogsListState extends State<PostingLogsList> {
   LogsController logsPostcontroller = Get.put(LogsController());
   int _characterCount = 0;
   bool value = false;
+/////multi delete
+  bool isSelectAll = false; // Tracks Select All state
+  List<String> selectedPostIds = []; // Tracks selected post IDs
 
+/////
   @override
   void initState() {
     super.initState();
@@ -180,16 +184,35 @@ class _PostingLogsListState extends State<PostingLogsList> {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     Checkbox(
+                      value: isSelectAll,
                       activeColor: Kblue_twg,
                       checkColor: Kwhite,
-                      value: value,
                       onChanged: (value) {
                         setState(() {
-                          this.value = value!;
+                          isSelectAll = value ?? false;
+                          if (isSelectAll) {
+                            // Select all post IDs when Select All is checked
+                            selectedPostIds = logsPostcontroller.logsList
+                                .map<String>((post) => post["id"] as String)
+                                .toList();
+                          } else {
+                            // Clear all selections when Select All is unchecked
+                            selectedPostIds.clear();
+                          }
                         });
-                        print(value);
                       },
                     ),
+                    // Checkbox(
+                    //   activeColor: Kblue_twg,
+                    //   checkColor: Kwhite,
+                    //   value: value,
+                    //   onChanged: (value) {
+                    //     setState(() {
+                    //       this.value = value!;
+                    //     });
+                    //     // print(value);
+                    //   },
+                    // ),
                     Text(
                       "Select All",
                       style: GoogleFonts.poppins(
@@ -197,8 +220,47 @@ class _PostingLogsListState extends State<PostingLogsList> {
                           fontSize: kSixteenFont,
                           fontWeight: kFW400),
                     ),
+                    isSelectAll
+                        ? Padding(
+                            padding: EdgeInsets.only(left: 7.w, right: 15.w),
+                            child: InkWell(
+                              onTap: () {
+                                logsPostcontroller
+                                    .muliDeleteLogs(selectedPostIds);
+                              },
+                              child: Image.asset(
+                                "assets/images/deleted_image.png",
+                                height: 25.h,
+                                width: 25.h,
+                              ),
+                            ),
+                          )
+                        : SizedBox()
                   ],
                 ),
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.end,
+                //   children: [
+                //     Checkbox(
+                //       activeColor: Kblue_twg,
+                //       checkColor: Kwhite,
+                //       value: value,
+                //       onChanged: (value) {
+                //         setState(() {
+                //           this.value = value!;
+                //         });
+                //         print(value);
+                //       },
+                //     ),
+                //     Text(
+                //       "Select All",
+                //       style: GoogleFonts.poppins(
+                //           color: kblack,
+                //           fontSize: kSixteenFont,
+                //           fontWeight: kFW400),
+                //     ),
+                //   ],
+                // ),
               ),
               const SizedBox(
                 height: 15,
@@ -231,6 +293,8 @@ class _PostingLogsListState extends State<PostingLogsList> {
                             String newUrl = imageUrl.contains(baseUrl)
                                 ? imageUrl.substring(baseUrl.length)
                                 : "URL not found";
+                            var post = logsPostcontroller.logsList[index];
+                            String postId = post["id"];
                             return logsPostcontroller.filteredSocialCategory !=
                                         "" &&
                                     logsPostcontroller.filteredSocialCategory !=
@@ -345,18 +409,53 @@ class _PostingLogsListState extends State<PostingLogsList> {
                                               Positioned(
                                                 bottom: 3.h,
                                                 right: 3.w,
-                                                child: Checkbox(
-                                                  activeColor: Kblue_twg,
-                                                  checkColor: Kwhite,
-                                                  value: value,
-                                                  onChanged: (value) {
-                                                    setState(() {
-                                                      this.value = value!;
-                                                    });
-                                                    // print(value);
-                                                  },
-                                                ),
+                                                child: isSelectAll
+                                                    ? Checkbox(
+                                                        value: selectedPostIds
+                                                            .contains(postId),
+                                                        activeColor: Kblue_twg,
+                                                        checkColor: Kwhite,
+                                                        onChanged: (value) {
+                                                          setState(() {
+                                                            if (value == true) {
+                                                              selectedPostIds
+                                                                  .add(postId);
+                                                            } else {
+                                                              selectedPostIds
+                                                                  .remove(
+                                                                      postId);
+                                                            }
+                                                          });
+                                                        },
+                                                      )
+                                                    : SizedBox(),
+                                                // Checkbox(
+                                                //   activeColor: Kblue_twg,
+                                                //   checkColor: Kwhite,
+                                                //   value: value,
+                                                //   onChanged: (value) {
+                                                //     setState(() {
+                                                //       this.value = value!;
+                                                //     });
+                                                //     // print(value);
+                                                //   },
+                                                // ),
                                               ),
+                                              // Positioned(
+                                              //   bottom: 3.h,
+                                              //   right: 3.w,
+                                              //   child: Checkbox(
+                                              //     activeColor: Kblue_twg,
+                                              //     checkColor: Kwhite,
+                                              //     value: value,
+                                              //     onChanged: (value) {
+                                              //       setState(() {
+                                              //         this.value = value!;
+                                              //       });
+                                              //       // print(value);
+                                              //     },
+                                              //   ),
+                                              // ),
                                             ],
                                           ),
                                           SizedBox(

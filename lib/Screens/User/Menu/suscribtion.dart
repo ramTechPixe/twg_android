@@ -47,8 +47,15 @@ class _SuscribtionState extends State<Suscribtion> {
             child: Obx(
           () => suscrbtioncontroller.sucriptionLoading == true
               ? Center(
-                  child: CircularProgressIndicator(
-                    color: Kform_border_twg,
+                  child: Column(
+                    children: [
+                      SizedBox(
+                        height: 20.h,
+                      ),
+                      CircularProgressIndicator(
+                        color: Kform_border_twg,
+                      ),
+                    ],
                   ),
                 )
               : suscrbtioncontroller.suscriptionData.isEmpty ||
@@ -504,6 +511,14 @@ class _SuscribtionState extends State<Suscribtion> {
                                                                                 : "assets/images/${network}_images.png",
                                             height: 25,
                                             width: 25,
+                                            errorBuilder:
+                                                (context, error, stackTrace) {
+                                              return Image.asset(
+                                                "assets/images/error_image.png",
+                                                height: 25,
+                                                width: 25,
+                                              );
+                                            },
                                           ),
                                         ),
                                         Positioned(

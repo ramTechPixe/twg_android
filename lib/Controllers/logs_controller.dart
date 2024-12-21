@@ -56,6 +56,44 @@ class LogsController extends GetxController {
     }
   }
 
+  // multiple delete
+
+  Future<void> muliDeleteLogs(List list) async {
+    logPostDeleteLoading(true);
+
+    //  var payload = {"log_id": toDeletePostID.value};
+    try {
+      var response = await apiService.postRequestMultiIDDeleteLogData(
+          endpoint: "delete-multiple-logs-api/", payload: list);
+// https://thewisguystech.com/delete-multiple-logs-api/
+      Map data = jsonDecode(response);
+      print(data);
+
+      if (data["status"] == "success") {
+        userLogsPost();
+        Fluttertoast.showToast(
+          msg: data["message"],
+        );
+        print("object");
+      } else if (data["message"] == "Invalid session token") {
+        Fluttertoast.showToast(
+          msg: data["message"],
+        );
+        Get.toNamed(kSignIns);
+      } else {
+        Fluttertoast.showToast(
+          msg: data["message"],
+        );
+      }
+    } catch (e) {
+      Fluttertoast.showToast(
+        msg: "Something went wrong",
+      );
+    } finally {
+      logPostDeleteLoading(false);
+    }
+  }
+
   ///////////////////////////////
   // By id
   var logIDLoading = false.obs;

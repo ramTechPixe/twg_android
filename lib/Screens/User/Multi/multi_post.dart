@@ -238,6 +238,23 @@ class _MultiPostScreenState extends State<MultiPostScreen> {
                                 fontSize: kSixteenFont,
                                 fontWeight: kFW400),
                           ),
+                          isSelectAll
+                              ? Padding(
+                                  padding:
+                                      EdgeInsets.only(left: 7.w, right: 15.w),
+                                  child: InkWell(
+                                    onTap: () {
+                                      multiPostcontroller
+                                          .muliDeleteLogs(selectedPostIds);
+                                    },
+                                    child: Image.asset(
+                                      "assets/images/deleted_image.png",
+                                      height: 25.h,
+                                      width: 25.h,
+                                    ),
+                                  ),
+                                )
+                              : SizedBox()
                         ],
                       ),
                     ],

@@ -106,4 +106,44 @@ class MultPostingsController extends GetxController {
       quickPostDeleteLoading(false);
     }
   }
+
+  /// multi deledt
+  // multiple delete
+
+  Future<void> muliDeleteLogs(List list) async {
+    quickPostDeleteLoading(true);
+
+    //  var payload = {"log_id": toDeletePostID.value};
+    try {
+      var response = await apiService.postRequestMultiIDDeleteMultiPosts(
+          endpoint: "deletemulti-post-apis/", payload: list);
+//  https://thewisguystech.com/deletemulti-post-apis/
+      Map data = jsonDecode(response);
+      print(data);
+
+      if (data["status"] == "success") {
+        userMultiPost();
+        // userLogsPost();
+        Fluttertoast.showToast(
+          msg: data["message"],
+        );
+        print("object");
+      } else if (data["message"] == "Invalid session token") {
+        Fluttertoast.showToast(
+          msg: data["message"],
+        );
+        Get.toNamed(kSignIns);
+      } else {
+        Fluttertoast.showToast(
+          msg: data["message"],
+        );
+      }
+    } catch (e) {
+      Fluttertoast.showToast(
+        msg: "Something went wrong",
+      );
+    } finally {
+      quickPostDeleteLoading(false);
+    }
+  }
 }

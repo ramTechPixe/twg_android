@@ -46,96 +46,101 @@ class CustomTotalCards extends StatelessWidget {
   Widget build(BuildContext context) {
     return
         /////////////////////////////////////////////
-        Container(
-      padding: EdgeInsets.all(8),
-      decoration: BoxDecoration(
-        boxShadow: [
-          BoxShadow(
-            color: kblack.withOpacity(0.1),
-            blurRadius: 2.r,
-            offset: Offset(0, 1),
-            spreadRadius: 2.r,
-          )
-        ],
-        color: Kwhite,
-        borderRadius: BorderRadius.circular(8.r),
-      ),
-      child: Column(
-        children: [
-          SizedBox(
-            height: 10.h,
-          ),
-          Row(
-            children: [
-              Container(
-                padding: EdgeInsets.all(8),
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  boxShadow: [
-                    BoxShadow(
-                      color: kblack.withOpacity(0.3),
-                      blurRadius: 1.r,
-                      offset: Offset(1, 1),
-                      spreadRadius: 1.r,
-                    )
-                  ],
-                  color: Kwhite,
-                  borderRadius: BorderRadius.circular(5.r),
-                ),
-                child: Image.asset(
-                  imageAddress,
-                  height: 45.h,
-                  width: 45.h,
-                  // height: 115.h,
-                  // width: 300.w,
-                ),
-              ),
-            ],
-          ),
-          SizedBox(
-            height: 10.h,
-          ),
-          Text(
-            cardTitle,
-            style: GoogleFonts.poppins(
-                color: kblack, fontSize: kFourteenFont, fontWeight: kFW400),
-          ),
-          SizedBox(
-            height: 3.h,
-          ),
-          Text(
-            value,
-            style: GoogleFonts.poppins(
-                color: Kblue_twg, fontSize: kFourteenFont, fontWeight: kFW400),
-          ),
-          SizedBox(
-            height: 15.h,
-          ),
-          Container(
-            height: 36.h,
-            width: 140.w,
-            alignment: Alignment.center,
-            decoration: BoxDecoration(
-              color: Kdeep_purple_twg,
-              borderRadius: BorderRadius.circular(5.r),
+        InkWell(
+      onTap: onTap,
+      child: Container(
+        padding: EdgeInsets.all(8),
+        decoration: BoxDecoration(
+          boxShadow: [
+            BoxShadow(
+              color: kblack.withOpacity(0.1),
+              blurRadius: 2.r,
+              offset: Offset(0, 1),
+              spreadRadius: 2.r,
+            )
+          ],
+          color: Kwhite,
+          borderRadius: BorderRadius.circular(8.r),
+        ),
+        child: Column(
+          children: [
+            SizedBox(
+              height: 10.h,
             ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
+            Row(
               children: [
-                Text(
-                  buttonTitle,
-                  style: GoogleFonts.poppins(
-                      color: Kwhite, fontSize: 11.sp, fontWeight: kFW400),
-                ),
-                Text(
-                  buttonValue,
-                  style: GoogleFonts.poppins(
-                      color: Kwhite, fontSize: 11.sp, fontWeight: kFW400),
+                Container(
+                  padding: EdgeInsets.all(8),
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    boxShadow: [
+                      BoxShadow(
+                        color: kblack.withOpacity(0.3),
+                        blurRadius: 1.r,
+                        offset: Offset(1, 1),
+                        spreadRadius: 1.r,
+                      )
+                    ],
+                    color: Kwhite,
+                    borderRadius: BorderRadius.circular(5.r),
+                  ),
+                  child: Image.asset(
+                    imageAddress,
+                    height: 45.h,
+                    width: 45.h,
+                    // height: 115.h,
+                    // width: 300.w,
+                  ),
                 ),
               ],
             ),
-          )
-        ],
+            SizedBox(
+              height: 10.h,
+            ),
+            Text(
+              cardTitle,
+              style: GoogleFonts.poppins(
+                  color: kblack, fontSize: kFourteenFont, fontWeight: kFW400),
+            ),
+            SizedBox(
+              height: 3.h,
+            ),
+            Text(
+              value,
+              style: GoogleFonts.poppins(
+                  color: Kblue_twg,
+                  fontSize: kFourteenFont,
+                  fontWeight: kFW400),
+            ),
+            SizedBox(
+              height: 15.h,
+            ),
+            Container(
+              height: 36.h,
+              width: 140.w,
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                color: Kdeep_purple_twg,
+                borderRadius: BorderRadius.circular(5.r),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Text(
+                    buttonTitle,
+                    style: GoogleFonts.poppins(
+                        color: Kwhite, fontSize: 11.sp, fontWeight: kFW400),
+                  ),
+                  Text(
+                    buttonValue,
+                    style: GoogleFonts.poppins(
+                        color: Kwhite, fontSize: 11.sp, fontWeight: kFW400),
+                  ),
+                ],
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
