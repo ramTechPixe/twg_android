@@ -1,21 +1,6 @@
 import 'package:multiselect/multiselect.dart';
 import 'package:twg/untils/export_file.dart';
 
-// class YouTube extends StatefulWidget {
-//   const YouTube({super.key});
-
-//   @override
-//   State<YouTube> createState() => _YouTubeState();
-// }
-
-// class _YouTubeState extends State<YouTube> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       body: Text("data"),
-//     );
-//   }
-// }
 import 'package:twg/untils/export_file.dart';
 
 import 'dart:convert';
@@ -34,6 +19,8 @@ class YouTube extends StatefulWidget {
 class _YouTubeState extends State<YouTube> {
   String? selectedOption;
   DashboardController dashboardcontroller = Get.put(DashboardController());
+  ProfileController userprofilecontroller = Get.put(ProfileController());
+  SettingsController settingscontroller = Get.put(SettingsController());
   File? selectedImage;
   String base64Image = "";
   bool showimagenullMessage = false;
@@ -276,6 +263,7 @@ class _YouTubeState extends State<YouTube> {
                       //  Get.toNamed(kSearchPlaces);
                     },
                     enabled: true,
+                    controller: settingscontroller.youtubeAPIKeyController,
                     labelColor: KText,
                     obscureText: false,
                     contentPadding:
@@ -304,6 +292,7 @@ class _YouTubeState extends State<YouTube> {
                     enabled: true,
                     labelColor: KText,
                     obscureText: false,
+                    controller: settingscontroller.youtubeAppSecretController,
                     contentPadding:
                         const EdgeInsets.symmetric(vertical: 16, horizontal: 8),
                     fontSize: kFourteenFont,
@@ -343,41 +332,126 @@ class _YouTubeState extends State<YouTube> {
                       ),
                     ],
                   ),
-                  Container(
-                    margin: EdgeInsets.only(top: 26),
-                    height: 45,
-                    width: 120.w,
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                      color: Kform_border_twg,
-                      borderRadius: BorderRadius.all(Radius.circular(5)),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        // Icon(
-                        //   Icons.shopping_bag,
-                        //   color: Kwhite,
-                        // ),
-                        Image.asset(
-                          "assets/images/Vector.png",
-                          // height: 3.h,
-                          // width: 80.w,
-                        ),
-                        SizedBox(
-                          width: 12.w,
-                        ),
-                        Text(
-                          "Save",
-                          textAlign: TextAlign.center,
-                          style: GoogleFonts.poppins(
-                              fontWeight: kFW600,
-                              color: Kwhite,
-                              fontSize: 16.sp),
-                        ),
-                      ],
-                    ),
-                  ),
+                  Obx(() => settingscontroller.youtubeSaveLoading == true
+                      ? Center(
+                          child: CircularProgressIndicator(
+                            color: Kform_border_twg,
+                          ),
+                        )
+                      //  settingscontroller.youtubeAppSecretController
+                      : InkWell(
+                          onTap: () {
+                            var payload = {
+                              'sap_youtube_options[youtube_keys][0][consumer_key]':
+                                  settingscontroller
+                                      .youtubeAPIKeyController.text,
+                              'sap_youtube_options[youtube_keys][0][consumer_secret]':
+                                  settingscontroller
+                                      .youtubeAppSecretController.text,
+                              'sap_youtube_options[sap_yt_video]': '',
+                              'sap_youtube_options[yt_type_shortner_opt]': '',
+                              'sap_youtube_options[yt_bitly_access_token]': '',
+                              'sap_youtube_options[yt_shortest_api_token]': '',
+                              'limit_youtube_count': '20',
+                              'created_youtube_count': '1',
+                              'sap_youtube_submit': '',
+                              'user_id': userprofilecontroller
+                                  .profileData["user_details"]["id"],
+                              // "sap_twitter_options[twitter_keys][0][consumer_key]":
+                              //     settingscontroller
+                              //         .twitterAPIKeyController.text,
+                              // "sap_twitter_options[twitter_keys][0][consumer_secret]":
+                              //     settingscontroller
+                              //         .twitterAPISecretController.text,
+                              // "sap_twitter_options[twitter_keys][0][oauth_token]":
+                              //     settingscontroller
+                              //         .twitterAceesTokenController.text,
+                              // "sap_twitter_options[twitter_keys][0][oauth_secret]":
+                              //     settingscontroller
+                              //         .twitterAceesTokenSecretController.text,
+
+                              // ///
+                              // "sap_twitter_options[tw_type_shortner_opt]": "",
+                              // "sap_twitter_options[tw_bitly_access_token]": "",
+                              // "sap_twitter_options[tw_shortest_api_token]": "",
+                              // "limit_twitter_count": "",
+                              // //
+                              // "created_twitter_count": "",
+                              // "sap_twitter_submit": "",
+                              // "user_id": userprofilecontroller
+                              //     .profileData["user_details"]["id"],
+                            };
+/////////////
+//////////////////////////////////
+
+                            settingscontroller.youtubeSave(payload);
+                          },
+                          child: Container(
+                            margin: EdgeInsets.only(top: 26),
+                            height: 45,
+                            width: 120.w,
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                              color: Kform_border_twg,
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(5)),
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Image.asset(
+                                  "assets/images/Vector.png",
+                                ),
+                                SizedBox(
+                                  width: 12.w,
+                                ),
+                                Text(
+                                  "Save",
+                                  textAlign: TextAlign.center,
+                                  style: GoogleFonts.poppins(
+                                      fontWeight: kFW600,
+                                      color: Kwhite,
+                                      fontSize: 16.sp),
+                                ),
+                              ],
+                            ),
+                          ),
+                        )),
+                  // Container(
+                  //   margin: EdgeInsets.only(top: 26),
+                  //   height: 45,
+                  //   width: 120.w,
+                  //   alignment: Alignment.center,
+                  //   decoration: BoxDecoration(
+                  //     color: Kform_border_twg,
+                  //     borderRadius: BorderRadius.all(Radius.circular(5)),
+                  //   ),
+                  //   child: Row(
+                  //     mainAxisAlignment: MainAxisAlignment.center,
+                  //     children: [
+                  //       // Icon(
+                  //       //   Icons.shopping_bag,
+                  //       //   color: Kwhite,
+                  //       // ),
+                  //       Image.asset(
+                  //         "assets/images/Vector.png",
+                  //         // height: 3.h,
+                  //         // width: 80.w,
+                  //       ),
+                  //       SizedBox(
+                  //         width: 12.w,
+                  //       ),
+                  //       Text(
+                  //         "Saves",
+                  //         textAlign: TextAlign.center,
+                  //         style: GoogleFonts.poppins(
+                  //             fontWeight: kFW600,
+                  //             color: Kwhite,
+                  //             fontSize: 16.sp),
+                  //       ),
+                  //     ],
+                  //   ),
+                  // ),
                 ],
               )),
           SizedBox(

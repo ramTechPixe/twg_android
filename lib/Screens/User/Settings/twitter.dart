@@ -17,6 +17,7 @@ class _TwitterSettingsState extends State<TwitterSettings> {
   File? selectedImage;
   String base64Image = "";
   bool showimagenullMessage = false;
+  ProfileController userprofilecontroller = Get.put(ProfileController());
 //////////////////////
   Future<void> chooseImage(type) async {
     var image;
@@ -47,6 +48,7 @@ class _TwitterSettingsState extends State<TwitterSettings> {
 
   String? selectedOption;
   DashboardController dashboardcontroller = Get.put(DashboardController());
+  SettingsController settingscontroller = Get.put(SettingsController());
   bool isTimestampSwitched = false;
   List<String> yourOptionsList = ['Option 1', 'Option 2', 'Option 3'];
   final List<String> CompanyList = [
@@ -159,7 +161,6 @@ class _TwitterSettingsState extends State<TwitterSettings> {
                   ),
                   Container(
                     margin: EdgeInsets.only(top: 10),
-                    // "7"
                     height: 43,
                     width: 110.w,
                     alignment: Alignment.center,
@@ -272,6 +273,7 @@ class _TwitterSettingsState extends State<TwitterSettings> {
                     ),
                     child: TextFormField(
                       cursorColor: Kform_border_twg,
+                      controller: settingscontroller.twitterAPIKeyController,
                       obscureText: passwordVisible,
                       obscuringCharacter: '*',
                       enabled: true,
@@ -359,6 +361,7 @@ class _TwitterSettingsState extends State<TwitterSettings> {
                     ontap: () {},
                     enabled: true,
                     labelColor: KText,
+                    controller: settingscontroller.twitterAPISecretController,
                     obscureText: false,
                     contentPadding:
                         const EdgeInsets.symmetric(vertical: 16, horizontal: 8),
@@ -382,6 +385,7 @@ class _TwitterSettingsState extends State<TwitterSettings> {
                     ontap: () {},
                     enabled: true,
                     labelColor: KText,
+                    controller: settingscontroller.twitterAceesTokenController,
                     obscureText: false,
                     contentPadding:
                         const EdgeInsets.symmetric(vertical: 16, horizontal: 8),
@@ -405,6 +409,8 @@ class _TwitterSettingsState extends State<TwitterSettings> {
                     ontap: () {},
                     enabled: true,
                     labelColor: KText,
+                    controller:
+                        settingscontroller.twitterAceesTokenSecretController,
                     obscureText: false,
                     contentPadding:
                         const EdgeInsets.symmetric(vertical: 16, horizontal: 8),
@@ -444,35 +450,75 @@ class _TwitterSettingsState extends State<TwitterSettings> {
                       ),
                     ],
                   ),
-                  Container(
-                    margin: EdgeInsets.only(top: 26),
-                    height: 45,
-                    width: 120.w,
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                      color: Kform_border_twg,
-                      borderRadius: BorderRadius.all(Radius.circular(5)),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Image.asset(
-                          "assets/images/Vector.png",
-                        ),
-                        SizedBox(
-                          width: 12.w,
-                        ),
-                        Text(
-                          "Save",
-                          textAlign: TextAlign.center,
-                          style: GoogleFonts.poppins(
-                              fontWeight: kFW600,
-                              color: Kwhite,
-                              fontSize: 16.sp),
-                        ),
-                      ],
-                    ),
-                  ),
+                  Obx(() => settingscontroller.twitterSaveLoading == true
+                      ? Center(
+                          child: CircularProgressIndicator(
+                            color: Kform_border_twg,
+                          ),
+                        )
+                      : InkWell(
+                          onTap: () {
+                            var payload = {
+                              "sap_twitter_options[twitter_keys][0][consumer_key]":
+                                  settingscontroller
+                                      .twitterAPIKeyController.text,
+                              "sap_twitter_options[twitter_keys][0][consumer_secret]":
+                                  settingscontroller
+                                      .twitterAPISecretController.text,
+                              "sap_twitter_options[twitter_keys][0][oauth_token]":
+                                  settingscontroller
+                                      .twitterAceesTokenController.text,
+                              "sap_twitter_options[twitter_keys][0][oauth_secret]":
+                                  settingscontroller
+                                      .twitterAceesTokenSecretController.text,
+
+                              ///
+                              "sap_twitter_options[tw_type_shortner_opt]": "",
+                              "sap_twitter_options[tw_bitly_access_token]": "",
+                              "sap_twitter_options[tw_shortest_api_token]": "",
+                              "limit_twitter_count": "",
+                              //
+                              "created_twitter_count": "",
+                              "sap_twitter_submit": "",
+                              "user_id": userprofilecontroller
+                                  .profileData["user_details"]["id"],
+                            };
+/////////////
+//////////////////////////////////
+
+                            settingscontroller.twitterSave(payload);
+                          },
+                          child: Container(
+                            margin: EdgeInsets.only(top: 26),
+                            height: 45,
+                            width: 120.w,
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                              color: Kform_border_twg,
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(5)),
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Image.asset(
+                                  "assets/images/Vector.png",
+                                ),
+                                SizedBox(
+                                  width: 12.w,
+                                ),
+                                Text(
+                                  "Save",
+                                  textAlign: TextAlign.center,
+                                  style: GoogleFonts.poppins(
+                                      fontWeight: kFW600,
+                                      color: Kwhite,
+                                      fontSize: 16.sp),
+                                ),
+                              ],
+                            ),
+                          ),
+                        )),
                 ],
               )),
           SizedBox(

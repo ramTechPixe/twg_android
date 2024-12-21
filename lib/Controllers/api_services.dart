@@ -23,6 +23,8 @@ class ApiService extends GetxService {
 
 //  String baseUrl = "http://192.168.1.197:5000/";
   String baseUrl = "https://thewisguystech.com/";
+  String dummybaseUrl = "https://twgpost.in/";
+  //https://twgpost.in/twiter-api-save-data-api/
   //  String baseUrl = "https://dev.thewisguystech.com/";  //old
   String live_baseUrl = "https://thewisguystech.com/uploads/twg-api/";
 //  String baseUrl = "http://192.168.1.197:5000/"; // main
@@ -198,6 +200,240 @@ class ApiService extends GetxService {
     }
   }
 
+  //
+  Future postRequestTwitterSavedummyurl({
+    required String endpoint,
+    required Map<dynamic, dynamic> payload,
+    Map<String, String>? customHeaders,
+  }) async {
+    Uri url = Uri.parse(dummybaseUrl + endpoint);
+    ////////////////////////////////////////////////////////////////
+
+    ////////////////
+    try {
+      var request = http.MultipartRequest('POST', url)
+        ..fields['sap_twitter_options[twitter_keys][0][consumer_key]'] =
+            payload['sap_twitter_options[twitter_keys][0][consumer_key]']
+        ..fields['sap_twitter_options[twitter_keys][0][consumer_secret]'] =
+            payload['sap_twitter_options[twitter_keys][0][consumer_secret]']
+        ..fields['sap_twitter_options[twitter_keys][0][oauth_token]'] =
+            payload['sap_twitter_options[twitter_keys][0][oauth_token]']
+        ..fields['sap_twitter_options[twitter_keys][0][oauth_secret]'] =
+            payload['sap_twitter_options[twitter_keys][0][oauth_secret]']
+        // ..fields['sap_twitter_options[tweet_image]'] =
+        //     payload['sap_twitter_options[tweet_image]']
+        ..fields['sap_twitter_options[tw_type_shortner_opt]'] =
+            payload['sap_twitter_options[tw_type_shortner_opt]']
+        ..fields['sap_twitter_options[tw_bitly_access_token]'] =
+            payload['sap_twitter_options[tw_bitly_access_token]']
+        ..fields['sap_twitter_options[tw_shortest_api_token]'] =
+            payload['sap_twitter_options[tw_shortest_api_token]']
+        ..fields['limit_twitter_count'] = payload['limit_twitter_count']
+        ..fields['created_twitter_count'] = payload['created_twitter_count']
+        ..fields['sap_twitter_submit'] = payload['sap_twitter_submit']
+        ..fields['user_id'] = payload['user_id'];
+
+      var streamedResponse = await request.send();
+      var response = await http.Response.fromStream(streamedResponse);
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        return response.body;
+      }
+    } on DioError catch (e) {
+      debugPrint("$e");
+      if (e.response?.statusCode == 404) {
+        return e.response?.data;
+      } else if (e.response?.statusCode == 401) {
+        return e.response?.data;
+      } else if (e.response?.statusCode == 400) {
+        return e.response?.data;
+      } else {
+        return {"message": "Something went wrong!"};
+      }
+    }
+  }
+
+  // tumbler save
+  Future postRequestTumblerSavedummyurl({
+    required String endpoint,
+    required Map<dynamic, dynamic> payload,
+    Map<String, String>? customHeaders,
+  }) async {
+    Uri url = Uri.parse(dummybaseUrl + endpoint);
+    ////////////////////////////////////////////////////////////////
+
+    ////////////////
+    try {
+      var request = http.MultipartRequest('POST', url)
+        ..fields['sap_tumblr_options[post_content_size]'] =
+            payload['sap_tumblr_options[post_content_size]']
+        ..fields['sap_tumblr_options[tumblr_keys][0][tumblr_consumer_key]'] =
+            payload['sap_tumblr_options[tumblr_keys][0][tumblr_consumer_key]']
+        ..fields['sap_tumblr_options[tumblr_keys][0][tumblr_consumer_secret]'] =
+            payload[
+                'sap_tumblr_options[tumblr_keys][0][tumblr_consumer_secret]']
+        ..fields['sap_tumblr_options[tumblr_keys][1][tumblr_consumer_key]'] =
+            payload['sap_tumblr_options[tumblr_keys][1][tumblr_consumer_key]']
+        ..fields['sap_tumblr_options[tumblr_keys][1][tumblr_consumer_secret]'] =
+            payload[
+                'sap_tumblr_options[tumblr_keys][1][tumblr_consumer_secret]']
+        ..fields['sap_tumblr_options[posting_type]'] =
+            payload['sap_tumblr_options[posting_type]']
+        ..fields['sap_tumblr_options[tumblr_link]'] =
+            payload['sap_tumblr_options[tumblr_link]']
+        ..fields['sap_tumblr_options[tu_type_shortner_opt]'] =
+            payload['sap_tumblr_options[tu_type_shortner_opt]']
+        ..fields['sap_tumblr_options[tu_bitly_access_token]'] =
+            payload['sap_tumblr_options[tu_bitly_access_token]']
+        ..fields['sap_tumblr_options[tu_shortest_api_token]'] =
+            payload['sap_tumblr_options[tu_shortest_api_token]']
+        ..fields['limit_tumbir_count'] = payload['limit_tumbir_count']
+        ..fields['created_tumbir_count'] = payload['created_tumbir_count']
+        ..fields['sap_tumblr_submit'] = payload['sap_tumblr_submit']
+        ..fields['user_id'] = payload['user_id'];
+
+      var streamedResponse = await request.send();
+      var response = await http.Response.fromStream(streamedResponse);
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        return response.body;
+      }
+    } on DioError catch (e) {
+      debugPrint("$e");
+      if (e.response?.statusCode == 404) {
+        return e.response?.data;
+      } else if (e.response?.statusCode == 401) {
+        return e.response?.data;
+      } else if (e.response?.statusCode == 400) {
+        return e.response?.data;
+      } else {
+        return {"message": "Something went wrong!"};
+      }
+    }
+  }
+
+  //  pinterest
+  Future postRequestPinterestSavedummyurl({
+    required String endpoint,
+    required Map<dynamic, dynamic> payload,
+    Map<String, String>? customHeaders,
+  }) async {
+    Uri url = Uri.parse(dummybaseUrl + endpoint);
+    ////////////////////////////////////////////////////////////////
+
+    ////////////////
+    try {
+      var request = http.MultipartRequest('POST', url)
+        ..fields['sap_pinterest_options[proxy_url]'] =
+            payload['sap_pinterest_options[proxy_url]']
+        ..fields['sap_pinterest_options[proxy_username]'] =
+            payload['sap_pinterest_options[proxy_username]']
+        ..fields['sap_pinterest_options[proxy_password]'] =
+            payload['sap_pinterest_options[proxy_password]']
+        ..fields['sap_pinterest_options[pin_auth_options]'] =
+            payload['sap_pinterest_options[pin_auth_options]']
+        ..fields['sap_pinterest_options[pinterest_keys][0][app_id]'] =
+            payload['sap_pinterest_options[pinterest_keys][0][app_id]']
+        ..fields['sap_pinterest_options[pinterest_keys][0][app_secret]'] =
+            payload['sap_pinterest_options[pinterest_keys][0][app_secret]']
+        ..fields['sap_pinterest_options[pin_image]'] =
+            payload['sap_pinterest_options[pin_image]']
+        ..fields['sap_pinterest_options[pin_type_shortner_opt]'] =
+            payload['sap_pinterest_options[pin_type_shortner_opt]']
+        ..fields['sap_pinterest_options[pin_bitly_access_token]'] =
+            payload['sap_pinterest_options[pin_bitly_access_token]']
+        ..fields['sap_pinterest_options[pin_shortest_api_token]'] =
+            payload['sap_pinterest_options[pin_shortest_api_token]']
+        ..fields['limit_pinterest_count'] = payload['limit_pinterest_count']
+        ..fields['created_pinterest_count'] = payload['created_pinterest_count']
+        ..fields['sap-pinterest-cookie'] = payload['sap-pinterest-cookie']
+        ..fields['sap_pinterest_submit'] = payload['sap_pinterest_submit']
+        ..fields['user_id'] = payload['user_id'];
+
+      var streamedResponse = await request.send();
+      var response = await http.Response.fromStream(streamedResponse);
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        return response.body;
+      }
+    } on DioError catch (e) {
+      debugPrint("$e");
+      if (e.response?.statusCode == 404) {
+        return e.response?.data;
+      } else if (e.response?.statusCode == 401) {
+        return e.response?.data;
+      } else if (e.response?.statusCode == 400) {
+        return e.response?.data;
+      } else {
+        return {"message": "Something went wrong!"};
+      }
+    }
+  }
+  //
+  // ..fields['sap_pinterest_options[proxy_url]'] =
+  //       payload['sap_pinterest_options[proxy_url]']
+  //   ..fields['sap_pinterest_options[proxy_username]'] =
+  //       payload['sap_pinterest_options[proxy_username]']
+  //   ..fields['sap_pinterest_options[proxy_password]'] =
+  //       payload['sap_pinterest_options[proxy_password]']
+  //   ..fields['sap_pinterest_options[pin_auth_options]'] =
+  //       payload['sap_pinterest_options[pin_auth_options]']
+  //   ..fields['sap_pinterest_options[pinterest_keys][0][app_id]'] =
+  //       payload['sap_pinterest_options[pinterest_keys][0][app_id]']
+  //   ..fields['sap_pinterest_options[pinterest_keys][0][app_secret]'] =
+  //       payload['sap_pinterest_options[pinterest_keys][0][app_secret]']
+  //   ..fields['sap_pinterest_options[pin_image]'] =
+  //       payload['sap_pinterest_options[pin_image]']
+  //   ..fields['sap_pinterest_options[pin_type_shortner_opt]'] =
+  //       payload['sap_pinterest_options[pin_type_shortner_opt]']
+  //   ..fields['sap_pinterest_options[pin_bitly_access_token]'] =
+  //       payload['sap_pinterest_options[pin_bitly_access_token]']
+  //   ..fields['sap_pinterest_options[pin_shortest_api_token]'] =
+  //       payload['sap_pinterest_options[pin_shortest_api_token]']
+  //   ..fields['limit_pinterest_count'] = payload['limit_pinterest_count']
+  //   ..fields['created_pinterest_count'] = payload['created_pinterest_count']
+  //   ..fields['sap-pinterest-cookie'] = payload['sap-pinterest-cookie']
+  //   ..fields['sap_pinterest_submit'] = payload['sap_pinterest_submit']
+  //   ..fields['user_id'] = payload['user_id'];
+
+  //
+
+  // youtube save
+  Future postRequestYoutubeSavedummyurl({
+    required String endpoint,
+    required Map<dynamic, dynamic> payload,
+    Map<String, String>? customHeaders,
+  }) async {
+    Uri url = Uri.parse(dummybaseUrl + endpoint);
+
+    try {
+      var headers = {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        if (customHeaders != null) ...customHeaders,
+      };
+
+      var encodedPayload = payload.entries
+          .map((e) =>
+              '${Uri.encodeComponent(e.key)}=${Uri.encodeComponent(e.value.toString())}')
+          .join('&');
+
+      var response = await http.post(
+        url,
+        headers: headers,
+        body: encodedPayload,
+      );
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        return response.body;
+      } else {
+        return {"message": response.reasonPhrase ?? "Request failed!"};
+      }
+    } catch (e) {
+      debugPrint("Error occurred: $e");
+      return {"message": "Something went wrong!"};
+    }
+  }
+
 /////
   // post view
   Future postRequestPostViewData({
@@ -329,7 +565,146 @@ class ApiService extends GetxService {
     }
   }
 
-  ///
+  /// multilogs delete // first
+  // Future postRequestMultiIDDeleteLogData({
+  //   required String endpoint,
+  //   required List<dynamic> payload,
+  //   Map<String, String>? customHeaders,
+  // }) async {
+  //   Uri url = Uri.parse(baseUrl + endpoint);
+
+  //   try {
+  //     var request = http.MultipartRequest('POST', url);
+
+  //     for (var i = 0; i < payload.length; i++) {
+  //       request.fields['id[]'] = payload[i].toString();
+  //     }
+
+  //     if (customHeaders != null) {
+  //       request.headers.addAll(customHeaders);
+  //     }
+
+  //     var streamedResponse = await request.send();
+  //     var response = await http.Response.fromStream(streamedResponse);
+
+  //     if (response.statusCode == 200 || response.statusCode == 201) {
+  //       return response.body;
+  //     } else {
+  //       return {
+  //         "message": "Request failed with status: ${response.statusCode}"
+  //       };
+  //     }
+  //   } catch (e) {
+  //     debugPrint("$e");
+  //     return {"message": "Something went wrong!"};
+  //   }
+  // }
+  Future postRequestMultiIDDeleteLogData({
+    required String endpoint,
+    required List payload,
+    Map<String, String>? customHeaders,
+  }) async {
+    Uri url = Uri.parse(baseUrl + endpoint);
+
+    try {
+      var request = http.MultipartRequest('POST', url);
+
+      // Add all IDs from payload as separate 'id[]' fields
+      for (var id in payload) {
+        request.fields.addAll({'id[]': id.toString()});
+      }
+
+      // Add custom headers if provided
+      if (customHeaders != null) {
+        request.headers.addAll(customHeaders);
+      }
+
+      // Send the request and capture the response
+      var streamedResponse = await request.send();
+      var response = await http.Response.fromStream(streamedResponse);
+
+      // Check the response status and handle accordingly
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        return response.body;
+      } else {
+        return {
+          "message": "Request failed with status: ${response.statusCode}"
+        };
+      }
+    } catch (e) {
+      debugPrint("$e");
+      return {"message": "Something went wrong!"};
+    }
+  }
+
+// multi delete Posts // first
+  // Future postRequestMultiIDDeleteMultiPosts({
+  //   required String endpoint,
+  //   required List<dynamic> payload,
+  //   Map<String, String>? customHeaders,
+  // }) async {
+  //   Uri url = Uri.parse(baseUrl + endpoint);
+
+  //   try {
+  //     var request = http.MultipartRequest('POST', url);
+
+  //     for (var i = 0; i < payload.length; i++) {
+  //       request.fields['post_id[]'] = payload[i].toString();
+  //     }
+
+  //     if (customHeaders != null) {
+  //       request.headers.addAll(customHeaders);
+  //     }
+
+  //     var streamedResponse = await request.send();
+  //     var response = await http.Response.fromStream(streamedResponse);
+
+  //     if (response.statusCode == 200 || response.statusCode == 201) {
+  //       return response.body;
+  //     } else {
+  //       return {
+  //         "message": "Request failed with status: ${response.statusCode}"
+  //       };
+  //     }
+  //   } catch (e) {
+  //     debugPrint("$e");
+  //     return {"message": "Something went wrong!"};
+  //   }
+  // }
+  // second
+  Future postRequestMultiIDDeleteMultiPosts({
+    required String endpoint,
+    required List payload,
+    Map<String, String>? customHeaders,
+  }) async {
+    Uri url = Uri.parse(baseUrl + endpoint);
+
+    try {
+      var request = http.MultipartRequest('POST', url);
+
+      for (var id in payload) {
+        request.fields.addAll({'post_id[]': id});
+      }
+      print(request.fields);
+      if (customHeaders != null) {
+        request.headers.addAll(customHeaders);
+      }
+
+      var streamedResponse = await request.send();
+      var response = await http.Response.fromStream(streamedResponse);
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        return response.body;
+      } else {
+        return {
+          "message": "Request failed with status: ${response.statusCode}"
+        };
+      }
+    } catch (e) {
+      debugPrint("$e");
+      return {"message": "Something went wrong!"};
+    }
+  }
 
 // edit profile
   Future postRequestEditProfileFormData({

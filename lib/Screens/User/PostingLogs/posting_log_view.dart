@@ -31,7 +31,7 @@ class _PostingLogViewState extends State<PostingLogView> {
   @override
   void initState() {
     logsPostcontroller.userLogPostID();
-    // TODO: implement initState
+
     super.initState();
   }
 

@@ -25,6 +25,8 @@ class DashboardController extends GetxController {
   var selectedSocialMediaGraph = "".obs;
   var isCustomSelected = false.obs;
   var autoPostUploadType = "image".obs;
+  var tumblerPostContentType = "snippets".obs;
+  //
   var selectappmethidType = "appmethod".obs;
   var choosenAutoCRMTool = "".obs;
   ProfileController userprofilecontroller = Get.put(ProfileController());

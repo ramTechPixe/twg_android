@@ -18,6 +18,9 @@ class _TotalCardsState extends State<TotalCards> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 CustomTotalCards(
+                  onTap: () {
+                    Get.toNamed(kPostingLogsScreen);
+                  },
                   buttonTitle: "This month",
                   imageAddress: "assets/images/posts_image.png",
                   cardTitle: "Total Posts",
@@ -48,6 +51,9 @@ class _TotalCardsState extends State<TotalCards> {
                   //     : "0",
                 ),
                 CustomTotalCards(
+                  onTap: () {
+                    Get.toNamed(kPostingLogsScreen);
+                  },
                   buttonTitle: "Remaining Points",
                   imageAddress: "assets/images/publish_image.png",
                   cardTitle: "Total Publish",
@@ -86,6 +92,9 @@ class _TotalCardsState extends State<TotalCards> {
                   buttonValue: '0',
                 ),
                 CustomTotalCards(
+                  onTap: () {
+                    Get.toNamed(kSuscribtion);
+                  },
                   buttonTitle: "Remaining Days",
                   imageAddress: "assets/images/mdi_timer-sand.png",
                   cardTitle: "Plan Expiry Date",

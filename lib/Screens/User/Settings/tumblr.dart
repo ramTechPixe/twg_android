@@ -16,6 +16,9 @@ class _TumblrState extends State<Tumblr> {
   String? selectedOption;
   File? selectedImage;
   String base64Image = "";
+  DashboardController dashboardcontroller = Get.put(DashboardController());
+  ProfileController userprofilecontroller = Get.put(ProfileController());
+  SettingsController settingscontroller = Get.put(SettingsController());
   bool showimagenullMessage = false;
   List<String> variantsList = [
     'Ram',
@@ -59,7 +62,7 @@ class _TumblrState extends State<Tumblr> {
   }
 
 ///////////
-  DashboardController dashboardcontroller = Get.put(DashboardController());
+
   bool isTimestampSwitched = false;
   List<String> yourOptionsList = ['Option 1', 'Option 2', 'Option 3'];
   final List<String> CompanyList = [
@@ -181,8 +184,8 @@ class _TumblrState extends State<Tumblr> {
                         onChanged: (value) {
                           setState(() {
                             selectedOption = value;
-                            dashboardcontroller.autoPostUploadType.value =
-                                "image";
+                            dashboardcontroller.tumblerPostContentType.value =
+                                "snippets";
                           });
                         },
                       ),
@@ -206,8 +209,8 @@ class _TumblrState extends State<Tumblr> {
                         onChanged: (value) {
                           setState(() {
                             selectedOption = value; // Update selected option
-                            dashboardcontroller.autoPostUploadType.value =
-                                "video";
+                            dashboardcontroller.tumblerPostContentType.value =
+                                "full";
                           });
                         },
                       ),
@@ -331,6 +334,7 @@ class _TumblrState extends State<Tumblr> {
                       //  Get.toNamed(kSearchPlaces);
                     },
                     enabled: true,
+                    controller: settingscontroller.tumblerConsumerKeyController,
                     labelColor: KText,
                     obscureText: false,
                     contentPadding:
@@ -356,6 +360,7 @@ class _TumblrState extends State<Tumblr> {
                     ontap: () {},
                     enabled: true,
                     labelColor: KText,
+                    controller: settingscontroller.tumblerSecretController,
                     obscureText: false,
                     contentPadding:
                         const EdgeInsets.symmetric(vertical: 16, horizontal: 8),
@@ -409,50 +414,146 @@ class _TumblrState extends State<Tumblr> {
                       ),
                     ],
                   ),
-                  Container(
-                    margin: EdgeInsets.only(top: 26),
-                    // "7"
-                    height: 45,
-                    width: 120.w,
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                      // boxShadow: [
-                      //   BoxShadow(
-                      //     color: Ktextcolor.withOpacity(0.5),
-                      //     blurRadius: 5.r,
-                      //     offset: Offset(0, 5),
-                      //     spreadRadius: 1.r,
-                      //   )
-                      // ],
-                      color: Kform_border_twg,
-                      borderRadius: BorderRadius.all(Radius.circular(5)),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        // Icon(
-                        //   Icons.shopping_bag,
-                        //   color: Kwhite,
-                        // ),
-                        Image.asset(
-                          "assets/images/Vector.png",
-                          // height: 3.h,
-                          // width: 80.w,
-                        ),
-                        SizedBox(
-                          width: 12.w,
-                        ),
-                        Text(
-                          "Save",
-                          textAlign: TextAlign.center,
-                          style: GoogleFonts.poppins(
-                              fontWeight: kFW600,
-                              color: Kwhite,
-                              fontSize: 16.sp),
-                        ),
-                      ],
-                    ),
-                  ),
+                  // dashboardcontroller.tumblerPostContentType.value
+                  Obx(() => settingscontroller.tumblerSaveLoading == true
+                      ? Center(
+                          child: CircularProgressIndicator(
+                            color: Kform_border_twg,
+                          ),
+                        )
+                      : InkWell(
+                          onTap: () {
+                            var payload = {
+                              'sap_tumblr_options[post_content_size]':
+                                  dashboardcontroller
+                                      .tumblerPostContentType.value,
+                              'sap_tumblr_options[tumblr_keys][0][tumblr_consumer_key]':
+                                  settingscontroller
+                                      .tumblerConsumerKeyController.text,
+                              'sap_tumblr_options[tumblr_keys][0][tumblr_consumer_secret]':
+                                  settingscontroller
+                                      .tumblerSecretController.text,
+                              'sap_tumblr_options[tumblr_keys][1][tumblr_consumer_key]':
+                                  '987654zyx',
+                              'sap_tumblr_options[tumblr_keys][1][tumblr_consumer_secret]':
+                                  'secret123abc',
+                              'sap_tumblr_options[posting_type]': 'text',
+                              'sap_tumblr_options[tumblr_link]': '',
+                              'sap_tumblr_options[tu_type_shortner_opt]': '',
+                              'sap_tumblr_options[tu_bitly_access_token]': '',
+                              'sap_tumblr_options[tu_shortest_api_token]': '',
+                              'limit_tumbir_count': '60',
+                              'created_tumbir_count': '1',
+                              'sap_tumblr_submit': '1',
+                              'user_id': userprofilecontroller
+                                  .profileData["user_details"]["id"]
+
+                              // "sap_twitter_options[twitter_keys][0][consumer_key]":
+                              //     settingscontroller
+                              //         .twitterAPIKeyController.text,
+                              // "sap_twitter_options[twitter_keys][0][consumer_secret]":
+                              //     settingscontroller
+                              //         .twitterAPISecretController.text,
+                              // "sap_twitter_options[twitter_keys][0][oauth_token]":
+                              //     settingscontroller
+                              //         .twitterAceesTokenController.text,
+                              // "sap_twitter_options[twitter_keys][0][oauth_secret]":
+                              //     settingscontroller
+                              //         .twitterAceesTokenSecretController.text,
+
+                              // ///
+                              // "sap_twitter_options[tw_type_shortner_opt]": "",
+                              // "sap_twitter_options[tw_bitly_access_token]": "",
+                              // "sap_twitter_options[tw_shortest_api_token]": "",
+                              // "limit_twitter_count": "",
+                              // //
+                              // "created_twitter_count": "",
+                              // "sap_twitter_submit": "",
+                              // "user_id": userprofilecontroller
+                              //     .profileData["user_details"]["id"],
+                            };
+/////////////
+//////////////////////////////////
+
+                            settingscontroller.tumblerSave(payload);
+                          },
+                          child: Container(
+                            margin: EdgeInsets.only(top: 26),
+                            height: 45,
+                            width: 120.w,
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                              color: Kform_border_twg,
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(5)),
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Image.asset(
+                                  "assets/images/Vector.png",
+                                ),
+                                SizedBox(
+                                  width: 12.w,
+                                ),
+                                Text(
+                                  "Save",
+                                  textAlign: TextAlign.center,
+                                  style: GoogleFonts.poppins(
+                                      fontWeight: kFW600,
+                                      color: Kwhite,
+                                      fontSize: 16.sp),
+                                ),
+                              ],
+                            ),
+                          ),
+                        )),
+
+                  ///
+                  // Container(
+                  //   margin: EdgeInsets.only(top: 26),
+                  //   // "7"
+                  //   height: 45,
+                  //   width: 120.w,
+                  //   alignment: Alignment.center,
+                  //   decoration: BoxDecoration(
+                  //     // boxShadow: [
+                  //     //   BoxShadow(
+                  //     //     color: Ktextcolor.withOpacity(0.5),
+                  //     //     blurRadius: 5.r,
+                  //     //     offset: Offset(0, 5),
+                  //     //     spreadRadius: 1.r,
+                  //     //   )
+                  //     // ],
+                  //     color: Kform_border_twg,
+                  //     borderRadius: BorderRadius.all(Radius.circular(5)),
+                  //   ),
+                  //   child: Row(
+                  //     mainAxisAlignment: MainAxisAlignment.center,
+                  //     children: [
+                  //       // Icon(
+                  //       //   Icons.shopping_bag,
+                  //       //   color: Kwhite,
+                  //       // ),
+                  //       Image.asset(
+                  //         "assets/images/Vector.png",
+                  //         // height: 3.h,
+                  //         // width: 80.w,
+                  //       ),
+                  //       SizedBox(
+                  //         width: 12.w,
+                  //       ),
+                  //       Text(
+                  //         "Save",
+                  //         textAlign: TextAlign.center,
+                  //         style: GoogleFonts.poppins(
+                  //             fontWeight: kFW600,
+                  //             color: Kwhite,
+                  //             fontSize: 16.sp),
+                  //       ),
+                  //     ],
+                  //   ),
+                  // ),
                 ],
               )),
           SizedBox(

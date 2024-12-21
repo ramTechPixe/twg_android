@@ -18,6 +18,9 @@ class _PinterestSettingsState extends State<PinterestSettings> {
   File? selectedImage;
   String base64Image = "";
   bool showimagenullMessage = false;
+
+  ProfileController userprofilecontroller = Get.put(ProfileController());
+  SettingsController settingscontroller = Get.put(SettingsController());
 //////////////////////
   Future<void> chooseImage(type) async {
     var image;
@@ -429,11 +432,10 @@ class _PinterestSettingsState extends State<PinterestSettings> {
                     height: 15.h,
                   ),
                   CustomFormFields(
-                    ontap: () {
-                      //  Get.toNamed(kSearchPlaces);
-                    },
+                    ontap: () {},
                     enabled: true,
                     labelColor: KText,
+                    controller: settingscontroller.pinterestAppKeyController,
                     obscureText: false,
                     contentPadding:
                         const EdgeInsets.symmetric(vertical: 16, horizontal: 8),
@@ -458,6 +460,7 @@ class _PinterestSettingsState extends State<PinterestSettings> {
                     ontap: () {},
                     enabled: true,
                     labelColor: KText,
+                    controller: settingscontroller.pinterestSecretController,
                     obscureText: false,
                     contentPadding:
                         const EdgeInsets.symmetric(vertical: 16, horizontal: 8),
@@ -511,49 +514,129 @@ class _PinterestSettingsState extends State<PinterestSettings> {
                       ),
                     ],
                   ),
-                  Container(
-                      margin: EdgeInsets.only(top: 26),
-                      // "7"
-                      height: 45,
-                      width: 120.w,
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                        // boxShadow: [
-                        //   BoxShadow(
-                        //     color: Ktextcolor.withOpacity(0.5),
-                        //     blurRadius: 5.r,
-                        //     offset: Offset(0, 5),
-                        //     spreadRadius: 1.r,
-                        //   )
-                        // ],
-                        color: Kform_border_twg,
-                        borderRadius: BorderRadius.all(Radius.circular(5)),
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          // Icon(
-                          //   Icons.shopping_bag,
-                          //   color: Kwhite,
-                          // ),
-                          Image.asset(
-                            "assets/images/Vector.png",
-                            // height: 3.h,
-                            // width: 80.w,
+                  Obx(() => settingscontroller.pinterestSaveLoading == true
+                      ? Center(
+                          child: CircularProgressIndicator(
+                            color: Kform_border_twg,
                           ),
-                          SizedBox(
-                            width: 12.w,
+                        )
+                      : InkWell(
+                          onTap: () {
+                            var payload = {
+                              /////////////////////
+                              'sap_pinterest_options[proxy_url]': '',
+                              'sap_pinterest_options[proxy_username]': '',
+                              'sap_pinterest_options[proxy_password]': '',
+                              'sap_pinterest_options[pin_auth_options]': 'app',
+                              'sap_pinterest_options[pinterest_keys][0][app_id]':
+                                  settingscontroller
+                                      .pinterestAppKeyController.text,
+                              'sap_pinterest_options[pinterest_keys][0][app_secret]':
+                                  settingscontroller
+                                      .pinterestSecretController.text,
+                              'sap_pinterest_options[pin_image]': '',
+                              'sap_pinterest_options[pin_type_shortner_opt]':
+                                  '',
+                              'sap_pinterest_options[pin_bitly_access_token]':
+                                  '',
+                              'sap_pinterest_options[pin_shortest_api_token]':
+                                  '',
+                              'limit_pinterest_count': '10',
+                              'created_pinterest_count': '1',
+                              'sap-pinterest-cookie': '',
+                              'sap_pinterest_submit': '',
+                              'user_id': userprofilecontroller
+                                  .profileData["user_details"]["id"]
+                              ////////////////////
+                              // 'sap_tumblr_options[post_content_size]':
+                              //     dashboardcontroller
+                              //         .tumblerPostContentType.value,
+                              // 'sap_tumblr_options[tumblr_keys][0][tumblr_consumer_key]':
+                              //     settingscontroller
+                              //         .tumblerConsumerKeyController.text,
+                              // 'sap_tumblr_options[tumblr_keys][0][tumblr_consumer_secret]':
+                              //     settingscontroller
+                              //         .tumblerSecretController.text,
+                              // 'sap_tumblr_options[tumblr_keys][1][tumblr_consumer_key]':
+                              //     '987654zyx',
+                              // 'sap_tumblr_options[tumblr_keys][1][tumblr_consumer_secret]':
+                              //     'secret123abc',
+                              // 'sap_tumblr_options[posting_type]': 'text',
+                              // 'sap_tumblr_options[tumblr_link]': '',
+                              // 'sap_tumblr_options[tu_type_shortner_opt]': '',
+                              // 'sap_tumblr_options[tu_bitly_access_token]': '',
+                              // 'sap_tumblr_options[tu_shortest_api_token]': '',
+                              // 'limit_tumbir_count': '60',
+                              // 'created_tumbir_count': '1',
+                              // 'sap_tumblr_submit': '1',
+                              // 'user_id': userprofilecontroller
+                              //     .profileData["user_details"]["id"]
+                            };
+/////////////
+//////////////////////////////////
+
+                            settingscontroller.pinterestSave(payload);
+                          },
+                          child: Container(
+                            margin: EdgeInsets.only(top: 26),
+                            height: 45,
+                            width: 120.w,
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                              color: Kform_border_twg,
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(5)),
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Image.asset(
+                                  "assets/images/Vector.png",
+                                ),
+                                SizedBox(
+                                  width: 12.w,
+                                ),
+                                Text(
+                                  "Save",
+                                  textAlign: TextAlign.center,
+                                  style: GoogleFonts.poppins(
+                                      fontWeight: kFW600,
+                                      color: Kwhite,
+                                      fontSize: 16.sp),
+                                ),
+                              ],
+                            ),
                           ),
-                          Text(
-                            "Save",
-                            textAlign: TextAlign.center,
-                            style: GoogleFonts.poppins(
-                                fontWeight: kFW600,
-                                color: Kwhite,
-                                fontSize: 16.sp),
-                          ),
-                        ],
-                      ))
+                        )),
+                  // ram
+                  // Container(
+                  //     margin: EdgeInsets.only(top: 26),
+                  //     height: 45,
+                  //     width: 120.w,
+                  //     alignment: Alignment.center,
+                  //     decoration: BoxDecoration(
+                  //       color: Kform_border_twg,
+                  //       borderRadius: BorderRadius.all(Radius.circular(5)),
+                  //     ),
+                  //     child: Row(
+                  //       mainAxisAlignment: MainAxisAlignment.center,
+                  //       children: [
+                  //         Image.asset(
+                  //           "assets/images/Vector.png",
+                  //         ),
+                  //         SizedBox(
+                  //           width: 12.w,
+                  //         ),
+                  //         Text(
+                  //           "Saves",
+                  //           textAlign: TextAlign.center,
+                  //           style: GoogleFonts.poppins(
+                  //               fontWeight: kFW600,
+                  //               color: Kwhite,
+                  //               fontSize: 16.sp),
+                  //         ),
+                  //       ],
+                  //     ))
                   ///////////
                 ],
               )),
