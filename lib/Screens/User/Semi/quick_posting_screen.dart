@@ -11,6 +11,7 @@ class _QuickPostingState extends State<QuickPosting> {
   DashboardController dashboardcontroller = Get.put(DashboardController());
   AuthController authcontroller = Get.put(AuthController());
   SemiController semicontroller = Get.put(SemiController());
+  ProfileController userprofilecontroller = Get.put(ProfileController());
   int _characterCount = 0;
 
   @override
@@ -122,7 +123,8 @@ class _QuickPostingState extends State<QuickPosting> {
             ),
           ],
         ),
-        body: SingleChildScrollView(
+        body: 
+        SingleChildScrollView(
           child: Obx(
             () => Container(
               margin: EdgeInsets.all(16),
@@ -318,7 +320,7 @@ class _QuickPostingState extends State<QuickPosting> {
                                         //   ],
                                         // ),
                                         Obx(() => semicontroller
-                                                    .aiTextLoading ==
+                                                    .autoPostMessageLoading ==
                                                 true
                                             ? Row(
                                                 children: [
@@ -347,12 +349,13 @@ class _QuickPostingState extends State<QuickPosting> {
                                                 isLoading: false,
                                                 onTap: () async {
                                                   var paylodd = {
-                                                    "custom_message": authcontroller
+                                                    "heading": authcontroller
                                                         .autoPostHeadingController
                                                         .text,
                                                   };
                                                   semicontroller
-                                                      .autoPostAIText(paylodd);
+                                                      .autoPostMessageV2(
+                                                          paylodd);
                                                 },
                                               )),
                                       ],
@@ -372,7 +375,7 @@ class _QuickPostingState extends State<QuickPosting> {
                                           ontap: () {
                                             //  Get.toNamed(kSearchPlaces); // kForgotPassword
                                           },
-                                          controller: authcontroller
+                                          controller: semicontroller
                                               .autoPostMessageController,
                                           enabled: true,
                                           labelColor: KText,
@@ -419,6 +422,8 @@ class _QuickPostingState extends State<QuickPosting> {
                                           ontap: () {},
                                           enabled: true,
                                           labelColor: KText,
+                                          controller: authcontroller
+                                              .aiMessageLinkController,
                                           onChanged: (Value) {
                                             setState(() {});
                                           },
@@ -444,7 +449,7 @@ class _QuickPostingState extends State<QuickPosting> {
                                         ),
                                         CustomFormFields(
                                           ontap: () {},
-                                          controller: authcontroller
+                                          controller: semicontroller
                                               .autoPostMessageController,
                                           enabled: true,
                                           labelColor: KText,
@@ -477,6 +482,121 @@ class _QuickPostingState extends State<QuickPosting> {
                                             fontSize: kTenFont,
                                             fontWeight: kFW400,
                                           ),
+                                        ),
+                                        SizedBox(
+                                          height: 20.h,
+                                        ),
+                                        Text(
+                                          "Number of words",
+                                          textAlign: TextAlign.start,
+                                          style: GoogleFonts.poppins(
+                                              fontSize: kSixteenFont,
+                                              //  letterSpacing: 1,
+                                              color: KBlack_twg,
+                                              fontWeight: kFW400),
+                                        ),
+                                        SizedBox(
+                                          height: 2.h,
+                                        ),
+                                        Container(
+                                          height: 45,
+                                          decoration: BoxDecoration(
+                                              border: Border.all(
+                                                  color: Ktextcolor.withOpacity(
+                                                      0.4)),
+                                              borderRadius:
+                                                  BorderRadius.circular(10.r)),
+                                          padding: EdgeInsets.only(
+                                              left: 15.w,
+                                              right: 15.w,
+                                              top: 6.h,
+                                              bottom: 6.h),
+                                          child: Row(
+                                            children: <Widget>[
+                                              // Decrement Button
+                                              InkWell(
+                                                onTap: () {
+                                                  authcontroller.decrement();
+                                                },
+                                                child: const Icon(
+                                                  Icons.remove,
+                                                  color: KdarkText,
+                                                ),
+                                              ),
+                                              SizedBox(width: 10.w),
+
+                                              Expanded(
+                                                child: TextFormField(
+                                                  controller: authcontroller
+                                                      .numberOfWordsController,
+                                                  textAlign: TextAlign.center,
+                                                  style: GoogleFonts.roboto(
+                                                    color: KdarkText,
+                                                    fontWeight: FontWeight.w700,
+                                                  ),
+                                                  keyboardType:
+                                                      TextInputType.number,
+                                                  decoration: InputDecoration(
+                                                    hintText: "number of words",
+                                                    border: InputBorder.none,
+                                                    isDense: true,
+                                                  ),
+                                                  onChanged: (value) {
+                                                    authcontroller
+                                                        .setCounter(value);
+                                                  },
+                                                ),
+                                              ),
+                                              SizedBox(width: 10.w),
+                                              // Increment Button
+                                              InkWell(
+                                                onTap: () {
+                                                  authcontroller.increment();
+                                                },
+                                                child: const Icon(
+                                                  Icons.add,
+                                                  color: KdarkText,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          //  Row(
+                                          //   children: <Widget>[
+                                          //     authcontroller.counter <= 0
+                                          //         ? SizedBox()
+                                          //         : InkWell(
+                                          //             onTap: () {
+                                          //               authcontroller.decrement();
+                                          //             },
+                                          //             child: const Icon(Icons.arrow_left)),
+                                          //     SizedBox(
+                                          //       width: 10.w,
+                                          //     ),
+                                          //     Obx(
+                                          //       () => Padding(
+                                          //         padding: const EdgeInsets.only(
+                                          //             left: 5, right: 5),
+                                          //         child: Text(
+                                          //           '${authcontroller.counter}',
+                                          //           style: GoogleFonts.roboto(
+                                          //               color: KdarkText,
+                                          //               fontWeight: kFW700),
+                                          //         ),
+                                          //       ),
+                                          //     ),
+                                          //     SizedBox(
+                                          //       width: 10.w,
+                                          //     ),
+                                          //     InkWell(
+                                          //         onTap: () {
+                                          //           authcontroller.increment();
+                                          //         },
+                                          //         child: const Icon(
+                                          //           Icons.arrow_right,
+                                          //           color: KdarkText,
+                                          //         )),
+                                          //   ],
+                                          // )
                                         ),
                                         SizedBox(
                                           height: 20.h,
@@ -569,21 +689,68 @@ class _QuickPostingState extends State<QuickPosting> {
                                             //         )),
                                             //   ],
                                             // ),
-
-                                            CustomButton(
-                                              // margin: EdgeInsets.only(top: 36.h),
-                                              borderRadius:
-                                                  BorderRadius.circular(5.r),
-                                              Color: Kform_border_twg,
-                                              textColor: Kwhite,
-                                              height: 45,
-                                              width: 155.w,
-                                              label: "Generate Caption",
-                                              fontSize: 15.sp,
-                                              fontWeight: kFW600,
-                                              isLoading: false,
-                                              onTap: () async {},
-                                            ),
+                                            Obx(() => semicontroller
+                                                        .aIMessageLoading ==
+                                                    true
+                                                ? Row(
+                                                    children: [
+                                                      SizedBox(
+                                                        height: 50.w,
+                                                      ),
+                                                      Center(
+                                                        child:
+                                                            CircularProgressIndicator(
+                                                          color:
+                                                              Kform_border_twg,
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  )
+                                                : CustomButton(
+                                                    // margin: EdgeInsets.only(top: 36.h),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            5.r),
+                                                    Color: Kform_border_twg,
+                                                    textColor: Kwhite,
+                                                    height: 45,
+                                                    width: 155.w,
+                                                    label: "Generate Caption",
+                                                    fontSize: 15.sp,
+                                                    fontWeight: kFW600,
+                                                    isLoading: false,
+                                                    onTap: () async {
+                                                      var paylodd = {
+                                                        "number_of_words":
+                                                            authcontroller
+                                                                .numberOfWordsController
+                                                                .text,
+                                                        // authcontroller
+                                                        //     .aiMessageLinkController
+                                                        //     .text,
+                                                        "sap_ai_content_link":
+                                                            authcontroller
+                                                                .aiMessageLinkController
+                                                                .text
+                                                      };
+                                                      semicontroller
+                                                          .aIMessageV2(paylodd);
+                                                    },
+                                                  )),
+                                            // CustomButton(
+                                            //   // margin: EdgeInsets.only(top: 36.h),
+                                            //   borderRadius:
+                                            //       BorderRadius.circular(5.r),
+                                            //   Color: Kform_border_twg,
+                                            //   textColor: Kwhite,
+                                            //   height: 45,
+                                            //   width: 155.w,
+                                            //   label: "Generate Caption",
+                                            //   fontSize: 15.sp,
+                                            //   fontWeight: kFW600,
+                                            //   isLoading: false,
+                                            //   onTap: () async {},
+                                            // ),
                                           ],
                                         ),
                                       ],
@@ -607,6 +774,9 @@ class _QuickPostingState extends State<QuickPosting> {
                                       setState(() {
                                         dashboardcontroller.selectedQuickPost
                                             .value = "Auto Post";
+                                        semicontroller.autoPostMessageController
+                                            .text = "";
+                                        //  authcontroller.UserEmailSignInController.text = "sri965272@gmail.com";
                                       });
                                     },
                                     child: Column(
@@ -637,6 +807,8 @@ class _QuickPostingState extends State<QuickPosting> {
                                       setState(() {
                                         dashboardcontroller.selectedQuickPost
                                             .value = "Auto Post";
+                                        semicontroller.autoPostMessageController
+                                            .text = "";
                                       });
                                     },
                                     child: Column(
@@ -669,6 +841,8 @@ class _QuickPostingState extends State<QuickPosting> {
                                       setState(() {
                                         dashboardcontroller.selectedQuickPost
                                             .value = "Custom Message";
+                                        semicontroller.autoPostMessageController
+                                            .text = "";
                                       });
                                     },
                                     child: Column(
@@ -699,6 +873,8 @@ class _QuickPostingState extends State<QuickPosting> {
                                       setState(() {
                                         dashboardcontroller.selectedQuickPost
                                             .value = "Custom Message";
+                                        semicontroller.autoPostMessageController
+                                            .text = "";
                                       });
                                     },
                                     child: Column(
@@ -731,6 +907,8 @@ class _QuickPostingState extends State<QuickPosting> {
                                       setState(() {
                                         dashboardcontroller.selectedQuickPost
                                             .value = "AI Message";
+                                        semicontroller.autoPostMessageController
+                                            .text = "";
                                       });
                                     },
                                     child: Column(
@@ -761,6 +939,8 @@ class _QuickPostingState extends State<QuickPosting> {
                                       setState(() {
                                         dashboardcontroller.selectedQuickPost
                                             .value = "AI Message";
+                                        semicontroller.autoPostMessageController
+                                            .text = "";
                                       });
                                     },
                                     child: Column(
@@ -874,5 +1054,6 @@ class _QuickPostingState extends State<QuickPosting> {
             ),
           ),
         ));
+ 
   }
 }

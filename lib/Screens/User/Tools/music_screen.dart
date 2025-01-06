@@ -8,9 +8,29 @@ class MusicScreen extends StatefulWidget {
 }
 
 class _MusicScreenState extends State<MusicScreen> {
+  MenusController menuscontroller = Get.put(MenusController());
+  ProfileController userprofilecontroller = Get.put(ProfileController());
+  final _formKey = GlobalKey<FormState>();
   final List<String> CompanyList = ['Male', 'Female', 'Others'];
   AuthController authcontroller = Get.put(AuthController());
   String? selectedUserValue;
+  @override
+  void initState() {
+    setState(() {
+      //  'musictype':
+      //                                      ,
+
+      //                                   //
+      //                                   'instrument':
+      //                                      ,
+      //'guitar'
+      menuscontroller.musictype.text = 'rock';
+      menuscontroller.instrument.text = 'guitar';
+    });
+    // TODO: implement initState
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,122 +59,169 @@ class _MusicScreenState extends State<MusicScreen> {
       body: SingleChildScrollView(
           child: Container(
               margin: EdgeInsets.all(16.r),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Music",
-                    style: GoogleFonts.poppins(
-                        color: Kform_border_twg,
-                        fontSize: 22.sp,
-                        fontWeight: kFW600),
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(top: 20),
-                    width: double.infinity,
-                    padding: EdgeInsets.only(top: 10),
-                    decoration: BoxDecoration(
-                      border: GradientBoxBorder(
-                        gradient: LinearGradient(
-                            colors: [
-                              Klight_grey_twg,
-                              Klight_grey_twg,
-                              Klight_grey_twg,
-                              Klight_grey_twg,
-                              Klight_grey_twg,
-                              Klight_grey_twg
-                            ],
-                            begin: Alignment.topCenter,
-                            end: Alignment.bottomCenter),
-                        width: 1,
-                      ),
-                      color: Kwhite,
-                      borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(5),
-                          topRight: Radius.circular(5),
-                          bottomLeft: Radius.circular(5),
-                          bottomRight: Radius.circular(5)),
+              child: Form(
+                key: _formKey,
+                // autovalidateMode: AutovalidateMode.always,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Music",
+                      style: GoogleFonts.poppins(
+                          color: Kform_border_twg,
+                          fontSize: 22.sp,
+                          fontWeight: kFW600),
                     ),
-                    child: Container(
+                    Container(
+                      margin: EdgeInsets.only(top: 20),
                       width: double.infinity,
-                      margin: const EdgeInsets.only(top: 2, bottom: 10),
-                      padding: const EdgeInsets.symmetric(horizontal: 16),
-                      decoration: const BoxDecoration(
+                      padding: EdgeInsets.only(top: 10),
+                      decoration: BoxDecoration(
+                        border: GradientBoxBorder(
+                          gradient: LinearGradient(
+                              colors: [
+                                Klight_grey_twg,
+                                Klight_grey_twg,
+                                Klight_grey_twg,
+                                Klight_grey_twg,
+                                Klight_grey_twg,
+                                Klight_grey_twg
+                              ],
+                              begin: Alignment.topCenter,
+                              end: Alignment.bottomCenter),
+                          width: 1,
+                        ),
+                        color: Kwhite,
                         borderRadius: BorderRadius.only(
-                          topLeft: Radius.zero,
-                          topRight: Radius.zero,
-                          bottomLeft: Radius.circular(10),
-                          bottomRight: Radius.circular(10),
+                            topLeft: Radius.circular(5),
+                            topRight: Radius.circular(5),
+                            bottomLeft: Radius.circular(5),
+                            bottomRight: Radius.circular(5)),
+                      ),
+                      child: Container(
+                        width: double.infinity,
+                        margin: const EdgeInsets.only(top: 2, bottom: 10),
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                        decoration: const BoxDecoration(
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.zero,
+                            topRight: Radius.zero,
+                            bottomLeft: Radius.circular(10),
+                            bottomRight: Radius.circular(10),
+                          ),
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            CustomFormFields(
+                              ontap: () {},
+                              enabled: true,
+                              controller: menuscontroller.musictype,
+                              labelColor: KText,
+                              obscureText: false,
+                              contentPadding: const EdgeInsets.symmetric(
+                                  vertical: 16, horizontal: 8),
+                              fontSize: kFourteenFont,
+                              fontWeight: FontWeight.w500,
+                              hintText: "For example:Rock,Jazz,Pop",
+                              maxLines: 1,
+                              readOnly: false,
+                              label: "Music Type",
+                              validator: (value) {
+                                if (value!.isEmpty) {
+                                  return 'Please Enter Type';
+                                }
+                                return null;
+                              },
+                            ),
+                            SizedBox(
+                              height: 20.h,
+                            ),
+                            CustomFormFields(
+                              ontap: () {
+                                //  Get.toNamed(kSearchPlaces);
+                              },
+                              enabled: true,
+                              controller: menuscontroller.instrument,
+                              labelColor: KText,
+                              obscureText: false,
+                              contentPadding: const EdgeInsets.symmetric(
+                                  vertical: 16, horizontal: 8),
+                              fontSize: kFourteenFont,
+                              fontWeight: FontWeight.w500,
+                              hintText: "For example:Guitar,Piano",
+                              maxLines: 1,
+                              readOnly: false,
+                              label: "Content Source",
+                              validator: (value) {
+                                if (value!.isEmpty) {
+                                  return 'Please Enter Source';
+                                }
+                                return null;
+                              },
+                            ),
+                            Obx(
+                              () => menuscontroller.musicLoading == true
+                                  ? Center(
+                                      child: CircularProgressIndicator(
+                                        color: Kform_border_twg,
+                                      ),
+                                    )
+                                  : CustomButton(
+                                      margin: EdgeInsets.only(top: 36.h),
+                                      borderRadius: BorderRadius.circular(8.r),
+                                      Color: Kform_border_twg,
+                                      textColor: Kwhite,
+                                      height: 40,
+                                      width: double.infinity,
+                                      label: "Submit",
+                                      fontSize: kSixteenFont,
+                                      fontWeight: kFW700,
+                                      isLoading: false,
+                                      onTap: () {
+                                        var payload = {
+                                          'user_id': userprofilecontroller
+                                                  .profileData["user_details"]
+                                              ["id"],
+                                          'musictype':
+                                              menuscontroller.musictype.text,
+
+                                          //'rock',
+                                          'instrument':
+                                              menuscontroller.instrument.text,
+                                          //'guitar'
+                                        };
+
+                                        // if (_formKey.currentState!.validate()) {
+                                        //   authcontroller.userSignIn(payload);
+                                        // }
+                                        if (_formKey.currentState!.validate()) {
+                                          menuscontroller.userMusic(payload);
+                                          menuscontroller.musictype.clear();
+                                          menuscontroller.instrument.clear();
+                                        }
+                                        // Get.toNamed(kNavigation);
+                                      }),
+                            ),
+                            // CustomButton(
+                            //     margin: EdgeInsets.only(top: 36.h),
+                            //     borderRadius: BorderRadius.circular(8.r),
+                            //     Color: Kform_border_twg,
+                            //     textColor: Kwhite,
+                            //     height: 40,
+                            //     width: double.infinity,
+                            //     label: "Submit",
+                            //     fontSize: kSixteenFont,
+                            //     fontWeight: kFW700,
+                            //     isLoading: false,
+                            //     onTap: () {}),
+                          ],
                         ),
                       ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          CustomFormFields(
-                            ontap: () {},
-                            enabled: true,
-                            //    controller: userprofilecontroller.editFirstNameController,
-                            labelColor: KText,
-                            obscureText: false,
-                            contentPadding: const EdgeInsets.symmetric(
-                                vertical: 16, horizontal: 8),
-                            fontSize: kFourteenFont,
-                            fontWeight: FontWeight.w500,
-                            hintText: "For example:Rock,Jazz,Pop",
-                            maxLines: 1,
-                            readOnly: false,
-                            label: "Music Type",
-                            validator: (value) {
-                              if (value!.isEmpty) {
-                                return 'Please Enter Type';
-                              }
-                              return null;
-                            },
-                          ),
-                          SizedBox(
-                            height: 20.h,
-                          ),
-                          CustomFormFields(
-                            ontap: () {
-                              //  Get.toNamed(kSearchPlaces);
-                            },
-                            enabled: true,
-                            //    controller: userprofilecontroller.editFirstNameController,
-                            labelColor: KText,
-                            obscureText: false,
-                            contentPadding: const EdgeInsets.symmetric(
-                                vertical: 16, horizontal: 8),
-                            fontSize: kFourteenFont,
-                            fontWeight: FontWeight.w500,
-                            hintText: "For example:Guitar,Piano",
-                            maxLines: 1,
-                            readOnly: false,
-                            label: "Content Source",
-                            validator: (value) {
-                              if (value!.isEmpty) {
-                                return 'Please Enter Source';
-                              }
-                              return null;
-                            },
-                          ),
-                          CustomButton(
-                              margin: EdgeInsets.only(top: 36.h),
-                              borderRadius: BorderRadius.circular(8.r),
-                              Color: Kform_border_twg,
-                              textColor: Kwhite,
-                              height: 40,
-                              width: double.infinity,
-                              label: "Submit",
-                              fontSize: kSixteenFont,
-                              fontWeight: kFW700,
-                              isLoading: false,
-                              onTap: () {}),
-                        ],
-                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ))),
     );
   }

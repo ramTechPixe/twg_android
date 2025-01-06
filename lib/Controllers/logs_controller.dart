@@ -7,6 +7,7 @@ import 'dart:convert';
 
 class LogsController extends GetxController {
   final apiService = Get.put(ApiService());
+  final dioapiService = Get.put(ApiServiceDio());
   ProfileController userprofilecontroller = Get.put(ProfileController());
   // var toDeletePostID = "".obs;
   var logsList = [].obs;
@@ -58,15 +59,50 @@ class LogsController extends GetxController {
 
   // multiple delete
 
-  Future<void> muliDeleteLogs(List list) async {
+  // Future<void> muliDeleteLogs(List list) async {
+  //   logPostDeleteLoading(true);
+
+  //   try {
+  //     var response = await apiService.postRequestMultiIDDeleteLogData(
+  //         endpoint: "delete-multiple-logs-api/", payload: list);
+
+  //     Map data = jsonDecode(response);
+  //     print(data);
+
+  //     if (data["status"] == "success") {
+  //       userLogsPost();
+  //       Fluttertoast.showToast(
+  //         msg: data["message"],
+  //       );
+  //       print("object");
+  //     } else if (data["message"] == "Invalid session token") {
+  //       Fluttertoast.showToast(
+  //         msg: data["message"],
+  //       );
+  //       Get.toNamed(kSignIns);
+  //     } else {
+  //       Fluttertoast.showToast(
+  //         msg: data["message"],
+  //       );
+  //     }
+  //   } catch (e) {
+  //     Fluttertoast.showToast(
+  //       msg: "Something went wrong",
+  //     );
+  //   } finally {
+  //     logPostDeleteLoading(false);
+  //   }
+  // }
+  // v2 delete muiltilogs
+  Future<void> muliDeleteLogs(List<String> list) async {
     logPostDeleteLoading(true);
 
     //  var payload = {"log_id": toDeletePostID.value};
     try {
-      var response = await apiService.postRequestMultiIDDeleteLogData(
+      var response = await dioapiService.postRequestMultiIDDeleteMultiLogs(
           endpoint: "delete-multiple-logs-api/", payload: list);
-// https://thewisguystech.com/delete-multiple-logs-api/
-      Map data = jsonDecode(response);
+//  https://thewisguystech.com/deletemulti-post-apis/
+      Map data = response;
       print(data);
 
       if (data["status"] == "success") {
@@ -195,12 +231,32 @@ class LogsController extends GetxController {
           }
           return log;
         }).toList();
+        print(processedLogs);
         ////////////////////////////////////////
+        // for (var i = 0; i < processedLogs.length; i++) {
+        //   String socialSource = processedLogs[i]["old_social_source"];
+        //   String extractedMessage = _extractMessage(socialSource);
+        //   processedLogs[i]["newMessage"] = extractedMessage;
+        // }
+        // v2
         for (var i = 0; i < processedLogs.length; i++) {
-          String socialSource = processedLogs[i]["old_social_source"];
-          String extractedMessage = _extractMessage(socialSource);
-          processedLogs[i]["newMessage"] = extractedMessage;
+          String? socialSource = processedLogs[i]["old_social_source"];
+          if (socialSource != null && socialSource.isNotEmpty) {
+            try {
+              String extractedMessage = _extractMessage(socialSource);
+              processedLogs[i]["newMessage"] = extractedMessage;
+            } catch (e) {
+              print("Error extracting message for log at index $i: $e");
+              processedLogs[i]["newMessage"] =
+                  ""; // Default value if extraction fails
+            }
+          } else {
+            print("Missing or empty old_social_source for log at index $i.");
+            processedLogs[i]["newMessage"] =
+                ""; // Default value for missing source
+          }
         }
+
         ///////////////////////////////////////////////////
 
         logsList.value = processedLogs;

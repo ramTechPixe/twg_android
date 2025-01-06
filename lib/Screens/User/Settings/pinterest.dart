@@ -101,6 +101,17 @@ class _PinterestSettingsState extends State<PinterestSettings> {
   }
 
   @override
+  void initState() {
+    setState(() {
+      settingscontroller.pinterestAppKeyController.text = "qwry";
+      settingscontroller.pinterestSecretController.text = "WDTJK";
+    });
+
+    // TODO: implement initState
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Center(
       child: Column(

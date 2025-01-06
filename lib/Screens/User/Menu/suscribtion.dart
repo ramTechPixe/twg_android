@@ -13,7 +13,7 @@ class _SuscribtionState extends State<Suscribtion> {
   SuscribtionController suscrbtioncontroller = Get.put(SuscribtionController());
   @override
   void initState() {
-    suscrbtioncontroller.userSuscription();
+    suscrbtioncontroller.userSuscriptionv2();
     // TODO: implement initState
     super.initState();
   }
@@ -45,7 +45,7 @@ class _SuscribtionState extends State<Suscribtion> {
             )),
         body: SingleChildScrollView(
             child: Obx(
-          () => suscrbtioncontroller.sucriptionLoading == true
+          () => suscrbtioncontroller.sucriptionLoadingv2 == true
               ? Center(
                   child: Column(
                     children: [
@@ -58,8 +58,8 @@ class _SuscribtionState extends State<Suscribtion> {
                     ],
                   ),
                 )
-              : suscrbtioncontroller.suscriptionData.isEmpty ||
-                      suscrbtioncontroller.suscriptionData == null
+              : suscrbtioncontroller.suscriptionDatav2.isEmpty ||
+                      suscrbtioncontroller.suscriptionDatav2 == null
                   ? Text(
                       "No Data",
                       style: GoogleFonts.poppins(
@@ -82,12 +82,15 @@ class _SuscribtionState extends State<Suscribtion> {
                                 ClipRRect(
                                   borderRadius: BorderRadius.circular(24.r),
                                   child: Image.asset(
-                                    suscrbtioncontroller
-                                                .suscriptionData["name"] ==
+                                    suscrbtioncontroller.suscriptionDatav2[
+                                                    "subscription_details"]
+                                                ["name"] ==
                                             "Gold"
                                         ? "assets/images/gold.png"
                                         : suscrbtioncontroller
-                                                    .suscriptionData["name"] ==
+                                                            .suscriptionDatav2[
+                                                        "subscription_details"]
+                                                    ["name"] ==
                                                 "Silver"
                                             ? "assets/images/silvers.png"
                                             : "assets/images/platinum.png",
@@ -130,8 +133,9 @@ class _SuscribtionState extends State<Suscribtion> {
                                             fontWeight: kFW400),
                                       ),
                                       Text(
-                                        suscrbtioncontroller
-                                                .suscriptionData["name"] ??
+                                        suscrbtioncontroller.suscriptionDatav2[
+                                                    "subscription_details"]
+                                                ["name"] ??
                                             "",
                                         textAlign: TextAlign.center,
                                         style: GoogleFonts.pacifico(
@@ -248,9 +252,14 @@ class _SuscribtionState extends State<Suscribtion> {
                                           height: 3.h,
                                         ),
                                         Text(
-                                          suscrbtioncontroller.suscriptionData[
-                                                  "customer_name"] ??
-                                              "no name",
+                                          suscrbtioncontroller
+                                                          .suscriptionDatav2[
+                                                      "subscription_details"]
+                                                  ["customer_name"] ??
+                                              "",
+                                          // suscrbtioncontroller.suscriptionData[
+                                          //         "customer_name"] ??
+                                          //     "no name",
 
                                           //  "Sri Ram",
                                           maxLines: 1,
@@ -285,9 +294,15 @@ class _SuscribtionState extends State<Suscribtion> {
                                         Text(
                                           "₹ " +
                                                   suscrbtioncontroller
-                                                          .suscriptionData[
-                                                      "price"] ??
-                                              "no price",
+                                                              .suscriptionDatav2[
+                                                          "subscription_details"]
+                                                      ["price"] ??
+                                              "",
+
+                                          //     suscrbtioncontroller
+                                          //             .suscriptionData[
+                                          //         "price"] ??
+                                          // "no price",
                                           // "₹9999",
                                           maxLines: 1,
                                           overflow: TextOverflow.ellipsis,
@@ -328,22 +343,29 @@ class _SuscribtionState extends State<Suscribtion> {
                                           height: 3.h,
                                         ),
                                         Text(
-                                          suscrbtioncontroller.suscriptionData[
-                                                      "membership_status"] ==
+                                          suscrbtioncontroller.suscriptionDatav2[
+                                                          "subscription_details"]
+                                                      ["membership_status"] ==
                                                   "1"
                                               ? "Active"
                                               : suscrbtioncontroller
-                                                              .suscriptionData[
+                                                                  .suscriptionDatav2[
+                                                              "subscription_details"]
+                                                          [
                                                           "membership_status"] ==
                                                       "0"
                                                   ? "pending"
                                                   : suscrbtioncontroller
-                                                                  .suscriptionData[
+                                                                      .suscriptionDatav2[
+                                                                  "subscription_details"]
+                                                              [
                                                               "membership_status"] ==
                                                           "2"
                                                       ? "Expired"
                                                       : suscrbtioncontroller
-                                                                      .suscriptionData[
+                                                                          .suscriptionDatav2[
+                                                                      "subscription_details"]
+                                                                  [
                                                                   "membership_status"] ==
                                                               "3"
                                                           ? "Cancelled"
@@ -378,8 +400,9 @@ class _SuscribtionState extends State<Suscribtion> {
                                           height: 3.h,
                                         ),
                                         Text(
-                                          suscrbtioncontroller.suscriptionData[
-                                                      "recurring"] ==
+                                          suscrbtioncontroller.suscriptionDatav2[
+                                                          "subscription_details"]
+                                                      ["recurring"] ==
                                                   "0"
                                               ? "No"
                                               : "Yes",
@@ -420,10 +443,15 @@ class _SuscribtionState extends State<Suscribtion> {
                                         height: 3.h,
                                       ),
                                       Text(
-                                        //   "Nov 25, 2024",
-                                        suscrbtioncontroller.suscriptionData[
-                                                "expiration_date"] ??
+                                        suscrbtioncontroller.suscriptionDatav2[
+                                                    "subscription_details"]
+                                                ["expiration_date"] ??
                                             "",
+
+                                        //   "Nov 25, 2024",
+                                        // suscrbtioncontroller.suscriptionData[
+                                        //         "expiration_date"] ??
+                                        //     "",
                                         maxLines: 1,
                                         overflow: TextOverflow.ellipsis,
                                         style: GoogleFonts.poppins(
@@ -564,51 +592,6 @@ class _SuscribtionState extends State<Suscribtion> {
                                     );
                                   }).toList(),
                                 )
-                                // Wrap(
-                                //   alignment: WrapAlignment.center,
-                                //   spacing: 12,
-                                //   runSpacing: 8,
-                                //   children: List.generate(10, (index) {
-                                //     return Stack(
-                                //       children: [
-                                //         Container(
-                                //           height: 42,
-                                //           width: 52,
-                                //           margin: EdgeInsets.only(
-                                //               top: 12, right: 12),
-                                //           decoration: BoxDecoration(
-                                //             color: Kwhite,
-                                //             border:
-                                //                 Border.all(color: Colors.black),
-                                //             borderRadius:
-                                //                 BorderRadius.circular(2),
-                                //           ),
-                                //           child: Image.asset(
-                                //             "assets/images/fb_logo.png",
-                                //             height: 25,
-                                //             width: 25,
-                                //           ),
-                                //         ),
-                                //         Positioned(
-                                //           top: 0,
-                                //           right: 0,
-                                //           child: CircleAvatar(
-                                //             backgroundColor: Kblue_twg,
-                                //             radius: 12,
-                                //             child: Text(
-                                //               "10",
-                                //               style: GoogleFonts.poppins(
-                                //                 fontSize: 10,
-                                //                 color: Kwhite,
-                                //                 fontWeight: FontWeight.w400,
-                                //               ),
-                                //             ),
-                                //           ),
-                                //         ),
-                                //       ],
-                                //     );
-                                //   }).toList(),
-                                // )
                               ],
                             ),
                           ),
@@ -684,9 +667,14 @@ class _SuscribtionState extends State<Suscribtion> {
                                               ),
                                               Text(
                                                 suscrbtioncontroller
-                                                            .suscriptionData[
-                                                        "name"] ??
+                                                                .suscriptionDatav2[
+                                                            "subscription_details"]
+                                                        ["name"] ??
                                                     "",
+                                                // suscrbtioncontroller
+                                                //             .suscriptionData[
+                                                //         "name"] ??
+                                                //     "",
                                                 maxLines: 1,
                                                 overflow: TextOverflow.ellipsis,
                                                 style: GoogleFonts.poppins(
@@ -721,9 +709,15 @@ class _SuscribtionState extends State<Suscribtion> {
                                               ),
                                               Text(
                                                 suscrbtioncontroller
-                                                            .suscriptionData[
-                                                        "gateway"] ??
+                                                                .suscriptionDatav2[
+                                                            "subscription_details"]
+                                                        ["gateway"] ??
                                                     "",
+
+                                                // suscrbtioncontroller
+                                                //             .suscriptionData[
+                                                //         "gateway"] ??
+                                                //     "",
                                                 maxLines: 1,
                                                 overflow: TextOverflow.ellipsis,
                                                 style: GoogleFonts.poppins(
@@ -766,9 +760,15 @@ class _SuscribtionState extends State<Suscribtion> {
                                               ),
                                               Text(
                                                 suscrbtioncontroller
-                                                            .suscriptionData[
-                                                        "subscription_id"] ??
+                                                                .suscriptionDatav2[
+                                                            "subscription_details"]
+                                                        ["subscription_id"] ??
                                                     "",
+
+                                                // suscrbtioncontroller
+                                                //             .suscriptionData[
+                                                //         "subscription_id"] ??
+                                                //     "",
 
                                                 // "AC1",
                                                 maxLines: 1,
@@ -803,7 +803,14 @@ class _SuscribtionState extends State<Suscribtion> {
                                                 height: 3.h,
                                               ),
                                               Text(
-                                                "Completed",
+                                                suscrbtioncontroller.suscriptionDatav2[
+                                                                "subscription_details"]
+                                                            ["status"] ==
+                                                        "1"
+                                                    ? "Completed"
+                                                    : "InComplete",
+
+                                                // "Completed",
                                                 maxLines: 1,
                                                 overflow: TextOverflow.ellipsis,
                                                 style: GoogleFonts.poppins(
@@ -845,7 +852,12 @@ class _SuscribtionState extends State<Suscribtion> {
                                                 height: 3.h,
                                               ),
                                               Text(
-                                                "₹9999",
+                                                suscrbtioncontroller
+                                                                .suscriptionDatav2[
+                                                            "subscription_details"]
+                                                        ["price"] ??
+                                                    "",
+                                                // "₹9999",
                                                 maxLines: 1,
                                                 overflow: TextOverflow.ellipsis,
                                                 style: GoogleFonts.poppins(
@@ -878,7 +890,13 @@ class _SuscribtionState extends State<Suscribtion> {
                                                 height: 3.h,
                                               ),
                                               Text(
-                                                "Oct 26, 2024 9:30 am",
+                                                suscrbtioncontroller
+                                                                .suscriptionDatav2[
+                                                            "subscription_details"]
+                                                        ["expiration_date"] ??
+                                                    "",
+
+                                                // "Oct 26, 2024 9:30 am",
                                                 maxLines: 1,
                                                 overflow: TextOverflow.ellipsis,
                                                 style: GoogleFonts.poppins(

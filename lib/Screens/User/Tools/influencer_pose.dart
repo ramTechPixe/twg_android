@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:shimmer/shimmer.dart';
 import 'package:twg/untils/export_file.dart';
 
 class DigitalInfluencerPose extends StatefulWidget {
@@ -17,6 +18,9 @@ class _DigitalInfluencerPoseState extends State<DigitalInfluencerPose> {
     'Influencer-female-age:30'
   ];
   AuthController authcontroller = Get.put(AuthController());
+  MenusController menuscontroller = Get.put(MenusController());
+  ProfileController userprofilecontroller = Get.put(ProfileController());
+
   String? selectedUserValue;
   bool showimagenullMessage = false;
   File? selectedImage;
@@ -49,6 +53,7 @@ class _DigitalInfluencerPoseState extends State<DigitalInfluencerPose> {
         selectedImage = File(image.path);
         base64Image = base64Encode(selectedImage!.readAsBytesSync());
         // profilecontroller.editProfilePicture(selectedImage!); //
+        menuscontroller.updateSelectedImage(selectedImage);
         print(selectedImage!.readAsBytesSync().lengthInBytes);
         final kb = selectedImage!.readAsBytesSync().lengthInBytes / 1024;
         print(kb);
@@ -58,6 +63,13 @@ class _DigitalInfluencerPoseState extends State<DigitalInfluencerPose> {
         showimagenullMessage = false;
       });
     }
+  }
+
+  @override
+  void initState() {
+    menuscontroller.getDigitalInfluentsAPI();
+    // TODO: implement initState
+    super.initState();
   }
 
   @override
@@ -86,7 +98,7 @@ class _DigitalInfluencerPoseState extends State<DigitalInfluencerPose> {
                   color: Kwhite, fontSize: kTwentyFont, fontWeight: kFW600),
             )),
         body: SingleChildScrollView(
-            child: Container(
+            child: Obx(() => Container(
                 margin: EdgeInsets.all(16.r),
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -216,8 +228,9 @@ class _DigitalInfluencerPoseState extends State<DigitalInfluencerPose> {
                                             color: KTextgery.withOpacity(0.5),
                                           ),
                                         ),
-                                        items: CompanyList.map(
-                                            (item) => DropdownMenuItem<String>(
+                                        items: menuscontroller.dropdownList
+                                            .map((item) =>
+                                                DropdownMenuItem<String>(
                                                   value: item,
                                                   child: Text(
                                                     item,
@@ -225,7 +238,8 @@ class _DigitalInfluencerPoseState extends State<DigitalInfluencerPose> {
                                                       fontSize: 14,
                                                     ),
                                                   ),
-                                                )).toList(),
+                                                ))
+                                            .toList(),
                                         validator: (value) {
                                           if (value == null) {
                                             return 'Please select Form';
@@ -233,12 +247,18 @@ class _DigitalInfluencerPoseState extends State<DigitalInfluencerPose> {
                                           return null;
                                         },
                                         onChanged: (value) {
-                                          setState(() {
-                                            selectedUserValue =
-                                                value.toString();
-                                            setState(() {});
-                                          });
+                                          if (value != null) {
+                                            menuscontroller
+                                                .updateSelectedItem(value);
+                                          }
                                         },
+                                        // onChanged: (value) {
+                                        //   setState(() {
+                                        //     selectedUserValue =
+                                        //         value.toString();
+                                        //     setState(() {});
+                                        //   });
+                                        // },
                                         onSaved: (value) {
                                           selectedUserValue = value.toString();
                                           print(selectedUserValue);
@@ -267,44 +287,122 @@ class _DigitalInfluencerPoseState extends State<DigitalInfluencerPose> {
                                         ),
                                       ),
                                     ),
-                                    SizedBox(
-                                      height: 20.h,
-                                    ),
-                                    Text(
-                                      "Your Digital influencer",
-                                      style: GoogleFonts.poppins(
-                                          color: Kform_border_twg,
-                                          fontSize: kTwentyFont,
-                                          fontWeight: kFW500),
-                                    ),
-                                    Container(
-                                      margin: EdgeInsets.only(
-                                          top: 10.h, bottom: 15.h),
-                                      padding: EdgeInsets.all(8),
-                                      // alignment: Alignment.center,
-                                      decoration: BoxDecoration(
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color: kblack.withOpacity(0.3),
-                                            blurRadius: 1.r,
-                                            offset: Offset(1, 1),
-                                            spreadRadius: 1.r,
-                                          )
-                                        ],
-                                        color: Kwhite,
-                                        borderRadius:
-                                            BorderRadius.circular(4.r),
-                                      ),
-                                      child: ClipRRect(
-                                        borderRadius: BorderRadius.circular(8),
-                                        child: Image.asset(
-                                          "assets/images/ai_lady.png",
-                                          height: 200.h,
-                                          fit: BoxFit.fill,
-                                          width: double.infinity,
-                                        ),
-                                      ),
-                                    ),
+                                    menuscontroller.selectedImageUrl.isEmpty
+                                        ? SizedBox()
+                                        : Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              SizedBox(
+                                                height: 20.h,
+                                              ),
+                                              Text(
+                                                "Your Digital influencer",
+                                                style: GoogleFonts.poppins(
+                                                    color: Kform_border_twg,
+                                                    fontSize: kTwentyFont,
+                                                    fontWeight: kFW500),
+                                              ),
+                                              Container(
+                                                  margin: EdgeInsets.only(
+                                                      top: 10.h, bottom: 15.h),
+                                                  padding: EdgeInsets.all(8),
+                                                  // alignment: Alignment.center,
+                                                  decoration: BoxDecoration(
+                                                    boxShadow: [
+                                                      BoxShadow(
+                                                        color: kblack
+                                                            .withOpacity(0.3),
+                                                        blurRadius: 1.r,
+                                                        offset: Offset(1, 1),
+                                                        spreadRadius: 1.r,
+                                                      )
+                                                    ],
+                                                    color: Kwhite,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            4.r),
+                                                  ),
+                                                  child: ClipRRect(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            8),
+                                                    child: CachedNetworkImage(
+                                                      imageUrl: menuscontroller
+                                                          .selectedImageUrl
+                                                          .value,
+                                                      // multiPostcontroller
+                                                      //         .mutiPostList[
+                                                      //     index]["img"],
+                                                      placeholder:
+                                                          (context, url) =>
+                                                              SizedBox(
+                                                        height: 200.h,
+                                                        width: double.infinity,
+                                                        child:
+                                                            Shimmer.fromColors(
+                                                          baseColor:
+                                                              Colors.black12,
+                                                          highlightColor: Colors
+                                                              .white
+                                                              .withOpacity(0.5),
+                                                          child: Container(
+                                                            decoration:
+                                                                BoxDecoration(
+                                                              color: Kwhite
+                                                                  .withOpacity(
+                                                                      0.5),
+                                                            ),
+                                                            height: 200.h,
+                                                            width:
+                                                                double.infinity,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      errorWidget: (context,
+                                                              url, error) =>
+                                                          Image.asset(
+                                                        // kBaseImageUrl
+                                                        "assets/images/multipost_image.png",
+                                                        height: 200.h,
+                                                        width: double.infinity,
+                                                        fit: BoxFit.fill,
+                                                        // width: 25.h,
+                                                      ),
+                                                      height: 200.h,
+                                                      width: double.infinity,
+                                                      fit: BoxFit.fill,
+                                                    ),
+                                                    //   Image.asset(
+                                                    //     "assets/images/ai_lady.png",
+                                                    //     height: 200.h,
+                                                    //     fit: BoxFit.fill,
+                                                    //     width: double.infinity,
+                                                    //   ),
+                                                    // ),
+                                                  )),
+                                              // CachedNetworkImage(
+                                              //   imageUrl: menuscontroller
+                                              //       .selectedImageUrl.value,
+                                              //   height: 200,
+                                              //   width: 200,
+                                              //   fit: BoxFit.cover,
+                                              //   placeholder: (context, url) =>
+                                              //       CircularProgressIndicator(),
+                                              //   errorWidget:
+                                              //       (context, url, error) =>
+                                              //           Icon(Icons.error),
+                                              // ),
+                                              // SizedBox(height: 10),
+                                              // Text(
+                                              //   "Influencer ID: ${menuscontroller.selectedInfluencerId.value}",
+                                              //   style: GoogleFonts.poppins(
+                                              //       fontSize: 16),
+                                              // ),
+                                              Divider()
+                                            ],
+                                          ),
+
                                     Container(
                                       decoration: BoxDecoration(
                                         boxShadow: [
@@ -474,20 +572,255 @@ class _DigitalInfluencerPoseState extends State<DigitalInfluencerPose> {
                                             ),
                                           )),
                                     ),
-                                    CustomButton(
-                                        margin: EdgeInsets.only(top: 36.h),
-                                        borderRadius:
-                                            BorderRadius.circular(8.r),
-                                        Color: Kform_border_twg,
-                                        textColor: Kwhite,
-                                        height: 40,
-                                        width: double.infinity,
-                                        label: "Submit",
-                                        fontSize: kSixteenFont,
-                                        fontWeight: kFW700,
-                                        isLoading: false,
-                                        onTap: () {}),
+                                    Obx(
+                                      () => menuscontroller
+                                                  .babuinfluncerLoading ==
+                                              true
+                                          ? Center(
+                                              child: CircularProgressIndicator(
+                                                color: Kform_border_twg,
+                                              ),
+                                            )
+                                          : CustomButton(
+                                              margin:
+                                                  EdgeInsets.only(top: 36.h),
+                                              borderRadius:
+                                                  BorderRadius.circular(8.r),
+                                              Color: Kform_border_twg,
+                                              textColor: Kwhite,
+                                              height: 40,
+                                              width: double.infinity,
+                                              label: "Submit",
+                                              fontSize: kSixteenFont,
+                                              fontWeight: kFW700,
+                                              isLoading: false,
+                                              onTap: () {
+                                                var payload = {
+                                                  // "user_email": authcontroller
+                                                  //     .UserEmailSignInController.text,
+                                                  // "user_password": authcontroller
+                                                  //     .UserEmailPasswordController.text
+                                                  'user_id':
+                                                      userprofilecontroller
+                                                              .profileData[
+                                                          "user_details"]["id"],
+                                                  'influencer_id':
+                                                      "${menuscontroller.selectedInfluencerId.value}"
+                                                };
+
+                                                // if (_formKey.currentState!.validate()) {
+                                                //   authcontroller.userSignIn(payload);
+                                                // }
+
+                                                menuscontroller
+                                                    .useCreateInfluencer(
+                                                        payload);
+
+                                                // Get.toNamed(kNavigation);
+                                              }),
+                                    ),
+                                    // CustomButton(
+                                    //     margin: EdgeInsets.only(top: 36.h),
+                                    //     borderRadius:
+                                    //         BorderRadius.circular(8.r),
+                                    //     Color: Kform_border_twg,
+                                    //     textColor: Kwhite,
+                                    //     height: 40,
+                                    //     width: double.infinity,
+                                    //     label: "Submit",
+                                    //     fontSize: kSixteenFont,
+                                    //     fontWeight: kFW700,
+                                    //     isLoading: false,
+                                    //     onTap: () {}),
                                   ]))),
-                    ]))));
+                      //
+                      menuscontroller.poseData["image_process_response"] == null
+                          ? SizedBox()
+                          : menuscontroller.poseData["image_process_response"]
+                                      ["result_url"] ==
+                                  null
+                              // menuscontroller.selectedImageUrl.isEmpty
+                              ? SizedBox()
+                              : Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    SizedBox(
+                                      height: 20.h,
+                                    ),
+                                    Text(
+                                      "Your Result",
+                                      style: GoogleFonts.poppins(
+                                          color: Kform_border_twg,
+                                          fontSize: kTwentyFont,
+                                          fontWeight: kFW500),
+                                    ),
+                                    Container(
+                                        margin: EdgeInsets.only(
+                                            top: 10.h, bottom: 15.h),
+                                        padding: EdgeInsets.all(8),
+                                        // alignment: Alignment.center,
+                                        decoration: BoxDecoration(
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color: kblack.withOpacity(0.3),
+                                              blurRadius: 1.r,
+                                              offset: Offset(1, 1),
+                                              spreadRadius: 1.r,
+                                            )
+                                          ],
+                                          color: Kwhite,
+                                          borderRadius:
+                                              BorderRadius.circular(4.r),
+                                        ),
+                                        child: ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(8),
+                                          child: CachedNetworkImage(
+                                            imageUrl: menuscontroller.poseData[
+                                                    "image_process_response"]
+                                                ["result_url"],
+                                            //  menuscontroller
+                                            //     .selectedImageUrl
+                                            //     .value,
+                                            // multiPostcontroller
+                                            //         .mutiPostList[
+                                            //     index]["img"],
+                                            placeholder: (context, url) =>
+                                                SizedBox(
+                                              height: 200.h,
+                                              width: double.infinity,
+                                              child: Shimmer.fromColors(
+                                                baseColor: Colors.black12,
+                                                highlightColor: Colors.white
+                                                    .withOpacity(0.5),
+                                                child: Container(
+                                                  decoration: BoxDecoration(
+                                                    color:
+                                                        Kwhite.withOpacity(0.5),
+                                                  ),
+                                                  height: 200.h,
+                                                  width: double.infinity,
+                                                ),
+                                              ),
+                                            ),
+                                            errorWidget:
+                                                (context, url, error) =>
+                                                    Image.asset(
+                                              // kBaseImageUrl
+                                              "assets/images/multipost_image.png",
+                                              height: 200.h,
+                                              width: double.infinity,
+                                              fit: BoxFit.fill,
+                                              // width: 25.h,
+                                            ),
+                                            height: 200.h,
+                                            width: double.infinity,
+                                            fit: BoxFit.cover,
+                                          ),
+                                          //     Image.asset(
+                                          //     "assets/images/ai_lady.png",
+                                          //     height: 200.h,
+                                          //     fit: BoxFit.fill,
+                                          //     width: double.infinity,
+                                          //   ),
+                                          // ),
+                                        )),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        CustomButton(
+                                          margin: EdgeInsets.only(top: 36.h),
+                                          borderRadius:
+                                              BorderRadius.circular(8.r),
+                                          Color: Kform_border_twg,
+                                          textColor: Kwhite,
+                                          height: 40,
+                                          width: 150.w,
+                                          label: "Save",
+                                          fontSize: kSixteenFont,
+                                          fontWeight: kFW700,
+                                          isLoading: false,
+                                          onTap: () {
+                                            _launchURL(menuscontroller.poseData[
+                                                        "image_process_response"]
+                                                    ["result_url"] ??
+                                                "");
+                                          },
+                                        ),
+
+                                        // regenaret
+                                        Obx(
+                                          () => menuscontroller
+                                                      .babuinfluncerLoading ==
+                                                  true
+                                              ? Center(
+                                                  child:
+                                                      CircularProgressIndicator(
+                                                    color: Kform_border_twg,
+                                                  ),
+                                                )
+                                              : CustomButton(
+                                                  margin: EdgeInsets.only(
+                                                      top: 36.h),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          8.r),
+                                                  Color: KOrange,
+                                                  textColor: Kwhite,
+                                                  height: 40,
+                                                  width: 150.w,
+                                                  label: "Regenerate",
+                                                  fontSize: kSixteenFont,
+                                                  fontWeight: kFW700,
+                                                  isLoading: false,
+                                                  onTap: () {
+                                                    menuscontroller
+                                                        .useCreateInfluencer(
+                                                            menuscontroller
+                                                                .poseDigitalPayload
+                                                                // .createDigitalPayload
+                                                                .value);
+                                                    //
+
+                                                    // if (_formKey.currentState!.validate()) {
+                                                    //   authcontroller.userSignIn(payload);
+                                                    // }
+
+                                                    // Get.toNamed(kNavigation);
+                                                  }),
+                                        ),
+                                      ],
+                                    ),
+
+                                    // CachedNetworkImage(
+                                    //   imageUrl: menuscontroller
+                                    //       .selectedImageUrl.value,
+                                    //   height: 200,
+                                    //   width: 200,
+                                    //   fit: BoxFit.cover,
+                                    //   placeholder: (context, url) =>
+                                    //       CircularProgressIndicator(),
+                                    //   errorWidget:
+                                    //       (context, url, error) =>
+                                    //           Icon(Icons.error),
+                                    // ),
+                                    // SizedBox(height: 10),
+                                    // Text(
+                                    //   "Influencer ID: ${menuscontroller.selectedInfluencerId.value}",
+                                    //   style: GoogleFonts.poppins(
+                                    //       fontSize: 16),
+                                    // ),
+                                    Divider(),
+                                  ],
+                                ),
+                    ])))));
+  }
+
+  _launchURL(String web) async {
+    final Uri url = Uri.parse(web);
+    if (!await launchUrl(url)) {
+      throw Exception('Could not launch $url');
+    }
   }
 }

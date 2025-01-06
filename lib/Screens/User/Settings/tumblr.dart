@@ -103,6 +103,17 @@ class _TumblrState extends State<Tumblr> {
   }
 
   @override
+  void initState() {
+    setState(() {
+      settingscontroller.tumblerConsumerKeyController.text = "rytuyu";
+
+      settingscontroller.tumblerSecretController.text = "uiujyutiu";
+    });
+    // TODO: implement initState
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Center(
       child: Column(

@@ -105,6 +105,17 @@ class _YouTubeState extends State<YouTube> {
   }
 
   @override
+  void initState() {
+    setState(() {
+      settingscontroller.youtubeAPIKeyController.text = '098yew';
+
+      settingscontroller.youtubeAppSecretController.text = '456il;';
+    });
+
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Center(
       child: Column(
