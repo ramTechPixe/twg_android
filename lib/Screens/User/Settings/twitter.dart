@@ -77,11 +77,13 @@ class _TwitterSettingsState extends State<TwitterSettings> {
       // });
       setState(() {
         isautopostingSwitched = true;
+        UserSimplePreferences.twitterStatus(twitterStatus: true);
         //  _isfbExpandCard = true;
       });
     } else {
       setState(() {
         isautopostingSwitched = false;
+        UserSimplePreferences.twitterStatus(twitterStatus: false);
         //   _isfbExpandCard = false;
       });
     }
@@ -101,6 +103,21 @@ class _TwitterSettingsState extends State<TwitterSettings> {
   }
 
   bool passwordVisible = true;
+  @override
+  void initState() {
+    setState(() {
+      settingscontroller.twitterAPIKeyController.text =
+          "zDfobV8eCqHz4q7BFSFmGnEAR";
+      settingscontroller.twitterAPISecretController.text =
+          "O6x6CiDRVua6yFkras3qsntwTkirSjHyoPPmdBbLb2qMBf0HHc";
+      settingscontroller.twitterAceesTokenController.text =
+          "1475719265730777092-jRMhlZAR9hfLc6DVhX98IzgRWtukG3";
+      settingscontroller.twitterAceesTokenSecretController.text =
+          "oyHRqkn3pTxuX8kNeNRP47BCLita41MVjsZeZpjhbpsXl";
+    });
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -140,7 +157,9 @@ class _TwitterSettingsState extends State<TwitterSettings> {
                             // });
                             toggleautoPostSwitch(value);
                           },
-                          value: isautopostingSwitched,
+                          value: UserSimplePreferences.getTwitterStatus() ??
+                              isautopostingSwitched,
+                          //  value: isautopostingSwitched,
                           materialTapTargetSize:
                               MaterialTapTargetSize.shrinkWrap,
                           activeColor: KLightDust_twg,

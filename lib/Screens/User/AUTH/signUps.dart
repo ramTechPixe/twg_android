@@ -129,6 +129,8 @@ class _SignUPSState extends State<SignUPS> {
                         ontap: () {
                           //  Get.toNamed(kSearchPlaces);
                         },
+                        controller:
+                            authcontroller.UserFirstNameSignUpController,
                         enabled: true,
                         labelColor: KText,
                         obscureText: false,
@@ -154,6 +156,7 @@ class _SignUPSState extends State<SignUPS> {
                         ontap: () {
                           //  Get.toNamed(kSearchPlaces);
                         },
+                        controller: authcontroller.UserLastNameSignUpController,
                         enabled: true,
                         labelColor: KText,
                         obscureText: false,
@@ -179,6 +182,7 @@ class _SignUPSState extends State<SignUPS> {
                         ontap: () {
                           //  Get.toNamed(kSearchPlaces);
                         },
+                        controller: authcontroller.UserEmailSignUpController,
                         enabled: true,
                         labelColor: KText,
                         obscureText: false,
@@ -250,6 +254,8 @@ class _SignUPSState extends State<SignUPS> {
                             TextFormField(
                               cursorColor: Kform_border_twg,
                               obscureText: passwordVisible,
+                              controller:
+                                  authcontroller.UserPasswordSignUpController,
                               obscuringCharacter: '*',
                               enabled: true,
                               readOnly: false,
@@ -444,6 +450,8 @@ class _SignUPSState extends State<SignUPS> {
                           cursorColor: Kform_border_twg,
                           obscureText: confirmpasswordVisible,
                           obscuringCharacter: '*',
+                          controller:
+                              authcontroller.UserRepasswordSignUpController,
                           enabled: true,
                           readOnly: false,
                           style: GoogleFonts.poppins(
@@ -635,15 +643,20 @@ class _SignUPSState extends State<SignUPS> {
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Text(
-                                        authcontroller
-                                            .selectedSuscribtionData["name"],
-                                        textAlign: TextAlign.center,
-                                        style: GoogleFonts.poppins(
-                                            fontSize: 24.sp,
-                                            //  letterSpacing: 1,
-                                            color: Kwhite,
-                                            fontWeight: kFW600),
+                                      SizedBox(
+                                        width: 150.w,
+                                        child: Text(
+                                          authcontroller
+                                              .selectedSuscribtionData["name"],
+                                          textAlign: TextAlign.center,
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: GoogleFonts.poppins(
+                                              fontSize: 24.sp,
+                                              //  letterSpacing: 1,
+                                              color: Kwhite,
+                                              fontWeight: kFW600),
+                                        ),
                                       ),
                                       Stack(
                                         children: [
@@ -820,7 +833,7 @@ class _SignUPSState extends State<SignUPS> {
                                       );
                                     }).toList(),
                                   )
-                                 
+
                                   // Wrap(
                                   //   alignment: WrapAlignment.center,
                                   //   spacing: 12,
@@ -1370,21 +1383,69 @@ class _SignUPSState extends State<SignUPS> {
                           ],
                         ),
                       ),
+                      Obx(
+                        () => authcontroller.razorPayIdRequestLoading == true
+                            ? Center(
+                                child: CircularProgressIndicator(
+                                  color: Kform_border_twg,
+                                ),
+                              )
+                            : CustomButton(
+                                margin: EdgeInsets.only(top: 36.h),
+                                borderRadius: BorderRadius.circular(8.r),
+                                Color: Kform_border_twg,
+                                textColor: Kwhite,
+                                height: 40,
+                                width: double.infinity,
+                                label: "Register",
+                                fontSize: kSixteenFont,
+                                fontWeight: kFW700,
+                                isLoading: false,
+                                onTap: () {
+                                  var payload = {
+                                    "sap_plan": authcontroller
+                                            .selectedSuscribtionData["id"] ??
+                                        "",
+                                    // "sap_plan": authcontroller
+                                    //     .UserEmailSignInController.text,
+                                  };
+                                  if (authcontroller.selectedSuscribtionData[
+                                              "name"] ==
+                                          null &&
+                                      authcontroller.selectedSuscribtionData[
+                                              "price"] ==
+                                          null) {
+                                    Fluttertoast.showToast(
+                                      msg: "please select Suscribtion",
+                                    );
+                                  } else {
+                                    authcontroller
+                                        .getrazorPayIdRequest(payload);
+                                  }
+                                  // if (_formKey.currentState!.validate()) {
+                                  //   authcontroller.userSignIn(payload);
+                                  // }
+                                  // if (_formKey.currentState!.validate()) {
+                                  // authcontroller.getrazorPayIdRequest(payload);
+                                  // }
+                                  // Get.toNamed(kNavigation);
+                                }),
+                      ),
                       //////////////
-                      CustomButton(
-                          margin: EdgeInsets.only(top: 36.h),
-                          borderRadius: BorderRadius.circular(8.r),
-                          Color: Kform_border_twg,
-                          textColor: Kwhite,
-                          height: 40,
-                          width: double.infinity,
-                          label: "Register",
-                          fontSize: kSixteenFont,
-                          fontWeight: kFW700,
-                          isLoading: false,
-                          onTap: () {
-                            // Get.back();
-                          }),
+                      // CustomButton(
+                      //     margin: EdgeInsets.only(top: 36.h),
+                      //     borderRadius: BorderRadius.circular(8.r),
+                      //     Color: Kform_border_twg,
+                      //     textColor: Kwhite,
+                      //     height: 40,
+                      //     width: double.infinity,
+                      //     label: "Register",
+                      //     fontSize: kSixteenFont,
+                      //     fontWeight: kFW700,
+                      //     isLoading: false,
+                      //     onTap: () {
+                      //       // Get.back();
+                      //     }),
                       SizedBox(
                         height: 20.h,
                       ),

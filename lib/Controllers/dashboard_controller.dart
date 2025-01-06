@@ -23,8 +23,12 @@ class DashboardController extends GetxController {
   var selectedAllItem = "".obs;
   var selectedAnaliyics = "All".obs;
   var selectedSocialMediaGraph = "".obs;
+  var selectedSocialMediaType = "".obs;
+  var selectedStartDate = "".obs;
+  var selectedEndDate = "".obs;
   var isCustomSelected = false.obs;
   var autoPostUploadType = "image".obs;
+  var semiAuotPostMediaType = "enableimage".obs;
   var tumblerPostContentType = "snippets".obs;
   //
   var selectappmethidType = "appmethod".obs;
@@ -38,7 +42,7 @@ class DashboardController extends GetxController {
   void setSelectedImage(File? imageFile) {
     selectedImageobss.value = imageFile;
   }
-
+// selectedImageobss.value
   // Forvideo
 
   Rxn<File> selectedVideo = Rxn<File>(); // Store selected video file

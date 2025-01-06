@@ -41,11 +41,13 @@ class _FacebbokSettingsState extends State<FacebbokSettings> {
       // });
       setState(() {
         isautopostingSwitched = true;
+        UserSimplePreferences.facebookStatus(fbStatus: true);
         //  _isfbExpandCard = true;
       });
     } else {
       setState(() {
         isautopostingSwitched = false;
+        UserSimplePreferences.facebookStatus(fbStatus: false);
         //   _isfbExpandCard = false;
       });
     }
@@ -106,7 +108,9 @@ class _FacebbokSettingsState extends State<FacebbokSettings> {
                             // });
                             toggleautoPostSwitch(value);
                           },
-                          value: isautopostingSwitched,
+                          value: UserSimplePreferences.getfacebookStatus() ??
+                              isautopostingSwitched,
+                          //  value: isautopostingSwitched,
                           materialTapTargetSize:
                               MaterialTapTargetSize.shrinkWrap,
                           activeColor: KLightDust_twg,

@@ -250,7 +250,8 @@ class _PreviewScreenState extends State<PreviewScreen> {
                                 height: 10.h,
                               ),
                               Text(
-                                authcontroller.autoPostMessageController.text,
+                                semicontroller.autoPostMessageController.text,
+                                //  authcontroller.autoPostMessageController.text,
                                 //  "Lorem ipsum dolor sit amet consectetur. In massa ipsum duis sem velit venenatis nisl.massa ipsum duis sem velit venenatis nisl",
                                 style: GoogleFonts.poppins(
                                     color: kblack,
@@ -460,7 +461,7 @@ class _PreviewScreenState extends State<PreviewScreen> {
                                     height: 10.h,
                                   ),
                                   Text(
-                                    authcontroller
+                                    semicontroller
                                         .autoPostMessageController.text,
                                     //  "Lorem ipsum dolor sit amet consectetur. In massa ipsum duis sem velit venenatis nisl.massa ipsum duis sem velit venenatis nisl",
                                     style: GoogleFonts.poppins(
@@ -689,7 +690,7 @@ class _PreviewScreenState extends State<PreviewScreen> {
                                         height: 10.h,
                                       ),
                                       Text(
-                                        authcontroller
+                                        semicontroller
                                             .autoPostMessageController.text,
                                         //   "Lorem ipsum dolor sit amet consectetur. In massa ipsum duis sem velit venenatis nisl.massa ipsum duis sem velit venenatis nisl",
                                         style: GoogleFonts.poppins(
@@ -1001,7 +1002,7 @@ class _PreviewScreenState extends State<PreviewScreen> {
                                             height: 6.h,
                                           ),
                                           Text(
-                                            authcontroller
+                                            semicontroller
                                                 .autoPostMessageController.text,
                                             //   "Lorem ipsum dolor sit amet consectetur. In massa ipsum duis sem velit venenatis nisl.massa ipsum duis sem velit venenatis nisl",
                                             style: GoogleFonts.poppins(

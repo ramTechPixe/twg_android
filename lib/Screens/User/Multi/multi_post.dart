@@ -138,9 +138,10 @@ class _MultiPostScreenState extends State<MultiPostScreen> {
                         //                                   apiController.assetsData = apiController.OriginalassetsData;
                         // apiController.assetsData = apiController.assetsDatafilter;
                         multiPostcontroller.mutiPostList.value =
-                            multiPostcontroller
-                                .filtermutiPostList
-                                .where((element) => element["message"]
+                            multiPostcontroller.filtermutiPostList
+                                .where((element) => element["body"]
+                                    //
+                                    // .where((element) => element["message"]
                                     .toString()
                                     .toLowerCase()
                                     .contains(value.toString().toLowerCase()))
@@ -171,31 +172,31 @@ class _MultiPostScreenState extends State<MultiPostScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Row(
-                        children: [
-                          Text(
-                            "Page : ",
-                            style: GoogleFonts.poppins(
-                                fontSize: kFourteenFont,
-                                color: KdarkText,
-                                fontWeight: kFW400),
-                          ),
-                          Text(
-                            "${multiPostcontroller.currentPage} of ",
-                            style: GoogleFonts.poppins(
-                                fontSize: kFourteenFont,
-                                color: KdarkText,
-                                fontWeight: kFW400),
-                          ),
-                          Text(
-                            "${multiPostcontroller.totalPage}",
-                            style: GoogleFonts.poppins(
-                                fontSize: kFourteenFont,
-                                color: KdarkText,
-                                fontWeight: kFW400),
-                          ),
-                        ],
-                      ),
+                      // Row(
+                      //   children: [
+                      //     Text(
+                      //       "Page : ",
+                      //       style: GoogleFonts.poppins(
+                      //           fontSize: kFourteenFont,
+                      //           color: KdarkText,
+                      //           fontWeight: kFW400),
+                      //     ),
+                      //     Text(
+                      //       "${multiPostcontroller.currentPage} of ",
+                      //       style: GoogleFonts.poppins(
+                      //           fontSize: kFourteenFont,
+                      //           color: KdarkText,
+                      //           fontWeight: kFW400),
+                      //     ),
+                      //     Text(
+                      //       "${multiPostcontroller.totalPage}",
+                      //       style: GoogleFonts.poppins(
+                      //           fontSize: kFourteenFont,
+                      //           color: KdarkText,
+                      //           fontWeight: kFW400),
+                      //     ),
+                      //   ],
+                      // ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
@@ -292,9 +293,24 @@ class _MultiPostScreenState extends State<MultiPostScreen> {
                                   children: [
                                     InkWell(
                                       onTap: () {
-                                        Get.toNamed(kMultiPostView,
-                                            arguments: multiPostcontroller
-                                                .mutiPostList[index]);
+                                        setState(() {
+                                          multiPostcontroller
+                                                  .selectedlogId.value =
+                                              multiPostcontroller
+                                                      .mutiPostList[index]
+                                                  ['post_id'];
+                                          // logsPostcontroller.logsList[index]["id"];
+                                          // semicontroller
+                                          //         .selectedSchedulePostID.value =
+                                          //     semicontroller.scheduledList[index]
+                                          //         ["id"];
+                                        });
+                                        Get.toNamed(
+                                          kMultiPostView,
+                                        );
+                                        // Get.toNamed(kMultiPostView,
+                                        //     arguments: multiPostcontroller
+                                        //         .mutiPostList[index]);
                                       },
                                       child: Container(
                                         margin: EdgeInsets.only(
@@ -321,18 +337,32 @@ class _MultiPostScreenState extends State<MultiPostScreen> {
                                               children: [
                                                 multiPostcontroller
                                                                 .mutiPostList[
-                                                            index]["image"] ==
+                                                            index]["img"] ==
                                                         "0"
-                                                    ? SizedBox(
-                                                        height: 200.h,
-                                                        width: double.infinity,
-                                                        child: VideoWidget(
-                                                            videoUrl: kBaseImageUrl +
-                                                                multiPostcontroller
-                                                                            .mutiPostList[
-                                                                        index]
-                                                                    ["video"]),
-                                                      )
+                                                    ? multiPostcontroller
+                                                                    .mutiPostList[
+                                                                index]["video"] ==
+                                                            null
+                                                        ? Image.asset(
+                                                            // kBaseImageUrl
+                                                            "assets/images/multipost_image.png",
+                                                            height: 200.h,
+                                                            width:
+                                                                double.infinity,
+                                                            fit: BoxFit.cover,
+                                                            // width: 25.h,
+                                                          )
+                                                        : SizedBox(
+                                                            height: 200.h,
+                                                            width:
+                                                                double.infinity,
+                                                            child: VideoWidget(
+                                                                videoUrl: kBaseImageUrl +
+                                                                    multiPostcontroller
+                                                                            .mutiPostList[index]
+                                                                        [
+                                                                        "video"]),
+                                                          )
 
                                                     // SizedBox()
                                                     : ClipRRect(
@@ -344,7 +374,7 @@ class _MultiPostScreenState extends State<MultiPostScreen> {
                                                           imageUrl: kBaseImageUrl +
                                                               multiPostcontroller
                                                                       .mutiPostList[
-                                                                  index]["image"],
+                                                                  index]["img"],
                                                           placeholder:
                                                               (context, url) =>
                                                                   SizedBox(
@@ -444,9 +474,13 @@ class _MultiPostScreenState extends State<MultiPostScreen> {
                                                           .width /
                                                       2,
                                                   child: Text(
+                                                    // multiPostcontroller
+                                                    //             .mutiPostList[
+                                                    //         index]["post_id"] ??
+                                                    //     "id",
                                                     multiPostcontroller
                                                                 .mutiPostList[
-                                                            index]["message"] ??
+                                                            index]["body"] ??
                                                         "No Message",
                                                     maxLines: 1,
                                                     overflow:
@@ -463,7 +497,11 @@ class _MultiPostScreenState extends State<MultiPostScreen> {
                                                     InkWell(
                                                       onTap: () {
                                                         Get.toNamed(
-                                                            kEditMultiPost);
+                                                            kEditMultiPost,
+                                                            arguments:
+                                                                multiPostcontroller
+                                                                        .mutiPostList[
+                                                                    index]);
                                                       },
                                                       child: Image.asset(
                                                         "assets/images/edit-outline.png",
@@ -574,7 +612,14 @@ class _MultiPostScreenState extends State<MultiPostScreen> {
                                                               index]["status"] ==
                                                           "1"
                                                       ? "Published"
-                                                      : "Scheduled",
+                                                      : 
+                                                       multiPostcontroller
+                                                                  .mutiPostList[
+                                                              index]["status"] == "2"
+                                                              ?
+                                                      "Scheduled"
+                                                      : "Unpublished"
+                                                      ,
                                                   style: GoogleFonts.poppins(
                                                       color: KGreen,
                                                       fontSize: kFourteenFont,

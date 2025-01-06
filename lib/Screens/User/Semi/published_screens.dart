@@ -621,7 +621,10 @@ class _PublishedScreensState extends State<PublishedScreens> {
                                                 InkWell(
                                                   onTap: () {
                                                     Get.toNamed(
-                                                        kEditScheduleScreen);
+                                                        kEditScheduleScreen,
+                                                        arguments: semicontroller
+                                                                .scheduledList[
+                                                            index]);
                                                   },
                                                   child: Image.asset(
                                                     "assets/images/edit-outline.png",

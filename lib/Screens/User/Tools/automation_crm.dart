@@ -9,10 +9,14 @@ class AutomationCRMScreen extends StatefulWidget {
 
 class _AutomationCRMScreenState extends State<AutomationCRMScreen> {
   DashboardController dashboardcontroller = Get.put(DashboardController());
+  MenusController menuscontroller = Get.put(MenusController());
+  ProfileController userprofilecontroller = Get.put(ProfileController());
   final List<String> CompanyList = [
     'Facebook Ads Lead Management',
     'Website Lead Management System'
   ];
+  final _formKeyOne = GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormState>();
   AuthController authcontroller = Get.put(AuthController());
   String? selectedUserValue;
   @override
@@ -20,6 +24,18 @@ class _AutomationCRMScreenState extends State<AutomationCRMScreen> {
     setState(() {
       dashboardcontroller.choosenAutoCRMTool.value =
           "Facebook Ads Lead Management";
+      menuscontroller.fbleadname.text = "sri ram";
+      menuscontroller.fbleademail.text = "sri965272@gmail.com";
+      menuscontroller.fbleadPhone_number.text = "8686180840";
+      menuscontroller.fbleadfacebook_page_link.text =
+          "https://www.facebook.com/profile.php?id=61553474931502";
+      menuscontroller.fbleadad_link.text =
+          "https://ads.google.com/intl/en_us/home/";
+      menuscontroller.fbladwebsite_link.text = "https://www.facebook.com/";
+      //////
+
+      // // ,
+      /////
     });
 
     // TODO: implement initState
@@ -281,279 +297,458 @@ class _AutomationCRMScreenState extends State<AutomationCRMScreen> {
                           //
                           dashboardcontroller.choosenAutoCRMTool ==
                                   "Facebook Ads Lead Management"
-                              ? Column(
-                                  children: [
-                                    CustomFormFields(
-                                      ontap: () {},
-                                      enabled: true,
-                                      labelColor: KText,
-                                      obscureText: false,
-                                      contentPadding:
-                                          const EdgeInsets.symmetric(
-                                              vertical: 16, horizontal: 8),
-                                      fontSize: kFourteenFont,
-                                      fontWeight: FontWeight.w500,
-                                      hintText: "Enter Name",
-                                      maxLines: 1,
-                                      readOnly: false,
-                                      label: "Name",
-                                      validator: (value) {
-                                        if (value!.isEmpty) {
-                                          return 'Please Enter Name';
-                                        }
-                                        return null;
-                                      },
-                                    ),
-                                    SizedBox(
-                                      height: 20.h,
-                                    ),
-                                    CustomFormFields(
-                                      ontap: () {},
-                                      enabled: true,
-                                      labelColor: KText,
-                                      obscureText: false,
-                                      contentPadding:
-                                          const EdgeInsets.symmetric(
-                                              vertical: 16, horizontal: 8),
-                                      fontSize: kFourteenFont,
-                                      fontWeight: FontWeight.w500,
-                                      hintText: "Enter Mail ID",
-                                      maxLines: 1,
-                                      readOnly: false,
-                                      label: "Mail ID",
-                                      validator: (value) {
-                                        if (value!.isEmpty) {
-                                          return 'Please Enter mail';
-                                        }
-                                        return null;
-                                      },
-                                    ),
-                                    SizedBox(
-                                      height: 20.h,
-                                    ),
-                                    CustomFormFields(
-                                      ontap: () {},
-                                      enabled: true,
-                                      labelColor: KText,
-                                      obscureText: false,
-                                      contentPadding:
-                                          const EdgeInsets.symmetric(
-                                              vertical: 16, horizontal: 8),
-                                      fontSize: kFourteenFont,
-                                      fontWeight: FontWeight.w500,
-                                      hintText: "Enter Phone Number",
-                                      maxLines: 1,
-                                      readOnly: false,
-                                      label: "Phone Number",
-                                      validator: (value) {
-                                        if (value!.isEmpty) {
-                                          return 'Please Enter Phone Number';
-                                        }
-                                        return null;
-                                      },
-                                    ),
-                                    SizedBox(
-                                      height: 20.h,
-                                    ),
-                                    CustomFormFields(
-                                      ontap: () {},
-                                      enabled: true,
-                                      labelColor: KText,
-                                      obscureText: false,
-                                      contentPadding:
-                                          const EdgeInsets.symmetric(
-                                              vertical: 16, horizontal: 8),
-                                      fontSize: kFourteenFont,
-                                      fontWeight: FontWeight.w500,
-                                      hintText: "Enter Facebook Page Link",
-                                      maxLines: 1,
-                                      readOnly: false,
-                                      label: "Facebook Page Link",
-                                      validator: (value) {
-                                        if (value!.isEmpty) {
-                                          return 'Please Enter Facebook Page Link';
-                                        }
-                                        return null;
-                                      },
-                                    ),
-                                    SizedBox(
-                                      height: 20.h,
-                                    ),
-                                    CustomFormFields(
-                                      ontap: () {},
-                                      enabled: true,
-                                      labelColor: KText,
-                                      obscureText: false,
-                                      contentPadding:
-                                          const EdgeInsets.symmetric(
-                                              vertical: 16, horizontal: 8),
-                                      fontSize: kFourteenFont,
-                                      fontWeight: FontWeight.w500,
-                                      hintText: "Enter Ad Link",
-                                      maxLines: 1,
-                                      readOnly: false,
-                                      label: "Ad Link",
-                                      validator: (value) {
-                                        if (value!.isEmpty) {
-                                          return 'Please Enter Ad Link';
-                                        }
-                                        return null;
-                                      },
-                                    ),
-                                    CustomButton(
-                                        margin: EdgeInsets.only(top: 36.h),
-                                        borderRadius:
-                                            BorderRadius.circular(8.r),
-                                        Color: Kform_border_twg,
-                                        textColor: Kwhite,
-                                        height: 40,
-                                        width: double.infinity,
-                                        label: "Submit",
-                                        fontSize: kSixteenFont,
-                                        fontWeight: kFW700,
+                              ? Form(
+                                  key: _formKeyOne,
+                                  // autovalidateMode: AutovalidateMode.always,
+                                  child: Column(
+                                    children: [
+                                      CustomFormFields(
+                                        ontap: () {},
+                                        controller: menuscontroller.fbleadname,
+                                        enabled: true,
+                                        labelColor: KText,
+                                        obscureText: false,
+                                        contentPadding:
+                                            const EdgeInsets.symmetric(
+                                                vertical: 16, horizontal: 8),
+                                        fontSize: kFourteenFont,
+                                        fontWeight: FontWeight.w500,
+                                        hintText: "Enter Name",
+                                        maxLines: 1,
+                                        readOnly: false,
+                                        label: "Name",
+                                        validator: (value) {
+                                          if (value!.isEmpty) {
+                                            return 'Please Enter Name';
+                                          }
+                                          return null;
+                                        },
+                                      ),
+                                      SizedBox(
+                                        height: 20.h,
+                                      ),
+                                      CustomFormFields(
+                                        ontap: () {},
+                                        enabled: true,
+                                        labelColor: KText,
+                                        controller: menuscontroller.fbleademail,
+                                        obscureText: false,
+                                        contentPadding:
+                                            const EdgeInsets.symmetric(
+                                                vertical: 16, horizontal: 8),
+                                        fontSize: kFourteenFont,
+                                        fontWeight: FontWeight.w500,
+                                        hintText: "Enter Mail ID",
+                                        maxLines: 1,
+                                        readOnly: false,
+                                        label: "Mail ID",
+                                        validator: (value) {
+                                          if (value!.isEmpty) {
+                                            return 'Please Enter mail';
+                                          }
+                                          return null;
+                                        },
+                                      ),
+                                      SizedBox(
+                                        height: 20.h,
+                                      ),
+                                      CustomFormFields(
+                                        ontap: () {},
+                                        enabled: true,
+                                        labelColor: KText,
+                                        controller:
+                                            menuscontroller.fbleadPhone_number,
+                                        obscureText: false,
+                                        contentPadding:
+                                            const EdgeInsets.symmetric(
+                                                vertical: 16, horizontal: 8),
+                                        fontSize: kFourteenFont,
+                                        fontWeight: FontWeight.w500,
+                                        hintText: "Enter Phone Number",
+                                        maxLines: 1,
+                                        readOnly: false,
+                                        label: "Phone Number",
+                                        validator: (value) {
+                                          if (value!.isEmpty) {
+                                            return 'Please Enter Phone Number';
+                                          }
+                                          return null;
+                                        },
+                                      ),
+                                      SizedBox(
+                                        height: 20.h,
+                                      ),
+                                      CustomFormFields(
+                                        ontap: () {},
+                                        enabled: true,
+                                        labelColor: KText,
+                                        controller: menuscontroller
+                                            .fbleadfacebook_page_link,
+                                        obscureText: false,
+                                        contentPadding:
+                                            const EdgeInsets.symmetric(
+                                                vertical: 16, horizontal: 8),
+                                        fontSize: kFourteenFont,
+                                        fontWeight: FontWeight.w500,
+                                        hintText: "Enter Facebook Page Link",
+                                        maxLines: 1,
+                                        readOnly: false,
+                                        label: "Facebook Page Link",
+                                        validator: (value) {
+                                          if (value!.isEmpty) {
+                                            return 'Please Enter Facebook Page Link';
+                                          }
+                                          return null;
+                                        },
+                                      ),
+                                      SizedBox(
+                                        height: 20.h,
+                                      ),
+                                      CustomFormFields(
+                                        ontap: () {},
+                                        enabled: true,
+                                        labelColor: KText,
+                                        obscureText: false,
+                                        controller:
+                                            menuscontroller.fbleadad_link,
+                                        contentPadding:
+                                            const EdgeInsets.symmetric(
+                                                vertical: 16, horizontal: 8),
+                                        fontSize: kFourteenFont,
+                                        fontWeight: FontWeight.w500,
+                                        hintText: "Enter Ad Link",
+                                        maxLines: 1,
+                                        readOnly: false,
+                                        label: "Ad Link",
+                                        validator: (value) {
+                                          if (value!.isEmpty) {
+                                            return 'Please Enter Ad Link';
+                                          }
+                                          return null;
+                                        },
+                                      ),
+                                      Obx(
+                                        () => menuscontroller.fbcrmLoading ==
+                                                true
+                                            ? Center(
+                                                child:
+                                                    CircularProgressIndicator(
+                                                  color: Kform_border_twg,
+                                                ),
+                                              )
+                                            : CustomButton(
+                                                margin:
+                                                    EdgeInsets.only(top: 36.h),
+                                                borderRadius:
+                                                    BorderRadius.circular(8.r),
+                                                Color: Kform_border_twg,
+                                                textColor: Kwhite,
+                                                height: 40,
+                                                width: double.infinity,
+                                                label: "Submit",
+                                                fontSize: kSixteenFont,
+                                                fontWeight: kFW700,
+                                                isLoading: false,
+                                                onTap: () {
+                                                  var payload = {
+                                                    // "user_email": authcontroller
+                                                    //     .UserEmailSignInController.text,
+                                                    // "user_password": authcontroller
+                                                    //     .UserEmailPasswordController.text
+                                                    "name": menuscontroller
+                                                        .fbleadname.text,
+                                                    //"sri ram",
+                                                    "email": menuscontroller
+                                                        .fbleademail.text,
+                                                    //  "sri965272@gmail.com",
+                                                    "phone_number":
+                                                        menuscontroller
+                                                            .fbleadPhone_number
+                                                            .text,
+                                                    //  "8686180840",
+                                                    "facebook_page_link":
+                                                        menuscontroller
+                                                            .fbleadfacebook_page_link
+                                                            .text,
+                                                    //  "https://www.facebook.com/profile.php?id=61553474931502",
+                                                    "ad_link": menuscontroller
+                                                        .fbleadad_link.text,
+                                                    //  "https://ads.google.com/intl/en_us/home/",
+                                                    "form_type":
+                                                        "facebookAdsLead",
+                                                    "user_id":
+                                                        userprofilecontroller
+                                                                .profileData[
+                                                            "user_details"]["id"]
+                                                    //"80"
+                                                  };
+
+                                                  if (_formKeyOne.currentState!
+                                                      .validate()) {
+                                                    //   authcontroller.userSignIn(payload);
+                                                    // }
+
+                                                    menuscontroller
+                                                        .userfbcrm(payload);
+                                                    menuscontroller.fbleadname
+                                                        .clear();
+                                                    menuscontroller.fbleademail
+                                                        .clear();
+                                                    menuscontroller
+                                                        .fbleadPhone_number
+                                                        .clear();
+                                                    menuscontroller
+                                                        .fbleadfacebook_page_link
+                                                        .clear();
+                                                    menuscontroller
+                                                        .fbleadad_link
+                                                        .clear();
+                                                  }
+
+                                                  // Get.toNamed(kNavigation);
+                                                }),
+                                      ),
+                                      // postRequestfbCrm
+                                      // CustomButton(
+                                      //     margin: EdgeInsets.only(top: 36.h),
+                                      //     borderRadius:
+                                      //         BorderRadius.circular(8.r),
+                                      //     Color: Kform_border_twg,
+                                      //     textColor: Kwhite,
+                                      //     height: 40,
+                                      //     width: double.infinity,
+                                      //     label: "Submits",
+                                      //     fontSize: kSixteenFont,
+                                      //     fontWeight: kFW700,
+                                      //     isLoading: false,
+                                      //     onTap: () {
+                                      //       // Get.toNamed(kFBAddDemoScreen);
+                                      //     }),
+                                      CustomButtonOutlined(
+                                        margin: EdgeInsets.only(top: 20.h),
+                                        label: "Get Demo",
+                                        borderColor: Kform_border_twg,
                                         isLoading: false,
+                                        fontSize: kSixteenFont,
+                                        textColor: KBlack_twg,
                                         onTap: () {
-                                          // Get.toNamed(kFBAddDemoScreen);
-                                        }),
-                                    CustomButtonOutlined(
-                                      margin: EdgeInsets.only(top: 20.h),
-                                      label: "Get Demo",
-                                      borderColor: Kform_border_twg,
-                                      isLoading: false,
-                                      fontSize: kSixteenFont,
-                                      textColor: KBlack_twg,
-                                      onTap: () {
-                                        Get.toNamed(kFBAddDemoScreen);
-                                      },
-                                      fontWeight: kFW500,
-                                      Padding: EdgeInsets.symmetric(
-                                          vertical: 8, horizontal: 24),
-                                    )
-                                  ],
+                                          Get.toNamed(kFBAddDemoScreen);
+                                        },
+                                        fontWeight: kFW500,
+                                        Padding: EdgeInsets.symmetric(
+                                            vertical: 8, horizontal: 24),
+                                      )
+                                    ],
+                                  ),
                                 )
-                              : Column(
-                                  children: [
-                                    CustomFormFields(
-                                      ontap: () {},
-                                      enabled: true,
-                                      labelColor: KText,
-                                      obscureText: false,
-                                      contentPadding:
-                                          const EdgeInsets.symmetric(
-                                              vertical: 16, horizontal: 8),
-                                      fontSize: kFourteenFont,
-                                      fontWeight: FontWeight.w500,
-                                      hintText: "Enter Name",
-                                      maxLines: 1,
-                                      readOnly: false,
-                                      label: "Name",
-                                      validator: (value) {
-                                        if (value!.isEmpty) {
-                                          return 'Please Enter Name';
-                                        }
-                                        return null;
-                                      },
-                                    ),
-                                    SizedBox(
-                                      height: 20.h,
-                                    ),
-                                    CustomFormFields(
-                                      ontap: () {},
-                                      enabled: true,
-                                      labelColor: KText,
-                                      obscureText: false,
-                                      contentPadding:
-                                          const EdgeInsets.symmetric(
-                                              vertical: 16, horizontal: 8),
-                                      fontSize: kFourteenFont,
-                                      fontWeight: FontWeight.w500,
-                                      hintText: "Enter Mail ID",
-                                      maxLines: 1,
-                                      readOnly: false,
-                                      label: "Mail ID",
-                                      validator: (value) {
-                                        if (value!.isEmpty) {
-                                          return 'Please Enter mail';
-                                        }
-                                        return null;
-                                      },
-                                    ),
-                                    SizedBox(
-                                      height: 20.h,
-                                    ),
-                                    CustomFormFields(
-                                      ontap: () {},
-                                      enabled: true,
-                                      labelColor: KText,
-                                      obscureText: false,
-                                      contentPadding:
-                                          const EdgeInsets.symmetric(
-                                              vertical: 16, horizontal: 8),
-                                      fontSize: kFourteenFont,
-                                      fontWeight: FontWeight.w500,
-                                      hintText: "Enter Phone Number",
-                                      maxLines: 1,
-                                      readOnly: false,
-                                      label: "Phone Number",
-                                      validator: (value) {
-                                        if (value!.isEmpty) {
-                                          return 'Please Enter Phone Number';
-                                        }
-                                        return null;
-                                      },
-                                    ),
-                                    SizedBox(
-                                      height: 20.h,
-                                    ),
-                                    CustomFormFields(
-                                      ontap: () {},
-                                      enabled: true,
-                                      labelColor: KText,
-                                      obscureText: false,
-                                      contentPadding:
-                                          const EdgeInsets.symmetric(
-                                              vertical: 16, horizontal: 8),
-                                      fontSize: kFourteenFont,
-                                      fontWeight: FontWeight.w500,
-                                      hintText: "Enter Website Link",
-                                      maxLines: 1,
-                                      readOnly: false,
-                                      label: "Website Link",
-                                      validator: (value) {
-                                        if (value!.isEmpty) {
-                                          return 'Please Enter Website Link';
-                                        }
-                                        return null;
-                                      },
-                                    ),
-                                    CustomButton(
-                                        margin: EdgeInsets.only(top: 36.h),
-                                        borderRadius:
-                                            BorderRadius.circular(8.r),
-                                        Color: Kform_border_twg,
-                                        textColor: Kwhite,
-                                        height: 40,
-                                        width: double.infinity,
-                                        label: "Submit",
-                                        fontSize: kSixteenFont,
-                                        fontWeight: kFW700,
+                              : Form(
+                                  key: _formKey,
+                                  child: Column(
+                                    children: [
+                                      CustomFormFields(
+                                        ontap: () {},
+                                        enabled: true,
+                                        controller: menuscontroller.fbleadname,
+                                        labelColor: KText,
+                                        obscureText: false,
+                                        contentPadding:
+                                            const EdgeInsets.symmetric(
+                                                vertical: 16, horizontal: 8),
+                                        fontSize: kFourteenFont,
+                                        fontWeight: FontWeight.w500,
+                                        hintText: "Enter Name",
+                                        maxLines: 1,
+                                        readOnly: false,
+                                        label: "Name",
+                                        validator: (value) {
+                                          if (value!.isEmpty) {
+                                            return 'Please Enter Name';
+                                          }
+                                          return null;
+                                        },
+                                      ),
+                                      SizedBox(
+                                        height: 20.h,
+                                      ),
+                                      CustomFormFields(
+                                        ontap: () {},
+                                        enabled: true,
+                                        controller: menuscontroller.fbleademail,
+                                        labelColor: KText,
+                                        obscureText: false,
+                                        contentPadding:
+                                            const EdgeInsets.symmetric(
+                                                vertical: 16, horizontal: 8),
+                                        fontSize: kFourteenFont,
+                                        fontWeight: FontWeight.w500,
+                                        hintText: "Enter Mail ID",
+                                        maxLines: 1,
+                                        readOnly: false,
+                                        label: "Mail ID",
+                                        validator: (value) {
+                                          if (value!.isEmpty) {
+                                            return 'Please Enter mail';
+                                          }
+                                          return null;
+                                        },
+                                      ),
+                                      SizedBox(
+                                        height: 20.h,
+                                      ),
+                                      CustomFormFields(
+                                        ontap: () {},
+                                        enabled: true,
+                                        labelColor: KText,
+                                        controller:
+                                            menuscontroller.fbleadPhone_number,
+                                        obscureText: false,
+                                        contentPadding:
+                                            const EdgeInsets.symmetric(
+                                                vertical: 16, horizontal: 8),
+                                        fontSize: kFourteenFont,
+                                        fontWeight: FontWeight.w500,
+                                        hintText: "Enter Phone Number",
+                                        maxLines: 1,
+                                        readOnly: false,
+                                        label: "Phone Number",
+                                        validator: (value) {
+                                          if (value!.isEmpty) {
+                                            return 'Please Enter Phone Number';
+                                          }
+                                          return null;
+                                        },
+                                      ),
+                                      SizedBox(
+                                        height: 20.h,
+                                      ),
+                                      CustomFormFields(
+                                        ontap: () {},
+                                        enabled: true,
+                                        controller:
+                                            menuscontroller.fbladwebsite_link,
+                                        labelColor: KText,
+                                        obscureText: false,
+                                        contentPadding:
+                                            const EdgeInsets.symmetric(
+                                                vertical: 16, horizontal: 8),
+                                        fontSize: kFourteenFont,
+                                        fontWeight: FontWeight.w500,
+                                        hintText: "Enter Website Link",
+                                        maxLines: 1,
+                                        readOnly: false,
+                                        label: "Website Link",
+                                        validator: (value) {
+                                          if (value!.isEmpty) {
+                                            return 'Please Enter Website Link';
+                                          }
+                                          return null;
+                                        },
+                                      ),
+                                      Obx(
+                                        () => menuscontroller.webcrmLoading ==
+                                                true
+                                            ? Center(
+                                                child:
+                                                    CircularProgressIndicator(
+                                                  color: Kform_border_twg,
+                                                ),
+                                              )
+                                            : CustomButton(
+                                                margin:
+                                                    EdgeInsets.only(top: 36.h),
+                                                borderRadius:
+                                                    BorderRadius.circular(8.r),
+                                                Color: Kform_border_twg,
+                                                textColor: Kwhite,
+                                                height: 40,
+                                                width: double.infinity,
+                                                label: "Submit",
+                                                fontSize: kSixteenFont,
+                                                fontWeight: kFW700,
+                                                isLoading: false,
+                                                onTap: () {
+                                                  var payload = {
+                                                    // "user_email": authcontroller
+                                                    //     .UserEmailSignInController.text,
+                                                    // "user_password": authcontroller
+                                                    //     .UserEmailPasswordController.text
+                                                    "name": menuscontroller
+                                                        .fbleadname.text,
+                                                    // "sri ram",
+                                                    "email": menuscontroller
+                                                        .fbleademail.text,
+                                                    // "sri965272@gmail.com",
+                                                    "phone_number":
+                                                        menuscontroller
+                                                            .fbleadPhone_number
+                                                            .text,
+                                                    //"8686180840",
+                                                    "website_link":
+                                                        menuscontroller
+                                                            .fbladwebsite_link
+                                                            .text,
+                                                    //  "https://www.facebook.com/",
+                                                    "form_type":
+                                                        "websiteLeadManagement",
+                                                    "user_id":
+                                                        userprofilecontroller
+                                                                .profileData[
+                                                            "user_details"]["id"]
+                                                    // "80"
+                                                  };
+
+                                                  if (_formKey.currentState!
+                                                      .validate()) {
+                                                    //   authcontroller.userSignIn(payload);
+                                                    // }
+
+                                                    menuscontroller
+                                                        .userWebcrm(payload);
+                                                    menuscontroller.fbleadname
+                                                        .clear();
+                                                    menuscontroller.fbleademail
+                                                        .clear();
+                                                    menuscontroller
+                                                        .fbleadPhone_number
+                                                        .clear();
+
+                                                    menuscontroller
+                                                        .fbladwebsite_link
+                                                        .clear();
+                                                  }
+
+                                                  // Get.toNamed(kNavigation);
+                                                }),
+                                      ),
+                                      // CustomButton(
+                                      //     margin: EdgeInsets.only(top: 36.h),
+                                      //     borderRadius:
+                                      //         BorderRadius.circular(8.r),
+                                      //     Color: Kform_border_twg,
+                                      //     textColor: Kwhite,
+                                      //     height: 40,
+                                      //     width: double.infinity,
+                                      //     label: "Submitss",
+                                      //     fontSize: kSixteenFont,
+                                      //     fontWeight: kFW700,
+                                      //     isLoading: false,
+                                      //     onTap: () {}),
+                                      CustomButtonOutlined(
+                                        margin: EdgeInsets.only(top: 20.h),
+                                        label: "Get Demo",
+                                        borderColor: Kform_border_twg,
                                         isLoading: false,
-                                        onTap: () {}),
-                                    CustomButtonOutlined(
-                                      margin: EdgeInsets.only(top: 20.h),
-                                      label: "Get Demo",
-                                      borderColor: Kform_border_twg,
-                                      isLoading: false,
-                                      fontSize: kSixteenFont,
-                                      textColor: KBlack_twg,
-                                      onTap: () {
-                                        Get.toNamed(kWebAddDemoScreen);
-                                      },
-                                      fontWeight: kFW500,
-                                      Padding: EdgeInsets.symmetric(
-                                          vertical: 8, horizontal: 24),
-                                    )
-                                  ],
+                                        fontSize: kSixteenFont,
+                                        textColor: KBlack_twg,
+                                        onTap: () {
+                                          Get.toNamed(kWebAddDemoScreen);
+                                        },
+                                        fontWeight: kFW500,
+                                        Padding: EdgeInsets.symmetric(
+                                            vertical: 8, horizontal: 24),
+                                      )
+                                    ],
+                                  ),
                                 )
                         ],
                       ),

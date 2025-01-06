@@ -3,6 +3,15 @@ import 'package:shared_preferences/shared_preferences.dart';
 class UserSimplePreferences {
   static late SharedPreferences _preferences;
   static const String isUserLoggedIn = 'isuserloggedin';
+  static const String isFacebook = 'isFacebook';
+  static const String isTwitter = 'isTwitter';
+  static const String isLinkedIn = 'isLinkedIn';
+  static const String isTumblr = 'isTumblr';
+  static const String isPinterest = 'isPinterest';
+  static const String isGoogleBusinessProfile = 'isGoogleBusinessProfile';
+  static const String isInstagram = 'isInstagram';
+  static const String isYouTube = 'isYouTube';
+  static const String isWordPress = 'isWordPress';
   static const String isToken = 'token';
 
   static const String userDataLocal = 'userData';
@@ -22,10 +31,93 @@ class UserSimplePreferences {
     await _preferences.setBool(isUserLoggedIn, loginStatus);
   }
 
+  // for networks
+  static Future facebookStatus({required bool fbStatus}) async {
+    await _preferences.setBool(isFacebook, fbStatus);
+  }
+
   static bool? getLoginStatus() {
     return _preferences.getBool(isUserLoggedIn);
   }
 
+  // getNetworks
+  static bool? getfacebookStatus() {
+    return _preferences.getBool(isFacebook);
+  }
+
+  // Twitter Status
+  static Future twitterStatus({required bool twitterStatus}) async {
+    await _preferences.setBool(isTwitter, twitterStatus);
+  }
+
+  static bool? getTwitterStatus() {
+    return _preferences.getBool(isTwitter);
+  }
+
+  // LinkedIn Status
+  static Future linkedInStatus({required bool linkedInStatus}) async {
+    await _preferences.setBool(isLinkedIn, linkedInStatus);
+  }
+
+  static bool? getLinkedInStatus() {
+    return _preferences.getBool(isLinkedIn);
+  }
+
+  // Tumblr Status
+  static Future tumblrStatus({required bool tumblrStatus}) async {
+    await _preferences.setBool(isTumblr, tumblrStatus);
+  }
+
+  static bool? getTumblrStatus() {
+    return _preferences.getBool(isTumblr);
+  }
+
+  // Pinterest Status
+  static Future pinterestStatus({required bool pinterestStatus}) async {
+    await _preferences.setBool(isPinterest, pinterestStatus);
+  }
+
+  static bool? getPinterestStatus() {
+    return _preferences.getBool(isPinterest);
+  }
+
+  // Google Business Profile Status
+  static Future googleBusinessProfileStatus({required bool gbpStatus}) async {
+    await _preferences.setBool(isGoogleBusinessProfile, gbpStatus);
+  }
+
+  static bool? getGoogleBusinessProfileStatus() {
+    return _preferences.getBool(isGoogleBusinessProfile);
+  }
+
+  // Instagram Status
+  static Future instagramStatus({required bool instagramStatus}) async {
+    await _preferences.setBool(isInstagram, instagramStatus);
+  }
+
+  static bool? getInstagramStatus() {
+    return _preferences.getBool(isInstagram);
+  }
+
+  // YouTube Status
+  static Future youtubeStatus({required bool youtubeStatus}) async {
+    await _preferences.setBool(isYouTube, youtubeStatus);
+  }
+
+  static bool? getYouTubeStatus() {
+    return _preferences.getBool(isYouTube);
+  }
+
+  // WordPress Status
+  static Future wordpressStatus({required bool wordpressStatus}) async {
+    await _preferences.setBool(isWordPress, wordpressStatus);
+  }
+
+  static bool? getWordPressStatus() {
+    return _preferences.getBool(isWordPress);
+  }
+
+//
   static Future setfcmToken(String? token) async {
     await _preferences.setString(fcmToken, token!);
   }

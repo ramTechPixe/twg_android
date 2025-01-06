@@ -56,6 +56,10 @@ export 'package:twg/Controllers/multi_posting_controller.dart';
 export 'package:twg/Controllers/logs_controller.dart';
 export 'package:twg/Controllers/suscribtion_controller.dart';
 export 'package:twg/Controllers/settings_controller.dart';
+export 'package:twg/Controllers/api_services_dio.dart';
+export 'package:twg/Controllers/accounts_controller.dart';
+export 'package:twg/Controllers/reports_or_graphs_controller.dart';
+export 'package:twg/Controllers/menus_contoll.dart';
 // Semi Automation
 export 'package:twg/Screens/User/Semi/quick_posting_screen.dart';
 export 'package:twg/Screens/User/Semi/auto_post.dart';

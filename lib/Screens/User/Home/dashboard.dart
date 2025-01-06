@@ -11,6 +11,8 @@ class UserDashboard extends StatefulWidget {
 class _UserDashboardState extends State<UserDashboard> {
   ProfileController userprofilecontroller = Get.put(ProfileController());
   DashboardController dashboardcontroller = Get.put(DashboardController());
+  AccontsController accountscontroller = Get.put(AccontsController());
+  AuthController authcontroller = Get.put(AuthController());
   SemiController semicontroller = Get.put(SemiController());
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   void checkInternet() async {
@@ -18,6 +20,23 @@ class _UserDashboardState extends State<UserDashboard> {
     if (isConnected == false) {
       Get.toNamed(kNointernetScreen);
     }
+    // debugPrint("${isConnected}");
+  }
+
+  //  true,
+  void loadAccounts() async {
+    accountscontroller.userSMFbAccountsList();
+    accountscontroller.userPinterestAccountsList();
+    accountscontroller.userTwitterAccountsList();
+    accountscontroller.usertumblerAccountsList();
+    accountscontroller.userYouTubeAccountsList();
+    // accountscontroller.useryoutubeAccountsList();
+    accountscontroller.userredditAccountsList();
+    accountscontroller.userInstaAccountsList();
+    // bool isConnected = await InternetConnection().hasInternetAccess;
+    // if (isConnected == false) {
+    //   Get.toNamed(kNointernetScreen);
+    // }
     // debugPrint("${isConnected}");
   }
 
@@ -32,6 +51,7 @@ class _UserDashboardState extends State<UserDashboard> {
     dashboardcontroller.dashboardTotalSocialPostAPI();
     dashboardcontroller.dashboardTotalPostAPI();
     semicontroller.userScheduledPost();
+    loadAccounts();
     // userprofilecontroller.userProfile();
 
     super.initState();
@@ -75,7 +95,12 @@ class _UserDashboardState extends State<UserDashboard> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 InkWell(
-                                  onTap: () {},
+                                  onTap: () {
+                                    accountscontroller
+                                        .userYouTubeAccountsList();
+                                    // accountscontroller
+                                    //     .useryoutubeAccountsList();
+                                  },
                                   child: Text(
                                     "Welcome",
                                     style: GoogleFonts.poppins(
@@ -602,6 +627,81 @@ Widget leftDrawerMenu(
               ),
               Text(
                 "Creat Banners",
+                style: GoogleFonts.poppins(
+                    color: kblack, fontSize: kSixteenFont, fontWeight: kFW500),
+              ),
+            ],
+          ),
+        ),
+        SizedBox(
+          height: 20.h,
+        ),
+        InkWell(
+          onTap: () {
+            showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return AlertDialog(
+                    title: Text('Are You Sure',
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: GoogleFonts.roboto(
+                            fontSize: 12.sp,
+                            fontWeight: kFW700,
+                            color: KdarkText)),
+                    content: Text('You Want To LogOut ?',
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        style: GoogleFonts.roboto(
+                            fontSize: 12.sp,
+                            fontWeight: kFW700,
+                            color: KdarkText.withOpacity(0.7))),
+                    actions: [
+                      TextButton(
+                        onPressed: () {
+                          Get.back();
+                        },
+                        child: Text('No',
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: GoogleFonts.roboto(
+                                fontSize: 12.sp,
+                                fontWeight: kFW700,
+                                color: KdarkText)),
+                      ),
+                      TextButton(
+                        onPressed: () async {
+                          AuthController authController =
+                              Get.put(AuthController());
+                          authController.userLogOut();
+                          // authcontroller
+                          // UserSimplePreferences.clearAllData();
+                          // authcontroller.
+                        },
+                        child: Text('Yes',
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: GoogleFonts.roboto(
+                                fontSize: 12.sp,
+                                fontWeight: kFW700,
+                                color: KdarkText)),
+                      )
+                    ],
+                  );
+                });
+          },
+          child: Row(
+            children: [
+              Image.asset(
+                "assets/images/video_template.png",
+                height: 30.h,
+                width: 30.w,
+              ),
+              SizedBox(
+                width: 15.w,
+              ),
+              Text(
+                "Log Out",
                 style: GoogleFonts.poppins(
                     color: kblack, fontSize: kSixteenFont, fontWeight: kFW500),
               ),

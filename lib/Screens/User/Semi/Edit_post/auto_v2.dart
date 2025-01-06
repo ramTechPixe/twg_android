@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:intl/intl.dart';
 import 'package:multiselect/multiselect.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:twg/untils/export_file.dart';
 import 'dart:io';
 import 'dart:typed_data';
@@ -20,14 +21,14 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:video_player/video_player.dart';
 
-class AutoPost extends StatefulWidget {
-  const AutoPost({super.key});
+class AutoPostv2 extends StatefulWidget {
+  const AutoPostv2({super.key});
 
   @override
-  State<AutoPost> createState() => _AutoPostState();
+  State<AutoPostv2> createState() => _AutoPostv2State();
 }
 
-class _AutoPostState extends State<AutoPost> {
+class _AutoPostv2State extends State<AutoPostv2> {
   DashboardController dashboardcontroller = Get.put(DashboardController());
   ProfileController userprofilecontroller = Get.put(ProfileController());
   SemiController semicontroller = Get.put(SemiController());
@@ -440,10 +441,55 @@ class _AutoPostState extends State<AutoPost> {
                                     ),
                                   ],
                                 )
-                              : Text(
-                                  "No image selected",
-                                  style: TextStyle(color: kblack),
-                                ),
+                              : semicontroller.semipostMap["image"] == "0"
+                                  ? Text(
+                                      "No image selected",
+                                      style: TextStyle(color: kblack),
+                                    )
+                                  : Container(
+                                      margin: EdgeInsets.only(bottom: 5.h),
+                                      height: 200.h,
+                                      child: ClipRRect(
+                                        borderRadius:
+                                            BorderRadius.circular(8.r),
+                                        child: CachedNetworkImage(
+                                          imageUrl: kBaseImageUrl +
+                                              semicontroller
+                                                  .semipostMap["image"],
+                                          placeholder: (context, url) =>
+                                              SizedBox(
+                                            height: 200.h,
+                                            width: double.infinity,
+                                            child: Shimmer.fromColors(
+                                              baseColor: Colors.black12,
+                                              highlightColor:
+                                                  Colors.white.withOpacity(0.5),
+                                              child: Container(
+                                                decoration: BoxDecoration(
+                                                  color:
+                                                      Kwhite.withOpacity(0.5),
+                                                ),
+                                                height: 200.h,
+                                                width: double.infinity,
+                                              ),
+                                            ),
+                                          ),
+                                          errorWidget: (context, url, error) =>
+                                              Image.asset(
+                                            // kBaseImageUrl
+                                            "assets/images/multipost_image.png",
+                                            height: 200.h,
+                                            width: double.infinity,
+                                            fit: BoxFit.cover,
+                                            // width: 25.h,
+                                          ),
+                                          height: 200.h,
+                                          width: double.infinity,
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
+                                    ),
+
                           SizedBox(
                             height: 20.h,
                           ),
@@ -1472,7 +1518,6 @@ class _AutoPostState extends State<AutoPost> {
                     fontWeight: kFW400,
                   ),
                 ),
-                // implement later
                 // UserSimplePreferences.getfacebookStatus() == null ||
                 //         UserSimplePreferences.getfacebookStatus() == false
                 //     ? SizedBox()
@@ -1698,7 +1743,9 @@ class _AutoPostState extends State<AutoPost> {
                                         accountsController.selectedNames.value,
                                     onChanged:
                                         accountsController.onSelectionChanged,
-                                    whenEmpty: 'Select User',
+                                    whenEmpty:
+                                        semicontroller.fbPostedAccounts.value ??
+                                            "",
                                   ),
                                 );
                               }),
@@ -1875,12 +1922,15 @@ class _AutoPostState extends State<AutoPost> {
                               ),
                               CustomFormFields(
                                 hintText:
-                                    DateFormat.yMMMd().format(fbselectedDate) ==
-                                            DateFormat.yMMMd()
-                                                .format(DateTime.now())
-                                        ? "Select Date & Time"
-                                        : DateFormat('dd/MM/yyyy hh:mm a')
-                                            .format(fbselectedDate),
+                                    semicontroller.formattedDatefb.value ?? "",
+                                // formattedDatefb
+                                // DateFormat.yMMMd()
+                                //             .format(fbselectedDate) ==
+                                //         DateFormat.yMMMd()
+                                //             .format(DateTime.now())
+                                //     ? "Select Date & Time"
+                                //     : DateFormat('dd/MM/yyyy hh:mm a')
+                                //         .format(fbselectedDate),
                                 ontap: () async {
                                   // Step 1: Show Date Picker
                                   final DateTime? pickedDate =
@@ -2361,7 +2411,9 @@ class _AutoPostState extends State<AutoPost> {
                                         .twtselectedNames.value,
                                     onChanged: accountsController
                                         .twtonSelectionChanged,
-                                    whenEmpty: 'Select User',
+                                    whenEmpty: semicontroller
+                                            .twtPostedAccounts.value ??
+                                        "",
                                     // Display names only
                                     // options: accountsController
                                     //     .accountDetails
@@ -2443,13 +2495,8 @@ class _AutoPostState extends State<AutoPost> {
                                 height: 20.h,
                               ),
                               CustomFormFields(
-                                hintText: DateFormat.yMMMd()
-                                            .format(twtselectedDate) ==
-                                        DateFormat.yMMMd()
-                                            .format(DateTime.now())
-                                    ? "Select Date & Time"
-                                    : DateFormat('dd/MM/yyyy hh:mm a')
-                                        .format(twtselectedDate),
+                                hintText:
+                                    semicontroller.formattedDatetwt.value ?? "",
                                 ontap: () async {
                                   // Step 1: Show Date Picker
                                   final DateTime? pickedDate =
@@ -3050,7 +3097,9 @@ class _AutoPostState extends State<AutoPost> {
                                     //     .selectedtumblerNames.value,
                                     onChanged: accountsController
                                         .onTumblerSelectionChanged,
-                                    whenEmpty: 'Select User',
+                                    whenEmpty: semicontroller
+                                            .tumbPostedAccounts.value ??
+                                        "",
                                   ),
                                 );
                               }),
@@ -3196,13 +3245,9 @@ class _AutoPostState extends State<AutoPost> {
                                 height: 20.h,
                               ),
                               CustomFormFields(
-                                hintText: DateFormat.yMMMd()
-                                            .format(tumbselectedDate) ==
-                                        DateFormat.yMMMd()
-                                            .format(DateTime.now())
-                                    ? "Select Date & Time"
-                                    : DateFormat('dd/MM/yyyy hh:mm a')
-                                        .format(tumbselectedDate),
+                                hintText:
+                                    semicontroller.formattedDatetumb.value ??
+                                        "",
                                 ontap: () async {
                                   // Step 1: Show Date Picker
                                   final DateTime? pickedDate =
@@ -3463,7 +3508,9 @@ class _AutoPostState extends State<AutoPost> {
                                     //     .selectedtumblerNames.value,
                                     onChanged: accountsController
                                         .pintonTumblerSelectionChanged,
-                                    whenEmpty: 'Select User',
+                                    whenEmpty: semicontroller
+                                            .pintPostedAccounts.value ??
+                                        "",
                                   ),
                                 );
                               }),
@@ -3609,13 +3656,9 @@ class _AutoPostState extends State<AutoPost> {
                                 height: 20.h,
                               ),
                               CustomFormFields(
-                                hintText: DateFormat.yMMMd()
-                                            .format(pintselectedDate) ==
-                                        DateFormat.yMMMd()
-                                            .format(DateTime.now())
-                                    ? "Select Date & Time"
-                                    : DateFormat('dd/MM/yyyy hh:mm a')
-                                        .format(pintselectedDate),
+                                hintText:
+                                    semicontroller.formattedDatepint.value ??
+                                        "",
                                 ontap: () async {
                                   // Step 1: Show Date Picker
                                   final DateTime? pickedDate =
@@ -4051,11 +4094,8 @@ class _AutoPostState extends State<AutoPost> {
                     SizedBox(
                       width: MediaQuery.of(context).size.width / 2.5,
                       child: CustomFormFields(
-                        hintText: DateFormat.yMMMd().format(selectedDate) ==
-                                DateFormat.yMMMd().format(DateTime.now())
-                            ? "Select Date & Time"
-                            : DateFormat('dd/MM/yyyy hh:mm a')
-                                .format(selectedDate),
+                        hintText:
+                            semicontroller.formattedDateglobal.value ?? "",
                         ontap: () async {
                           // Step 1: Show Date Picker
                           final DateTime? pickedDate = await showDatePicker(
@@ -4238,7 +4278,7 @@ class _AutoPostState extends State<AutoPost> {
 //                       ),
 //                     ),
                     ,
-                    Obx(() => semicontroller.publishLoading == true
+                    Obx(() => semicontroller.updatepublishLoading == true
                         //settingscontroller.tumblerSaveLoading == true
                         ? Center(
                             child: CircularProgressIndicator(
@@ -4257,6 +4297,8 @@ class _AutoPostState extends State<AutoPost> {
                             isLoading: false,
                             onTap: () {
                               var payload = {
+                                'id': semicontroller.semipostMap["post_id"],
+
                                 'user_id': userprofilecontroller
                                     .profileData["user_details"]["id"],
                                 'enable_video_image': dashboardcontroller
@@ -4288,7 +4330,8 @@ class _AutoPostState extends State<AutoPost> {
                                     multiPostcontroller.addpostGlobalTime.value
                                 //'',
                               };
-                              semicontroller.quickPostPublish(payload);
+                              semicontroller.quickPostUpdate(payload);
+                              // semicontroller.quickPostPublish(payload);
                             })),
                   ],
                 ),

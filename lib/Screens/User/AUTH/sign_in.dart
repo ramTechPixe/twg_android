@@ -65,7 +65,10 @@ class _SignInState extends State<SignIn> {
   @override
   void initState() {
     setState(() {
-      authcontroller.UserEmailSignInController.text = "sri965272@gmail.com";
+      authcontroller.UserEmailSignInController.text = "bharatsports@gmail.com";
+      // bharatsports@gmail.com
+      // authcontroller.UserEmailSignInController.text = "nlp73683@gmail.com";
+      //"sri965272@gmail.com";
       authcontroller.UserEmailPasswordController.text = "Bstore@123";
       //  userprofilecontroller.profileData["user_details"]["last_name"] ?? "";
       // userprofilecontroller.editEmailController.text =
@@ -338,8 +341,7 @@ class _SignInState extends State<SignIn> {
                                   authcontroller.userSignIn(payload);
                                 }
                                 // Get.toNamed(kNavigation);
-                              }
-                              ),
+                              }),
                     ),
 
                     SizedBox(
