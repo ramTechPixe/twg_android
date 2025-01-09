@@ -15,7 +15,7 @@ class DashboardController extends GetxController {
   final apiService = Get.put(ApiService());
   var isFormselected = false.obs;
   var selectedQuickPost = "Auto Post".obs;
-
+  var deviceIp = "".obs;
   var selectedPublishedorScheduled = "Published".obs;
   var selectedMediaType = "".obs;
   var selectedMediaChannels = "".obs;
@@ -136,6 +136,10 @@ class DashboardController extends GetxController {
   // Dev api // Dashboard Social Media
   var dashboardTotalSocialPosts = {}.obs;
   var networkCountList = [].obs;
+  var twitternetworkCount = 0.obs;
+  var tumbnetworkCount = 0.obs;
+  var younetworkCount = 0.obs;
+  var pintnetworkCount = 0.obs;
   var dashboardTotalSocialPostsLoading = false.obs;
 
   Future<void> dashboardTotalSocialPostAPI() async {
@@ -197,19 +201,52 @@ class DashboardController extends GetxController {
         );
 
         print(networkCountList);
+        for (int i = 0; i < networkCountList.length; i++) {
+          if (networkCountList[i]["name"] == "twitter") {
+            twitternetworkCount.value = networkCountList[i]["count"];
+          } else if (networkCountList[i]["name"] == "tumblr") {
+            tumbnetworkCount.value = networkCountList[i]["count"];
+          } else if (networkCountList[i]["name"] == "pinterest") {
+            pintnetworkCount.value = networkCountList[i]["count"];
+          } else if (networkCountList[i]["name"] == "youtube") {
+            younetworkCount.value = networkCountList[i]["count"];
+          }
+          //   if(int.parse(kitchen[i]["delivery_time"])<=time.value){
+          //   lesstimeKitchen.add(kitchen[i]);
+          // }
+        }
+        print(networkCountList);
       } else if (data["message"] == "Invalid session token") {
         Fluttertoast.showToast(
           msg: data["message"],
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: KDarkPink_twg,
+          textColor: Kwhite,
+          fontSize: 16.0,
         );
         Get.toNamed(kSignIns);
       } else {
         Fluttertoast.showToast(
           msg: data["message"],
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: KDarkPink_twg,
+          textColor: Kwhite,
+          fontSize: 16.0,
         );
       }
     } catch (e) {
       Fluttertoast.showToast(
         msg: "Something went wrong",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: KDarkPink_twg,
+        textColor: Kwhite,
+        fontSize: 16.0,
       );
     } finally {
       dashboardTotalSocialPostsLoading(false);
@@ -238,16 +275,34 @@ class DashboardController extends GetxController {
       } else if (data["message"] == "Invalid session token") {
         Fluttertoast.showToast(
           msg: data["message"],
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: KDarkPink_twg,
+          textColor: Kwhite,
+          fontSize: 16.0,
         );
         Get.toNamed(kSignIns);
       } else {
         Fluttertoast.showToast(
           msg: data["message"],
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: KDarkPink_twg,
+          textColor: Kwhite,
+          fontSize: 16.0,
         );
       }
     } catch (e) {
       Fluttertoast.showToast(
         msg: "Something went wrong",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: KDarkPink_twg,
+        textColor: Kwhite,
+        fontSize: 16.0,
       );
     } finally {
       dashboardTotalPostsLoading(false);

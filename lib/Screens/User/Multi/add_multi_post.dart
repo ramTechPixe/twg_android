@@ -1189,8 +1189,7 @@ class _AddMultiScreenState extends State<AddMultiScreen> {
                                                   CrossAxisAlignment.center,
                                               children: [
                                                 fbselectedImage == null
-                                                    ? 
-                                                    SizedBox()
+                                                    ? SizedBox()
                                                     : InkWell(
                                                         onTap: () {
                                                           setState(() {
@@ -2052,6 +2051,9 @@ class _AddMultiScreenState extends State<AddMultiScreen> {
                                             ]),
                                         child: DropdownButtonFormField2<String>(
                                           isExpanded: true,
+                                          value: multiPostcontroller
+                                                  .tumbSharingPosttype.value ??
+                                              "",
                                           decoration: InputDecoration(
                                             enabledBorder: OutlineInputBorder(
                                               borderSide: BorderSide(
@@ -5740,7 +5742,7 @@ class _AddMultiScreenState extends State<AddMultiScreen> {
                             'form-submitted': '1',
                             // 'img': 'path/to/image.png',add dynamic
                             'individual_status': '1',
-                            'ip': '115.98.63.215',
+                            'ip': dashboardcontroller.deviceIp.value,
                             'created_date': formattedDateTime,
                             // '2024-12-18 15:09:23',
                             'user_id': userprofilecontroller

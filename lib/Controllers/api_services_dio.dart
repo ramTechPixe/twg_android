@@ -21,13 +21,17 @@ import 'package:dio/dio.dart' as dio; // Alias for dio package
 import 'package:get/get_connect/http/src/multipart/form_data.dart'
     as getFormData; // Alias for GetX FormData
 import 'package:http_parser/http_parser.dart';
+import 'package:dio/dio.dart' as dio_package;
+import 'package:get/get_connect/http/src/multipart/form_data.dart'
+    as get_package;
 
 class ApiServiceDio extends GetxService {
 //  http://192.168.1.197:5000
 
 //  String baseUrl = "http://192.168.1.197:5000/";
   String baseUrl = "https://thewisguystech.com/";
-  String dummybaseUrl = "https://twgpost.in/";
+
+  String dummybaseUrl = "https://thewisguystech.com/";
   //https://twgpost.in/twiter-api-save-data-api/
   //  String baseUrl = "https://dev.thewisguystech.com/";  //old
   String live_baseUrl = "https://thewisguystech.com/uploads/twg-api/";
@@ -39,6 +43,96 @@ class ApiServiceDio extends GetxService {
     "status": "error"
   };
   ////////////TWG APIS SERVICES
+  ///Network settings
+
+  Future<dynamic> postRequestTwitterSavedummyurl({
+    required String endpoint,
+    required Map<dynamic, dynamic> payload,
+    Map<String, String>? customHeaders,
+  }) async {
+    try {
+      dio_package.Dio dioInstance = dio_package.Dio();
+
+      // Add custom headers if provided
+      Map<String, dynamic> headers = {};
+      if (customHeaders != null) {
+        headers.addAll(customHeaders);
+      }
+
+      // Use dio_package.FormData
+      dio_package.FormData data = dio_package.FormData();
+      payload.forEach((key, value) {
+        if (value != null) {
+          data.fields.add(MapEntry(key.toString(), value.toString()));
+        }
+      });
+
+      print("FormData: ${data.fields}");
+
+      // Send POST request
+      dio_package.Response response = await dioInstance.post(
+        baseUrl + endpoint,
+        options: dio_package.Options(headers: headers),
+        data: data,
+      );
+
+      // Check response status
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        return response.data;
+      } else {
+        return {
+          "message": "Request failed with status: ${response.statusCode}"
+        };
+      }
+    } catch (e) {
+      print("Error: $e");
+      return {"message": "Something went wrong!"};
+    }
+  }
+
+  /////
+  ///Scheduled posts
+  Future<dynamic> postRequestMultiIDDeleteScheduledPosts({
+    required String endpoint,
+    required List<String> payload,
+    Map<String, String>? customHeaders,
+  }) async {
+    try {
+      dio.Dio dioInstance = dio.Dio();
+
+      Map<String, dynamic> headers = {};
+      if (customHeaders != null) {
+        headers.addAll(customHeaders);
+      }
+
+      dio.FormData data = dio.FormData();
+      for (String id in payload) {
+        data.fields.add(MapEntry('id[]', id));
+      }
+
+      print("FormData: ${data.fields}");
+
+      // Send POST request
+      dio.Response response = await dioInstance.post(
+        baseUrl + endpoint,
+        options: dio.Options(headers: headers),
+        data: data,
+      );
+
+      // Check the response status
+      if (response.statusCode == 200) {
+        return response.data;
+      } else {
+        return {
+          "message": "Request failed with status: ${response.statusCode}"
+        };
+      }
+    } catch (e) {
+      print("Error: $e");
+      return {"message": "Something went wrong!"};
+    }
+  }
+  /////
 
   Future<dynamic> postRequestMultiIDDeleteMultiPosts({
     required String endpoint,
@@ -129,6 +223,7 @@ class ApiServiceDio extends GetxService {
   // addmulti post
 
   Future<dynamic> postRequestAddSaveMultipost({
+    //uthista
     required String endpoint,
     required payload,
     required List fbList,
@@ -346,7 +441,7 @@ class ApiServiceDio extends GetxService {
   }
 
   // Quick post
-  // postRequestQuickPostPublish
+  // postRequestQuickPostPublish // ram
   Future<dynamic> postRequestAddQucikpost({
     required String endpoint,
     required payload,
@@ -358,7 +453,7 @@ class ApiServiceDio extends GetxService {
     required List ytuList,
     Map<String, String>? customHeaders,
     File? video,
-    File? img, // Separate image for img
+    File? image, // Separate image for img
   }) async {
     try {
       // Create Dio instance
@@ -414,13 +509,13 @@ class ApiServiceDio extends GetxService {
       }
       ;
 
-      if (img != null) {
+      if (image != null) {
         formData.files.add(
           MapEntry(
-            'img',
+            'image',
             await dio.MultipartFile.fromFile(
-              img.path,
-              filename: basename(img.path),
+              image.path,
+              filename: basename(image.path),
               // filename: 'post_image.jpg',
               contentType: MediaType('image', 'jpeg'), // Specify the MIME type
             ),

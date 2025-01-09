@@ -11,6 +11,7 @@ import 'dart:io';
 
 class SettingsController extends GetxController {
   final apiService = Get.put(ApiService());
+  final dioapiService = Get.put(ApiServiceDio());
   ProfileController userprofilecontroller = Get.put(ProfileController());
 
   TextEditingController twitterAPIKeyController = TextEditingController();
@@ -29,8 +30,13 @@ class SettingsController extends GetxController {
 // pinterest
   TextEditingController pinterestAppKeyController = TextEditingController();
   TextEditingController pinterestSecretController = TextEditingController();
+//
+  TextEditingController tiniUrlOneController = TextEditingController();
+  TextEditingController bitlyController = TextEditingController();
+  TextEditingController shortController = TextEditingController();
 //  https://twgpost.in/twiter-api-save-data-api/
   /////////
+  var twitterShort = "".obs;
   var twitterSaveLoading = false.obs;
   Future<void> twitterSave(Map payload) async {
     twitterSaveLoading(true);
@@ -39,14 +45,23 @@ class SettingsController extends GetxController {
     //   "custom_message": paylodd["custom_message"]
     // };
     try {
-      var response = await apiService.postRequestTwitterSavedummyurl(
-          endpoint: "twiter-api-save-data-api/", payload: payload);
+      // postRequestTwitterSavedummyurl
+      var response = await dioapiService.postRequestTwitterSavedummyurl(
+          //   var response = await .postRequestTwitterSavedummyurl(
+          endpoint: "twiter-api-save-data-api/",
+          payload: payload);
 // https://thewisguystech.com/ai-text-content/
       Map data = jsonDecode(response);
       print(data);
       if (data["status"] == "success") {
         Fluttertoast.showToast(
           msg: data["message"],
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: KDarkPink_twg,
+          textColor: Kwhite,
+          fontSize: 16.0,
         );
         //////////////
 
@@ -55,16 +70,34 @@ class SettingsController extends GetxController {
       } else if (data["message"] == "Invalid session token") {
         Fluttertoast.showToast(
           msg: data["message"],
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: KDarkPink_twg,
+          textColor: Kwhite,
+          fontSize: 16.0,
         );
         Get.toNamed(kSignIns);
       } else {
         Fluttertoast.showToast(
           msg: data["message"],
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: KDarkPink_twg,
+          textColor: Kwhite,
+          fontSize: 16.0,
         );
       }
     } catch (e) {
       Fluttertoast.showToast(
         msg: "Something went wrong",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: KDarkPink_twg,
+        textColor: Kwhite,
+        fontSize: 16.0,
       );
     } finally {
       twitterSaveLoading(false);
@@ -85,6 +118,12 @@ class SettingsController extends GetxController {
       if (data["status"] == "success") {
         Fluttertoast.showToast(
           msg: data["message"],
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: KDarkPink_twg,
+          textColor: Kwhite,
+          fontSize: 16.0,
         );
         //////////////
 
@@ -93,16 +132,34 @@ class SettingsController extends GetxController {
       } else if (data["message"] == "Invalid session token") {
         Fluttertoast.showToast(
           msg: data["message"],
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: KDarkPink_twg,
+          textColor: Kwhite,
+          fontSize: 16.0,
         );
         Get.toNamed(kSignIns);
       } else {
         Fluttertoast.showToast(
           msg: data["message"],
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: KDarkPink_twg,
+          textColor: Kwhite,
+          fontSize: 16.0,
         );
       }
     } catch (e) {
       Fluttertoast.showToast(
         msg: "Something went wrong",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: KDarkPink_twg,
+        textColor: Kwhite,
+        fontSize: 16.0,
       );
     } finally {
       tumblerSaveLoading(false);
@@ -115,14 +172,22 @@ class SettingsController extends GetxController {
     pinterestSaveLoading(true);
 
     try {
-      var response = await apiService.postRequestPinterestSavedummyurl(
-          endpoint: "pintrest-api-save-data-api/", payload: payload);
+      var response = await dioapiService.postRequestTwitterSavedummyurl(
+          //var response = await apiService.postRequestPinterestSavedummyurl(
+          endpoint: "pintrest-api-save-data-api/",
+          payload: payload);
 //  https://twgpost.in/
       Map data = jsonDecode(response);
       print(data);
       if (data["status"] == "success") {
         Fluttertoast.showToast(
           msg: data["message"],
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: KDarkPink_twg,
+          textColor: Kwhite,
+          fontSize: 16.0,
         );
         //////////////
 
@@ -131,16 +196,34 @@ class SettingsController extends GetxController {
       } else if (data["message"] == "Invalid session token") {
         Fluttertoast.showToast(
           msg: data["message"],
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: KDarkPink_twg,
+          textColor: Kwhite,
+          fontSize: 16.0,
         );
         Get.toNamed(kSignIns);
       } else {
         Fluttertoast.showToast(
           msg: data["message"],
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: KDarkPink_twg,
+          textColor: Kwhite,
+          fontSize: 16.0,
         );
       }
     } catch (e) {
       Fluttertoast.showToast(
         msg: "Something went wrong",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: KDarkPink_twg,
+        textColor: Kwhite,
+        fontSize: 16.0,
       );
     } finally {
       pinterestSaveLoading(false);
@@ -153,7 +236,8 @@ class SettingsController extends GetxController {
   Future<void> youtubeSave(Map payload) async {
     youtubeSaveLoading(true);
     try {
-      var response = await apiService.postRequestYoutubeSavedummyurl(
+      var response = await dioapiService.postRequestTwitterSavedummyurl(
+        //  var response = await apiService.postRequestYoutubeSavedummyurl(
         endpoint: "youtube-api-save-data-api/",
         payload: payload,
         customHeaders: {'Cookie': 'PHPSESSID=n923agookfgsg7ucda02254ihs'},
@@ -161,15 +245,47 @@ class SettingsController extends GetxController {
 
       Map data = jsonDecode(response);
       if (data["status"] == "success") {
-        Fluttertoast.showToast(msg: data["message"]);
+        Fluttertoast.showToast(
+          msg: data["message"],
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: KDarkPink_twg,
+          textColor: Kwhite,
+          fontSize: 16.0,
+        );
       } else if (data["message"] == "Invalid session token") {
-        Fluttertoast.showToast(msg: data["message"]);
+        Fluttertoast.showToast(
+          msg: data["message"],
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: KDarkPink_twg,
+          textColor: Kwhite,
+          fontSize: 16.0,
+        );
         Get.toNamed(kSignIns);
       } else {
-        Fluttertoast.showToast(msg: data["message"]);
+        Fluttertoast.showToast(
+          msg: data["message"],
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: KDarkPink_twg,
+          textColor: Kwhite,
+          fontSize: 16.0,
+        );
       }
     } catch (e) {
-      Fluttertoast.showToast(msg: "Something went wrong");
+      Fluttertoast.showToast(
+        msg: "Something went wrong",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: KDarkPink_twg,
+        textColor: Kwhite,
+        fontSize: 16.0,
+      );
     } finally {
       youtubeSaveLoading(false);
     }

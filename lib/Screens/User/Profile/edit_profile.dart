@@ -2715,7 +2715,14 @@ class _EditProfileState extends State<EditProfile> {
                                 .userEditprofilePassword(payload);
                           } else {
                             Fluttertoast.showToast(
-                                msg: "Please enter Passwords correctly");
+                              msg: "Please enter Passwords correctly",
+                              toastLength: Toast.LENGTH_SHORT,
+                              gravity: ToastGravity.BOTTOM,
+                              timeInSecForIosWeb: 1,
+                              backgroundColor: KDarkPink_twg,
+                              textColor: Kwhite,
+                              fontSize: 16.0,
+                            );
                           }
                         }),
 

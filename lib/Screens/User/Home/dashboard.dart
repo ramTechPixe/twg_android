@@ -1,5 +1,6 @@
 import 'package:twg/Controllers/profile_controller.dart';
 import 'package:twg/untils/export_file.dart';
+import 'package:http/http.dart' as http;
 
 class UserDashboard extends StatefulWidget {
   const UserDashboard({super.key});
@@ -40,6 +41,30 @@ class _UserDashboardState extends State<UserDashboard> {
     // debugPrint("${isConnected}");
   }
 
+// ip
+  Future<String> getPublicIP() async {
+    try {
+      final response = await http.get(Uri.parse('https://api.ipify.org'));
+      if (response.statusCode == 200) {
+        return response.body;
+      } else {
+        throw Exception('Failed to fetch IP address');
+      }
+    } catch (e) {
+      print('Error: $e');
+      return 'Error fetching IP';
+    }
+  }
+
+  void deviceIp() async {
+    String ip = await getPublicIP();
+    setState(() {
+      dashboardcontroller.deviceIp.value = '$ip';
+    });
+    print('Public IP: $ip');
+  }
+
+//
   @override
   void initState() {
     checkInternet();
@@ -52,11 +77,32 @@ class _UserDashboardState extends State<UserDashboard> {
     dashboardcontroller.dashboardTotalPostAPI();
     semicontroller.userScheduledPost();
     loadAccounts();
+    deviceIp();
     // userprofilecontroller.userProfile();
 
     super.initState();
   }
 
+//RefreshIndicator
+  Future<void> _refreshData() async {
+    await Future.delayed(Duration(seconds: 2));
+
+    // setState(() {
+    //   items = List.generate(20, (index) => 'New Item ${index + 1}');
+    // });
+    checkInternet();
+    // userprofilecontroller.userProfile();
+    // dashboardcontroller.userTotalPostAPI();
+    // dashboardcontroller.userPlanExpiryAPI();
+    // dashboardcontroller.userQuickPostAPI();
+    // dashboardcontroller.dashboardTotalSocialPostAPI();
+    dashboardcontroller.dashboardTotalSocialPostAPI();
+    dashboardcontroller.dashboardTotalPostAPI();
+    semicontroller.userScheduledPost();
+    loadAccounts();
+  }
+
+//
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -66,105 +112,109 @@ class _UserDashboardState extends State<UserDashboard> {
           elevation: 16.0,
           child: leftDrawerMenu(context),
         ),
-        body: Obx(
-          () => userprofilecontroller.profiledataLoading == true ||
-                  // dashboardcontroller.userTotalPostLoading == true ||
-                  // dashboardcontroller.userPlanExpiryLoading == true ||
-                  dashboardcontroller.dashboardTotalSocialPostsLoading ==
-                      true ||
-                  //  dashboardcontroller.userSocialMediadataLoading == true ||
-                  dashboardcontroller.dashboardTotalPostsLoading == true
-              ? Center(
-                  child: CircularProgressIndicator(
-                    color: Kform_border_twg,
-                  ),
-                )
-              : SingleChildScrollView(
-                  child: Container(
-                    margin: EdgeInsets.all(16),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(
-                          height: 30.h,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        body: RefreshIndicator(
+            color: Kblue_twg,
+            displacement: 200.h,
+            onRefresh: _refreshData,
+            child: Obx(
+              () => userprofilecontroller.profiledataLoading == true ||
+                      // dashboardcontroller.userTotalPostLoading == true ||
+                      // dashboardcontroller.userPlanExpiryLoading == true ||
+                      dashboardcontroller.dashboardTotalSocialPostsLoading ==
+                          true ||
+                      //  dashboardcontroller.userSocialMediadataLoading == true ||
+                      dashboardcontroller.dashboardTotalPostsLoading == true
+                  ? Center(
+                      child: CircularProgressIndicator(
+                        color: Kform_border_twg,
+                      ),
+                    )
+                  : SingleChildScrollView(
+                      child: Container(
+                        margin: EdgeInsets.all(16),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
+                            SizedBox(
+                              height: 30.h,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    InkWell(
+                                      onTap: () {
+                                        accountscontroller
+                                            .userYouTubeAccountsList();
+                                        // accountscontroller
+                                        //     .useryoutubeAccountsList();
+                                      },
+                                      child: Text(
+                                        "Welcome",
+                                        style: GoogleFonts.poppins(
+                                            color: KDarkPink_twg,
+                                            fontSize: 24.sp,
+                                            fontWeight: kFW600),
+                                      ),
+                                    ),
+                                    Text(
+                                      userprofilecontroller.profileData[
+                                                      "user_details"]
+                                                  ["first_name"] +
+                                              " " +
+                                              userprofilecontroller.profileData[
+                                                      "user_details"]
+                                                  ["last_name"] ??
+                                          "",
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: GoogleFonts.poppins(
+                                          color: kblack,
+                                          fontSize: kTwentyFont,
+                                          fontWeight: kFW500),
+                                    ),
+                                  ],
+                                ),
                                 InkWell(
                                   onTap: () {
-                                    accountscontroller
-                                        .userYouTubeAccountsList();
-                                    // accountscontroller
-                                    //     .useryoutubeAccountsList();
+                                    _scaffoldKey.currentState!.openEndDrawer();
                                   },
-                                  child: Text(
-                                    "Welcome",
-                                    style: GoogleFonts.poppins(
-                                        color: KDarkPink_twg,
-                                        fontSize: 24.sp,
-                                        fontWeight: kFW600),
+                                  child: Image.asset(
+                                    "assets/images/menu_image.png",
+                                    width: 30,
+                                    height: 30,
                                   ),
-                                ),
-                                Text(
-                                  userprofilecontroller
-                                                  .profileData["user_details"]
-                                              ["first_name"] +
-                                          " " +
-                                          userprofilecontroller
-                                                  .profileData["user_details"]
-                                              ["last_name"] ??
-                                      "",
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: GoogleFonts.poppins(
-                                      color: kblack,
-                                      fontSize: kTwentyFont,
-                                      fontWeight: kFW500),
-                                ),
+                                )
                               ],
                             ),
-                            InkWell(
-                              onTap: () {
-                                _scaffoldKey.currentState!.openEndDrawer();
-                              },
-                              child: Image.asset(
-                                "assets/images/menu_image.png",
-                                width: 30,
-                                height: 30,
-                              ),
-                            )
+                            SizedBox(
+                              height: 20.h,
+                            ),
+                            TotalCards(),
+                            SizedBox(
+                              height: 50.h,
+                            ),
+                            Text(
+                              "Total Social Media updates",
+                              style: GoogleFonts.poppins(
+                                  color: KGradientPurple_twg,
+                                  fontSize: kTwentyFont,
+                                  fontWeight: kFW600),
+                            ),
+                            SizedBox(
+                              height: 15.h,
+                            ),
+                            SocialMediaCards(),
+                            SizedBox(
+                              height: 100.h,
+                            ),
                           ],
                         ),
-                        SizedBox(
-                          height: 20.h,
-                        ),
-                        TotalCards(),
-                        SizedBox(
-                          height: 50.h,
-                        ),
-                        Text(
-                          "Total Social Media updates",
-                          style: GoogleFonts.poppins(
-                              color: KGradientPurple_twg,
-                              fontSize: kTwentyFont,
-                              fontWeight: kFW600),
-                        ),
-                        SizedBox(
-                          height: 15.h,
-                        ),
-                        SocialMediaCards(),
-                        SizedBox(
-                          height: 100.h,
-                        ),
-                      ],
+                      ),
                     ),
-                  ),
-                ),
-        ));
+            )));
   }
 }
 
@@ -471,168 +521,169 @@ Widget leftDrawerMenu(
             ],
           ),
         ),
-        SizedBox(
-          height: 20.h,
-        ),
-        GestureDetector(
-          onTap: () {
-            showModalBottomSheet(
-              context: context,
-              builder: (BuildContext context) {
-                return Container(
-                  height: 200,
-                  color: Kwhite,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          InkWell(
-                            onTap: () {
-                              Get.toNamed(kCreateBannersScreens,
-                                  arguments: ["square"]);
-                            },
-                            child: Column(
-                              children: [
-                                Container(
-                                  height: 50.h,
-                                  width: 50.w,
-                                  padding: EdgeInsets.all(8),
-                                  alignment: Alignment.center,
-                                  decoration: BoxDecoration(
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: kblack.withOpacity(0.3),
-                                        blurRadius: 1.r,
-                                        offset: Offset(1, 1),
-                                        spreadRadius: 1.r,
-                                      )
-                                    ],
-                                    color: Klight_grey_twg,
-                                    borderRadius: BorderRadius.circular(1.r),
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 8.h,
-                                ),
-                                Text(
-                                  "Sqaure Post",
-                                  style: GoogleFonts.poppins(
-                                      color: kblack,
-                                      fontSize: kFourteenFont,
-                                      fontWeight: kFW500),
-                                ),
-                              ],
-                            ),
-                          ),
-                          InkWell(
-                            onTap: () {
-                              Get.toNamed(kCreateBannersScreens,
-                                  arguments: ["landscape"]);
-                            },
-                            child: Column(
-                              children: [
-                                Container(
-                                  height: 40.h,
-                                  width: 75.w,
-                                  padding: EdgeInsets.all(8),
-                                  alignment: Alignment.center,
-                                  decoration: BoxDecoration(
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: kblack.withOpacity(0.3),
-                                        blurRadius: 1.r,
-                                        offset: Offset(1, 1),
-                                        spreadRadius: 1.r,
-                                      )
-                                    ],
-                                    color: Klight_grey_twg,
-                                    borderRadius: BorderRadius.circular(1.r),
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 8.h,
-                                ),
-                                Text(
-                                  "LandScape Post",
-                                  style: GoogleFonts.poppins(
-                                      color: kblack,
-                                      fontSize: kFourteenFont,
-                                      fontWeight: kFW500),
-                                ),
-                              ],
-                            ),
-                          ),
-                          InkWell(
-                            onTap: () {
-                              Get.toNamed(kCreateBannersScreens,
-                                  arguments: ["free"]);
-                            },
-                            child: Column(
-                              children: [
-                                Container(
-                                  height: 30.h,
-                                  width: 30.w,
-                                  padding: EdgeInsets.all(8),
-                                  alignment: Alignment.center,
-                                  decoration: BoxDecoration(
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: kblack.withOpacity(0.3),
-                                        blurRadius: 1.r,
-                                        offset: Offset(1, 1),
-                                        spreadRadius: 1.r,
-                                      )
-                                    ],
-                                    color: Kwhite,
-                                    border: Border.all(color: Klight_grey_twg),
-                                    borderRadius: BorderRadius.circular(1.r),
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 8.h,
-                                ),
-                                Text(
-                                  "Free Style",
-                                  style: GoogleFonts.poppins(
-                                      color: kblack,
-                                      fontSize: kFourteenFont,
-                                      fontWeight: kFW500),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                );
-              },
-            );
+        // SizedBox(
+        //   height: 20.h,
+        // ),
+        // GestureDetector(
+        //   onTap: () {
+        //     showModalBottomSheet(
+        //       context: context,
+        //       builder: (BuildContext context) {
+        //         return Container(
+        //           height: 200,
+        //           color: Kwhite,
+        //           child: Column(
+        //             mainAxisAlignment: MainAxisAlignment.center,
+        //             crossAxisAlignment: CrossAxisAlignment.center,
+        //             children: [
+        //               Row(
+        //                 mainAxisAlignment: MainAxisAlignment.spaceAround,
+        //                 crossAxisAlignment: CrossAxisAlignment.center,
+        //                 children: [
+        //                   InkWell(
+        //                     onTap: () {
+        //                       Get.toNamed(kCreateBannersScreens,
+        //                           arguments: ["square"]);
+        //                     },
+        //                     child: Column(
+        //                       children: [
+        //                         Container(
+        //                           height: 50.h,
+        //                           width: 50.w,
+        //                           padding: EdgeInsets.all(8),
+        //                           alignment: Alignment.center,
+        //                           decoration: BoxDecoration(
+        //                             boxShadow: [
+        //                               BoxShadow(
+        //                                 color: kblack.withOpacity(0.3),
+        //                                 blurRadius: 1.r,
+        //                                 offset: Offset(1, 1),
+        //                                 spreadRadius: 1.r,
+        //                               )
+        //                             ],
+        //                             color: Klight_grey_twg,
+        //                             borderRadius: BorderRadius.circular(1.r),
+        //                           ),
+        //                         ),
+        //                         SizedBox(
+        //                           height: 8.h,
+        //                         ),
+        //                         Text(
+        //                           "Sqaure Post",
+        //                           style: GoogleFonts.poppins(
+        //                               color: kblack,
+        //                               fontSize: kFourteenFont,
+        //                               fontWeight: kFW500),
+        //                         ),
+        //                       ],
+        //                     ),
+        //                   ),
+        //                   InkWell(
+        //                     onTap: () {
+        //                       Get.toNamed(kCreateBannersScreens,
+        //                           arguments: ["landscape"]);
+        //                     },
+        //                     child: Column(
+        //                       children: [
+        //                         Container(
+        //                           height: 40.h,
+        //                           width: 75.w,
+        //                           padding: EdgeInsets.all(8),
+        //                           alignment: Alignment.center,
+        //                           decoration: BoxDecoration(
+        //                             boxShadow: [
+        //                               BoxShadow(
+        //                                 color: kblack.withOpacity(0.3),
+        //                                 blurRadius: 1.r,
+        //                                 offset: Offset(1, 1),
+        //                                 spreadRadius: 1.r,
+        //                               )
+        //                             ],
+        //                             color: Klight_grey_twg,
+        //                             borderRadius: BorderRadius.circular(1.r),
+        //                           ),
+        //                         ),
+        //                         SizedBox(
+        //                           height: 8.h,
+        //                         ),
+        //                         Text(
+        //                           "LandScape Post",
+        //                           style: GoogleFonts.poppins(
+        //                               color: kblack,
+        //                               fontSize: kFourteenFont,
+        //                               fontWeight: kFW500),
+        //                         ),
+        //                       ],
+        //                     ),
+        //                   ),
+        //                   InkWell(
+        //                     onTap: () {
+        //                       Get.toNamed(kCreateBannersScreens,
+        //                           arguments: ["free"]);
+        //                     },
+        //                     child: Column(
+        //                       children: [
+        //                         Container(
+        //                           height: 30.h,
+        //                           width: 30.w,
+        //                           padding: EdgeInsets.all(8),
+        //                           alignment: Alignment.center,
+        //                           decoration: BoxDecoration(
+        //                             boxShadow: [
+        //                               BoxShadow(
+        //                                 color: kblack.withOpacity(0.3),
+        //                                 blurRadius: 1.r,
+        //                                 offset: Offset(1, 1),
+        //                                 spreadRadius: 1.r,
+        //                               )
+        //                             ],
+        //                             color: Kwhite,
+        //                             border: Border.all(color: Klight_grey_twg),
+        //                             borderRadius: BorderRadius.circular(1.r),
+        //                           ),
+        //                         ),
+        //                         SizedBox(
+        //                           height: 8.h,
+        //                         ),
+        //                         Text(
+        //                           "Free Style",
+        //                           style: GoogleFonts.poppins(
+        //                               color: kblack,
+        //                               fontSize: kFourteenFont,
+        //                               fontWeight: kFW500),
+        //                         ),
+        //                       ],
+        //                     ),
+        //                   ),
+        //                 ],
+        //               ),
+        //             ],
+        //           ),
+        //         );
+        //       },
+        //     );
 
-            // Get.toNamed(kEdit_Profile);
-          },
-          child: Row(
-            children: [
-              Image.asset(
-                "assets/images/video_template.png",
-                height: 30.h,
-                width: 30.w,
-              ),
-              SizedBox(
-                width: 15.w,
-              ),
-              Text(
-                "Creat Banners",
-                style: GoogleFonts.poppins(
-                    color: kblack, fontSize: kSixteenFont, fontWeight: kFW500),
-              ),
-            ],
-          ),
-        ),
+        //     // Get.toNamed(kEdit_Profile);
+        //   },
+        //   child: Row(
+        //     children: [
+        //       Image.asset(
+        //         "assets/images/video_template.png",
+        //         height: 30.h,
+        //         width: 30.w,
+        //       ),
+        //       SizedBox(
+        //         width: 15.w,
+        //       ),
+        //       Text(
+        //         "Creat Banners",
+        //         style: GoogleFonts.poppins(
+        //             color: kblack, fontSize: kSixteenFont, fontWeight: kFW500),
+        //       ),
+        //     ],
+        //   ),
+        // ),
+
         SizedBox(
           height: 20.h,
         ),

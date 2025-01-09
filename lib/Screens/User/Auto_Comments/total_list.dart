@@ -124,7 +124,14 @@ class _TotalsListState extends State<TotalsList> {
                             if (menuscontroller.autoCommentsList.isEmpty &&
                                 value != "") {
                               Fluttertoast.showToast(
-                                  msg: "No posts Available ,Search Again");
+                                msg: "No posts Available ,Search Again",
+                                toastLength: Toast.LENGTH_SHORT,
+                                gravity: ToastGravity.BOTTOM,
+                                timeInSecForIosWeb: 1,
+                                backgroundColor: KDarkPink_twg,
+                                textColor: Kwhite,
+                                fontSize: 16.0,
+                              );
 
                               setState(() {
                                 menuscontroller.userautoCommentslistAPI();

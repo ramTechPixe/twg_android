@@ -4296,6 +4296,7 @@ class _AutoPostv2State extends State<AutoPostv2> {
                             fontWeight: kFW600,
                             isLoading: false,
                             onTap: () {
+                              /////
                               var payload = {
                                 'id': semicontroller.semipostMap["post_id"],
 

@@ -201,6 +201,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.3.9"
+  dyn_mouse_scroll:
+    dependency: "direct main"
+    description:
+      name: dyn_mouse_scroll
+      sha256: "57890aed6fb19069bfbc5300f736a540ef23f8d91c956ead9c8f8e01060eb3e3"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.7"
   emoji_picker_flutter:
     dependency: "direct main"
     description:
@@ -1074,6 +1082,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.4.0"
+  universal_io:
+    dependency: transitive
+    description:
+      name: universal_io
+      sha256: "1722b2dcc462b4b2f3ee7d188dad008b6eb4c40bbd03a3de451d82c78bba9aad"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.2.2"
   url_launcher:
     dependency: "direct main"
     description:

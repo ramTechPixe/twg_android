@@ -123,8 +123,7 @@ class _QuickPostingState extends State<QuickPosting> {
             ),
           ],
         ),
-        body: 
-        SingleChildScrollView(
+        body: SingleChildScrollView(
           child: Obx(
             () => Container(
               margin: EdgeInsets.all(16),
@@ -971,12 +970,13 @@ class _QuickPostingState extends State<QuickPosting> {
                       ),
                     ],
                   ),
-                  dashboardcontroller.selectedQuickPost == "Auto Post"
-                      ? AutoPost()
-                      : dashboardcontroller.selectedQuickPost ==
-                              "Custom Message"
-                          ? CustomPost()
-                          : AiPost(),
+                  AutoPost(),
+                  // dashboardcontroller.selectedQuickPost == "Auto Post"
+                  //     ? AutoPost()
+                  //     : dashboardcontroller.selectedQuickPost ==
+                  //             "Custom Message"
+                  //         ? CustomPost()
+                  //         : AiPost(),
                   // Row(
                   //   mainAxisAlignment: MainAxisAlignment.end,
                   //   children: [
@@ -1054,6 +1054,5 @@ class _QuickPostingState extends State<QuickPosting> {
             ),
           ),
         ));
- 
   }
 }

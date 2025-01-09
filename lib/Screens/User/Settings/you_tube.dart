@@ -18,6 +18,7 @@ class YouTube extends StatefulWidget {
 
 class _YouTubeState extends State<YouTube> {
   String? selectedOption;
+  final List<String> sortner = ['TinyURL', 'bit.ly', 'shorte.st'];
   DashboardController dashboardcontroller = Get.put(DashboardController());
   ProfileController userprofilecontroller = Get.put(ProfileController());
   SettingsController settingscontroller = Get.put(SettingsController());
@@ -37,6 +38,18 @@ class _YouTubeState extends State<YouTube> {
     "Nashik"
   ];
   List<String> selectedCheckBoxValue = [];
+  //
+  final List<Map<String, TextEditingController>> _twitterFields = [];
+
+  void _addNewFieldSet() {
+    setState(() {
+      _twitterFields.add({
+        "consumer_key": TextEditingController(),
+        "consumer_secret": TextEditingController(),
+      });
+    });
+  }
+
 //////////////////////
   Future<void> chooseImage(type) async {
     var image;
@@ -110,6 +123,8 @@ class _YouTubeState extends State<YouTube> {
       settingscontroller.youtubeAPIKeyController.text = '098yew';
 
       settingscontroller.youtubeAppSecretController.text = '456il;';
+      settingscontroller.twitterShort.value = 'TinyURL';
+      _addNewFieldSet();
     });
 
     super.initState();
@@ -269,76 +284,103 @@ class _YouTubeState extends State<YouTube> {
                   SizedBox(
                     height: 15.h,
                   ),
-                  CustomFormFields(
-                    ontap: () {
-                      //  Get.toNamed(kSearchPlaces);
-                    },
-                    enabled: true,
-                    controller: settingscontroller.youtubeAPIKeyController,
-                    labelColor: KText,
-                    obscureText: false,
-                    contentPadding:
-                        const EdgeInsets.symmetric(vertical: 16, horizontal: 8),
-                    fontSize: kFourteenFont,
-                    fontWeight: FontWeight.w500,
-                    hintText: "Enter Youtube App ID / API Key",
-                    maxLines: 1,
-                    readOnly: false,
-                    label: "API Key",
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'Please enter API Key';
-                      }
-                      return null;
-                    },
-                  ),
-                  // API Secret
-                  SizedBox(
-                    height: 15.h,
-                  ),
-                  CustomFormFields(
-                    ontap: () {
-                      //  Get.toNamed(kSearchPlaces);
-                    },
-                    enabled: true,
-                    labelColor: KText,
-                    obscureText: false,
-                    controller: settingscontroller.youtubeAppSecretController,
-                    contentPadding:
-                        const EdgeInsets.symmetric(vertical: 16, horizontal: 8),
-                    fontSize: kFourteenFont,
-                    fontWeight: FontWeight.w500,
-                    hintText: "Enter YouTube App Secret.",
-                    maxLines: 1,
-                    readOnly: false,
-                    label: "YouTube App Secret.",
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'Please enter YouTube App Secret.';
-                      }
-                      return null;
+                  // CustomFormFields(
+                  //   ontap: () {
+                  //     //  Get.toNamed(kSearchPlaces);
+                  //   },
+                  //   enabled: true,
+                  //   controller: settingscontroller.youtubeAPIKeyController,
+                  //   labelColor: KText,
+                  //   obscureText: false,
+                  //   contentPadding:
+                  //       const EdgeInsets.symmetric(vertical: 16, horizontal: 8),
+                  //   fontSize: kFourteenFont,
+                  //   fontWeight: FontWeight.w500,
+                  //   hintText: "Enter Youtube App ID / API Key",
+                  //   maxLines: 1,
+                  //   readOnly: false,
+                  //   label: "API Key",
+                  //   validator: (value) {
+                  //     if (value!.isEmpty) {
+                  //       return 'Please enter API Key';
+                  //     }
+                  //     return null;
+                  //   },
+                  // ),
+                  // // API Secret
+                  // SizedBox(
+                  //   height: 15.h,
+                  // ),
+                  // CustomFormFields(
+                  //   ontap: () {
+                  //     //  Get.toNamed(kSearchPlaces);
+                  //   },
+                  //   enabled: true,
+                  //   labelColor: KText,
+                  //   obscureText: false,
+                  //   controller: settingscontroller.youtubeAppSecretController,
+                  //   contentPadding:
+                  //       const EdgeInsets.symmetric(vertical: 16, horizontal: 8),
+                  //   fontSize: kFourteenFont,
+                  //   fontWeight: FontWeight.w500,
+                  //   hintText: "Enter YouTube App Secret.",
+                  //   maxLines: 1,
+                  //   readOnly: false,
+                  //   label: "YouTube App Secret.",
+                  //   validator: (value) {
+                  //     if (value!.isEmpty) {
+                  //       return 'Please enter YouTube App Secret.';
+                  //     }
+                  //     return null;
+                  //   },
+                  // ),
+                  ListView.builder(
+                    itemCount: _twitterFields.length,
+                    shrinkWrap: true,
+                    physics: NeverScrollableScrollPhysics(),
+                    itemBuilder: (context, index) {
+                      final fieldSet = _twitterFields[index];
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          _buildTextField(
+                              controller: fieldSet["consumer_key"]!,
+                              label: "API Key ${index + 1}"),
+                          SizedBox(height: 8),
+                          _buildTextField(
+                              controller: fieldSet["consumer_secret"]!,
+                              label: "API Secret ${index + 1}"),
+                          //  SizedBox(height: 8),
+
+                          SizedBox(height: 16),
+                          Divider(),
+                        ],
+                      );
                     },
                   ),
 
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      Container(
-                        margin: EdgeInsets.only(top: 26),
-                        height: 45,
-                        width: 120.w,
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                          color: Kform_border_twg,
-                          borderRadius: BorderRadius.all(Radius.circular(5)),
-                        ),
-                        child: Text(
-                          "+ Add More",
-                          textAlign: TextAlign.center,
-                          style: GoogleFonts.poppins(
-                              fontWeight: kFW600,
-                              color: Kwhite,
-                              fontSize: 16.sp),
+                      InkWell(
+                        onTap: _addNewFieldSet,
+                        child: Container(
+                          margin: EdgeInsets.only(top: 26),
+                          height: 45,
+                          width: 120.w,
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                            color: Kform_border_twg,
+                            borderRadius: BorderRadius.all(Radius.circular(5)),
+                          ),
+                          child: Text(
+                            "+ Add More",
+                            textAlign: TextAlign.center,
+                            style: GoogleFonts.poppins(
+                                fontWeight: kFW600,
+                                color: Kwhite,
+                                fontSize: 16.sp),
+                          ),
                         ),
                       ),
                     ],
@@ -352,48 +394,66 @@ class _YouTubeState extends State<YouTube> {
                       //  settingscontroller.youtubeAppSecretController
                       : InkWell(
                           onTap: () {
-                            var payload = {
-                              'sap_youtube_options[youtube_keys][0][consumer_key]':
-                                  settingscontroller
-                                      .youtubeAPIKeyController.text,
-                              'sap_youtube_options[youtube_keys][0][consumer_secret]':
-                                  settingscontroller
-                                      .youtubeAppSecretController.text,
-                              'sap_youtube_options[sap_yt_video]': '',
-                              'sap_youtube_options[yt_type_shortner_opt]': '',
-                              'sap_youtube_options[yt_bitly_access_token]': '',
-                              'sap_youtube_options[yt_shortest_api_token]': '',
-                              'limit_youtube_count': '20',
-                              'created_youtube_count': '1',
-                              'sap_youtube_submit': '',
-                              'user_id': userprofilecontroller
-                                  .profileData["user_details"]["id"],
-                              // "sap_twitter_options[twitter_keys][0][consumer_key]":
-                              //     settingscontroller
-                              //         .twitterAPIKeyController.text,
-                              // "sap_twitter_options[twitter_keys][0][consumer_secret]":
-                              //     settingscontroller
-                              //         .twitterAPISecretController.text,
-                              // "sap_twitter_options[twitter_keys][0][oauth_token]":
-                              //     settingscontroller
-                              //         .twitterAceesTokenController.text,
-                              // "sap_twitter_options[twitter_keys][0][oauth_secret]":
-                              //     settingscontroller
-                              //         .twitterAceesTokenSecretController.text,
+                            Map<String, dynamic> payload = {};
 
-                              // ///
-                              // "sap_twitter_options[tw_type_shortner_opt]": "",
-                              // "sap_twitter_options[tw_bitly_access_token]": "",
-                              // "sap_twitter_options[tw_shortest_api_token]": "",
-                              // "limit_twitter_count": "",
-                              // //
-                              // "created_twitter_count": "",
-                              // "sap_twitter_submit": "",
-                              // "user_id": userprofilecontroller
-                              //     .profileData["user_details"]["id"],
-                            };
-/////////////
-//////////////////////////////////
+                            // Loop through the dynamically added fields
+                            for (int i = 0; i < _twitterFields.length; i++) {
+                              var fieldSet = _twitterFields[i];
+
+                              payload["sap_youtube_options[youtube_keys][$i][consumer_key]"]
+                                  // payload["sap_twitter_options[twitter_keys][$i][consumer_key]"]
+                                  = fieldSet["consumer_key"]!.text;
+
+                              // payload["sap_twitter_options[twitter_keys][$i][consumer_secret]"] =
+                              payload["sap_youtube_options[youtube_keys][$i][consumer_secret]"] =
+                                  fieldSet["consumer_secret"]!.text;
+                            }
+
+                            // Add static fields // ['TinyURL', 'bit.ly', 'shorte.st'];
+
+                            payload.addAll({
+                              'sap_youtube_options[sap_yt_video]': '',
+                              "sap_youtube_options[yt_type_shortner_opt]":
+                                  settingscontroller.twitterShort == 'TinyURL'
+                                      ? settingscontroller
+                                          .tiniUrlOneController.text
+                                      : "",
+                              "sap_youtube_options[yt_bitly_access_token]":
+                                  settingscontroller.twitterShort == 'bit.ly'
+                                      ? settingscontroller
+                                          .tiniUrlOneController.text
+                                      : "",
+                              "sap_youtube_options[yt_shortest_api_token]":
+                                  settingscontroller.twitterShort == 'shorte.st'
+                                      ? settingscontroller
+                                          .tiniUrlOneController.text
+                                      : "",
+                              "limit_youtube_count":
+                                  "${dashboardcontroller.younetworkCount.value}",
+                              "created_youtube_count": "1",
+                              "sap_youtube_submit": "",
+                              "user_id": userprofilecontroller
+                                  .profileData["user_details"]["id"],
+                            });
+
+                            // var payload = {
+
+                            // 'sap_youtube_options[youtube_keys][0][consumer_key]':
+                            //     settingscontroller
+                            //         .youtubeAPIKeyController.text,
+                            // 'sap_youtube_options[youtube_keys][0][consumer_secret]':
+                            //     settingscontroller
+                            //         .youtubeAppSecretController.text,
+                            // 'sap_youtube_options[sap_yt_video]': '',
+                            // 'sap_youtube_options[yt_type_shortner_opt]': '',
+                            // 'sap_youtube_options[yt_bitly_access_token]': '',
+                            // 'sap_youtube_options[yt_shortest_api_token]': '',
+                            // 'limit_youtube_count': '20',
+                            // 'created_youtube_count': '1',
+                            // 'sap_youtube_submit': '',
+                            // 'user_id': userprofilecontroller
+                            //     .profileData["user_details"]["id"],
+                            //    };
 
                             settingscontroller.youtubeSave(payload);
                           },
@@ -831,50 +891,258 @@ class _YouTubeState extends State<YouTube> {
                   //   ),
                   // ),
                   ,
+                  SizedBox(
+                    height: 10.h,
+                  ),
+                  Text(
+                    "URL Shortener",
+                    style: GoogleFonts.poppins(
+                        color: kblack,
+                        fontSize: kSixteenFont,
+                        fontWeight: kFW500),
+                  ),
                   Container(
-                    margin: EdgeInsets.only(top: 26),
-                    // "7"
-                    height: 45,
-                    width: 120.w,
-                    alignment: Alignment.center,
+                    margin: EdgeInsets.only(top: 10.h),
                     decoration: BoxDecoration(
-                      // boxShadow: [
-                      //   BoxShadow(
-                      //     color: Ktextcolor.withOpacity(0.5),
-                      //     blurRadius: 5.r,
-                      //     offset: Offset(0, 5),
-                      //     spreadRadius: 1.r,
-                      //   )
-                      // ],
-                      color: Kform_border_twg,
-                      borderRadius: BorderRadius.all(Radius.circular(5)),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        // Icon(
-                        //   Icons.shopping_bag,
-                        //   color: Kwhite,
-                        // ),
-                        Image.asset(
-                          "assets/images/Vector.png",
-                          // height: 3.h,
-                          // width: 80.w,
+                        borderRadius: BorderRadius.circular(10.0),
+                        color: Kwhite,
+                        boxShadow: [
+                          BoxShadow(
+                            color: kblack.withOpacity(0.2),
+                            blurRadius: 2.r,
+                            offset: Offset(1, 1),
+                            spreadRadius: 1.r,
+                          )
+                          // BoxShadow(
+                          //   color: Color(0x3FD3D1D8),
+                          //   blurRadius: 30,
+                          //   offset: Offset(15, 15),
+                          //   spreadRadius: 2,
+                          // )
+                        ]),
+                    child: DropdownButtonFormField2<String>(
+                      value: settingscontroller.twitterShort.value ?? "",
+                      isExpanded: true,
+                      decoration: InputDecoration(
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                              color: kblack.withOpacity(0.6), width: 0.5),
+                          borderRadius: BorderRadius.circular(10.r),
                         ),
-                        SizedBox(
-                          width: 12.w,
+                        errorBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                              color: kblack.withOpacity(0.6), width: 0.5),
+                          borderRadius: BorderRadius.circular(10.r),
                         ),
-                        Text(
-                          "Save",
-                          textAlign: TextAlign.center,
-                          style: GoogleFonts.poppins(
-                              fontWeight: kFW600,
-                              color: Kwhite,
-                              fontSize: 16.sp),
+                        disabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                              color: kblack.withOpacity(0.6), width: 0.5),
+                          borderRadius: BorderRadius.circular(10.r),
                         ),
-                      ],
+                        focusedErrorBorder: OutlineInputBorder(
+                          borderSide:
+                              BorderSide(color: Kform_border_twg, width: 1),
+                          borderRadius: BorderRadius.circular(10.r),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide:
+                              BorderSide(color: Kform_border_twg, width: 1),
+                          borderRadius: BorderRadius.circular(10.r),
+                        ),
+                        contentPadding: const EdgeInsets.symmetric(
+                            vertical: 10, horizontal: 8),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                      hint: Text(
+                        'Link',
+                        style: GoogleFonts.poppins(
+                          fontSize: 14,
+                          color: KTextgery.withOpacity(0.5),
+                        ),
+                      ),
+                      items: sortner
+                          .map((item) => DropdownMenuItem<String>(
+                                value: item,
+                                child: Text(
+                                  item,
+                                  style: GoogleFonts.poppins(
+                                    fontSize: 14,
+                                  ),
+                                ),
+                              ))
+                          .toList(),
+                      validator: (value) {
+                        if (value == null) {
+                          return 'Please Share  Link';
+                        }
+                        return null;
+                      },
+                      onChanged: (value) {
+                        setState(() {
+                          selectedUserValue = value.toString();
+                          settingscontroller.twitterShort.value =
+                              value.toString();
+                          setState(() {});
+                        });
+                      },
+                      onSaved: (value) {
+                        selectedUserValue = value.toString();
+                        print(selectedUserValue);
+                        setState(() {});
+                      },
+                      buttonStyleData: const ButtonStyleData(
+                        padding: EdgeInsets.only(right: 8),
+                      ),
+                      iconStyleData: IconStyleData(
+                        icon: Icon(
+                          Icons.arrow_drop_down,
+                          color: kblack.withOpacity(0.6),
+                        ),
+                        iconSize: 24,
+                      ),
+                      dropdownStyleData: DropdownStyleData(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(15),
+                        ),
+                      ),
+                      menuItemStyleData: const MenuItemStyleData(
+                        padding: EdgeInsets.symmetric(horizontal: 16),
+                      ),
                     ),
                   ),
+                  SizedBox(
+                    height: 10.h,
+                  ),
+                  CustomFormFields(
+                    ontap: () {
+                      //  Get.toNamed(kSearchPlaces);
+                    },
+                    enabled: true,
+                    controller: settingscontroller.tiniUrlOneController,
+                    //    controller: userprofilecontroller.editFirstNameController,
+                    labelColor: KText,
+                    obscureText: false,
+                    contentPadding:
+                        const EdgeInsets.symmetric(vertical: 16, horizontal: 8),
+                    fontSize: kFourteenFont,
+                    fontWeight: FontWeight.w500,
+                    hintText: " ",
+                    maxLines: 1,
+                    readOnly: false,
+                    label: "${settingscontroller.twitterShort.value}" + "Token",
+
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'Please Enter text';
+                      }
+                      return null;
+                    },
+                  ),
+                  Obx(() => settingscontroller.youtubeSaveLoading == true
+                      ? Center(
+                          child: CircularProgressIndicator(
+                            color: Kform_border_twg,
+                          ),
+                        )
+                      //  settingscontroller.youtubeAppSecretController
+                      : InkWell(
+                          onTap: () {
+                            Map<String, dynamic> payload = {};
+
+                            // Loop through the dynamically added fields
+                            for (int i = 0; i < _twitterFields.length; i++) {
+                              var fieldSet = _twitterFields[i];
+
+                              payload["sap_youtube_options[youtube_keys][$i][consumer_key]"]
+                                  // payload["sap_twitter_options[twitter_keys][$i][consumer_key]"]
+                                  = fieldSet["consumer_key"]!.text;
+
+                              // payload["sap_twitter_options[twitter_keys][$i][consumer_secret]"] =
+                              payload["sap_youtube_options[youtube_keys][$i][consumer_secret]"] =
+                                  fieldSet["consumer_secret"]!.text;
+                            }
+
+                            // Add static fields // ['TinyURL', 'bit.ly', 'shorte.st'];
+
+                            payload.addAll({
+                              'sap_youtube_options[sap_yt_video]': '',
+                              "sap_youtube_options[yt_type_shortner_opt]":
+                                  settingscontroller.twitterShort == 'TinyURL'
+                                      ? settingscontroller
+                                          .tiniUrlOneController.text
+                                      : "",
+                              "sap_youtube_options[yt_bitly_access_token]":
+                                  settingscontroller.twitterShort == 'bit.ly'
+                                      ? settingscontroller
+                                          .tiniUrlOneController.text
+                                      : "",
+                              "sap_youtube_options[yt_shortest_api_token]":
+                                  settingscontroller.twitterShort == 'shorte.st'
+                                      ? settingscontroller
+                                          .tiniUrlOneController.text
+                                      : "",
+                              "limit_youtube_count":
+                                  "${dashboardcontroller.younetworkCount.value}",
+                              "created_youtube_count": "1",
+                              "sap_youtube_submit": "",
+                              "user_id": userprofilecontroller
+                                  .profileData["user_details"]["id"],
+                            });
+
+                            // var payload = {
+
+                            // 'sap_youtube_options[youtube_keys][0][consumer_key]':
+                            //     settingscontroller
+                            //         .youtubeAPIKeyController.text,
+                            // 'sap_youtube_options[youtube_keys][0][consumer_secret]':
+                            //     settingscontroller
+                            //         .youtubeAppSecretController.text,
+                            // 'sap_youtube_options[sap_yt_video]': '',
+                            // 'sap_youtube_options[yt_type_shortner_opt]': '',
+                            // 'sap_youtube_options[yt_bitly_access_token]': '',
+                            // 'sap_youtube_options[yt_shortest_api_token]': '',
+                            // 'limit_youtube_count': '20',
+                            // 'created_youtube_count': '1',
+                            // 'sap_youtube_submit': '',
+                            // 'user_id': userprofilecontroller
+                            //     .profileData["user_details"]["id"],
+                            //    };
+
+                            settingscontroller.youtubeSave(payload);
+                          },
+                          child: Container(
+                            margin: EdgeInsets.only(top: 26),
+                            height: 45,
+                            width: 120.w,
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                              color: Kform_border_twg,
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(5)),
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Image.asset(
+                                  "assets/images/Vector.png",
+                                ),
+                                SizedBox(
+                                  width: 12.w,
+                                ),
+                                Text(
+                                  "Save",
+                                  textAlign: TextAlign.center,
+                                  style: GoogleFonts.poppins(
+                                      fontWeight: kFW600,
+                                      color: Kwhite,
+                                      fontSize: 16.sp),
+                                ),
+                              ],
+                            ),
+                          ),
+                        )),
                 ],
               )),
           SizedBox(
@@ -884,4 +1152,52 @@ class _YouTubeState extends State<YouTube> {
       ),
     );
   }
+
+  //
+  Widget _buildTextField(
+      {required TextEditingController controller, required String label}) {
+    return CustomFormFields(
+      ontap: () {},
+      enabled: true,
+      labelColor: KText,
+      controller: controller,
+      obscureText: false,
+      contentPadding: const EdgeInsets.symmetric(vertical: 16, horizontal: 8),
+      fontSize: kFourteenFont,
+      fontWeight: FontWeight.w500,
+      hintText: "Enter Access Token Secret",
+      maxLines: 1,
+      readOnly: false,
+      label: label,
+      validator: (value) {
+        if (value!.isEmpty) {
+          return 'Please enter Access Token Secret';
+        }
+        return null;
+      },
+    );
+    // TextFormField(
+    //   controller: controller,
+    //   decoration: InputDecoration(
+    //     labelText: label,
+    //     border: OutlineInputBorder(),
+    //   ),
+    //   validator: (value) {
+    //     if (value == null || value.isEmpty) {
+    //       return 'Please enter $label';
+    //     }
+    //     return null;
+    //   },
+    // );
+  }
+
+  void _saveFields() {
+    for (var fieldSet in _twitterFields) {
+      print("Consumer Key: ${fieldSet['consumer_key']!.text}");
+      print("Consumer Secret: ${fieldSet['consumer_secret']!.text}");
+
+      print("---");
+    }
+  }
+  //
 }

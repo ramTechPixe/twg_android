@@ -6830,7 +6830,7 @@ class _EditMultiScreenState extends State<EditMultiScreen> {
                             'status': '1',
                             'form-submitted': '1',
                             'individual_status': '1',
-                            'ip': '"115.98.63.215"',
+                            'ip': dashboardcontroller.deviceIp.value,
                             'created_date': formattedDateTime,
                             'user_id': userprofilecontroller
                                 .profileData["user_details"]["id"],
