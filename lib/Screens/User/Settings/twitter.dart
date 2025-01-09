@@ -51,10 +51,26 @@ class _TwitterSettingsState extends State<TwitterSettings> {
   SettingsController settingscontroller = Get.put(SettingsController());
   bool isTimestampSwitched = false;
   List<String> yourOptionsList = ['Option 1', 'Option 2', 'Option 3'];
+  //
+  final List<Map<String, TextEditingController>> _twitterFields = [];
+
+  void _addNewFieldSet() {
+    setState(() {
+      _twitterFields.add({
+        "consumer_key": TextEditingController(),
+        "consumer_secret": TextEditingController(),
+        "oauth_token": TextEditingController(),
+        "oauth_secret": TextEditingController(),
+      });
+    });
+  }
+
+  //
   final List<String> CompanyList = [
     'Kolkata',
     'Delhi',
   ];
+  final List<String> sortner = ['TinyURL', 'bit.ly', 'shorte.st'];
   List<String> variantsList = [
     'Ram',
     "Komal",
@@ -106,14 +122,18 @@ class _TwitterSettingsState extends State<TwitterSettings> {
   @override
   void initState() {
     setState(() {
-      settingscontroller.twitterAPIKeyController.text =
-          "zDfobV8eCqHz4q7BFSFmGnEAR";
-      settingscontroller.twitterAPISecretController.text =
-          "O6x6CiDRVua6yFkras3qsntwTkirSjHyoPPmdBbLb2qMBf0HHc";
-      settingscontroller.twitterAceesTokenController.text =
-          "1475719265730777092-jRMhlZAR9hfLc6DVhX98IzgRWtukG3";
-      settingscontroller.twitterAceesTokenSecretController.text =
-          "oyHRqkn3pTxuX8kNeNRP47BCLita41MVjsZeZpjhbpsXl";
+      _addNewFieldSet();
+      setState(() {
+        settingscontroller.twitterShort.value = 'TinyURL';
+      });
+      // settingscontroller.twitterAPIKeyController.text =
+      //     "zDfobV8eCqHz4q7BFSFmGnEAR";
+      // settingscontroller.twitterAPISecretController.text =
+      //     "O6x6CiDRVua6yFkras3qsntwTkirSjHyoPPmdBbLb2qMBf0HHc";
+      // settingscontroller.twitterAceesTokenController.text =
+      //     "1475719265730777092-jRMhlZAR9hfLc6DVhX98IzgRWtukG3";
+      // settingscontroller.twitterAceesTokenSecretController.text =
+      //     "oyHRqkn3pTxuX8kNeNRP47BCLita41MVjsZeZpjhbpsXl";
     });
     super.initState();
   }
@@ -242,229 +262,263 @@ class _TwitterSettingsState extends State<TwitterSettings> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Container(
-                      margin: EdgeInsets.only(top: 8.h),
-                      decoration: BoxDecoration(
-                          border:
-                              Border.all(color: Ktextcolor.withOpacity(0.4)),
-                          borderRadius: BorderRadius.circular(4.r)),
-                      padding: EdgeInsets.all(5),
-                      child: Column(
+                  // Container(
+                  //     margin: EdgeInsets.only(top: 8.h),
+                  //     decoration: BoxDecoration(
+                  //         border:
+                  //             Border.all(color: Ktextcolor.withOpacity(0.4)),
+                  //         borderRadius: BorderRadius.circular(4.r)),
+                  //     padding: EdgeInsets.all(5),
+                  //     child: Column(
+                  //       crossAxisAlignment: CrossAxisAlignment.start,
+                  //       children: [
+                  //         Row(
+                  //           mainAxisAlignment: MainAxisAlignment.start,
+                  //           children: [
+                  //             Icon(Icons.info),
+                  //             SizedBox(
+                  //               width: 10,
+                  //             ),
+                  //             Text(
+                  //               "Note: You have a maximum of 10 accounts allowed",
+                  //               style: GoogleFonts.poppins(
+                  //                   fontSize: kTenFont,
+                  //                   color: kblack,
+                  //                   fontWeight: kFW400),
+                  //             ),
+                  //           ],
+                  //         ),
+                  //       ],
+                  //     )),
+                  // SizedBox(
+                  //   height: 15.h,
+                  // ),
+                  // Text(
+                  //   "API Key",
+                  //   textAlign: TextAlign.start,
+                  //   style: GoogleFonts.poppins(
+                  //       fontSize: kSixteenFont,
+                  //       //  letterSpacing: 1,
+                  //       color: KBlack_twg,
+                  //       fontWeight: kFW400),
+                  // ),
+                  // SizedBox(
+                  //   height: 2.h,
+                  // ),
+                  // Container(
+                  //   decoration: BoxDecoration(
+                  //     borderRadius: BorderRadius.circular(8),
+                  //     color: Kwhite,
+                  //   ),
+                  //   child: TextFormField(
+                  //     cursorColor: Kform_border_twg,
+                  //     controller: settingscontroller.twitterAPIKeyController,
+                  //     obscureText: passwordVisible,
+                  //     obscuringCharacter: '*',
+                  //     enabled: true,
+                  //     readOnly: false,
+                  //     style: GoogleFonts.poppins(
+                  //         fontSize: 14.sp, fontWeight: kFW500, color: kblack),
+                  //     decoration: InputDecoration(
+                  //       focusColor: Kwhite,
+                  //       filled: true,
+                  //       floatingLabelBehavior: FloatingLabelBehavior.auto,
+                  //       contentPadding: const EdgeInsets.symmetric(
+                  //           vertical: 16, horizontal: 8),
+
+                  //       border: OutlineInputBorder(
+                  //         borderRadius: BorderRadius.circular(50.r),
+                  //       ),
+                  //       enabledBorder: OutlineInputBorder(
+                  //         borderSide:
+                  //             BorderSide(color: KText_border_twg, width: 0.5),
+                  //         borderRadius: BorderRadius.circular(8.r),
+                  //       ),
+                  //       errorBorder: OutlineInputBorder(
+                  //         borderSide: BorderSide(color: KRed_twg, width: 0.5),
+                  //         borderRadius: BorderRadius.circular(8.r),
+                  //       ),
+                  //       disabledBorder: OutlineInputBorder(
+                  //         borderSide:
+                  //             BorderSide(color: KText_border_twg, width: 0.5),
+                  //         borderRadius: BorderRadius.circular(8.r),
+                  //       ),
+                  //       focusedErrorBorder: OutlineInputBorder(
+                  //         borderSide:
+                  //             BorderSide(color: Kform_border_twg, width: 1),
+                  //         borderRadius: BorderRadius.circular(8.r),
+                  //       ),
+                  //       focusedBorder: OutlineInputBorder(
+                  //         borderSide:
+                  //             BorderSide(color: Kform_border_twg, width: 1),
+                  //         borderRadius: BorderRadius.circular(8.r),
+                  //       ),
+                  //       fillColor: Kwhite,
+
+                  //       hintText: "Enter API Key",
+                  //       alignLabelWithHint: true,
+                  //       suffixIcon: IconButton(
+                  //         icon: Icon(
+                  //           passwordVisible
+                  //               ? Icons.visibility
+                  //               : Icons.visibility_off,
+                  //           size: 20.sp,
+                  //         ),
+                  //         onPressed: () {
+                  //           setState(
+                  //             () {
+                  //               passwordVisible = !passwordVisible;
+                  //             },
+                  //           );
+                  //         },
+                  //       ),
+                  //       //make hint text
+                  //       hintStyle: GoogleFonts.poppins(
+                  //         color: KLighText_twg,
+                  //         fontSize: 14.sp,
+                  //         fontWeight: kFW400,
+                  //       ),
+                  //       //////////////////
+
+                  //       ////////////
+
+                  //       //create lable
+                  //     ),
+                  //     validator: (value) {
+                  //       if (value!.isEmpty) {
+                  //         return 'Please enter API Key';
+                  //       }
+                  //       return null;
+                  //     },
+                  //     onChanged: (value) {},
+                  //   ),
+                  // ),
+                  // SizedBox(
+                  //   height: 15.h,
+                  // ),
+                  // CustomFormFields(
+                  //   ontap: () {},
+                  //   enabled: true,
+                  //   labelColor: KText,
+                  //   controller: settingscontroller.twitterAPISecretController,
+                  //   obscureText: false,
+                  //   contentPadding:
+                  //       const EdgeInsets.symmetric(vertical: 16, horizontal: 8),
+                  //   fontSize: kFourteenFont,
+                  //   fontWeight: FontWeight.w500,
+                  //   hintText: "Enter API Secret",
+                  //   maxLines: 1,
+                  //   readOnly: false,
+                  //   label: "API Secret",
+                  //   validator: (value) {
+                  //     if (value!.isEmpty) {
+                  //       return 'Please enter API Secret';
+                  //     }
+                  //     return null;
+                  //   },
+                  // ),
+                  // SizedBox(
+                  //   height: 15.h,
+                  // ),
+                  // CustomFormFields(
+                  //   ontap: () {},
+                  //   enabled: true,
+                  //   labelColor: KText,
+                  //   controller: settingscontroller.twitterAceesTokenController,
+                  //   obscureText: false,
+                  //   contentPadding:
+                  //       const EdgeInsets.symmetric(vertical: 16, horizontal: 8),
+                  //   fontSize: kFourteenFont,
+                  //   fontWeight: FontWeight.w500,
+                  //   hintText: "Enter Access Token",
+                  //   maxLines: 1,
+                  //   readOnly: false,
+                  //   label: "Access Token",
+                  //   validator: (value) {
+                  //     if (value!.isEmpty) {
+                  //       return 'Please enter Access Token';
+                  //     }
+                  //     return null;
+                  //   },
+                  // ),
+                  // SizedBox(
+                  //   height: 15.h,
+                  // ),
+                  // CustomFormFields(
+                  //   ontap: () {},
+                  //   enabled: true,
+                  //   labelColor: KText,
+                  //   controller:
+                  //       settingscontroller.twitterAceesTokenSecretController,
+                  //   obscureText: false,
+                  //   contentPadding:
+                  //       const EdgeInsets.symmetric(vertical: 16, horizontal: 8),
+                  //   fontSize: kFourteenFont,
+                  //   fontWeight: FontWeight.w500,
+                  //   hintText: "Enter Access Token Secret",
+                  //   maxLines: 1,
+                  //   readOnly: false,
+                  //   label: "Access Token Secret",
+                  //   validator: (value) {
+                  //     if (value!.isEmpty) {
+                  //       return 'Please enter Access Token Secret';
+                  //     }
+                  //     return null;
+                  //   },
+                  // ),
+                  ListView.builder(
+                    itemCount: _twitterFields.length,
+                    shrinkWrap: true,
+                    physics: NeverScrollableScrollPhysics(),
+                    itemBuilder: (context, index) {
+                      final fieldSet = _twitterFields[index];
+                      return Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Icon(Icons.info),
-                              SizedBox(
-                                width: 10,
-                              ),
-                              Text(
-                                "Note: You have a maximum of 10 accounts allowed",
-                                style: GoogleFonts.poppins(
-                                    fontSize: kTenFont,
-                                    color: kblack,
-                                    fontWeight: kFW400),
-                              ),
-                            ],
-                          ),
+                          _buildTextField(
+                              controller: fieldSet["consumer_key"]!,
+                              label: "API Key ${index + 1}"),
+                          SizedBox(height: 8),
+                          _buildTextField(
+                              controller: fieldSet["consumer_secret"]!,
+                              label: "API Secret ${index + 1}"),
+                          SizedBox(height: 8),
+                          _buildTextField(
+                              controller: fieldSet["oauth_token"]!,
+                              label: "Access Token ${index + 1}"),
+                          SizedBox(height: 8),
+                          _buildTextField(
+                              controller: fieldSet["oauth_secret"]!,
+                              label: "Access Token Secret ${index + 1}"),
+                          SizedBox(height: 16),
+                          Divider(),
                         ],
-                      )),
-                  SizedBox(
-                    height: 15.h,
-                  ),
-                  Text(
-                    "API Key",
-                    textAlign: TextAlign.start,
-                    style: GoogleFonts.poppins(
-                        fontSize: kSixteenFont,
-                        //  letterSpacing: 1,
-                        color: KBlack_twg,
-                        fontWeight: kFW400),
-                  ),
-                  SizedBox(
-                    height: 2.h,
-                  ),
-                  Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8),
-                      color: Kwhite,
-                    ),
-                    child: TextFormField(
-                      cursorColor: Kform_border_twg,
-                      controller: settingscontroller.twitterAPIKeyController,
-                      obscureText: passwordVisible,
-                      obscuringCharacter: '*',
-                      enabled: true,
-                      readOnly: false,
-                      style: GoogleFonts.poppins(
-                          fontSize: 14.sp, fontWeight: kFW500, color: kblack),
-                      decoration: InputDecoration(
-                        focusColor: Kwhite,
-                        filled: true,
-                        floatingLabelBehavior: FloatingLabelBehavior.auto,
-                        contentPadding: const EdgeInsets.symmetric(
-                            vertical: 16, horizontal: 8),
-
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(50.r),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderSide:
-                              BorderSide(color: KText_border_twg, width: 0.5),
-                          borderRadius: BorderRadius.circular(8.r),
-                        ),
-                        errorBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: KRed_twg, width: 0.5),
-                          borderRadius: BorderRadius.circular(8.r),
-                        ),
-                        disabledBorder: OutlineInputBorder(
-                          borderSide:
-                              BorderSide(color: KText_border_twg, width: 0.5),
-                          borderRadius: BorderRadius.circular(8.r),
-                        ),
-                        focusedErrorBorder: OutlineInputBorder(
-                          borderSide:
-                              BorderSide(color: Kform_border_twg, width: 1),
-                          borderRadius: BorderRadius.circular(8.r),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide:
-                              BorderSide(color: Kform_border_twg, width: 1),
-                          borderRadius: BorderRadius.circular(8.r),
-                        ),
-                        fillColor: Kwhite,
-
-                        hintText: "Enter API Key",
-                        alignLabelWithHint: true,
-                        suffixIcon: IconButton(
-                          icon: Icon(
-                            passwordVisible
-                                ? Icons.visibility
-                                : Icons.visibility_off,
-                            size: 20.sp,
-                          ),
-                          onPressed: () {
-                            setState(
-                              () {
-                                passwordVisible = !passwordVisible;
-                              },
-                            );
-                          },
-                        ),
-                        //make hint text
-                        hintStyle: GoogleFonts.poppins(
-                          color: KLighText_twg,
-                          fontSize: 14.sp,
-                          fontWeight: kFW400,
-                        ),
-                        //////////////////
-
-                        ////////////
-
-                        //create lable
-                      ),
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return 'Please enter API Key';
-                        }
-                        return null;
-                      },
-                      onChanged: (value) {},
-                    ),
-                  ),
-                  SizedBox(
-                    height: 15.h,
-                  ),
-                  CustomFormFields(
-                    ontap: () {},
-                    enabled: true,
-                    labelColor: KText,
-                    controller: settingscontroller.twitterAPISecretController,
-                    obscureText: false,
-                    contentPadding:
-                        const EdgeInsets.symmetric(vertical: 16, horizontal: 8),
-                    fontSize: kFourteenFont,
-                    fontWeight: FontWeight.w500,
-                    hintText: "Enter API Secret",
-                    maxLines: 1,
-                    readOnly: false,
-                    label: "API Secret",
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'Please enter API Secret';
-                      }
-                      return null;
+                      );
                     },
                   ),
-                  SizedBox(
-                    height: 15.h,
-                  ),
-                  CustomFormFields(
-                    ontap: () {},
-                    enabled: true,
-                    labelColor: KText,
-                    controller: settingscontroller.twitterAceesTokenController,
-                    obscureText: false,
-                    contentPadding:
-                        const EdgeInsets.symmetric(vertical: 16, horizontal: 8),
-                    fontSize: kFourteenFont,
-                    fontWeight: FontWeight.w500,
-                    hintText: "Enter Access Token",
-                    maxLines: 1,
-                    readOnly: false,
-                    label: "Access Token",
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'Please enter Access Token';
-                      }
-                      return null;
-                    },
-                  ),
-                  SizedBox(
-                    height: 15.h,
-                  ),
-                  CustomFormFields(
-                    ontap: () {},
-                    enabled: true,
-                    labelColor: KText,
-                    controller:
-                        settingscontroller.twitterAceesTokenSecretController,
-                    obscureText: false,
-                    contentPadding:
-                        const EdgeInsets.symmetric(vertical: 16, horizontal: 8),
-                    fontSize: kFourteenFont,
-                    fontWeight: FontWeight.w500,
-                    hintText: "Enter Access Token Secret",
-                    maxLines: 1,
-                    readOnly: false,
-                    label: "Access Token Secret",
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'Please enter Access Token Secret';
-                      }
-                      return null;
-                    },
-                  ),
+
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      Container(
-                        margin: EdgeInsets.only(top: 26),
-                        height: 45,
-                        width: 120.w,
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                          color: Kform_border_twg,
-                          borderRadius: BorderRadius.all(Radius.circular(5)),
-                        ),
-                        child: Text(
-                          "+ Add More",
-                          textAlign: TextAlign.center,
-                          style: GoogleFonts.poppins(
-                              fontWeight: kFW600,
-                              color: Kwhite,
-                              fontSize: 16.sp),
+                      InkWell(
+                        onTap: _addNewFieldSet,
+                        child: Container(
+                          margin: EdgeInsets.only(top: 26),
+                          height: 45,
+                          width: 120.w,
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                            color: Kform_border_twg,
+                            borderRadius: BorderRadius.all(Radius.circular(5)),
+                          ),
+                          child: Text(
+                            "+ Add More",
+                            textAlign: TextAlign.center,
+                            style: GoogleFonts.poppins(
+                                fontWeight: kFW600,
+                                color: Kwhite,
+                                fontSize: 16.sp),
+                          ),
                         ),
                       ),
                     ],
@@ -477,34 +531,77 @@ class _TwitterSettingsState extends State<TwitterSettings> {
                         )
                       : InkWell(
                           onTap: () {
-                            var payload = {
-                              "sap_twitter_options[twitter_keys][0][consumer_key]":
-                                  settingscontroller
-                                      .twitterAPIKeyController.text,
-                              "sap_twitter_options[twitter_keys][0][consumer_secret]":
-                                  settingscontroller
-                                      .twitterAPISecretController.text,
-                              "sap_twitter_options[twitter_keys][0][oauth_token]":
-                                  settingscontroller
-                                      .twitterAceesTokenController.text,
-                              "sap_twitter_options[twitter_keys][0][oauth_secret]":
-                                  settingscontroller
-                                      .twitterAceesTokenSecretController.text,
+                            // var payload = {
+                            //   "sap_twitter_options[twitter_keys][0][consumer_key]":
+                            //       settingscontroller
+                            //           .twitterAPIKeyController.text,
+                            //   "sap_twitter_options[twitter_keys][0][consumer_secret]":
+                            //       settingscontroller
+                            //           .twitterAPISecretController.text,
+                            //   "sap_twitter_options[twitter_keys][0][oauth_token]":
+                            //       settingscontroller
+                            //           .twitterAceesTokenController.text,
+                            //   "sap_twitter_options[twitter_keys][0][oauth_secret]":
+                            //       settingscontroller
+                            //           .twitterAceesTokenSecretController.text,
 
-                              ///
-                              "sap_twitter_options[tw_type_shortner_opt]": "",
-                              "sap_twitter_options[tw_bitly_access_token]": "",
-                              "sap_twitter_options[tw_shortest_api_token]": "",
-                              "limit_twitter_count": "",
-                              //
-                              "created_twitter_count": "",
-                              "sap_twitter_submit": "",
-                              "user_id": userprofilecontroller
-                                  .profileData["user_details"]["id"],
-                            };
+                            //   ///
+                            //   "sap_twitter_options[tw_type_shortner_opt]": "",
+                            //   "sap_twitter_options[tw_bitly_access_token]": "",
+                            //   "sap_twitter_options[tw_shortest_api_token]": "",
+                            //   "limit_twitter_count": "",
+                            //   //
+                            //   "created_twitter_count": "",
+                            //   "sap_twitter_submit": "",
+                            //   "user_id": userprofilecontroller
+                            //       .profileData["user_details"]["id"],
+                            // };
 /////////////
 //////////////////////////////////
 
+                            Map<String, dynamic> payload = {};
+
+                            // Loop through the dynamically added fields
+                            for (int i = 0; i < _twitterFields.length; i++) {
+                              var fieldSet = _twitterFields[i];
+
+                              payload["sap_twitter_options[twitter_keys][$i][consumer_key]"] =
+                                  fieldSet["consumer_key"]!.text;
+                              payload["sap_twitter_options[twitter_keys][$i][consumer_secret]"] =
+                                  fieldSet["consumer_secret"]!.text;
+                              payload["sap_twitter_options[twitter_keys][$i][oauth_token]"] =
+                                  fieldSet["oauth_token"]!.text;
+                              payload["sap_twitter_options[twitter_keys][$i][oauth_secret]"] =
+                                  fieldSet["oauth_secret"]!.text;
+                            }
+
+                            // Add static fields // ['TinyURL', 'bit.ly', 'shorte.st'];
+                            payload.addAll({
+                              "sap_twitter_options[tw_type_shortner_opt]":
+                                  settingscontroller.twitterShort == 'TinyURL'
+                                      ? settingscontroller
+                                          .tiniUrlOneController.text
+                                      : "",
+                              "sap_twitter_options[tw_bitly_access_token]":
+                                  settingscontroller.twitterShort == 'bit.ly'
+                                      ? settingscontroller
+                                          .tiniUrlOneController.text
+                                      : "",
+                              "sap_twitter_options[tw_shortest_api_token]":
+                                  settingscontroller.twitterShort == 'shorte.st'
+                                      ? settingscontroller
+                                          .tiniUrlOneController.text
+                                      : "",
+                              "limit_twitter_count":
+                                  "${dashboardcontroller.twitternetworkCount.value}",
+                              "created_twitter_count": "1",
+                              "sap_twitter_submit": "1",
+                              "user_id": userprofilecontroller
+                                  .profileData["user_details"]["id"],
+                            });
+
+                            // Debug log for verification
+                            print(payload);
                             settingscontroller.twitterSave(payload);
                           },
                           child: Container(
@@ -977,6 +1074,7 @@ class _TwitterSettingsState extends State<TwitterSettings> {
                           // )
                         ]),
                     child: DropdownButtonFormField2<String>(
+                      value: settingscontroller.twitterShort.value ?? "",
                       isExpanded: true,
                       decoration: InputDecoration(
                         enabledBorder: OutlineInputBorder(
@@ -1017,15 +1115,17 @@ class _TwitterSettingsState extends State<TwitterSettings> {
                           color: KTextgery.withOpacity(0.5),
                         ),
                       ),
-                      items: CompanyList.map((item) => DropdownMenuItem<String>(
-                            value: item,
-                            child: Text(
-                              item,
-                              style: GoogleFonts.poppins(
-                                fontSize: 14,
-                              ),
-                            ),
-                          )).toList(),
+                      items: sortner
+                          .map((item) => DropdownMenuItem<String>(
+                                value: item,
+                                child: Text(
+                                  item,
+                                  style: GoogleFonts.poppins(
+                                    fontSize: 14,
+                                  ),
+                                ),
+                              ))
+                          .toList(),
                       validator: (value) {
                         if (value == null) {
                           return 'Please Share  Link';
@@ -1035,6 +1135,8 @@ class _TwitterSettingsState extends State<TwitterSettings> {
                       onChanged: (value) {
                         setState(() {
                           selectedUserValue = value.toString();
+                          settingscontroller.twitterShort.value =
+                              value.toString();
                           setState(() {});
                         });
                       },
@@ -1063,50 +1165,146 @@ class _TwitterSettingsState extends State<TwitterSettings> {
                       ),
                     ),
                   ),
-                  Container(
-                    margin: EdgeInsets.only(top: 26),
-                    // "7"
-                    height: 45,
-                    width: 120.w,
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                      // boxShadow: [
-                      //   BoxShadow(
-                      //     color: Ktextcolor.withOpacity(0.5),
-                      //     blurRadius: 5.r,
-                      //     offset: Offset(0, 5),
-                      //     spreadRadius: 1.r,
-                      //   )
-                      // ],
-                      color: Kform_border_twg,
-                      borderRadius: BorderRadius.all(Radius.circular(5)),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        // Icon(
-                        //   Icons.shopping_bag,
-                        //   color: Kwhite,
-                        // ),
-                        Image.asset(
-                          "assets/images/Vector.png",
-                          // height: 3.h,
-                          // width: 80.w,
-                        ),
-                        SizedBox(
-                          width: 12.w,
-                        ),
-                        Text(
-                          "Save",
-                          textAlign: TextAlign.center,
-                          style: GoogleFonts.poppins(
-                              fontWeight: kFW600,
-                              color: Kwhite,
-                              fontSize: 16.sp),
-                        ),
-                      ],
-                    ),
+                  SizedBox(
+                    height: 10.h,
                   ),
+                  CustomFormFields(
+                    ontap: () {
+                      //  Get.toNamed(kSearchPlaces);
+                    },
+                    enabled: true,
+                    controller: settingscontroller.tiniUrlOneController,
+                    //    controller: userprofilecontroller.editFirstNameController,
+                    labelColor: KText,
+                    obscureText: false,
+                    contentPadding:
+                        const EdgeInsets.symmetric(vertical: 16, horizontal: 8),
+                    fontSize: kFourteenFont,
+                    fontWeight: FontWeight.w500,
+                    hintText: " ",
+                    maxLines: 1,
+                    readOnly: false,
+                    label: "${settingscontroller.twitterShort.value}" + "Token",
+
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'Please Enter text';
+                      }
+                      return null;
+                    },
+                  ),
+                  Obx(() => settingscontroller.twitterSaveLoading == true
+                      ? Center(
+                          child: CircularProgressIndicator(
+                            color: Kform_border_twg,
+                          ),
+                        )
+                      : InkWell(
+                          onTap: () {
+                            // var payload = {
+                            //   "sap_twitter_options[twitter_keys][0][consumer_key]":
+                            //       settingscontroller
+                            //           .twitterAPIKeyController.text,
+                            //   "sap_twitter_options[twitter_keys][0][consumer_secret]":
+                            //       settingscontroller
+                            //           .twitterAPISecretController.text,
+                            //   "sap_twitter_options[twitter_keys][0][oauth_token]":
+                            //       settingscontroller
+                            //           .twitterAceesTokenController.text,
+                            //   "sap_twitter_options[twitter_keys][0][oauth_secret]":
+                            //       settingscontroller
+                            //           .twitterAceesTokenSecretController.text,
+
+                            //   ///
+                            //   "sap_twitter_options[tw_type_shortner_opt]": "",
+                            //   "sap_twitter_options[tw_bitly_access_token]": "",
+                            //   "sap_twitter_options[tw_shortest_api_token]": "",
+                            //   "limit_twitter_count": "",
+                            //   //
+                            //   "created_twitter_count": "",
+                            //   "sap_twitter_submit": "",
+                            //   "user_id": userprofilecontroller
+                            //       .profileData["user_details"]["id"],
+                            // };
+/////////////
+//////////////////////////////////
+
+                            Map<String, dynamic> payload = {};
+
+                            // Loop through the dynamically added fields
+                            for (int i = 0; i < _twitterFields.length; i++) {
+                              var fieldSet = _twitterFields[i];
+
+                              payload["sap_twitter_options[twitter_keys][$i][consumer_key]"] =
+                                  fieldSet["consumer_key"]!.text;
+                              payload["sap_twitter_options[twitter_keys][$i][consumer_secret]"] =
+                                  fieldSet["consumer_secret"]!.text;
+                              payload["sap_twitter_options[twitter_keys][$i][oauth_token]"] =
+                                  fieldSet["oauth_token"]!.text;
+                              payload["sap_twitter_options[twitter_keys][$i][oauth_secret]"] =
+                                  fieldSet["oauth_secret"]!.text;
+                            }
+
+                            // Add static fields // ['TinyURL', 'bit.ly', 'shorte.st'];
+                            payload.addAll({
+                              "sap_twitter_options[tw_type_shortner_opt]":
+                                  settingscontroller.twitterShort == 'TinyURL'
+                                      ? settingscontroller
+                                          .tiniUrlOneController.text
+                                      : "",
+                              "sap_twitter_options[tw_bitly_access_token]":
+                                  settingscontroller.twitterShort == 'bit.ly'
+                                      ? settingscontroller
+                                          .tiniUrlOneController.text
+                                      : "",
+                              "sap_twitter_options[tw_shortest_api_token]":
+                                  settingscontroller.twitterShort == 'shorte.st'
+                                      ? settingscontroller
+                                          .tiniUrlOneController.text
+                                      : "",
+                              "limit_twitter_count":
+                                  "${dashboardcontroller.twitternetworkCount.value}",
+                              "created_twitter_count": "1",
+                              "sap_twitter_submit": "1",
+                              "user_id": userprofilecontroller
+                                  .profileData["user_details"]["id"],
+                            });
+
+                            // Debug log for verification
+                            print(payload);
+                            settingscontroller.twitterSave(payload);
+                          },
+                          child: Container(
+                            margin: EdgeInsets.only(top: 26),
+                            height: 45,
+                            width: 120.w,
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                              color: Kform_border_twg,
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(5)),
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Image.asset(
+                                  "assets/images/Vector.png",
+                                ),
+                                SizedBox(
+                                  width: 12.w,
+                                ),
+                                Text(
+                                  "Save",
+                                  textAlign: TextAlign.center,
+                                  style: GoogleFonts.poppins(
+                                      fontWeight: kFW600,
+                                      color: Kwhite,
+                                      fontSize: 16.sp),
+                                ),
+                              ],
+                            ),
+                          ),
+                        )),
                 ],
               )),
           SizedBox(
@@ -1115,5 +1313,52 @@ class _TwitterSettingsState extends State<TwitterSettings> {
         ],
       ),
     );
+  }
+
+  Widget _buildTextField(
+      {required TextEditingController controller, required String label}) {
+    return CustomFormFields(
+      ontap: () {},
+      enabled: true,
+      labelColor: KText,
+      controller: controller,
+      obscureText: false,
+      contentPadding: const EdgeInsets.symmetric(vertical: 16, horizontal: 8),
+      fontSize: kFourteenFont,
+      fontWeight: FontWeight.w500,
+      hintText: "Enter Access Token Secret",
+      maxLines: 1,
+      readOnly: false,
+      label: label,
+      validator: (value) {
+        if (value!.isEmpty) {
+          return 'Please enter Access Token Secret';
+        }
+        return null;
+      },
+    );
+    // TextFormField(
+    //   controller: controller,
+    //   decoration: InputDecoration(
+    //     labelText: label,
+    //     border: OutlineInputBorder(),
+    //   ),
+    //   validator: (value) {
+    //     if (value == null || value.isEmpty) {
+    //       return 'Please enter $label';
+    //     }
+    //     return null;
+    //   },
+    // );
+  }
+
+  void _saveFields() {
+    for (var fieldSet in _twitterFields) {
+      print("Consumer Key: ${fieldSet['consumer_key']!.text}");
+      print("Consumer Secret: ${fieldSet['consumer_secret']!.text}");
+      print("OAuth Token: ${fieldSet['oauth_token']!.text}");
+      print("OAuth Secret: ${fieldSet['oauth_secret']!.text}");
+      print("---");
+    }
   }
 }

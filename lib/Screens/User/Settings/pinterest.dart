@@ -100,11 +100,28 @@ class _PinterestSettingsState extends State<PinterestSettings> {
     }
   }
 
+///////////
+  final List<Map<String, TextEditingController>> _twitterFields = [];
+
+  void _addNewFieldSet() {
+    setState(() {
+      _twitterFields.add({
+        "consumer_key": TextEditingController(),
+        "consumer_secret": TextEditingController(),
+      });
+    });
+  }
+
+  final List<String> sortner = ['TinyURL', 'bit.ly', 'shorte.st'];
+////////
   @override
   void initState() {
     setState(() {
       settingscontroller.pinterestAppKeyController.text = "qwry";
       settingscontroller.pinterestSecretController.text = "WDTJK";
+      _addNewFieldSet();
+
+      settingscontroller.twitterShort.value = 'TinyURL';
     });
 
     // TODO: implement initState
@@ -442,89 +459,137 @@ class _PinterestSettingsState extends State<PinterestSettings> {
                   SizedBox(
                     height: 15.h,
                   ),
-                  CustomFormFields(
-                    ontap: () {},
-                    enabled: true,
-                    labelColor: KText,
-                    controller: settingscontroller.pinterestAppKeyController,
-                    obscureText: false,
-                    contentPadding:
-                        const EdgeInsets.symmetric(vertical: 16, horizontal: 8),
-                    fontSize: kFourteenFont,
-                    fontWeight: FontWeight.w500,
-                    hintText: "Enter App ID/API Key",
-                    maxLines: 1,
-                    readOnly: false,
-                    label: "App ID/API Key",
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'Please Enter App ID/API Key';
-                      }
-                      return null;
+                  ListView.builder(
+                    itemCount: _twitterFields.length,
+                    shrinkWrap: true,
+                    physics: NeverScrollableScrollPhysics(),
+                    itemBuilder: (context, index) {
+                      final fieldSet = _twitterFields[index];
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          _buildTextField(
+                              controller: fieldSet["consumer_key"]!,
+                              label: "API Key ${index + 1}"),
+                          SizedBox(height: 8),
+                          _buildTextField(
+                              controller: fieldSet["consumer_secret"]!,
+                              label: "API Secret ${index + 1}"),
+                          Divider(),
+                        ],
+                      );
                     },
-                  ),
-                  // API Secret
-                  SizedBox(
-                    height: 15.h,
-                  ),
-                  CustomFormFields(
-                    ontap: () {},
-                    enabled: true,
-                    labelColor: KText,
-                    controller: settingscontroller.pinterestSecretController,
-                    obscureText: false,
-                    contentPadding:
-                        const EdgeInsets.symmetric(vertical: 16, horizontal: 8),
-                    fontSize: kFourteenFont,
-                    fontWeight: FontWeight.w500,
-                    hintText: "Enter App Secret",
-                    maxLines: 1,
-                    readOnly: false,
-                    label: "App Secret",
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'Please Enter App Secret';
-                      }
-                      return null;
-                    },
-                  ),
-                  // Access Token
-                  SizedBox(
-                    height: 15.h,
                   ),
 
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      Container(
-                        margin: EdgeInsets.only(top: 26),
-                        // "7"
-                        height: 45,
-                        width: 120.w,
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                          // boxShadow: [
-                          //   BoxShadow(
-                          //     color: Ktextcolor.withOpacity(0.5),
-                          //     blurRadius: 5.r,
-                          //     offset: Offset(0, 5),
-                          //     spreadRadius: 1.r,
-                          //   )
-                          // ],
-                          color: Kform_border_twg,
-                          borderRadius: BorderRadius.all(Radius.circular(5)),
-                        ),
-                        child: Text(
-                          "+ Add More",
-                          textAlign: TextAlign.center,
-                          style: GoogleFonts.poppins(
-                              fontWeight: kFW600,
-                              color: Kwhite,
-                              fontSize: 16.sp),
+                      InkWell(
+                        onTap: _addNewFieldSet,
+                        child: Container(
+                          margin: EdgeInsets.only(top: 26),
+                          height: 45,
+                          width: 120.w,
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                            color: Kform_border_twg,
+                            borderRadius: BorderRadius.all(Radius.circular(5)),
+                          ),
+                          child: Text(
+                            "+ Add More",
+                            textAlign: TextAlign.center,
+                            style: GoogleFonts.poppins(
+                                fontWeight: kFW600,
+                                color: Kwhite,
+                                fontSize: 16.sp),
+                          ),
                         ),
                       ),
                     ],
                   ),
+                  // CustomFormFields(
+                  //   ontap: () {},
+                  //   enabled: true,
+                  //   labelColor: KText,
+                  //   controller: settingscontroller.pinterestAppKeyController,
+                  //   obscureText: false,
+                  //   contentPadding:
+                  //       const EdgeInsets.symmetric(vertical: 16, horizontal: 8),
+                  //   fontSize: kFourteenFont,
+                  //   fontWeight: FontWeight.w500,
+                  //   hintText: "Enter App ID/API Key",
+                  //   maxLines: 1,
+                  //   readOnly: false,
+                  //   label: "App ID/API Key",
+                  //   validator: (value) {
+                  //     if (value!.isEmpty) {
+                  //       return 'Please Enter App ID/API Key';
+                  //     }
+                  //     return null;
+                  //   },
+                  // ),
+                  // // API Secret
+                  // SizedBox(
+                  //   height: 15.h,
+                  // ),
+                  // CustomFormFields(
+                  //   ontap: () {},
+                  //   enabled: true,
+                  //   labelColor: KText,
+                  //   controller: settingscontroller.pinterestSecretController,
+                  //   obscureText: false,
+                  //   contentPadding:
+                  //       const EdgeInsets.symmetric(vertical: 16, horizontal: 8),
+                  //   fontSize: kFourteenFont,
+                  //   fontWeight: FontWeight.w500,
+                  //   hintText: "Enter App Secret",
+                  //   maxLines: 1,
+                  //   readOnly: false,
+                  //   label: "App Secret",
+                  //   validator: (value) {
+                  //     if (value!.isEmpty) {
+                  //       return 'Please Enter App Secret';
+                  //     }
+                  //     return null;
+                  //   },
+                  // ),
+                  // Access Token
+                  // SizedBox(
+                  //   height: 15.h,
+                  // ),
+
+                  // Row(
+                  //   mainAxisAlignment: MainAxisAlignment.end,
+                  //   children: [
+                  //     Container(
+                  //       margin: EdgeInsets.only(top: 26),
+                  //       // "7"
+                  //       height: 45,
+                  //       width: 120.w,
+                  //       alignment: Alignment.center,
+                  //       decoration: BoxDecoration(
+                  //         // boxShadow: [
+                  //         //   BoxShadow(
+                  //         //     color: Ktextcolor.withOpacity(0.5),
+                  //         //     blurRadius: 5.r,
+                  //         //     offset: Offset(0, 5),
+                  //         //     spreadRadius: 1.r,
+                  //         //   )
+                  //         // ],
+                  //         color: Kform_border_twg,
+                  //         borderRadius: BorderRadius.all(Radius.circular(5)),
+                  //       ),
+                  //       child: Text(
+                  //         "+ Add More",
+                  //         textAlign: TextAlign.center,
+                  //         style: GoogleFonts.poppins(
+                  //             fontWeight: kFW600,
+                  //             color: Kwhite,
+                  //             fontSize: 16.sp),
+                  //       ),
+                  //     ),
+                  //   ],
+                  // ),
                   Obx(() => settingscontroller.pinterestSaveLoading == true
                       ? Center(
                           child: CircularProgressIndicator(
@@ -533,59 +598,79 @@ class _PinterestSettingsState extends State<PinterestSettings> {
                         )
                       : InkWell(
                           onTap: () {
-                            var payload = {
-                              /////////////////////
+                            // var payload = {
+                            //   /////////////////////
+                            //   'sap_pinterest_options[proxy_url]': '',
+                            //   'sap_pinterest_options[proxy_username]': '',
+                            //   'sap_pinterest_options[proxy_password]': '',
+                            //   'sap_pinterest_options[pin_auth_options]': 'app',
+                            //   'sap_pinterest_options[pinterest_keys][0][app_id]':
+                            //       settingscontroller
+                            //           .pinterestAppKeyController.text,
+                            //   'sap_pinterest_options[pinterest_keys][0][app_secret]':
+                            //       settingscontroller
+                            //           .pinterestSecretController.text,
+                            //   'sap_pinterest_options[pin_image]': '',
+                            //   'sap_pinterest_options[pin_type_shortner_opt]':
+                            //       '',
+                            //   'sap_pinterest_options[pin_bitly_access_token]':
+                            //       '',
+                            //   'sap_pinterest_options[pin_shortest_api_token]':
+                            //       '',
+                            //   'limit_pinterest_count': '10',
+                            //   'created_pinterest_count': '1',
+                            //   'sap-pinterest-cookie': '',
+                            //   'sap_pinterest_submit': '',
+                            //   'user_id': userprofilecontroller
+                            //       .profileData["user_details"]["id"]
+                            // };
+/////////////
+//////////////////////////////////
+                            Map<String, dynamic> payload = {};
+
+                            // Loop through the dynamically added fields
+                            for (int i = 0; i < _twitterFields.length; i++) {
+                              var fieldSet = _twitterFields[i];
+// sap_pinterest_options[pinterest_keys][0][app_id]
+                              payload["sap_pinterest_options[pinterest_keys][$i][app_id]"] =
+                                  fieldSet["consumer_key"]!.text;
+// sap_pinterest_options[pinterest_keys][0][app_secret]
+                              payload["sap_pinterest_options[pinterest_keys][$i][app_secret]"] =
+                                  fieldSet["consumer_secret"]!.text;
+                            }
+
+                            // Add static fields // ['TinyURL', 'bit.ly', 'shorte.st'];
+                            payload.addAll({
                               'sap_pinterest_options[proxy_url]': '',
                               'sap_pinterest_options[proxy_username]': '',
                               'sap_pinterest_options[proxy_password]': '',
                               'sap_pinterest_options[pin_auth_options]': 'app',
-                              'sap_pinterest_options[pinterest_keys][0][app_id]':
-                                  settingscontroller
-                                      .pinterestAppKeyController.text,
-                              'sap_pinterest_options[pinterest_keys][0][app_secret]':
-                                  settingscontroller
-                                      .pinterestSecretController.text,
                               'sap_pinterest_options[pin_image]': '',
-                              'sap_pinterest_options[pin_type_shortner_opt]':
-                                  '',
-                              'sap_pinterest_options[pin_bitly_access_token]':
-                                  '',
-                              'sap_pinterest_options[pin_shortest_api_token]':
-                                  '',
-                              'limit_pinterest_count': '10',
+                              "sap_pinterest_options[pin_type_shortner_opt]":
+                                  settingscontroller.twitterShort == 'TinyURL'
+                                      ? settingscontroller
+                                          .tiniUrlOneController.text
+                                      : "",
+                              "sap_pinterest_options[pin_bitly_access_token]":
+                                  settingscontroller.twitterShort == 'bit.ly'
+                                      ? settingscontroller
+                                          .tiniUrlOneController.text
+                                      : "",
+                              "sap_pinterest_options[pin_shortest_api_token]":
+                                  settingscontroller.twitterShort == 'shorte.st'
+                                      ? settingscontroller
+                                          .tiniUrlOneController.text
+                                      : "",
+                              'limit_pinterest_count':
+                                  "${dashboardcontroller.twitternetworkCount.value}",
                               'created_pinterest_count': '1',
                               'sap-pinterest-cookie': '',
                               'sap_pinterest_submit': '',
-                              'user_id': userprofilecontroller
-                                  .profileData["user_details"]["id"]
-                              ////////////////////
-                              // 'sap_tumblr_options[post_content_size]':
-                              //     dashboardcontroller
-                              //         .tumblerPostContentType.value,
-                              // 'sap_tumblr_options[tumblr_keys][0][tumblr_consumer_key]':
-                              //     settingscontroller
-                              //         .tumblerConsumerKeyController.text,
-                              // 'sap_tumblr_options[tumblr_keys][0][tumblr_consumer_secret]':
-                              //     settingscontroller
-                              //         .tumblerSecretController.text,
-                              // 'sap_tumblr_options[tumblr_keys][1][tumblr_consumer_key]':
-                              //     '987654zyx',
-                              // 'sap_tumblr_options[tumblr_keys][1][tumblr_consumer_secret]':
-                              //     'secret123abc',
-                              // 'sap_tumblr_options[posting_type]': 'text',
-                              // 'sap_tumblr_options[tumblr_link]': '',
-                              // 'sap_tumblr_options[tu_type_shortner_opt]': '',
-                              // 'sap_tumblr_options[tu_bitly_access_token]': '',
-                              // 'sap_tumblr_options[tu_shortest_api_token]': '',
-                              // 'limit_tumbir_count': '60',
-                              // 'created_tumbir_count': '1',
-                              // 'sap_tumblr_submit': '1',
-                              // 'user_id': userprofilecontroller
-                              //     .profileData["user_details"]["id"]
-                            };
-/////////////
-//////////////////////////////////
+                              "user_id": userprofilecontroller
+                                  .profileData["user_details"]["id"],
+                            });
 
+                            print(payload);
                             settingscontroller.pinterestSave(payload);
                           },
                           child: Container(
@@ -1043,6 +1128,7 @@ class _PinterestSettingsState extends State<PinterestSettings> {
                           // )
                         ]),
                     child: DropdownButtonFormField2<String>(
+                      value: settingscontroller.twitterShort.value ?? "",
                       isExpanded: true,
                       decoration: InputDecoration(
                         enabledBorder: OutlineInputBorder(
@@ -1083,15 +1169,17 @@ class _PinterestSettingsState extends State<PinterestSettings> {
                           color: KTextgery.withOpacity(0.5),
                         ),
                       ),
-                      items: CompanyList.map((item) => DropdownMenuItem<String>(
-                            value: item,
-                            child: Text(
-                              item,
-                              style: GoogleFonts.poppins(
-                                fontSize: 14,
-                              ),
-                            ),
-                          )).toList(),
+                      items: sortner
+                          .map((item) => DropdownMenuItem<String>(
+                                value: item,
+                                child: Text(
+                                  item,
+                                  style: GoogleFonts.poppins(
+                                    fontSize: 14,
+                                  ),
+                                ),
+                              ))
+                          .toList(),
                       validator: (value) {
                         if (value == null) {
                           return 'Please Share  Link';
@@ -1101,6 +1189,8 @@ class _PinterestSettingsState extends State<PinterestSettings> {
                       onChanged: (value) {
                         setState(() {
                           selectedUserValue = value.toString();
+                          settingscontroller.twitterShort.value =
+                              value.toString();
                           setState(() {});
                         });
                       },
@@ -1129,50 +1219,148 @@ class _PinterestSettingsState extends State<PinterestSettings> {
                       ),
                     ),
                   ),
-                  Container(
-                    margin: EdgeInsets.only(top: 26),
-                    // "7"
-                    height: 45,
-                    width: 120.w,
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                      // boxShadow: [
-                      //   BoxShadow(
-                      //     color: Ktextcolor.withOpacity(0.5),
-                      //     blurRadius: 5.r,
-                      //     offset: Offset(0, 5),
-                      //     spreadRadius: 1.r,
-                      //   )
-                      // ],
-                      color: Kform_border_twg,
-                      borderRadius: BorderRadius.all(Radius.circular(5)),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        // Icon(
-                        //   Icons.shopping_bag,
-                        //   color: Kwhite,
-                        // ),
-                        Image.asset(
-                          "assets/images/Vector.png",
-                          // height: 3.h,
-                          // width: 80.w,
-                        ),
-                        SizedBox(
-                          width: 12.w,
-                        ),
-                        Text(
-                          "Save",
-                          textAlign: TextAlign.center,
-                          style: GoogleFonts.poppins(
-                              fontWeight: kFW600,
-                              color: Kwhite,
-                              fontSize: 16.sp),
-                        ),
-                      ],
-                    ),
+                  SizedBox(
+                    height: 10.h,
                   ),
+                  CustomFormFields(
+                    ontap: () {
+                      //  Get.toNamed(kSearchPlaces);
+                    },
+                    enabled: true,
+                    controller: settingscontroller.tiniUrlOneController,
+                    //    controller: userprofilecontroller.editFirstNameController,
+                    labelColor: KText,
+                    obscureText: false,
+                    contentPadding:
+                        const EdgeInsets.symmetric(vertical: 16, horizontal: 8),
+                    fontSize: kFourteenFont,
+                    fontWeight: FontWeight.w500,
+                    hintText: " ",
+                    maxLines: 1,
+                    readOnly: false,
+                    label: "${settingscontroller.twitterShort.value}" + "Token",
+
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'Please Enter text';
+                      }
+                      return null;
+                    },
+                  ),
+                  Obx(() => settingscontroller.pinterestSaveLoading == true
+                      ? Center(
+                          child: CircularProgressIndicator(
+                            color: Kform_border_twg,
+                          ),
+                        )
+                      : InkWell(
+                          onTap: () {
+                            // var payload = {
+                            //   /////////////////////
+                            //   'sap_pinterest_options[proxy_url]': '',
+                            //   'sap_pinterest_options[proxy_username]': '',
+                            //   'sap_pinterest_options[proxy_password]': '',
+                            //   'sap_pinterest_options[pin_auth_options]': 'app',
+                            //   'sap_pinterest_options[pinterest_keys][0][app_id]':
+                            //       settingscontroller
+                            //           .pinterestAppKeyController.text,
+                            //   'sap_pinterest_options[pinterest_keys][0][app_secret]':
+                            //       settingscontroller
+                            //           .pinterestSecretController.text,
+                            //   'sap_pinterest_options[pin_image]': '',
+                            //   'sap_pinterest_options[pin_type_shortner_opt]':
+                            //       '',
+                            //   'sap_pinterest_options[pin_bitly_access_token]':
+                            //       '',
+                            //   'sap_pinterest_options[pin_shortest_api_token]':
+                            //       '',
+                            //   'limit_pinterest_count': '10',
+                            //   'created_pinterest_count': '1',
+                            //   'sap-pinterest-cookie': '',
+                            //   'sap_pinterest_submit': '',
+                            //   'user_id': userprofilecontroller
+                            //       .profileData["user_details"]["id"]
+                            // };
+/////////////
+//////////////////////////////////
+                            Map<String, dynamic> payload = {};
+
+                            // Loop through the dynamically added fields
+                            for (int i = 0; i < _twitterFields.length; i++) {
+                              var fieldSet = _twitterFields[i];
+// sap_pinterest_options[pinterest_keys][0][app_id]
+                              payload["sap_pinterest_options[pinterest_keys][$i][app_id]"] =
+                                  fieldSet["consumer_key"]!.text;
+// sap_pinterest_options[pinterest_keys][0][app_secret]
+                              payload["sap_pinterest_options[pinterest_keys][$i][app_secret]"] =
+                                  fieldSet["consumer_secret"]!.text;
+                            }
+
+                            // Add static fields // ['TinyURL', 'bit.ly', 'shorte.st'];
+                            payload.addAll({
+                              'sap_pinterest_options[proxy_url]': '',
+                              'sap_pinterest_options[proxy_username]': '',
+                              'sap_pinterest_options[proxy_password]': '',
+                              'sap_pinterest_options[pin_auth_options]': 'app',
+                              'sap_pinterest_options[pin_image]': '',
+                              "sap_pinterest_options[pin_type_shortner_opt]":
+                                  settingscontroller.twitterShort == 'TinyURL'
+                                      ? settingscontroller
+                                          .tiniUrlOneController.text
+                                      : "",
+                              "sap_pinterest_options[pin_bitly_access_token]":
+                                  settingscontroller.twitterShort == 'bit.ly'
+                                      ? settingscontroller
+                                          .tiniUrlOneController.text
+                                      : "",
+                              "sap_pinterest_options[pin_shortest_api_token]":
+                                  settingscontroller.twitterShort == 'shorte.st'
+                                      ? settingscontroller
+                                          .tiniUrlOneController.text
+                                      : "",
+                              'limit_pinterest_count':
+                                  "${dashboardcontroller.twitternetworkCount.value}",
+                              'created_pinterest_count': '1',
+                              'sap-pinterest-cookie': '',
+                              'sap_pinterest_submit': '',
+                              "user_id": userprofilecontroller
+                                  .profileData["user_details"]["id"],
+                            });
+
+                            print(payload);
+                            settingscontroller.pinterestSave(payload);
+                          },
+                          child: Container(
+                            margin: EdgeInsets.only(top: 26),
+                            height: 45,
+                            width: 120.w,
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                              color: Kform_border_twg,
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(5)),
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Image.asset(
+                                  "assets/images/Vector.png",
+                                ),
+                                SizedBox(
+                                  width: 12.w,
+                                ),
+                                Text(
+                                  "Save",
+                                  textAlign: TextAlign.center,
+                                  style: GoogleFonts.poppins(
+                                      fontWeight: kFW600,
+                                      color: Kwhite,
+                                      fontSize: 16.sp),
+                                ),
+                              ],
+                            ),
+                          ),
+                        )),
                 ],
               )),
           SizedBox(
@@ -1181,5 +1369,51 @@ class _PinterestSettingsState extends State<PinterestSettings> {
         ],
       ),
     );
+  }
+
+  Widget _buildTextField(
+      {required TextEditingController controller, required String label}) {
+    return CustomFormFields(
+      ontap: () {},
+      enabled: true,
+      labelColor: KText,
+      controller: controller,
+      obscureText: false,
+      contentPadding: const EdgeInsets.symmetric(vertical: 16, horizontal: 8),
+      fontSize: kFourteenFont,
+      fontWeight: FontWeight.w500,
+      hintText: "Enter Access Token Secret",
+      maxLines: 1,
+      readOnly: false,
+      label: label,
+      validator: (value) {
+        if (value!.isEmpty) {
+          return 'Please enter Access Token Secret';
+        }
+        return null;
+      },
+    );
+    // TextFormField(
+    //   controller: controller,
+    //   decoration: InputDecoration(
+    //     labelText: label,
+    //     border: OutlineInputBorder(),
+    //   ),
+    //   validator: (value) {
+    //     if (value == null || value.isEmpty) {
+    //       return 'Please enter $label';
+    //     }
+    //     return null;
+    //   },
+    // );
+  }
+
+  void _saveFields() {
+    for (var fieldSet in _twitterFields) {
+      print("Consumer Key: ${fieldSet['consumer_key']!.text}");
+      print("Consumer Secret: ${fieldSet['consumer_secret']!.text}");
+
+      print("---");
+    }
   }
 }

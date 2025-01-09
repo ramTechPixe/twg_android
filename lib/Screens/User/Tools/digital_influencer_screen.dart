@@ -30,6 +30,9 @@ class _DigitalInfluencerState extends State<DigitalInfluencer> {
     super.initState();
   }
 
+  ///
+  ScrollControllerExample controller = Get.put(ScrollControllerExample());
+/////
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -719,8 +722,7 @@ class _DigitalInfluencerState extends State<DigitalInfluencer> {
                     ),
                     menuscontroller.createDigitalData["response_body"] == null
                         ? SizedBox()
-                        : 
-                        Column(
+                        : Column(
                             children: [
                               Container(
                                 height: 200.h,
@@ -905,13 +907,11 @@ class _DigitalInfluencerState extends State<DigitalInfluencer> {
                                   ),
                                 ],
                               ),
-                              
                               SizedBox(
                                 height: 100.h,
                               )
                             ],
                           ),
-                 
                   ],
                 ),
               )))),

@@ -175,6 +175,11 @@ class _DigitalInfluencerPoseState extends State<DigitalInfluencerPose> {
                                             )
                                           ]),
                                       child: DropdownButtonFormField2<String>(
+                                        value: menuscontroller
+                                                .selectedValuepose.value.isEmpty
+                                            ? null
+                                            : menuscontroller
+                                                .selectedValuepose.value,
                                         isExpanded: true,
                                         decoration: InputDecoration(
                                           enabledBorder: OutlineInputBorder(
@@ -235,11 +240,22 @@ class _DigitalInfluencerPoseState extends State<DigitalInfluencerPose> {
                                                   child: Text(
                                                     item,
                                                     style: GoogleFonts.poppins(
-                                                      fontSize: 14,
-                                                    ),
+                                                        fontSize: 14),
                                                   ),
                                                 ))
                                             .toList(),
+                                        // items: menuscontroller.dropdownList
+                                        //     .map((item) =>
+                                        //         DropdownMenuItem<String>(
+                                        //           value: item,
+                                        //           child: Text(
+                                        //             item,
+                                        //             style: GoogleFonts.poppins(
+                                        //               fontSize: 14,
+                                        //             ),
+                                        //           ),
+                                        //         ))
+                                        //     .toList(),
                                         validator: (value) {
                                           if (value == null) {
                                             return 'Please select Form';
@@ -250,6 +266,10 @@ class _DigitalInfluencerPoseState extends State<DigitalInfluencerPose> {
                                           if (value != null) {
                                             menuscontroller
                                                 .updateSelectedItem(value);
+                                          }
+                                          if (value != null) {
+                                            menuscontroller
+                                                .updateSelectedItempose(value);
                                           }
                                         },
                                         // onChanged: (value) {
@@ -262,6 +282,11 @@ class _DigitalInfluencerPoseState extends State<DigitalInfluencerPose> {
                                         onSaved: (value) {
                                           selectedUserValue = value.toString();
                                           print(selectedUserValue);
+
+                                          menuscontroller
+                                              .updateSelectedItempose(
+                                                  value ?? '');
+
                                           setState(() {});
                                         },
                                         buttonStyleData: const ButtonStyleData(

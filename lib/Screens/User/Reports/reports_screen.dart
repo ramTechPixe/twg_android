@@ -69,6 +69,7 @@ class _ReportsState extends State<Reports> {
       //userprofilecontroller.profileData["user_details"]["id"]
     };
     reportscontroller.userGraphs(payload);
+    dashboardcontroller.dashboardTotalSocialPostAPI();
     super.initState();
   }
 
@@ -244,10 +245,11 @@ class _ReportsState extends State<Reports> {
                             ),
                           ),
                           hint: Text(
-                            'Please select Media',
+                            dashboardcontroller.selectedSocialMediaType.value ??
+                                'Please select Media',
                             style: GoogleFonts.poppins(
                               fontSize: 14,
-                              color: KTextgery.withOpacity(0.5),
+                              color: KdarkText,
                             ),
                           ),
                           items: socialMediaNames.map((item) {

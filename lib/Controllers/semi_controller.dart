@@ -54,16 +54,34 @@ class SemiController extends GetxController {
       } else if (data["message"] == "Invalid session token") {
         Fluttertoast.showToast(
           msg: data["message"],
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: KDarkPink_twg,
+          textColor: Kwhite,
+          fontSize: 16.0,
         );
         Get.toNamed(kSignIns);
       } else {
         Fluttertoast.showToast(
           msg: data["message"],
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: KDarkPink_twg,
+          textColor: Kwhite,
+          fontSize: 16.0,
         );
       }
     } catch (e) {
       Fluttertoast.showToast(
         msg: "Something went wrong",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: KDarkPink_twg,
+        textColor: Kwhite,
+        fontSize: 16.0,
       );
     } finally {
       sapFbtimeLoading(false);
@@ -120,16 +138,34 @@ class SemiController extends GetxController {
       } else if (data["message"] == "Invalid session token") {
         Fluttertoast.showToast(
           msg: data["message"],
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: KDarkPink_twg,
+          textColor: Kwhite,
+          fontSize: 16.0,
         );
         Get.toNamed(kSignIns);
       } else {
         Fluttertoast.showToast(
           msg: data["message"],
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: KDarkPink_twg,
+          textColor: Kwhite,
+          fontSize: 16.0,
         );
       }
     } catch (e) {
       Fluttertoast.showToast(
         msg: "Something went wrong",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: KDarkPink_twg,
+        textColor: Kwhite,
+        fontSize: 16.0,
       );
     } finally {
       sapFbtimeLoading(false);
@@ -188,11 +224,23 @@ class SemiController extends GetxController {
       } else {
         Fluttertoast.showToast(
           msg: data["message"],
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: KDarkPink_twg,
+          textColor: Kwhite,
+          fontSize: 16.0,
         );
       }
     } catch (e) {
       Fluttertoast.showToast(
         msg: "Something went wrong",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: KDarkPink_twg,
+        textColor: Kwhite,
+        fontSize: 16.0,
       );
     } finally {
       sapFbtimeLoading(false);
@@ -247,16 +295,34 @@ class SemiController extends GetxController {
       } else if (data["message"] == "Invalid session token") {
         Fluttertoast.showToast(
           msg: data["message"],
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: KDarkPink_twg,
+          textColor: Kwhite,
+          fontSize: 16.0,
         );
         Get.toNamed(kSignIns);
       } else {
         Fluttertoast.showToast(
           msg: data["message"],
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: KDarkPink_twg,
+          textColor: Kwhite,
+          fontSize: 16.0,
         );
       }
     } catch (e) {
       Fluttertoast.showToast(
         msg: "Something went wrong",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: KDarkPink_twg,
+        textColor: Kwhite,
+        fontSize: 16.0,
       );
     } finally {
       sapFbtimeLoading(false);
@@ -311,16 +377,34 @@ class SemiController extends GetxController {
       } else if (data["message"] == "Invalid session token") {
         Fluttertoast.showToast(
           msg: data["message"],
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: KDarkPink_twg,
+          textColor: Kwhite,
+          fontSize: 16.0,
         );
         Get.toNamed(kSignIns);
       } else {
         Fluttertoast.showToast(
           msg: data["message"],
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: KDarkPink_twg,
+          textColor: Kwhite,
+          fontSize: 16.0,
         );
       }
     } catch (e) {
       Fluttertoast.showToast(
         msg: "Something went wrong",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: KDarkPink_twg,
+        textColor: Kwhite,
+        fontSize: 16.0,
       );
     } finally {
       sapFbtimeLoading(false);
@@ -375,16 +459,34 @@ class SemiController extends GetxController {
       } else if (data["message"] == "Invalid session token") {
         Fluttertoast.showToast(
           msg: data["message"],
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: KDarkPink_twg,
+          textColor: Kwhite,
+          fontSize: 16.0,
         );
         Get.toNamed(kSignIns);
       } else {
         Fluttertoast.showToast(
           msg: data["message"],
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: KDarkPink_twg,
+          textColor: Kwhite,
+          fontSize: 16.0,
         );
       }
     } catch (e) {
       Fluttertoast.showToast(
         msg: "Something went wrong",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: KDarkPink_twg,
+        textColor: Kwhite,
+        fontSize: 16.0,
       );
     } finally {
       sapFbtimeLoading(false);
@@ -439,16 +541,34 @@ class SemiController extends GetxController {
       } else if (data["message"] == "Invalid session token") {
         Fluttertoast.showToast(
           msg: data["message"],
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: KDarkPink_twg,
+          textColor: Kwhite,
+          fontSize: 16.0,
         );
         Get.toNamed(kSignIns);
       } else {
         Fluttertoast.showToast(
           msg: data["message"],
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: KDarkPink_twg,
+          textColor: Kwhite,
+          fontSize: 16.0,
         );
       }
     } catch (e) {
       Fluttertoast.showToast(
         msg: "Something went wrong",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: KDarkPink_twg,
+        textColor: Kwhite,
+        fontSize: 16.0,
       );
     } finally {
       sapFbtimeLoading(false);
@@ -534,16 +654,34 @@ class SemiController extends GetxController {
       } else if (data["message"] == "Invalid session token") {
         Fluttertoast.showToast(
           msg: data["message"],
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: KDarkPink_twg,
+          textColor: Kwhite,
+          fontSize: 16.0,
         );
         Get.toNamed(kSignIns);
       } else {
         Fluttertoast.showToast(
           msg: data["message"],
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: KDarkPink_twg,
+          textColor: Kwhite,
+          fontSize: 16.0,
         );
       }
     } catch (e) {
       Fluttertoast.showToast(
         msg: "Something went wrong",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: KDarkPink_twg,
+        textColor: Kwhite,
+        fontSize: 16.0,
       );
     } finally {
       sapFbtimeLoading(false);
@@ -578,6 +716,12 @@ class SemiController extends GetxController {
 
         Fluttertoast.showToast(
           msg: "Caption generated successfully",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: KDarkPink_twg,
+          textColor: Kwhite,
+          fontSize: 16.0,
         );
         //////////////
 
@@ -586,16 +730,34 @@ class SemiController extends GetxController {
       } else if (data["message"] == "Invalid session token") {
         Fluttertoast.showToast(
           msg: data["message"],
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: KDarkPink_twg,
+          textColor: Kwhite,
+          fontSize: 16.0,
         );
         Get.toNamed(kSignIns);
       } else {
         Fluttertoast.showToast(
           msg: data["message"],
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: KDarkPink_twg,
+          textColor: Kwhite,
+          fontSize: 16.0,
         );
       }
     } catch (e) {
       Fluttertoast.showToast(
         msg: "Something went wrong",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: KDarkPink_twg,
+        textColor: Kwhite,
+        fontSize: 16.0,
       );
     } finally {
       aIMessageLoading(false);
@@ -622,6 +784,12 @@ class SemiController extends GetxController {
 
         Fluttertoast.showToast(
           msg: "success",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: KDarkPink_twg,
+          textColor: Kwhite,
+          fontSize: 16.0,
         );
         //////////////
 //         "data": {
@@ -636,16 +804,34 @@ class SemiController extends GetxController {
       } else if (data["message"] == "Invalid session token") {
         Fluttertoast.showToast(
           msg: data["message"],
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: KDarkPink_twg,
+          textColor: Kwhite,
+          fontSize: 16.0,
         );
         Get.toNamed(kSignIns);
       } else {
         Fluttertoast.showToast(
           msg: data["message"],
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: KDarkPink_twg,
+          textColor: Kwhite,
+          fontSize: 16.0,
         );
       }
     } catch (e) {
       Fluttertoast.showToast(
         msg: "Something went wrong",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: KDarkPink_twg,
+        textColor: Kwhite,
+        fontSize: 16.0,
       );
     } finally {
       autoPostMessageLoading(false);
@@ -679,6 +865,12 @@ class SemiController extends GetxController {
 
         Fluttertoast.showToast(
           msg: data["message"],
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: KDarkPink_twg,
+          textColor: Kwhite,
+          fontSize: 16.0,
         );
         //////////////
 //         "data": {
@@ -693,16 +885,34 @@ class SemiController extends GetxController {
       } else if (data["message"] == "Invalid session token") {
         Fluttertoast.showToast(
           msg: data["message"],
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: KDarkPink_twg,
+          textColor: Kwhite,
+          fontSize: 16.0,
         );
         Get.toNamed(kSignIns);
       } else {
         Fluttertoast.showToast(
           msg: data["message"],
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: KDarkPink_twg,
+          textColor: Kwhite,
+          fontSize: 16.0,
         );
       }
     } catch (e) {
       Fluttertoast.showToast(
         msg: "Something went wrong",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: KDarkPink_twg,
+        textColor: Kwhite,
+        fontSize: 16.0,
       );
     } finally {
       aiTextLoading(false);
@@ -737,16 +947,34 @@ class SemiController extends GetxController {
       } else if (data["message"] == "Invalid session token") {
         Fluttertoast.showToast(
           msg: data["message"],
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: KDarkPink_twg,
+          textColor: Kwhite,
+          fontSize: 16.0,
         );
         Get.toNamed(kSignIns);
       } else {
         Fluttertoast.showToast(
           msg: data["message"],
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: KDarkPink_twg,
+          textColor: Kwhite,
+          fontSize: 16.0,
         );
       }
     } catch (e) {
       Fluttertoast.showToast(
         msg: "Something went wrong",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: KDarkPink_twg,
+        textColor: Kwhite,
+        fontSize: 16.0,
       );
     } finally {
       scheduledListLoading(false);
@@ -773,16 +1001,34 @@ class SemiController extends GetxController {
       } else if (data["message"] == "Invalid session token") {
         Fluttertoast.showToast(
           msg: data["message"],
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: KDarkPink_twg,
+          textColor: Kwhite,
+          fontSize: 16.0,
         );
         Get.toNamed(kSignIns);
       } else {
         Fluttertoast.showToast(
           msg: data["message"],
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: KDarkPink_twg,
+          textColor: Kwhite,
+          fontSize: 16.0,
         );
       }
     } catch (e) {
       Fluttertoast.showToast(
         msg: "Something went wrong",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: KDarkPink_twg,
+        textColor: Kwhite,
+        fontSize: 16.0,
       );
     } finally {
       scheduledViewLoading(false);
@@ -805,24 +1051,111 @@ class SemiController extends GetxController {
         userScheduledPost();
         Fluttertoast.showToast(
           msg: data["message"],
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: KDarkPink_twg,
+          textColor: Kwhite,
+          fontSize: 16.0,
         );
         print("object");
       } else if (data["message"] == "Invalid session token") {
         Fluttertoast.showToast(
           msg: data["message"],
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: KDarkPink_twg,
+          textColor: Kwhite,
+          fontSize: 16.0,
         );
         Get.toNamed(kSignIns);
       } else {
         Fluttertoast.showToast(
           msg: data["message"],
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: KDarkPink_twg,
+          textColor: Kwhite,
+          fontSize: 16.0,
         );
       }
     } catch (e) {
       Fluttertoast.showToast(
         msg: "Something went wrong",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: KDarkPink_twg,
+        textColor: Kwhite,
+        fontSize: 16.0,
       );
     } finally {
       quickPostDeleteLoading(false);
+    }
+  }
+
+  var multiquickPostDeleteLoading = false.obs;
+// https://thewisguystech.com/delete-multiple-posts-api/ ramworkdelete
+  Future<void> muliDeleteLogs(List<String> list) async {
+    multiquickPostDeleteLoading(true);
+
+    //  var payload = {"log_id": toDeletePostID.value};
+    try {
+      var response = await dioapiService.postRequestMultiIDDeleteScheduledPosts(
+          endpoint: "delete-multiple-posts-api/", payload: list);
+//  https://thewisguystech.com/deletemulti-post-apis/
+      Map data = response;
+      print(data);
+//  "status": "success",
+      if (data["status"] == "success") {
+        userScheduledPost();
+        // userLogsPost();
+        Fluttertoast.showToast(
+          msg: data["message"],
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: KDarkPink_twg,
+          textColor: Kwhite,
+          fontSize: 16.0,
+        );
+        print("object");
+      } else if (data["message"] == "Invalid session token") {
+        Fluttertoast.showToast(
+          msg: data["message"],
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: KDarkPink_twg,
+          textColor: Kwhite,
+          fontSize: 16.0,
+        );
+        Get.toNamed(kSignIns);
+      } else {
+        Fluttertoast.showToast(
+          msg: data["message"],
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: KDarkPink_twg,
+          textColor: Kwhite,
+          fontSize: 16.0,
+        );
+      }
+    } catch (e) {
+      Fluttertoast.showToast(
+        msg: "Something went wrong",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: KDarkPink_twg,
+        textColor: Kwhite,
+        fontSize: 16.0,
+      );
+    } finally {
+      multiquickPostDeleteLoading(false);
     }
   }
 
@@ -843,7 +1176,7 @@ class SemiController extends GetxController {
           payload: payload,
           fbList: accountscontroller.selectedValues.value,
           twtList: accountscontroller.twtnewTwitters.value,
-          img: dashboardcontroller.selectedImageobss.value,
+          image: dashboardcontroller.selectedImageobss.value,
           video: selectedVideos.value,
           tumbList: accountscontroller.selectedTumblerValues,
           pintList: accountscontroller.selectedPinterestValues,
@@ -856,6 +1189,12 @@ class SemiController extends GetxController {
       if (data["status"] == "1") {
         Fluttertoast.showToast(
           msg: data["message"],
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: KDarkPink_twg,
+          textColor: Kwhite,
+          fontSize: 16.0,
         );
         //////////////
 
@@ -864,16 +1203,34 @@ class SemiController extends GetxController {
       } else if (data["message"] == "Invalid session token") {
         Fluttertoast.showToast(
           msg: data["message"],
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: KDarkPink_twg,
+          textColor: Kwhite,
+          fontSize: 16.0,
         );
         Get.toNamed(kSignIns);
       } else {
         Fluttertoast.showToast(
           msg: data["message"],
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: KDarkPink_twg,
+          textColor: Kwhite,
+          fontSize: 16.0,
         );
       }
     } catch (e) {
       Fluttertoast.showToast(
         msg: "Something went wrong",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: KDarkPink_twg,
+        textColor: Kwhite,
+        fontSize: 16.0,
       );
     } finally {
       publishLoading(false);
@@ -897,20 +1254,25 @@ class SemiController extends GetxController {
           payload: payload,
           fbList: accountscontroller.selectedValues.value,
           twtList: accountscontroller.twtnewTwitters.value,
-          img: dashboardcontroller.selectedImageobss.value,
+          image: dashboardcontroller.selectedImageobss.value,
           video: selectedVideos.value,
           tumbList: accountscontroller.selectedTumblerValues,
           pintList: accountscontroller.selectedPinterestValues,
           instaList: accountscontroller.instpintselectedTumblerNames,
           ytuList: accountscontroller.selectedyoutubeValuess);
-      Map data = jsonDecode(response)
-      ;
+      Map data = jsonDecode(response);
       print(data);
       // Map data = jsonDecode(response);
       // print(data);
       if (data["status"] == "success") {
         Fluttertoast.showToast(
           msg: data["message"],
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: KDarkPink_twg,
+          textColor: Kwhite,
+          fontSize: 16.0,
         );
         //////////////
 
@@ -919,16 +1281,34 @@ class SemiController extends GetxController {
       } else if (data["message"] == "Invalid session token") {
         Fluttertoast.showToast(
           msg: data["message"],
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: KDarkPink_twg,
+          textColor: Kwhite,
+          fontSize: 16.0,
         );
         Get.toNamed(kSignIns);
       } else {
         Fluttertoast.showToast(
           msg: data["message"],
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: KDarkPink_twg,
+          textColor: Kwhite,
+          fontSize: 16.0,
         );
       }
     } catch (e) {
       Fluttertoast.showToast(
         msg: "Something went wrong",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: KDarkPink_twg,
+        textColor: Kwhite,
+        fontSize: 16.0,
       );
     } finally {
       updatepublishLoading(false);

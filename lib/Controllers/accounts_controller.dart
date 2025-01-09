@@ -45,16 +45,37 @@ class AccontsController extends GetxController {
       } else if (data["message"] == "Invalid session token") {
         Fluttertoast.showToast(
           msg: data["message"],
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: KDarkPink_twg,
+          textColor: Kwhite,
+          fontSize: 16.0,
         );
+        // Fluttertoast.showToast(
+        //
+        // );
         Get.toNamed(kSignIns);
       } else {
         Fluttertoast.showToast(
           msg: data["message"],
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: KDarkPink_twg,
+          textColor: Kwhite,
+          fontSize: 16.0,
         );
       }
     } catch (e) {
       Fluttertoast.showToast(
         msg: "Something went wrong",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: KDarkPink_twg,
+        textColor: Kwhite,
+        fontSize: 16.0,
       );
     } finally {
       instaAccountsLoading(false);
@@ -231,16 +252,34 @@ class AccontsController extends GetxController {
       } else if (data["message"] == "Invalid session token") {
         Fluttertoast.showToast(
           msg: data["message"],
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: KDarkPink_twg,
+          textColor: Kwhite,
+          fontSize: 16.0,
         );
         Get.toNamed(kSignIns);
       } else {
         Fluttertoast.showToast(
           msg: data["message"],
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: KDarkPink_twg,
+          textColor: Kwhite,
+          fontSize: 16.0,
         );
       }
     } catch (e) {
       Fluttertoast.showToast(
         msg: "Something went wrong",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: KDarkPink_twg,
+        textColor: Kwhite,
+        fontSize: 16.0,
       );
     } finally {
       redditAccountsLoading(false);
@@ -270,13 +309,29 @@ class AccontsController extends GetxController {
         selectedyoutubeValuess.value =
             List.from(data["data"]["sap_youtube_options"]["yt_type_post_user"]);
       } else {
-        Fluttertoast.showToast(msg: data["message"]);
+        Fluttertoast.showToast(
+          msg: data["message"],
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: KDarkPink_twg,
+          textColor: Kwhite,
+          fontSize: 16.0,
+        );
         if (data["message"] == "Invalid session token") {
           Get.toNamed(kSignIns);
         }
       }
     } catch (e) {
-      Fluttertoast.showToast(msg: "Something went wrong");
+      Fluttertoast.showToast(
+        msg: "Something went wrong",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: KDarkPink_twg,
+        textColor: Kwhite,
+        fontSize: 16.0,
+      );
     } finally {
       youtubeAccountsLoading(false);
     }
@@ -381,16 +436,34 @@ class AccontsController extends GetxController {
       } else if (data["message"] == "Invalid session token") {
         Fluttertoast.showToast(
           msg: data["message"],
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: KDarkPink_twg,
+          textColor: Kwhite,
+          fontSize: 16.0,
         );
         Get.toNamed(kSignIns);
       } else {
         Fluttertoast.showToast(
           msg: data["message"],
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: KDarkPink_twg,
+          textColor: Kwhite,
+          fontSize: 16.0,
         );
       }
     } catch (e) {
       Fluttertoast.showToast(
         msg: "Something went wrong",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: KDarkPink_twg,
+        textColor: Kwhite,
+        fontSize: 16.0,
       );
     } finally {
       tumblerAccountsLoading(false);
@@ -485,16 +558,34 @@ class AccontsController extends GetxController {
       } else if (data["message"] == "Invalid session token") {
         Fluttertoast.showToast(
           msg: data["message"],
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: KDarkPink_twg,
+          textColor: Kwhite,
+          fontSize: 16.0,
         );
         Get.toNamed(kSignIns);
       } else {
         Fluttertoast.showToast(
           msg: data["message"],
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: KDarkPink_twg,
+          textColor: Kwhite,
+          fontSize: 16.0,
         );
       }
     } catch (e) {
       Fluttertoast.showToast(
         msg: "Something went wrong",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: KDarkPink_twg,
+        textColor: Kwhite,
+        fontSize: 16.0,
       );
     } finally {
       pinterestAccountsLoading(false);
@@ -558,16 +649,34 @@ class AccontsController extends GetxController {
       } else if (data["message"] == "Invalid session token") {
         Fluttertoast.showToast(
           msg: data["message"],
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: KDarkPink_twg,
+          textColor: Kwhite,
+          fontSize: 16.0,
         );
         Get.toNamed(kSignIns);
       } else {
         Fluttertoast.showToast(
           msg: data["message"],
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: KDarkPink_twg,
+          textColor: Kwhite,
+          fontSize: 16.0,
         );
       }
     } catch (e) {
       Fluttertoast.showToast(
         msg: "Something went wrong",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: KDarkPink_twg,
+        textColor: Kwhite,
+        fontSize: 16.0,
       );
     } finally {
       pinterestAccountsLoading(false);
@@ -676,16 +785,34 @@ class AccontsController extends GetxController {
       } else if (data["message"] == "Invalid session token") {
         Fluttertoast.showToast(
           msg: data["message"],
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: KDarkPink_twg,
+          textColor: Kwhite,
+          fontSize: 16.0,
         );
         Get.toNamed(kSignIns);
       } else {
         Fluttertoast.showToast(
           msg: data["message"],
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: KDarkPink_twg,
+          textColor: Kwhite,
+          fontSize: 16.0,
         );
       }
     } catch (e) {
       Fluttertoast.showToast(
         msg: "Something went wrong",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: KDarkPink_twg,
+        textColor: Kwhite,
+        fontSize: 16.0,
       );
     } finally {
       smFbAccountsLoading(false);

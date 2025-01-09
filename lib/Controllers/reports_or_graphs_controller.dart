@@ -30,16 +30,34 @@ class ReportsOrGraphsController extends GetxController {
       } else if (data["message"] == "Invalid session token") {
         Fluttertoast.showToast(
           msg: data["message"],
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: KDarkPink_twg,
+          textColor: Kwhite,
+          fontSize: 16.0,
         );
         Get.toNamed(kSignIns);
       } else {
         Fluttertoast.showToast(
           msg: data["message"],
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: KDarkPink_twg,
+          textColor: Kwhite,
+          fontSize: 16.0,
         );
       }
     } catch (e) {
       Fluttertoast.showToast(
         msg: "Something went wrong",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: KDarkPink_twg,
+        textColor: Kwhite,
+        fontSize: 16.0,
       );
     } finally {
       graphsLoading(false);

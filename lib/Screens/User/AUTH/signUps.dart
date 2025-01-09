@@ -1417,6 +1417,12 @@ class _SignUPSState extends State<SignUPS> {
                                           null) {
                                     Fluttertoast.showToast(
                                       msg: "please select Suscribtion",
+                                      toastLength: Toast.LENGTH_SHORT,
+                                      gravity: ToastGravity.BOTTOM,
+                                      timeInSecForIosWeb: 1,
+                                      backgroundColor: KDarkPink_twg,
+                                      textColor: Kwhite,
+                                      fontSize: 16.0,
                                     );
                                   } else {
                                     authcontroller

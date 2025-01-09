@@ -65,7 +65,8 @@ class _SignInState extends State<SignIn> {
   @override
   void initState() {
     setState(() {
-      authcontroller.UserEmailSignInController.text = "bharatsports@gmail.com";
+      authcontroller.UserEmailSignInController.text = "androidtest@gmail.com";
+      // authcontroller.UserEmailSignInController.text = "bharatsports@gmail.com";
       // bharatsports@gmail.com
       // authcontroller.UserEmailSignInController.text = "nlp73683@gmail.com";
       //"sri965272@gmail.com";
@@ -293,7 +294,8 @@ class _SignInState extends State<SignIn> {
                       alignment: Alignment.centerRight,
                       child: InkWell(
                         onTap: () {
-                          Get.toNamed(kForgotPassword);
+                          
+                          // Get.toNamed(kForgotPassword);
                         },
                         child: Text(
                           "Forgot password?",
