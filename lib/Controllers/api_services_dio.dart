@@ -249,10 +249,8 @@ class ApiServiceDio extends GetxService {
         headers.addAll(customHeaders);
       }
 
-      // Construct form data using dio.FormData
       dio.FormData formData = dio.FormData();
 
-      // Add fields dynamically with null handling
       payload.forEach((key, value) {
         formData.fields
             .add(MapEntry(key, value?.toString() ?? "")); // Handle null values

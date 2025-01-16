@@ -4,13 +4,19 @@ plugins {
     // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
     id "dev.flutter.flutter-gradle-plugin"
 }
- 
+
+def keystoreProperties = new Properties()
+def keystorePropertiesFile = rootProject.file('key.properties')
+if (keystorePropertiesFile.exists()) {
+    keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+}
+
 
 android {
-    namespace = "com.example.twg"  // Set your package name here
+    namespace = "com.thewisguystech.twg"   
     compileSdkVersion 34
   
-    ndkVersion = flutter.ndkVersion
+    ndkVersion = "26.1.10909125" 
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
@@ -22,19 +28,32 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.example.twg"
+        applicationId = "com.thewisguystech.twg"
         minSdkVersion 21
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
         versionName = flutter.versionName
     }
 
-    buildTypes {
+ 
+
+    signingConfigs {
         release {
-            // Signing with the debug keys for now, so flutter run --release works.
-            signingConfig = signingConfigs.debug
+            keyAlias = keystoreProperties['keyAlias']
+            keyPassword = keystoreProperties['keyPassword']
+            storeFile = keystoreProperties['storeFile'] ? file(keystoreProperties['storeFile']) : null
+            storePassword = keystoreProperties['storePassword']
         }
     }
+    buildTypes {
+        release {
+            signingConfig signingConfigs.release
+            minifyEnabled true   
+            shrinkResources true   
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+ 
 }
 
 flutter {

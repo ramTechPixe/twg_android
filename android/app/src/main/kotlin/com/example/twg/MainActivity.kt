@@ -1,4 +1,4 @@
-package com.example.twg
+package com.thewisguystech.twg
 
 import io.flutter.embedding.android.FlutterActivity
 
