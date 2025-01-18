@@ -2323,7 +2323,7 @@ class _EditProfileState extends State<EditProfile> {
                       height: 6.h,
                     ),
                     Text(
-                      "We are glad to see you here",
+                      "Update Your details here.",
                       style: GoogleFonts.poppins(
                           color: Kwhite,
                           fontSize: kTenFont,
@@ -2725,7 +2725,23 @@ class _EditProfileState extends State<EditProfile> {
                             );
                           }
                         }),
-
+                SizedBox(
+                  height: 20.h,
+                ),
+                CustomButton(
+                    margin: EdgeInsets.only(top: 10.h),
+                    borderRadius: BorderRadius.circular(8.r),
+                    Color: Kform_border_twg,
+                    textColor: Kwhite,
+                    height: 40,
+                    width: double.infinity,
+                    label: "Go Back",
+                    fontSize: kSixteenFont,
+                    fontWeight: kFW700,
+                    isLoading: false,
+                    onTap: () {
+                      Get.back();
+                    }),
                 SizedBox(
                   height: 100.h,
                 )

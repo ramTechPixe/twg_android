@@ -11,6 +11,7 @@ class Suscribtion extends StatefulWidget {
 
 class _SuscribtionState extends State<Suscribtion> {
   SuscribtionController suscrbtioncontroller = Get.put(SuscribtionController());
+  ProfileController userprofilecontroller = Get.put(ProfileController());
   @override
   void initState() {
     suscrbtioncontroller.userSuscriptionv2();
@@ -31,6 +32,10 @@ class _SuscribtionState extends State<Suscribtion> {
             leading: InkWell(
               onTap: () {
                 Get.back();
+                // Get.toNamed(kNavigation);
+                // userprofilecontroller.userProfileNavigation();
+                // Get.toNamed(kNavigation);
+                // Get.back();
               },
               child: Icon(
                 Icons.arrow_back_ios,
@@ -514,29 +519,33 @@ class _SuscribtionState extends State<Suscribtion> {
                                                 BorderRadius.circular(2),
                                           ),
                                           child: Image.asset(
-                                            network == "facebook"
-                                                ? "assets/images/fb_logo.png"
-                                                : network == "twitter"
-                                                    ? "assets/images/x_logo.png"
-                                                    : network == "linkedin"
-                                                        ? "assets/images/in_logo.png"
-                                                        : network == "tumblr"
-                                                            ? "assets/images/tumbler_logo.png"
+                                            network == "reddit"
+                                                ? "assets/images/reddit_png.png"
+                                                : network == "blogger"
+                                                    ? "assets/images/blog_png.png"
+                                                    : network == "facebook"
+                                                        ? "assets/images/fb_logo.png"
+                                                        : network == "twitter"
+                                                            ? "assets/images/x_logo.png"
                                                             : network ==
-                                                                    "pinterest"
-                                                                ? "assets/images/pin_logo.png"
+                                                                    "linkedin"
+                                                                ? "assets/images/in_logo.png"
                                                                 : network ==
-                                                                        "gmb"
-                                                                    ? "assets/images/google_logo.png"
+                                                                        "tumblr"
+                                                                    ? "assets/images/tumbler_logo.png"
                                                                     : network ==
-                                                                            "instagram"
-                                                                        ? "assets/images/insta_logo.png"
+                                                                            "pinterest"
+                                                                        ? "assets/images/pin_logo.png"
                                                                         : network ==
-                                                                                "wordpress"
-                                                                            ? "assets/images/word_logo.png"
-                                                                            : network == "youtube"
-                                                                                ? "assets/images/y-tube_logo.png"
-                                                                                : "assets/images/${network}_images.png",
+                                                                                "gmb"
+                                                                            ? "assets/images/google_logo.png"
+                                                                            : network == "instagram"
+                                                                                ? "assets/images/insta_logo.png"
+                                                                                : network == "wordpress"
+                                                                                    ? "assets/images/word_logo.png"
+                                                                                    : network == "youtube"
+                                                                                        ? "assets/images/y-tube_logo.png"
+                                                                                        : "assets/images/${network}_images.png",
                                             height: 25,
                                             width: 25,
                                             errorBuilder:

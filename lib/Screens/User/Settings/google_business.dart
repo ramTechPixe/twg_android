@@ -171,148 +171,24 @@ class _GoogleBusineesState extends State<GoogleBusinees> {
                     style: GoogleFonts.poppins(
                         fontSize: 11.sp, color: kblack, fontWeight: kFW400),
                   ),
-                  Container(
-                    margin: EdgeInsets.only(top: 10),
-                    // "7"
-                    height: 43,
-                    width: 110.w,
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                      // boxShadow: [
-                      //   BoxShadow(
-                      //     color: Ktextcolor.withOpacity(0.5),
-                      //     blurRadius: 5.r,
-                      //     offset: Offset(0, 5),
-                      //     spreadRadius: 1.r,
-                      //   )
-                      // ],
-                      color: Kform_border_twg,
-                      borderRadius: BorderRadius.all(Radius.circular(5)),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        // Icon(
-                        //   Icons.shopping_bag,
-                        //   color: Kwhite,
-                        // ),
-                        Image.asset(
-                          "assets/images/Vector.png",
-                          // height: 3.h,
-                          // width: 80.w,
-                        ),
-                        SizedBox(
-                          width: 12.w,
-                        ),
-                        Text(
-                          "Save",
-                          textAlign: TextAlign.center,
-                          style: GoogleFonts.poppins(
-                              fontWeight: kFW600,
-                              color: Kwhite,
-                              fontSize: kFourteenFont.sp),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              )),
-          SizedBox(
-            height: 20.h,
-          ),
-          Text(
-            "API Settings",
-            style: GoogleFonts.poppins(
-                fontSize: kTwentyFont,
-                color: Knav_blue_twg,
-                fontWeight: kFW500),
-          ),
-          Container(
-              margin: EdgeInsets.only(top: 10.h),
-              decoration: BoxDecoration(
-                  border: Border.all(color: Ktextcolor.withOpacity(0.4)),
-                  borderRadius: BorderRadius.circular(4.r)),
-              padding: EdgeInsets.all(5),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                      margin: EdgeInsets.only(top: 8.h),
-                      decoration: BoxDecoration(
-                          border:
-                              Border.all(color: Ktextcolor.withOpacity(0.4)),
-                          borderRadius: BorderRadius.circular(4.r)),
-                      padding: EdgeInsets.all(5),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Icon(Icons.info),
-                              SizedBox(
-                                width: 10,
-                              ),
-                              Text(
-                                "Note: You have a maximum of 10 accounts allowed",
-                                style: GoogleFonts.poppins(
-                                    fontSize: kTenFont,
-                                    color: kblack,
-                                    fontWeight: kFW400),
-                              ),
-                            ],
-                          ),
-                        ],
-                      )),
-
-                  // Access Token
-                  SizedBox(
-                    height: 15.h,
-                  ),
-
-                  Row(
-                    children: [
-                      Container(
-                        padding: EdgeInsets.all(5),
-                        margin: EdgeInsets.only(top: 10),
-                        height: 43,
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                          border: Border.all(color: Kblue_twg),
-                          color: Kwhite,
-                          borderRadius: BorderRadius.all(Radius.circular(5)),
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              "+ Add GBP Account",
-                              textAlign: TextAlign.center,
-                              style: GoogleFonts.poppins(
-                                  fontWeight: kFW500,
-                                  color: Kblue_twg,
-                                  fontSize: 13.sp),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                  Container(
-                      margin: EdgeInsets.only(top: 26),
-                      // "7"
-                      height: 45,
-                      width: 120.w,
+                  InkWell(
+                    onTap: () {
+                      Fluttertoast.showToast(
+                        msg: "Not Available Now",
+                        toastLength: Toast.LENGTH_SHORT,
+                        gravity: ToastGravity.BOTTOM,
+                        timeInSecForIosWeb: 1,
+                        backgroundColor: KDarkPink_twg,
+                        textColor: Kwhite,
+                        fontSize: 16.0,
+                      );
+                    },
+                    child: Container(
+                      margin: EdgeInsets.only(top: 10),
+                      height: 43,
+                      width: 110.w,
                       alignment: Alignment.center,
                       decoration: BoxDecoration(
-                        // boxShadow: [
-                        //   BoxShadow(
-                        //     color: Ktextcolor.withOpacity(0.5),
-                        //     blurRadius: 5.r,
-                        //     offset: Offset(0, 5),
-                        //     spreadRadius: 1.r,
-                        //   )
-                        // ],
                         color: Kform_border_twg,
                         borderRadius: BorderRadius.all(Radius.circular(5)),
                       ),
@@ -337,541 +213,669 @@ class _GoogleBusineesState extends State<GoogleBusinees> {
                             style: GoogleFonts.poppins(
                                 fontWeight: kFW600,
                                 color: Kwhite,
-                                fontSize: 16.sp),
+                                fontSize: kFourteenFont.sp),
                           ),
                         ],
-                      ))
-                  ///////////
+                      ),
+                    ),
+                  ),
                 ],
               )),
           SizedBox(
             height: 20.h,
           ),
-          Text(
-            "Autopost Settings",
-            style: GoogleFonts.poppins(
-                fontSize: kTwentyFont,
-                color: Knav_blue_twg,
-                fontWeight: kFW500),
-          ),
-          Container(
-              margin: EdgeInsets.only(top: 10.h),
-              decoration: BoxDecoration(
-                  border: Border.all(color: Ktextcolor.withOpacity(0.4)),
-                  borderRadius: BorderRadius.circular(4.r)),
-              padding: EdgeInsets.all(5),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Autopost Posts to Google Business Profile of this user(s)",
-                    style: GoogleFonts.poppins(
-                        fontSize: kSixteenFont,
-                        color: kblack,
-                        fontWeight: kFW500),
-                  ),
-                  SizedBox(
-                    height: 15.h,
-                  ),
-                  Container(
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8),
-                      color: Kwhite,
-                    ),
-                    child: DropDownMultiSelect(
-                      decoration: InputDecoration(
-                        contentPadding:
-                            EdgeInsets.symmetric(vertical: 16, horizontal: 8),
-                        fillColor: Kwhite,
-                        focusColor: Theme.of(context).colorScheme.onPrimary,
-                        enabledBorder: const OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(8)),
-                            borderSide:
-                                BorderSide(color: KText_border_twg, width: 1)),
-                        focusedBorder: const OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(8)),
-                            borderSide: BorderSide(
-                              color: Kform_border_twg,
-                              width: 1,
-                            )),
-                      ),
-                      options: variantsList,
-                      selectedValues: selectedCheckBoxValue,
-                      onChanged: (List<String> value) {
-                        //   value = selectedCheckBoxValue;
-                        print("${selectedCheckBoxValue}");
-                      },
-                      whenEmpty: 'Select User',
-                    ),
-                  ),
-                  SizedBox(
-                    height: 10.h,
-                  ),
-                  Text(
-                    "Select each of the users that you want to automatically post to Google Business Profile Post Image when a new post is published.",
-                    style: GoogleFonts.poppins(
-                        fontSize: kTenFont, color: kblack, fontWeight: kFW400),
-                  ),
-                  SizedBox(
-                    height: 10.h,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      CustomButton(
-                          // margin: EdgeInsets.only(top: 36.h),
-                          borderRadius: BorderRadius.circular(5.r),
-                          Color: Kform_border_twg,
-                          textColor: Kwhite,
-                          height: 45,
-                          width: 105.w,
-                          label: "Select All",
-                          fontSize: kSixteenFont,
-                          fontWeight: kFW600,
-                          isLoading: false,
-                          onTap: () {}),
-                      Container(
-                        height: 45,
-                        alignment: Alignment.center,
-                        width: 140,
-                        margin: EdgeInsets.only(right: 10),
-                        padding: EdgeInsets.all(8),
-                        decoration: BoxDecoration(
-                          border: Border.all(color: Klight_grey_twg, width: 1),
-                          color: KPale_white_twg,
-                          borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(5),
-                              topRight: Radius.circular(5),
-                              bottomLeft: Radius.circular(5),
-                              bottomRight: Radius.circular(5)),
-                        ),
-                        child: Text(
-                          "Select None",
-                          style: GoogleFonts.poppins(
-                              color: kblack,
-                              fontSize: kSixteenFont,
-                              fontWeight: kFW600),
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 20.h,
-                  ),
-                  Text(
-                    "Google Business Profile Post Image",
-                    style: GoogleFonts.poppins(
-                        color: kblack,
-                        fontSize: kSixteenFont,
-                        fontWeight: kFW500),
-                  ),
-                  SizedBox(
-                    height: 12.h,
-                  ),
-                  Column(
-                    children: [
-                      selectedImage != null
-                          ? Container(
-                              padding: EdgeInsets.all(12),
-                              margin: EdgeInsets.only(bottom: 10),
-                              decoration: BoxDecoration(
-                                border: Border.all(
-                                    color: Klight_grey_twg, width: 1),
-                                color: Kwhite,
-                                borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(5),
-                                    topRight: Radius.circular(5),
-                                    bottomLeft: Radius.circular(5),
-                                    bottomRight: Radius.circular(5)),
-                              ),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Image.file(
-                                    selectedImage!,
-                                    width: 100.w,
-                                    height: 120.h,
-                                    //   fit: BoxFit.cover,
-                                    fit: BoxFit.cover,
-                                    // height: 100.h,
-                                    // width: 100.w,
-                                    // fit: BoxFit.cover,
-                                  ),
-                                  InkWell(
-                                    onTap: () {
-                                      setState(() {
-                                        selectedImage = null;
-                                      });
-                                      setState(() {});
-                                    },
-                                    child: Text('X',
-                                        maxLines: 2,
-                                        overflow: TextOverflow.ellipsis,
-                                        style: GoogleFonts.poppins(
-                                            fontSize: 20.sp,
-                                            fontWeight: kFW600,
-                                            color: Klight_grey_twg)),
-                                  )
-                                ],
-                              ),
-                            )
-                          : SizedBox(),
-                      Row(
-                        // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          selectedImage == null
-                              ? SizedBox()
-                              : InkWell(
-                                  onTap: () {
-                                    setState(() {
-                                      selectedImage = null;
-                                    });
-                                    setState(() {});
-                                  },
-                                  child: Container(
-                                    height: 45,
-                                    width: 110,
-                                    margin: EdgeInsets.only(right: 10),
-                                    padding: EdgeInsets.all(8),
-                                    decoration: BoxDecoration(
-                                      border: Border.all(
-                                          color: Klight_grey_twg, width: 1),
-                                      color: Kwhite,
-                                      borderRadius: BorderRadius.only(
-                                          topLeft: Radius.circular(5),
-                                          topRight: Radius.circular(5),
-                                          bottomLeft: Radius.circular(5),
-                                          bottomRight: Radius.circular(5)),
-                                    ),
-                                    child: Row(
-                                      children: [
-                                        Image.asset(
-                                          "assets/images/delete.png",
-                                          height: 24,
-                                          width: 24,
-                                        ),
-                                        SizedBox(
-                                          width: 5.w,
-                                        ),
-                                        Text(
-                                          "Delete",
-                                          style: GoogleFonts.poppins(
-                                              color: Klight_grey_twg,
-                                              fontSize: kSixteenFont,
-                                              fontWeight: kFW600),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                          CustomButton(
-                              // margin: EdgeInsets.only(top: 36.h),
-                              borderRadius: BorderRadius.circular(5.r),
-                              Color: Kform_border_twg,
-                              textColor: Kwhite,
-                              height: 45,
-                              width: 155.w,
-                              label: "+ Browse",
-                              fontSize: kSixteenFont,
-                              fontWeight: kFW600,
-                              isLoading: false,
-                              onTap: () {
-                                showModalBottomSheet(
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.only(
-                                          topRight: Radius.circular(20),
-                                          topLeft: Radius.circular(20)),
-                                    ),
-                                    backgroundColor: Kbackground,
-                                    context: context,
-                                    builder: (context) {
-                                      return Container(
-                                        child: Container(
-                                          decoration: BoxDecoration(
-                                              color: Kbackground,
-                                              borderRadius: BorderRadius.only(
-                                                  topLeft: Radius.circular(20),
-                                                  topRight:
-                                                      Radius.circular(20))),
-                                          height: 100.h,
-                                          padding: EdgeInsets.only(top: 20.h),
-                                          child: Row(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.center,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceAround,
-                                            children: [
-                                              GestureDetector(
-                                                onTap: () {
-                                                  chooseImage("Gallery");
-                                                  Navigator.pop(context);
-                                                },
-                                                child: Column(
-                                                  children: [
-                                                    Icon(
-                                                      Icons.image_outlined,
-                                                      color: Kblue_twg,
-                                                    ),
-                                                    SizedBox(
-                                                      height: 5.h,
-                                                    ),
-                                                    Text('Gallery',
-                                                        maxLines: 2,
-                                                        overflow: TextOverflow
-                                                            .ellipsis,
-                                                        style:
-                                                            GoogleFonts.poppins(
-                                                                fontSize: 12.sp,
-                                                                fontWeight:
-                                                                    kFW700,
-                                                                color:
-                                                                    KdarkText)),
-                                                  ],
-                                                ),
-                                              ),
-                                              GestureDetector(
-                                                onTap: () {
-                                                  chooseImage("camera");
-                                                  Navigator.pop(context);
-                                                },
-                                                child: Column(
-                                                  children: [
-                                                    Icon(
-                                                      Icons.camera_alt_outlined,
-                                                      color: Kblue_twg,
-                                                    ),
-                                                    SizedBox(
-                                                      height: 5.h,
-                                                    ),
-                                                    Text('camera',
-                                                        maxLines: 2,
-                                                        overflow: TextOverflow
-                                                            .ellipsis,
-                                                        style:
-                                                            GoogleFonts.poppins(
-                                                                fontSize: 12.sp,
-                                                                fontWeight:
-                                                                    kFW700,
-                                                                color:
-                                                                    KdarkText)),
-                                                  ],
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      );
-                                    });
-                              }),
-                        ],
-                      ),
-                    ],
-                  )
-                  // Container(
-                  //   margin: EdgeInsets.only(top: 10),
-                  //   // "7"
-                  //   height: 45,
-                  //   width: 120.w,
-                  //   alignment: Alignment.center,
-                  //   decoration: BoxDecoration(
-                  //     // boxShadow: [
-                  //     //   BoxShadow(
-                  //     //     color: Ktextcolor.withOpacity(0.5),
-                  //     //     blurRadius: 5.r,
-                  //     //     offset: Offset(0, 5),
-                  //     //     spreadRadius: 1.r,
-                  //     //   )
-                  //     // ],
-                  //     color: Kform_border_twg,
-                  //     borderRadius: BorderRadius.all(Radius.circular(5)),
-                  //   ),
-                  //   child: Row(
-                  //     mainAxisAlignment: MainAxisAlignment.center,
-                  //     children: [
-                  //       // Icon(
-                  //       //   Icons.shopping_bag,
-                  //       //   color: Kwhite,
-                  //       // ),
+          // Text(
+          //   "API Settings",
+          //   style: GoogleFonts.poppins(
+          //       fontSize: kTwentyFont,
+          //       color: Knav_blue_twg,
+          //       fontWeight: kFW500),
+          // ),
+          // Container(
+          //     margin: EdgeInsets.only(top: 10.h),
+          //     decoration: BoxDecoration(
+          //         border: Border.all(color: Ktextcolor.withOpacity(0.4)),
+          //         borderRadius: BorderRadius.circular(4.r)),
+          //     padding: EdgeInsets.all(5),
+          //     child: Column(
+          //       crossAxisAlignment: CrossAxisAlignment.start,
+          //       children: [
+          //         Container(
+          //             margin: EdgeInsets.only(top: 8.h),
+          //             decoration: BoxDecoration(
+          //                 border:
+          //                     Border.all(color: Ktextcolor.withOpacity(0.4)),
+          //                 borderRadius: BorderRadius.circular(4.r)),
+          //             padding: EdgeInsets.all(5),
+          //             child: Column(
+          //               crossAxisAlignment: CrossAxisAlignment.start,
+          //               children: [
+          //                 Row(
+          //                   mainAxisAlignment: MainAxisAlignment.start,
+          //                   children: [
+          //                     Icon(Icons.info),
+          //                     SizedBox(
+          //                       width: 10,
+          //                     ),
+          //                     Text(
+          //                       "Note: You have a maximum of 10 accounts allowed",
+          //                       style: GoogleFonts.poppins(
+          //                           fontSize: kTenFont,
+          //                           color: kblack,
+          //                           fontWeight: kFW400),
+          //                     ),
+          //                   ],
+          //                 ),
+          //               ],
+          //             )),
 
-                  //       Text(
-                  //         "+ Browse",
-                  //         textAlign: TextAlign.center,
-                  //         style: GoogleFonts.poppins(
-                  //             fontWeight: kFW600,
-                  //             color: Kwhite,
-                  //             fontSize: 16.sp),
-                  //       ),
-                  //     ],
-                  //   ),
-                  // ),
-                  ,
-                  SizedBox(
-                    height: 20.h,
-                  ),
-                  Text(
-                    "URL Shortener",
-                    style: GoogleFonts.poppins(
-                        color: kblack,
-                        fontSize: kSixteenFont,
-                        fontWeight: kFW500),
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(top: 10.h),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10.0),
-                        color: Kwhite,
-                        boxShadow: [
-                          BoxShadow(
-                            color: kblack.withOpacity(0.2),
-                            blurRadius: 2.r,
-                            offset: Offset(1, 1),
-                            spreadRadius: 1.r,
-                          )
-                          // BoxShadow(
-                          //   color: Color(0x3FD3D1D8),
-                          //   blurRadius: 30,
-                          //   offset: Offset(15, 15),
-                          //   spreadRadius: 2,
-                          // )
-                        ]),
-                    child: DropdownButtonFormField2<String>(
-                      isExpanded: true,
-                      decoration: InputDecoration(
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                              color: kblack.withOpacity(0.6), width: 0.5),
-                          borderRadius: BorderRadius.circular(10.r),
-                        ),
-                        errorBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                              color: kblack.withOpacity(0.6), width: 0.5),
-                          borderRadius: BorderRadius.circular(10.r),
-                        ),
-                        disabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                              color: kblack.withOpacity(0.6), width: 0.5),
-                          borderRadius: BorderRadius.circular(10.r),
-                        ),
-                        focusedErrorBorder: OutlineInputBorder(
-                          borderSide:
-                              BorderSide(color: Kform_border_twg, width: 1),
-                          borderRadius: BorderRadius.circular(10.r),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide:
-                              BorderSide(color: Kform_border_twg, width: 1),
-                          borderRadius: BorderRadius.circular(10.r),
-                        ),
-                        contentPadding: const EdgeInsets.symmetric(
-                            vertical: 10, horizontal: 8),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                      ),
-                      hint: Text(
-                        'Link',
-                        style: GoogleFonts.poppins(
-                          fontSize: 14,
-                          color: KTextgery.withOpacity(0.5),
-                        ),
-                      ),
-                      items: CompanyList.map((item) => DropdownMenuItem<String>(
-                            value: item,
-                            child: Text(
-                              item,
-                              style: GoogleFonts.poppins(
-                                fontSize: 14,
-                              ),
-                            ),
-                          )).toList(),
-                      validator: (value) {
-                        if (value == null) {
-                          return 'Please Share  Link';
-                        }
-                        return null;
-                      },
-                      onChanged: (value) {
-                        setState(() {
-                          selectedUserValue = value.toString();
-                          setState(() {});
-                        });
-                      },
-                      onSaved: (value) {
-                        selectedUserValue = value.toString();
-                        print(selectedUserValue);
-                        setState(() {});
-                      },
-                      buttonStyleData: const ButtonStyleData(
-                        padding: EdgeInsets.only(right: 8),
-                      ),
-                      iconStyleData: IconStyleData(
-                        icon: Icon(
-                          Icons.arrow_drop_down,
-                          color: kblack.withOpacity(0.6),
-                        ),
-                        iconSize: 24,
-                      ),
-                      dropdownStyleData: DropdownStyleData(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(15),
-                        ),
-                      ),
-                      menuItemStyleData: const MenuItemStyleData(
-                        padding: EdgeInsets.symmetric(horizontal: 16),
-                      ),
-                    ),
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(top: 26),
-                    // "7"
-                    height: 45,
-                    width: 120.w,
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                      // boxShadow: [
-                      //   BoxShadow(
-                      //     color: Ktextcolor.withOpacity(0.5),
-                      //     blurRadius: 5.r,
-                      //     offset: Offset(0, 5),
-                      //     spreadRadius: 1.r,
-                      //   )
-                      // ],
-                      color: Kform_border_twg,
-                      borderRadius: BorderRadius.all(Radius.circular(5)),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        // Icon(
-                        //   Icons.shopping_bag,
-                        //   color: Kwhite,
-                        // ),
-                        Image.asset(
-                          "assets/images/Vector.png",
-                          // height: 3.h,
-                          // width: 80.w,
-                        ),
-                        SizedBox(
-                          width: 12.w,
-                        ),
-                        Text(
-                          "Save",
-                          textAlign: TextAlign.center,
-                          style: GoogleFonts.poppins(
-                              fontWeight: kFW600,
-                              color: Kwhite,
-                              fontSize: 16.sp),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              )),
+          //         // Access Token
+          //         SizedBox(
+          //           height: 15.h,
+          //         ),
+
+          //         Row(
+          //           children: [
+          //             Container(
+          //               padding: EdgeInsets.all(5),
+          //               margin: EdgeInsets.only(top: 10),
+          //               height: 43,
+          //               alignment: Alignment.center,
+          //               decoration: BoxDecoration(
+          //                 border: Border.all(color: Kblue_twg),
+          //                 color: Kwhite,
+          //                 borderRadius: BorderRadius.all(Radius.circular(5)),
+          //               ),
+          //               child: Row(
+          //                 mainAxisAlignment: MainAxisAlignment.center,
+          //                 children: [
+          //                   Text(
+          //                     "+ Add GBP Account",
+          //                     textAlign: TextAlign.center,
+          //                     style: GoogleFonts.poppins(
+          //                         fontWeight: kFW500,
+          //                         color: Kblue_twg,
+          //                         fontSize: 13.sp),
+          //                   ),
+          //                 ],
+          //               ),
+          //             ),
+          //           ],
+          //         ),
+          //         Container(
+          //             margin: EdgeInsets.only(top: 26),
+          //             // "7"
+          //             height: 45,
+          //             width: 120.w,
+          //             alignment: Alignment.center,
+          //             decoration: BoxDecoration(
+          //               // boxShadow: [
+          //               //   BoxShadow(
+          //               //     color: Ktextcolor.withOpacity(0.5),
+          //               //     blurRadius: 5.r,
+          //               //     offset: Offset(0, 5),
+          //               //     spreadRadius: 1.r,
+          //               //   )
+          //               // ],
+          //               color: Kform_border_twg,
+          //               borderRadius: BorderRadius.all(Radius.circular(5)),
+          //             ),
+          //             child: Row(
+          //               mainAxisAlignment: MainAxisAlignment.center,
+          //               children: [
+          //                 // Icon(
+          //                 //   Icons.shopping_bag,
+          //                 //   color: Kwhite,
+          //                 // ),
+          //                 Image.asset(
+          //                   "assets/images/Vector.png",
+          //                   // height: 3.h,
+          //                   // width: 80.w,
+          //                 ),
+          //                 SizedBox(
+          //                   width: 12.w,
+          //                 ),
+          //                 Text(
+          //                   "Save",
+          //                   textAlign: TextAlign.center,
+          //                   style: GoogleFonts.poppins(
+          //                       fontWeight: kFW600,
+          //                       color: Kwhite,
+          //                       fontSize: 16.sp),
+          //                 ),
+          //               ],
+          //             ))
+          //         ///////////
+          //       ],
+          //     )),
+          // SizedBox(
+          //   height: 20.h,
+          // ),
+          // Text(
+          //   "Autopost Settings",
+          //   style: GoogleFonts.poppins(
+          //       fontSize: kTwentyFont,
+          //       color: Knav_blue_twg,
+          //       fontWeight: kFW500),
+          // ),
+          // Container(
+          //     margin: EdgeInsets.only(top: 10.h),
+          //     decoration: BoxDecoration(
+          //         border: Border.all(color: Ktextcolor.withOpacity(0.4)),
+          //         borderRadius: BorderRadius.circular(4.r)),
+          //     padding: EdgeInsets.all(5),
+          //     child: Column(
+          //       crossAxisAlignment: CrossAxisAlignment.start,
+          //       children: [
+          //         Text(
+          //           "Autopost Posts to Google Business Profile of this user(s)",
+          //           style: GoogleFonts.poppins(
+          //               fontSize: kSixteenFont,
+          //               color: kblack,
+          //               fontWeight: kFW500),
+          //         ),
+          //         SizedBox(
+          //           height: 15.h,
+          //         ),
+          //         Container(
+          //           width: double.infinity,
+          //           decoration: BoxDecoration(
+          //             borderRadius: BorderRadius.circular(8),
+          //             color: Kwhite,
+          //           ),
+          //           child: DropDownMultiSelect(
+          //             decoration: InputDecoration(
+          //               contentPadding:
+          //                   EdgeInsets.symmetric(vertical: 16, horizontal: 8),
+          //               fillColor: Kwhite,
+          //               focusColor: Theme.of(context).colorScheme.onPrimary,
+          //               enabledBorder: const OutlineInputBorder(
+          //                   borderRadius: BorderRadius.all(Radius.circular(8)),
+          //                   borderSide:
+          //                       BorderSide(color: KText_border_twg, width: 1)),
+          //               focusedBorder: const OutlineInputBorder(
+          //                   borderRadius: BorderRadius.all(Radius.circular(8)),
+          //                   borderSide: BorderSide(
+          //                     color: Kform_border_twg,
+          //                     width: 1,
+          //                   )),
+          //             ),
+          //             options: variantsList,
+          //             selectedValues: selectedCheckBoxValue,
+          //             onChanged: (List<String> value) {
+          //               //   value = selectedCheckBoxValue;
+          //               print("${selectedCheckBoxValue}");
+          //             },
+          //             whenEmpty: 'Select User',
+          //           ),
+          //         ),
+          //         SizedBox(
+          //           height: 10.h,
+          //         ),
+          //         Text(
+          //           "Select each of the users that you want to automatically post to Google Business Profile Post Image when a new post is published.",
+          //           style: GoogleFonts.poppins(
+          //               fontSize: kTenFont, color: kblack, fontWeight: kFW400),
+          //         ),
+          //         SizedBox(
+          //           height: 10.h,
+          //         ),
+          //         Row(
+          //           mainAxisAlignment: MainAxisAlignment.spaceAround,
+          //           crossAxisAlignment: CrossAxisAlignment.center,
+          //           children: [
+          //             CustomButton(
+          //                 // margin: EdgeInsets.only(top: 36.h),
+          //                 borderRadius: BorderRadius.circular(5.r),
+          //                 Color: Kform_border_twg,
+          //                 textColor: Kwhite,
+          //                 height: 45,
+          //                 width: 105.w,
+          //                 label: "Select All",
+          //                 fontSize: kSixteenFont,
+          //                 fontWeight: kFW600,
+          //                 isLoading: false,
+          //                 onTap: () {}),
+          //             Container(
+          //               height: 45,
+          //               alignment: Alignment.center,
+          //               width: 140,
+          //               margin: EdgeInsets.only(right: 10),
+          //               padding: EdgeInsets.all(8),
+          //               decoration: BoxDecoration(
+          //                 border: Border.all(color: Klight_grey_twg, width: 1),
+          //                 color: KPale_white_twg,
+          //                 borderRadius: BorderRadius.only(
+          //                     topLeft: Radius.circular(5),
+          //                     topRight: Radius.circular(5),
+          //                     bottomLeft: Radius.circular(5),
+          //                     bottomRight: Radius.circular(5)),
+          //               ),
+          //               child: Text(
+          //                 "Select None",
+          //                 style: GoogleFonts.poppins(
+          //                     color: kblack,
+          //                     fontSize: kSixteenFont,
+          //                     fontWeight: kFW600),
+          //               ),
+          //             ),
+          //           ],
+          //         ),
+          //         SizedBox(
+          //           height: 20.h,
+          //         ),
+          //         Text(
+          //           "Google Business Profile Post Image",
+          //           style: GoogleFonts.poppins(
+          //               color: kblack,
+          //               fontSize: kSixteenFont,
+          //               fontWeight: kFW500),
+          //         ),
+          //         SizedBox(
+          //           height: 12.h,
+          //         ),
+          //         Column(
+          //           children: [
+          //             selectedImage != null
+          //                 ? Container(
+          //                     padding: EdgeInsets.all(12),
+          //                     margin: EdgeInsets.only(bottom: 10),
+          //                     decoration: BoxDecoration(
+          //                       border: Border.all(
+          //                           color: Klight_grey_twg, width: 1),
+          //                       color: Kwhite,
+          //                       borderRadius: BorderRadius.only(
+          //                           topLeft: Radius.circular(5),
+          //                           topRight: Radius.circular(5),
+          //                           bottomLeft: Radius.circular(5),
+          //                           bottomRight: Radius.circular(5)),
+          //                     ),
+          //                     child: Row(
+          //                       mainAxisAlignment:
+          //                           MainAxisAlignment.spaceBetween,
+          //                       crossAxisAlignment: CrossAxisAlignment.start,
+          //                       children: [
+          //                         Image.file(
+          //                           selectedImage!,
+          //                           width: 100.w,
+          //                           height: 120.h,
+          //                           //   fit: BoxFit.cover,
+          //                           fit: BoxFit.cover,
+          //                           // height: 100.h,
+          //                           // width: 100.w,
+          //                           // fit: BoxFit.cover,
+          //                         ),
+          //                         InkWell(
+          //                           onTap: () {
+          //                             setState(() {
+          //                               selectedImage = null;
+          //                             });
+          //                             setState(() {});
+          //                           },
+          //                           child: Text('X',
+          //                               maxLines: 2,
+          //                               overflow: TextOverflow.ellipsis,
+          //                               style: GoogleFonts.poppins(
+          //                                   fontSize: 20.sp,
+          //                                   fontWeight: kFW600,
+          //                                   color: Klight_grey_twg)),
+          //                         )
+          //                       ],
+          //                     ),
+          //                   )
+          //                 : SizedBox(),
+          //             Row(
+          //               // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //               crossAxisAlignment: CrossAxisAlignment.center,
+          //               children: [
+          //                 selectedImage == null
+          //                     ? SizedBox()
+          //                     : InkWell(
+          //                         onTap: () {
+          //                           setState(() {
+          //                             selectedImage = null;
+          //                           });
+          //                           setState(() {});
+          //                         },
+          //                         child: Container(
+          //                           height: 45,
+          //                           width: 110,
+          //                           margin: EdgeInsets.only(right: 10),
+          //                           padding: EdgeInsets.all(8),
+          //                           decoration: BoxDecoration(
+          //                             border: Border.all(
+          //                                 color: Klight_grey_twg, width: 1),
+          //                             color: Kwhite,
+          //                             borderRadius: BorderRadius.only(
+          //                                 topLeft: Radius.circular(5),
+          //                                 topRight: Radius.circular(5),
+          //                                 bottomLeft: Radius.circular(5),
+          //                                 bottomRight: Radius.circular(5)),
+          //                           ),
+          //                           child: Row(
+          //                             children: [
+          //                               Image.asset(
+          //                                 "assets/images/delete.png",
+          //                                 height: 24,
+          //                                 width: 24,
+          //                               ),
+          //                               SizedBox(
+          //                                 width: 5.w,
+          //                               ),
+          //                               Text(
+          //                                 "Delete",
+          //                                 style: GoogleFonts.poppins(
+          //                                     color: Klight_grey_twg,
+          //                                     fontSize: kSixteenFont,
+          //                                     fontWeight: kFW600),
+          //                               ),
+          //                             ],
+          //                           ),
+          //                         ),
+          //                       ),
+          //                 CustomButton(
+          //                     // margin: EdgeInsets.only(top: 36.h),
+          //                     borderRadius: BorderRadius.circular(5.r),
+          //                     Color: Kform_border_twg,
+          //                     textColor: Kwhite,
+          //                     height: 45,
+          //                     width: 155.w,
+          //                     label: "+ Browse",
+          //                     fontSize: kSixteenFont,
+          //                     fontWeight: kFW600,
+          //                     isLoading: false,
+          //                     onTap: () {
+          //                       showModalBottomSheet(
+          //                           shape: RoundedRectangleBorder(
+          //                             borderRadius: BorderRadius.only(
+          //                                 topRight: Radius.circular(20),
+          //                                 topLeft: Radius.circular(20)),
+          //                           ),
+          //                           backgroundColor: Kbackground,
+          //                           context: context,
+          //                           builder: (context) {
+          //                             return Container(
+          //                               child: Container(
+          //                                 decoration: BoxDecoration(
+          //                                     color: Kbackground,
+          //                                     borderRadius: BorderRadius.only(
+          //                                         topLeft: Radius.circular(20),
+          //                                         topRight:
+          //                                             Radius.circular(20))),
+          //                                 height: 100.h,
+          //                                 padding: EdgeInsets.only(top: 20.h),
+          //                                 child: Row(
+          //                                   crossAxisAlignment:
+          //                                       CrossAxisAlignment.center,
+          //                                   mainAxisAlignment:
+          //                                       MainAxisAlignment.spaceAround,
+          //                                   children: [
+          //                                     GestureDetector(
+          //                                       onTap: () {
+          //                                         chooseImage("Gallery");
+          //                                         Navigator.pop(context);
+          //                                       },
+          //                                       child: Column(
+          //                                         children: [
+          //                                           Icon(
+          //                                             Icons.image_outlined,
+          //                                             color: Kblue_twg,
+          //                                           ),
+          //                                           SizedBox(
+          //                                             height: 5.h,
+          //                                           ),
+          //                                           Text('Gallery',
+          //                                               maxLines: 2,
+          //                                               overflow: TextOverflow
+          //                                                   .ellipsis,
+          //                                               style:
+          //                                                   GoogleFonts.poppins(
+          //                                                       fontSize: 12.sp,
+          //                                                       fontWeight:
+          //                                                           kFW700,
+          //                                                       color:
+          //                                                           KdarkText)),
+          //                                         ],
+          //                                       ),
+          //                                     ),
+          //                                     GestureDetector(
+          //                                       onTap: () {
+          //                                         chooseImage("camera");
+          //                                         Navigator.pop(context);
+          //                                       },
+          //                                       child: Column(
+          //                                         children: [
+          //                                           Icon(
+          //                                             Icons.camera_alt_outlined,
+          //                                             color: Kblue_twg,
+          //                                           ),
+          //                                           SizedBox(
+          //                                             height: 5.h,
+          //                                           ),
+          //                                           Text('camera',
+          //                                               maxLines: 2,
+          //                                               overflow: TextOverflow
+          //                                                   .ellipsis,
+          //                                               style:
+          //                                                   GoogleFonts.poppins(
+          //                                                       fontSize: 12.sp,
+          //                                                       fontWeight:
+          //                                                           kFW700,
+          //                                                       color:
+          //                                                           KdarkText)),
+          //                                         ],
+          //                                       ),
+          //                                     ),
+          //                                   ],
+          //                                 ),
+          //                               ),
+          //                             );
+          //                           });
+          //                     }),
+          //               ],
+          //             ),
+          //           ],
+          //         )
+          //         // Container(
+          //         //   margin: EdgeInsets.only(top: 10),
+          //         //   // "7"
+          //         //   height: 45,
+          //         //   width: 120.w,
+          //         //   alignment: Alignment.center,
+          //         //   decoration: BoxDecoration(
+          //         //     // boxShadow: [
+          //         //     //   BoxShadow(
+          //         //     //     color: Ktextcolor.withOpacity(0.5),
+          //         //     //     blurRadius: 5.r,
+          //         //     //     offset: Offset(0, 5),
+          //         //     //     spreadRadius: 1.r,
+          //         //     //   )
+          //         //     // ],
+          //         //     color: Kform_border_twg,
+          //         //     borderRadius: BorderRadius.all(Radius.circular(5)),
+          //         //   ),
+          //         //   child: Row(
+          //         //     mainAxisAlignment: MainAxisAlignment.center,
+          //         //     children: [
+          //         //       // Icon(
+          //         //       //   Icons.shopping_bag,
+          //         //       //   color: Kwhite,
+          //         //       // ),
+
+          //         //       Text(
+          //         //         "+ Browse",
+          //         //         textAlign: TextAlign.center,
+          //         //         style: GoogleFonts.poppins(
+          //         //             fontWeight: kFW600,
+          //         //             color: Kwhite,
+          //         //             fontSize: 16.sp),
+          //         //       ),
+          //         //     ],
+          //         //   ),
+          //         // ),
+          //         ,
+          //         SizedBox(
+          //           height: 20.h,
+          //         ),
+          //         Text(
+          //           "URL Shortener",
+          //           style: GoogleFonts.poppins(
+          //               color: kblack,
+          //               fontSize: kSixteenFont,
+          //               fontWeight: kFW500),
+          //         ),
+          //         Container(
+          //           margin: EdgeInsets.only(top: 10.h),
+          //           decoration: BoxDecoration(
+          //               borderRadius: BorderRadius.circular(10.0),
+          //               color: Kwhite,
+          //               boxShadow: [
+          //                 BoxShadow(
+          //                   color: kblack.withOpacity(0.2),
+          //                   blurRadius: 2.r,
+          //                   offset: Offset(1, 1),
+          //                   spreadRadius: 1.r,
+          //                 )
+          //                 // BoxShadow(
+          //                 //   color: Color(0x3FD3D1D8),
+          //                 //   blurRadius: 30,
+          //                 //   offset: Offset(15, 15),
+          //                 //   spreadRadius: 2,
+          //                 // )
+          //               ]),
+          //           child: DropdownButtonFormField2<String>(
+          //             isExpanded: true,
+          //             decoration: InputDecoration(
+          //               enabledBorder: OutlineInputBorder(
+          //                 borderSide: BorderSide(
+          //                     color: kblack.withOpacity(0.6), width: 0.5),
+          //                 borderRadius: BorderRadius.circular(10.r),
+          //               ),
+          //               errorBorder: OutlineInputBorder(
+          //                 borderSide: BorderSide(
+          //                     color: kblack.withOpacity(0.6), width: 0.5),
+          //                 borderRadius: BorderRadius.circular(10.r),
+          //               ),
+          //               disabledBorder: OutlineInputBorder(
+          //                 borderSide: BorderSide(
+          //                     color: kblack.withOpacity(0.6), width: 0.5),
+          //                 borderRadius: BorderRadius.circular(10.r),
+          //               ),
+          //               focusedErrorBorder: OutlineInputBorder(
+          //                 borderSide:
+          //                     BorderSide(color: Kform_border_twg, width: 1),
+          //                 borderRadius: BorderRadius.circular(10.r),
+          //               ),
+          //               focusedBorder: OutlineInputBorder(
+          //                 borderSide:
+          //                     BorderSide(color: Kform_border_twg, width: 1),
+          //                 borderRadius: BorderRadius.circular(10.r),
+          //               ),
+          //               contentPadding: const EdgeInsets.symmetric(
+          //                   vertical: 10, horizontal: 8),
+          //               border: OutlineInputBorder(
+          //                 borderRadius: BorderRadius.circular(10),
+          //               ),
+          //             ),
+          //             hint: Text(
+          //               'Link',
+          //               style: GoogleFonts.poppins(
+          //                 fontSize: 14,
+          //                 color: KTextgery.withOpacity(0.5),
+          //               ),
+          //             ),
+          //             items: CompanyList.map((item) => DropdownMenuItem<String>(
+          //                   value: item,
+          //                   child: Text(
+          //                     item,
+          //                     style: GoogleFonts.poppins(
+          //                       fontSize: 14,
+          //                     ),
+          //                   ),
+          //                 )).toList(),
+          //             validator: (value) {
+          //               if (value == null) {
+          //                 return 'Please Share  Link';
+          //               }
+          //               return null;
+          //             },
+          //             onChanged: (value) {
+          //               setState(() {
+          //                 selectedUserValue = value.toString();
+          //                 setState(() {});
+          //               });
+          //             },
+          //             onSaved: (value) {
+          //               selectedUserValue = value.toString();
+          //               print(selectedUserValue);
+          //               setState(() {});
+          //             },
+          //             buttonStyleData: const ButtonStyleData(
+          //               padding: EdgeInsets.only(right: 8),
+          //             ),
+          //             iconStyleData: IconStyleData(
+          //               icon: Icon(
+          //                 Icons.arrow_drop_down,
+          //                 color: kblack.withOpacity(0.6),
+          //               ),
+          //               iconSize: 24,
+          //             ),
+          //             dropdownStyleData: DropdownStyleData(
+          //               decoration: BoxDecoration(
+          //                 borderRadius: BorderRadius.circular(15),
+          //               ),
+          //             ),
+          //             menuItemStyleData: const MenuItemStyleData(
+          //               padding: EdgeInsets.symmetric(horizontal: 16),
+          //             ),
+          //           ),
+          //         ),
+          //         Container(
+          //           margin: EdgeInsets.only(top: 26),
+          //           // "7"
+          //           height: 45,
+          //           width: 120.w,
+          //           alignment: Alignment.center,
+          //           decoration: BoxDecoration(
+          //             // boxShadow: [
+          //             //   BoxShadow(
+          //             //     color: Ktextcolor.withOpacity(0.5),
+          //             //     blurRadius: 5.r,
+          //             //     offset: Offset(0, 5),
+          //             //     spreadRadius: 1.r,
+          //             //   )
+          //             // ],
+          //             color: Kform_border_twg,
+          //             borderRadius: BorderRadius.all(Radius.circular(5)),
+          //           ),
+          //           child: Row(
+          //             mainAxisAlignment: MainAxisAlignment.center,
+          //             children: [
+          //               // Icon(
+          //               //   Icons.shopping_bag,
+          //               //   color: Kwhite,
+          //               // ),
+          //               Image.asset(
+          //                 "assets/images/Vector.png",
+          //                 // height: 3.h,
+          //                 // width: 80.w,
+          //               ),
+          //               SizedBox(
+          //                 width: 12.w,
+          //               ),
+          //               Text(
+          //                 "Save",
+          //                 textAlign: TextAlign.center,
+          //                 style: GoogleFonts.poppins(
+          //                     fontWeight: kFW600,
+          //                     color: Kwhite,
+          //                     fontSize: 16.sp),
+          //               ),
+          //             ],
+          //           ),
+          //         ),
+          //       ],
+          //     )),
           SizedBox(
             height: 130,
           ),

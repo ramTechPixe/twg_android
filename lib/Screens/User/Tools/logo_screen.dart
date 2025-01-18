@@ -470,200 +470,200 @@ class _LogosScreenState extends State<LogosScreen> {
                         ),
                       ),
                     ),
-                 menuscontroller.createDigitalData["response_body"] == null
-                        ? SizedBox()
-                        : 
-                        Column(
-                            children: [
-                              Container(
-                                height: 200.h,
-                                margin:
-                                    EdgeInsets.only(top: 10.h, bottom: 15.h),
-                                padding: EdgeInsets.all(8),
-                                // alignment: Alignment.center,
-                                decoration: BoxDecoration(
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: kblack.withOpacity(0.3),
-                                      blurRadius: 1.r,
-                                      offset: Offset(1, 1),
-                                      spreadRadius: 1.r,
-                                    )
-                                  ],
-                                  color: Kwhite,
-                                  borderRadius: BorderRadius.circular(4.r),
-                                ),
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(8),
-                                  child:
-                                      // Image.asset(
-                                      //   "assets/images/ai_lady.png",
-                                      //   height: 200.h,
-                                      //   fit: BoxFit.fill,
-                                      //   width: double.infinity,
-                                      // ),
-                                      CachedNetworkImage(
-                                    imageUrl: menuscontroller
-                                        .createDigitalData["response_body"],
-                                    // multiPostcontroller
-                                    //         .mutiPostList[
-                                    //     index]["img"],
-                                    placeholder: (context, url) => SizedBox(
-                                      height: 200.h,
-                                      width: double.infinity,
-                                      child: Shimmer.fromColors(
-                                        baseColor: Colors.black12,
-                                        highlightColor:
-                                            Colors.white.withOpacity(0.5),
-                                        child: Container(
-                                          decoration: BoxDecoration(
-                                            color: Kwhite.withOpacity(0.5),
-                                          ),
-                                          height: 200.h,
-                                          width: double.infinity,
-                                        ),
-                                      ),
-                                    ),
-                                    errorWidget: (context, url, error) =>
-                                        Image.asset(
-                                      // kBaseImageUrl
-                                      "assets/images/multipost_image.png",
-                                      height: 200.h,
-                                      width: double.infinity,
-                                      fit: BoxFit.fill,
-                                      // width: 25.h,
-                                    ),
-                                    height: 200.h,
-                                    width: double.infinity,
-                                    fit: BoxFit.fill,
-                                  ),
-                                ),
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Obx(
-                                    () => menuscontroller
-                                                .savecreateDigitalLoading ==
-                                            true
-                                        ? Center(
-                                            child: CircularProgressIndicator(
-                                              color: Kform_border_twg,
-                                            ),
-                                          )
-                                        : CustomButton(
-                                            margin: EdgeInsets.only(top: 36.h),
-                                            borderRadius:
-                                                BorderRadius.circular(8.r),
-                                            Color: Kform_border_twg,
-                                            textColor: Kwhite,
-                                            height: 40,
-                                            width: 150.w,
-                                            label: "Save",
-                                            fontSize: kSixteenFont,
-                                            fontWeight: kFW700,
-                                            isLoading: false,
-                                            onTap: () {
-                                              var payloaddd = {
-                                                "age": menuscontroller
-                                                        .createDigitalPayload[
-                                                    "age"],
-                                                "background": menuscontroller
-                                                        .createDigitalPayload[
-                                                    "background"],
-                                                "country": menuscontroller
-                                                        .createDigitalPayload[
-                                                    "country"],
-                                                "dress": menuscontroller
-                                                        .createDigitalPayload[
-                                                    "dress"],
-                                                "gender": menuscontroller
-                                                        .createDigitalPayload[
-                                                    "gender"],
-                                                "image_url": menuscontroller
-                                                        .createDigitalData[
-                                                    "response_body"],
-                                                // "https://images.pexels.com/photos/3314294/pexels-photo-3314294.jpeg",
-                                                "looks": menuscontroller
-                                                        .createDigitalPayload[
-                                                    "looks"],
-                                                "user_id": userprofilecontroller
-                                                        .profileData[
-                                                    "user_details"]["id"]
-                                                // "gender": menuscontroller
-                                                //     .influencerGender.value,
-                                                // "age": authcontroller
-                                                //     .textController.text,
-                                                // "country": menuscontroller
-                                                //     .digiInfluCountry.text,
-                                                // "looks": menuscontroller
-                                                //     .digiInfluLooks.text,
-                                                // "dress": menuscontroller
-                                                //     .digiInfluDress.text,
-                                                // "background": menuscontroller
-                                                //     .digiInfluBackground.text
-                                                // "country": "india",
-                                                // "looks": "orange hair, face white",
-                                                // "dress": "formal",
-                                                // "background": "inside office"
-                                              };
+                    //  menuscontroller.createDigitalData["response_body"] == null
+                    //         ? SizedBox()
+                    //         :
+                    //         Column(
+                    //             children: [
+                    //               Container(
+                    //                 height: 200.h,
+                    //                 margin:
+                    //                     EdgeInsets.only(top: 10.h, bottom: 15.h),
+                    //                 padding: EdgeInsets.all(8),
+                    //                 // alignment: Alignment.center,
+                    //                 decoration: BoxDecoration(
+                    //                   boxShadow: [
+                    //                     BoxShadow(
+                    //                       color: kblack.withOpacity(0.3),
+                    //                       blurRadius: 1.r,
+                    //                       offset: Offset(1, 1),
+                    //                       spreadRadius: 1.r,
+                    //                     )
+                    //                   ],
+                    //                   color: Kwhite,
+                    //                   borderRadius: BorderRadius.circular(4.r),
+                    //                 ),
+                    //                 child: ClipRRect(
+                    //                   borderRadius: BorderRadius.circular(8),
+                    //                   child:
+                    //                       // Image.asset(
+                    //                       //   "assets/images/ai_lady.png",
+                    //                       //   height: 200.h,
+                    //                       //   fit: BoxFit.fill,
+                    //                       //   width: double.infinity,
+                    //                       // ),
+                    //                       CachedNetworkImage(
+                    //                     imageUrl: menuscontroller
+                    //                         .createDigitalData["response_body"],
+                    //                     // multiPostcontroller
+                    //                     //         .mutiPostList[
+                    //                     //     index]["img"],
+                    //                     placeholder: (context, url) => SizedBox(
+                    //                       height: 200.h,
+                    //                       width: double.infinity,
+                    //                       child: Shimmer.fromColors(
+                    //                         baseColor: Colors.black12,
+                    //                         highlightColor:
+                    //                             Colors.white.withOpacity(0.5),
+                    //                         child: Container(
+                    //                           decoration: BoxDecoration(
+                    //                             color: Kwhite.withOpacity(0.5),
+                    //                           ),
+                    //                           height: 200.h,
+                    //                           width: double.infinity,
+                    //                         ),
+                    //                       ),
+                    //                     ),
+                    //                     errorWidget: (context, url, error) =>
+                    //                         Image.asset(
+                    //                       // kBaseImageUrl
+                    //                       "assets/images/multipost_image.png",
+                    //                       height: 200.h,
+                    //                       width: double.infinity,
+                    //                       fit: BoxFit.fill,
+                    //                       // width: 25.h,
+                    //                     ),
+                    //                     height: 200.h,
+                    //                     width: double.infinity,
+                    //                     fit: BoxFit.fill,
+                    //                   ),
+                    //                 ),
+                    //               ),
+                    //               Row(
+                    //                 mainAxisAlignment:
+                    //                     MainAxisAlignment.spaceBetween,
+                    //                 children: [
+                    //                   Obx(
+                    //                     () => menuscontroller
+                    //                                 .savecreateDigitalLoading ==
+                    //                             true
+                    //                         ? Center(
+                    //                             child: CircularProgressIndicator(
+                    //                               color: Kform_border_twg,
+                    //                             ),
+                    //                           )
+                    //                         : CustomButton(
+                    //                             margin: EdgeInsets.only(top: 36.h),
+                    //                             borderRadius:
+                    //                                 BorderRadius.circular(8.r),
+                    //                             Color: Kform_border_twg,
+                    //                             textColor: Kwhite,
+                    //                             height: 40,
+                    //                             width: 150.w,
+                    //                             label: "Save",
+                    //                             fontSize: kSixteenFont,
+                    //                             fontWeight: kFW700,
+                    //                             isLoading: false,
+                    //                             onTap: () {
+                    //                               var payloaddd = {
+                    //                                 "age": menuscontroller
+                    //                                         .createDigitalPayload[
+                    //                                     "age"],
+                    //                                 "background": menuscontroller
+                    //                                         .createDigitalPayload[
+                    //                                     "background"],
+                    //                                 "country": menuscontroller
+                    //                                         .createDigitalPayload[
+                    //                                     "country"],
+                    //                                 "dress": menuscontroller
+                    //                                         .createDigitalPayload[
+                    //                                     "dress"],
+                    //                                 "gender": menuscontroller
+                    //                                         .createDigitalPayload[
+                    //                                     "gender"],
+                    //                                 "image_url": menuscontroller
+                    //                                         .createDigitalData[
+                    //                                     "response_body"],
+                    //                                 // "https://images.pexels.com/photos/3314294/pexels-photo-3314294.jpeg",
+                    //                                 "looks": menuscontroller
+                    //                                         .createDigitalPayload[
+                    //                                     "looks"],
+                    //                                 "user_id": userprofilecontroller
+                    //                                         .profileData[
+                    //                                     "user_details"]["id"]
+                    //                                 // "gender": menuscontroller
+                    //                                 //     .influencerGender.value,
+                    //                                 // "age": authcontroller
+                    //                                 //     .textController.text,
+                    //                                 // "country": menuscontroller
+                    //                                 //     .digiInfluCountry.text,
+                    //                                 // "looks": menuscontroller
+                    //                                 //     .digiInfluLooks.text,
+                    //                                 // "dress": menuscontroller
+                    //                                 //     .digiInfluDress.text,
+                    //                                 // "background": menuscontroller
+                    //                                 //     .digiInfluBackground.text
+                    //                                 // "country": "india",
+                    //                                 // "looks": "orange hair, face white",
+                    //                                 // "dress": "formal",
+                    //                                 // "background": "inside office"
+                    //                               };
 
-                                              // if (_formKey.currentState!.validate()) {
-                                              //   authcontroller.userSignIn(payload);
-                                              // }
+                    //                               // if (_formKey.currentState!.validate()) {
+                    //                               //   authcontroller.userSignIn(payload);
+                    //                               // }
 
-                                              menuscontroller
-                                                  .saveusercreateDigital(
-                                                      payloaddd);
-                                              ;
+                    //                               menuscontroller
+                    //                                   .saveusercreateDigital(
+                    //                                       payloaddd);
+                    //                               ;
 
-                                              // Get.toNamed(kNavigation);
-                                            }),
-                                  ),
+                    //                               // Get.toNamed(kNavigation);
+                    //                             }),
+                    //                   ),
 
-                                  // regenaret
-                                  Obx(
-                                    () => menuscontroller
-                                                .createDigitalLoading ==
-                                            true
-                                        ? Center(
-                                            child: CircularProgressIndicator(
-                                              color: Kform_border_twg,
-                                            ),
-                                          )
-                                        : CustomButton(
-                                            margin: EdgeInsets.only(top: 36.h),
-                                            borderRadius:
-                                                BorderRadius.circular(8.r),
-                                            Color: KOrange,
-                                            textColor: Kwhite,
-                                            height: 40,
-                                            width: 150.w,
-                                            label: "Regenerate",
-                                            fontSize: kSixteenFont,
-                                            fontWeight: kFW700,
-                                            isLoading: false,
-                                            onTap: () {
-                                              menuscontroller.usercreateDigital(
-                                                  menuscontroller
-                                                      .createDigitalPayload
-                                                      .value);
-                                              // if (_formKey.currentState!.validate()) {
-                                              //   authcontroller.userSignIn(payload);
-                                              // }
+                    //                   // regenaret
+                    //                   Obx(
+                    //                     () => menuscontroller
+                    //                                 .createDigitalLoading ==
+                    //                             true
+                    //                         ? Center(
+                    //                             child: CircularProgressIndicator(
+                    //                               color: Kform_border_twg,
+                    //                             ),
+                    //                           )
+                    //                         : CustomButton(
+                    //                             margin: EdgeInsets.only(top: 36.h),
+                    //                             borderRadius:
+                    //                                 BorderRadius.circular(8.r),
+                    //                             Color: KOrange,
+                    //                             textColor: Kwhite,
+                    //                             height: 40,
+                    //                             width: 150.w,
+                    //                             label: "Regenerate",
+                    //                             fontSize: kSixteenFont,
+                    //                             fontWeight: kFW700,
+                    //                             isLoading: false,
+                    //                             onTap: () {
+                    //                               menuscontroller.usercreateDigital(
+                    //                                   menuscontroller
+                    //                                       .createDigitalPayload
+                    //                                       .value);
+                    //                               // if (_formKey.currentState!.validate()) {
+                    //                               //   authcontroller.userSignIn(payload);
+                    //                               // }
 
-                                              // Get.toNamed(kNavigation);
-                                            }),
-                                  ),
-                                ],
-                              ),
-                              SizedBox(
-                                height: 100.h,
-                              )
-                            ],
-                          ),
-                 // 
+                    //                               // Get.toNamed(kNavigation);
+                    //                             }),
+                    //                   ),
+                    //                 ],
+                    //               ),
+                    //               SizedBox(
+                    //                 height: 100.h,
+                    //               )
+                    //             ],
+                    //           ),
+                    //  //
                   ],
                 ),
               ))),

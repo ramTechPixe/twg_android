@@ -86,8 +86,7 @@ class _MultiPostScreenState extends State<MultiPostScreen> {
             onTap: () {
               Get.toNamed(kAddMultiPost);
             }),
-        body: 
-        NestedScrollView(
+        body: NestedScrollView(
           floatHeaderSlivers: true,
           headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
             return [
@@ -689,37 +688,41 @@ class _MultiPostScreenState extends State<MultiPostScreen> {
                                                                         .isTotalPostsandpageEqual ==
                                                                     true
                                                                 ? SizedBox()
-                                                                : Container(
-                                                                    margin: EdgeInsets.only(
-                                                                        top:
-                                                                            3.h,
-                                                                        bottom:
-                                                                            70.h),
-                                                                    child:
-                                                                        InkWell(
-                                                                      onTap:
-                                                                          () {
-                                                                        setState(
-                                                                            () {
-                                                                          multiPostcontroller
-                                                                              .multipostPagenumber
-                                                                              .value = "${int.parse(multiPostcontroller.multipostPagenumber.value) + 1}";
-                                                                        });
-                                                                        multiPostcontroller
-                                                                            .userMultiPost();
-                                                                        print(
-                                                                            "object");
-                                                                      },
-                                                                      child: Image
-                                                                          .asset(
-                                                                        "assets/images/load_more.png",
-                                                                        height:
-                                                                            60.h,
-                                                                        width:
-                                                                            60.w,
-                                                                      ),
-                                                                    ),
-                                                                  )
+                                                                : SizedBox()
+                                                            // old original
+                                                            // Container(
+                                                            //     margin: EdgeInsets.only(
+                                                            //         top:
+                                                            //             3.h,
+                                                            //         bottom:
+                                                            //             70.h),
+                                                            //     child:
+                                                            //         InkWell(
+                                                            //       onTap:
+                                                            //           () {
+                                                            //         setState(
+                                                            //             () {
+                                                            //           multiPostcontroller
+                                                            //               .multipostPagenumber
+                                                            //               .value = "${int.parse(multiPostcontroller.multipostPagenumber.value) + 1}";
+                                                            //         });
+                                                            //         multiPostcontroller
+                                                            //             .userMultiPost();
+                                                            //         print(
+                                                            //             "object");
+                                                            //       },
+                                                            //       child: Image
+                                                            //           .asset(
+                                                            //         "assets/images/load_more.png",
+                                                            //         height:
+                                                            //             60.h,
+                                                            //         width:
+                                                            //             60.w,
+                                                            //       ),
+                                                            //     ),
+                                                            //   )
+
+                                                            //
                                                             : SizedBox(),
                                                       ],
                                                     );
