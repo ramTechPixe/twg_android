@@ -85,6 +85,17 @@ class _TotalCardsState extends State<TotalCards> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 CustomTotalCards(
+                  onTap: () {
+                    Fluttertoast.showToast(
+                      msg: "No data Found",
+                      toastLength: Toast.LENGTH_SHORT,
+                      gravity: ToastGravity.BOTTOM,
+                      timeInSecForIosWeb: 1,
+                      backgroundColor: KDarkPink_twg,
+                      textColor: Kwhite,
+                      fontSize: 16.0,
+                    );
+                  },
                   buttonTitle: "Remaining Points",
                   imageAddress: "assets/images/frames_images.png",
                   cardTitle: "Total Frames",

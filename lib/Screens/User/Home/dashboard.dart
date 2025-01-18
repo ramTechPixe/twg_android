@@ -31,6 +31,7 @@ class _UserDashboardState extends State<UserDashboard> {
     accountscontroller.userTwitterAccountsList();
     accountscontroller.usertumblerAccountsList();
     accountscontroller.userYouTubeAccountsList();
+
     // accountscontroller.useryoutubeAccountsList();
     accountscontroller.userredditAccountsList();
     accountscontroller.userInstaAccountsList();
@@ -144,20 +145,12 @@ class _UserDashboardState extends State<UserDashboard> {
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    InkWell(
-                                      onTap: () {
-                                        accountscontroller
-                                            .userYouTubeAccountsList();
-                                        // accountscontroller
-                                        //     .useryoutubeAccountsList();
-                                      },
-                                      child: Text(
-                                        "Welcome",
-                                        style: GoogleFonts.poppins(
-                                            color: KDarkPink_twg,
-                                            fontSize: 24.sp,
-                                            fontWeight: kFW600),
-                                      ),
+                                    Text(
+                                      "Welcome",
+                                      style: GoogleFonts.poppins(
+                                          color: KDarkPink_twg,
+                                          fontSize: 24.sp,
+                                          fontWeight: kFW600),
                                     ),
                                     Text(
                                       userprofilecontroller.profileData[
@@ -197,7 +190,7 @@ class _UserDashboardState extends State<UserDashboard> {
                               height: 50.h,
                             ),
                             Text(
-                              "Total Social Media updates",
+                              "Total Social Media Statistics",
                               style: GoogleFonts.poppins(
                                   color: KGradientPurple_twg,
                                   fontSize: kTwentyFont,
@@ -220,8 +213,7 @@ class _UserDashboardState extends State<UserDashboard> {
 
 Widget leftDrawerMenu(
   BuildContext context,
-) 
-{
+) {
   return Container(
     color: Kwhite,
     padding: const EdgeInsets.all(15.0),
@@ -282,31 +274,31 @@ Widget leftDrawerMenu(
             ],
           ),
         ),
-        SizedBox(
-          height: 20.h,
-        ),
-        InkWell(
-          onTap: () {
-            Get.toNamed(kAnalitics);
-          },
-          child: Row(
-            children: [
-              Image.asset(
-                "assets/images/debug.png",
-                height: 30.h,
-                width: 30.w,
-              ),
-              SizedBox(
-                width: 15.w,
-              ),
-              Text(
-                "Analitics",
-                style: GoogleFonts.poppins(
-                    color: kblack, fontSize: kSixteenFont, fontWeight: kFW500),
-              ),
-            ],
-          ),
-        ),
+        // SizedBox(
+        //   height: 20.h,
+        // ),
+        // InkWell(
+        //   onTap: () {
+        //     Get.toNamed(kAnalitics);
+        //   },
+        //   child: Row(
+        //     children: [
+        //       Image.asset(
+        //         "assets/images/debug.png",
+        //         height: 30.h,
+        //         width: 30.w,
+        //       ),
+        //       SizedBox(
+        //         width: 15.w,
+        //       ),
+        //       Text(
+        //         "Analitics",
+        //         style: GoogleFonts.poppins(
+        //             color: kblack, fontSize: kSixteenFont, fontWeight: kFW500),
+        //       ),
+        //     ],
+        //   ),
+        // ),
         SizedBox(
           height: 20.h,
         ),
@@ -357,71 +349,71 @@ Widget leftDrawerMenu(
             ],
           ),
         ),
-        SizedBox(
-          height: 20.h,
-        ),
-        InkWell(
-          onTap: () {
-            Get.toNamed(kCallAgent);
-          },
-          child: Row(
-            children: [
-              Image.asset(
-                "assets/images/website.png",
-                height: 30.h,
-                width: 30.w,
-              ),
-              SizedBox(
-                width: 15.w,
-              ),
-              Text(
-                "Call an Agent",
-                style: GoogleFonts.poppins(
-                    color: kblack, fontSize: kSixteenFont, fontWeight: kFW500),
-              ),
-            ],
-          ),
-        ),
-        SizedBox(
-          height: 20.h,
-        ),
-        Row(
-          children: [
-            Image.asset(
-              "assets/images/product.png",
-              height: 30.h,
-              width: 30.w,
-            ),
-            SizedBox(
-              width: 15.w,
-            ),
-            Text(
-              "Product Portfolio",
-              style: GoogleFonts.poppins(
-                  color: kblack, fontSize: kSixteenFont, fontWeight: kFW500),
-            ),
-          ],
-        ),
-        SizedBox(
-          height: 20.h,
-        ),
-        Row(
-          children: [
-            Image.asset(
-              "assets/images/template.png",
-              height: 30.h,
-              width: 30.w,
-            ),
-            SizedBox(
-              width: 15.w,
-            ),
-            Text(
-              "Product Template",
-              style: GoogleFonts.poppins(
-                  color: kblack, fontSize: kSixteenFont, fontWeight: kFW500),
-            ),
-          ],
-        ),
+        // SizedBox(
+        //   height: 20.h,
+        // ),
+        // InkWell(
+        //   onTap: () {
+        //     Get.toNamed(kCallAgent);
+        //   },
+        //   child: Row(
+        //     children: [
+        //       Image.asset(
+        //         "assets/images/website.png",
+        //         height: 30.h,
+        //         width: 30.w,
+        //       ),
+        //       SizedBox(
+        //         width: 15.w,
+        //       ),
+        //       Text(
+        //         "Call an Agent",
+        //         style: GoogleFonts.poppins(
+        //             color: kblack, fontSize: kSixteenFont, fontWeight: kFW500),
+        //       ),
+        //     ],
+        //   ),
+        // ),
+        // SizedBox(
+        //   height: 20.h,
+        // ),
+        // Row(
+        //   children: [
+        //     Image.asset(
+        //       "assets/images/product.png",
+        //       height: 30.h,
+        //       width: 30.w,
+        //     ),
+        //     SizedBox(
+        //       width: 15.w,
+        //     ),
+        //     Text(
+        //       "Product Portfolio",
+        //       style: GoogleFonts.poppins(
+        //           color: kblack, fontSize: kSixteenFont, fontWeight: kFW500),
+        //     ),
+        //   ],
+        // ),
+        // SizedBox(
+        //   height: 20.h,
+        // ),
+        // Row(
+        //   children: [
+        //     Image.asset(
+        //       "assets/images/template.png",
+        //       height: 30.h,
+        //       width: 30.w,
+        //     ),
+        //     SizedBox(
+        //       width: 15.w,
+        //     ),
+        //     Text(
+        //       "Product Template",
+        //       style: GoogleFonts.poppins(
+        //           color: kblack, fontSize: kSixteenFont, fontWeight: kFW500),
+        //     ),
+        //   ],
+        // ),
         SizedBox(
           height: 20.h,
         ),
@@ -447,31 +439,31 @@ Widget leftDrawerMenu(
             ],
           ),
         ),
-        SizedBox(
-          height: 20.h,
-        ),
-        InkWell(
-          onTap: () {
-            Get.toNamed(kVideoTemplateScreen);
-          },
-          child: Row(
-            children: [
-              Image.asset(
-                "assets/images/video_template.png",
-                height: 30.h,
-                width: 30.w,
-              ),
-              SizedBox(
-                width: 15.w,
-              ),
-              Text(
-                "Video Template",
-                style: GoogleFonts.poppins(
-                    color: kblack, fontSize: kSixteenFont, fontWeight: kFW500),
-              ),
-            ],
-          ),
-        ),
+        // SizedBox(
+        //   height: 20.h,
+        // ),
+        // InkWell(
+        //   onTap: () {
+        //     Get.toNamed(kVideoTemplateScreen);
+        //   },
+        //   child: Row(
+        //     children: [
+        //       Image.asset(
+        //         "assets/images/video_template.png",
+        //         height: 30.h,
+        //         width: 30.w,
+        //       ),
+        //       SizedBox(
+        //         width: 15.w,
+        //       ),
+        //       Text(
+        //         "Video Template",
+        //         style: GoogleFonts.poppins(
+        //             color: kblack, fontSize: kSixteenFont, fontWeight: kFW500),
+        //       ),
+        //     ],
+        //   ),
+        // ),
         SizedBox(
           height: 20.h,
         ),
@@ -482,7 +474,7 @@ Widget leftDrawerMenu(
           child: Row(
             children: [
               Image.asset(
-                "assets/images/video_template.png",
+                "assets/images/edit_profile.png",
                 height: 30.h,
                 width: 30.w,
               ),
@@ -507,7 +499,7 @@ Widget leftDrawerMenu(
           child: Row(
             children: [
               Image.asset(
-                "assets/images/video_template.png",
+                "assets/images/sub.png",
                 height: 30.h,
                 width: 30.w,
               ),
@@ -745,7 +737,7 @@ Widget leftDrawerMenu(
           child: Row(
             children: [
               Image.asset(
-                "assets/images/video_template.png",
+                "assets/images/logoutt.png",
                 height: 30.h,
                 width: 30.w,
               ),

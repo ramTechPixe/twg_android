@@ -137,29 +137,29 @@ class _Schedule_post_viewState extends State<Schedule_post_view> {
                                           fit: BoxFit.cover,
                                         ),
                                       ),
-                                Positioned(
-                                  bottom: 3.h,
-                                  right: 3.w,
-                                  child: CircleAvatar(
-                                    backgroundColor: Kwhite,
-                                    child: Image.asset(
-                                      "assets/images/deleted_image.png",
-                                      height: 25.h,
-                                      width: 25.h,
-                                    ),
-                                  ),
-                                  // Checkbox(
-                                  //   activeColor: Kblue_twg,
-                                  //   checkColor: Kwhite,
-                                  //   value: value,
-                                  //   onChanged: (value) {
-                                  //     setState(() {
-                                  //       this.value = value!;
-                                  //     });
-                                  //     // print(value);
-                                  //   },
-                                  // ),
-                                ),
+                                // Positioned(
+                                //   bottom: 3.h,
+                                //   right: 3.w,
+                                //   child: CircleAvatar(
+                                //     backgroundColor: Kwhite,
+                                //     child: Image.asset(
+                                //       "assets/images/deleted_image.png",
+                                //       height: 25.h,
+                                //       width: 25.h,
+                                //     ),
+                                //   ),
+                                //   // Checkbox(
+                                //   //   activeColor: Kblue_twg,
+                                //   //   checkColor: Kwhite,
+                                //   //   value: value,
+                                //   //   onChanged: (value) {
+                                //   //     setState(() {
+                                //   //       this.value = value!;
+                                //   //     });
+                                //   //     // print(value);
+                                //   //   },
+                                //   // ),
+                                // ),
                               ],
                             ),
                             SizedBox(
@@ -266,8 +266,3 @@ class _Schedule_post_viewState extends State<Schedule_post_view> {
         ));
   }
 }
-
-
-
-
-

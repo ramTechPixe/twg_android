@@ -186,48 +186,61 @@ class _PinterestSettingsState extends State<PinterestSettings> {
                     style: GoogleFonts.poppins(
                         fontSize: 11.sp, color: kblack, fontWeight: kFW400),
                   ),
-                  Container(
-                    margin: EdgeInsets.only(top: 10),
-                    // "7"
-                    height: 43,
-                    width: 110.w,
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                      // boxShadow: [
-                      //   BoxShadow(
-                      //     color: Ktextcolor.withOpacity(0.5),
-                      //     blurRadius: 5.r,
-                      //     offset: Offset(0, 5),
-                      //     spreadRadius: 1.r,
-                      //   )
-                      // ],
-                      color: Kform_border_twg,
-                      borderRadius: BorderRadius.all(Radius.circular(5)),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        // Icon(
-                        //   Icons.shopping_bag,
-                        //   color: Kwhite,
-                        // ),
-                        Image.asset(
-                          "assets/images/Vector.png",
-                          // height: 3.h,
-                          // width: 80.w,
-                        ),
-                        SizedBox(
-                          width: 12.w,
-                        ),
-                        Text(
-                          "Save",
-                          textAlign: TextAlign.center,
-                          style: GoogleFonts.poppins(
-                              fontWeight: kFW600,
-                              color: Kwhite,
-                              fontSize: kFourteenFont.sp),
-                        ),
-                      ],
+                  InkWell(
+                    onTap: () {
+                      Fluttertoast.showToast(
+                        msg: "Not Available Now",
+                        toastLength: Toast.LENGTH_SHORT,
+                        gravity: ToastGravity.BOTTOM,
+                        timeInSecForIosWeb: 1,
+                        backgroundColor: KDarkPink_twg,
+                        textColor: Kwhite,
+                        fontSize: 16.0,
+                      );
+                    },
+                    child: Container(
+                      margin: EdgeInsets.only(top: 10),
+                      // "7"
+                      height: 43,
+                      width: 110.w,
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        // boxShadow: [
+                        //   BoxShadow(
+                        //     color: Ktextcolor.withOpacity(0.5),
+                        //     blurRadius: 5.r,
+                        //     offset: Offset(0, 5),
+                        //     spreadRadius: 1.r,
+                        //   )
+                        // ],
+                        color: Kform_border_twg,
+                        borderRadius: BorderRadius.all(Radius.circular(5)),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          // Icon(
+                          //   Icons.shopping_bag,
+                          //   color: Kwhite,
+                          // ),
+                          Image.asset(
+                            "assets/images/Vector.png",
+                            // height: 3.h,
+                            // width: 80.w,
+                          ),
+                          SizedBox(
+                            width: 12.w,
+                          ),
+                          Text(
+                            "Save",
+                            textAlign: TextAlign.center,
+                            style: GoogleFonts.poppins(
+                                fontWeight: kFW600,
+                                color: Kwhite,
+                                fontSize: kFourteenFont.sp),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ],
@@ -287,33 +300,46 @@ class _PinterestSettingsState extends State<PinterestSettings> {
                     style: GoogleFonts.poppins(
                         fontSize: 11.sp, color: kblack, fontWeight: kFW400),
                   ),
-                  Container(
-                    margin: EdgeInsets.only(top: 10),
-                    height: 43,
-                    width: 110.w,
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                      color: Kform_border_twg,
-                      borderRadius: BorderRadius.all(Radius.circular(5)),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Image.asset(
-                          "assets/images/Vector.png",
-                        ),
-                        SizedBox(
-                          width: 12.w,
-                        ),
-                        Text(
-                          "Save",
-                          textAlign: TextAlign.center,
-                          style: GoogleFonts.poppins(
-                              fontWeight: kFW600,
-                              color: Kwhite,
-                              fontSize: kFourteenFont.sp),
-                        ),
-                      ],
+                  InkWell(
+                    onTap: () {
+                      Fluttertoast.showToast(
+                        msg: "Not Available Now",
+                        toastLength: Toast.LENGTH_SHORT,
+                        gravity: ToastGravity.BOTTOM,
+                        timeInSecForIosWeb: 1,
+                        backgroundColor: KDarkPink_twg,
+                        textColor: Kwhite,
+                        fontSize: 16.0,
+                      );
+                    },
+                    child: Container(
+                      margin: EdgeInsets.only(top: 10),
+                      height: 43,
+                      width: 110.w,
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        color: Kform_border_twg,
+                        borderRadius: BorderRadius.all(Radius.circular(5)),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Image.asset(
+                            "assets/images/Vector.png",
+                          ),
+                          SizedBox(
+                            width: 12.w,
+                          ),
+                          Text(
+                            "Save",
+                            textAlign: TextAlign.center,
+                            style: GoogleFonts.poppins(
+                                fontWeight: kFW600,
+                                color: Kwhite,
+                                fontSize: kFourteenFont.sp),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ],

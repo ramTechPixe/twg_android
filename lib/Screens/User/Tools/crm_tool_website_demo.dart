@@ -179,7 +179,17 @@ class _WebsiteToolDemoState extends State<WebsiteToolDemo> {
                               fontSize: kSixteenFont,
                               fontWeight: kFW700,
                               isLoading: false,
-                              onTap: () {}),
+                              onTap: () {
+                                Fluttertoast.showToast(
+                                  msg: "Not Available",
+                                  toastLength: Toast.LENGTH_SHORT,
+                                  gravity: ToastGravity.BOTTOM,
+                                  timeInSecForIosWeb: 1,
+                                  backgroundColor: KDarkPink_twg,
+                                  textColor: Kwhite,
+                                  fontSize: 16.0,
+                                );
+                              }),
                         ],
                       ),
                     ),

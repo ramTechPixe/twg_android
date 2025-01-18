@@ -59,64 +59,58 @@ class _SocialMediaCardsState extends State<SocialMediaCards> {
                                         // dashboardController
                                         //             .networksCountList[i].keys.first
                                         ==
-                                        "facebook"
-                                    ? "assets/images/fb_images.png"
-                                    :
-                                    // dashboardController
-                                    //             .networksCountList[i].keys.first
-                                    dashboardController.networkCountList[i]
-                                                ["name"] ==
-                                            "twitter"
-                                        ? "assets/images/twitter.png"
+                                        "reddit"
+                                    ? "assets/images/reddit_png.png"
+                                    : dashboardController.networkCountList[i]
+                                                ["name"]
+                                            // dashboardController
+                                            //             .networksCountList[i].keys.first
+                                            ==
+                                            "blogger"
+                                        ? "assets/images/blog_png.png"
                                         : dashboardController
                                                     .networkCountList[i]["name"]
-                                                // dashboardController.networksCountList[i]
-                                                //             .keys.first
+                                                // dashboardController
+                                                //             .networksCountList[i].keys.first
                                                 ==
-                                                "linkedin"
-                                            ? "assets/images/linkedInn.png"
-                                            : dashboardController
+                                                "facebook"
+                                            ? "assets/images/fb_images.png"
+                                            :
+                                            // dashboardController
+                                            //             .networksCountList[i].keys.first
+                                            dashboardController
                                                             .networkCountList[i]
-                                                        ["name"]
-                                                    // dashboardController
-                                                    //             .networksCountList[i]
-                                                    //             .keys
-                                                    //             .first
-                                                    ==
-                                                    "tumblr"
-                                                ? "assets/images/tumblr_image.png"
+                                                        ["name"] ==
+                                                    "twitter"
+                                                ? "assets/images/twitter.png"
                                                 : dashboardController
                                                                 .networkCountList[i]
                                                             ["name"]
-                                                        // dashboardController
-                                                        //             .networksCountList[i]
-                                                        //             .keys
-                                                        //             .first
+                                                        // dashboardController.networksCountList[i]
+                                                        //             .keys.first
                                                         ==
-                                                        "pinterest"
-                                                    ? "assets/images/pinterest.png"
+                                                        "linkedin"
+                                                    ? "assets/images/linkedInn.png"
                                                     : dashboardController
                                                                     .networkCountList[i]
                                                                 ["name"]
                                                             // dashboardController
-                                                            //             .networksCountList[
-                                                            //                 i]
+                                                            //             .networksCountList[i]
                                                             //             .keys
                                                             //             .first
                                                             ==
-                                                            "gmb"
-                                                        ? "assets/images/google.png"
+                                                            "tumblr"
+                                                        ? "assets/images/tumblr_image.png"
                                                         : dashboardController
-                                                                        .networkCountList[
-                                                                    i]["name"]
+                                                                        .networkCountList[i]
+                                                                    ["name"]
                                                                 // dashboardController
-                                                                //             .networksCountList[
-                                                                //                 i]
+                                                                //             .networksCountList[i]
                                                                 //             .keys
                                                                 //             .first
                                                                 ==
-                                                                "instagram"
-                                                            ? "assets/images/instagram.png"
+                                                                "pinterest"
+                                                            ? "assets/images/pinterest.png"
                                                             : dashboardController
                                                                             .networkCountList[i]
                                                                         ["name"]
@@ -126,8 +120,8 @@ class _SocialMediaCardsState extends State<SocialMediaCards> {
                                                                     //             .keys
                                                                     //             .first
                                                                     ==
-                                                                    "wordpress"
-                                                                ? "assets/images/word_press.png"
+                                                                    "gmb"
+                                                                ? "assets/images/google.png"
                                                                 : dashboardController.networkCountList[i]
                                                                             ["name"]
                                                                         // dashboardController
@@ -136,9 +130,27 @@ class _SocialMediaCardsState extends State<SocialMediaCards> {
                                                                         //             .keys
                                                                         //             .first
                                                                         ==
-                                                                        "youtube"
-                                                                    ? "assets/images/yuu_tube.png"
-                                                                    : "assets/images/${dashboardController.networkCountList[i]["name"]}_images.png",
+                                                                        "instagram"
+                                                                    ? "assets/images/instagram.png"
+                                                                    : dashboardController.networkCountList[i]["name"]
+                                                                            // dashboardController
+                                                                            //             .networksCountList[
+                                                                            //                 i]
+                                                                            //             .keys
+                                                                            //             .first
+                                                                            ==
+                                                                            "wordpress"
+                                                                        ? "assets/images/word_press.png"
+                                                                        : dashboardController.networkCountList[i]["name"]
+                                                                                // dashboardController
+                                                                                //             .networksCountList[
+                                                                                //                 i]
+                                                                                //             .keys
+                                                                                //             .first
+                                                                                ==
+                                                                                "youtube"
+                                                                            ? "assets/images/yuu_tube.png"
+                                                                            : "assets/images/${dashboardController.networkCountList[i]["name"]}_images.png",
                                 errorBuilder: (context, error, stackTrace) =>
                                     Icon(Icons.image_not_supported),
                               ), // youtube

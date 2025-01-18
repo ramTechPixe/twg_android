@@ -1047,7 +1047,7 @@ class _QuickPostingState extends State<QuickPosting> {
 //   )
 // )
                   SizedBox(
-                    height: 100,
+                    height: 150.h,
                   )
                 ],
               ),

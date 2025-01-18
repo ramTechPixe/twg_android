@@ -113,8 +113,10 @@ class _PostingLogsListState extends State<PostingLogsList> {
                 titleSpacing: 0,
                 leading: InkWell(
                   onTap: () {
+                    //  Get.toNamed(kNavigation);
+                    //  Get.toNamed(kNavigation);
                     Get.back();
-                    Get.back();
+                    // Get.back();
                   },
                   child: Icon(
                     Icons.arrow_back_ios,

@@ -563,36 +563,49 @@ class _InvoiceScreenState extends State<InvoiceScreen> {
                 style: GoogleFonts.poppins(
                     color: kblack, fontSize: kFourteenFont, fontWeight: kFW400),
               ),
-              Container(
-                padding: EdgeInsets.only(left: 12.w, right: 12.w),
-                height: 40,
-                margin: EdgeInsets.only(top: 40.h),
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(30.r),
-                  color: Kform_border_twg,
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(
-                      Icons.download_outlined,
-                      color: Kwhite,
-                      size: 22.sp,
-                    ),
-                    SizedBox(
-                      width: 6.w,
-                    ),
-                    Text(
-                      "Get PDF Recepit",
-                      textAlign: TextAlign.center,
-                      style: GoogleFonts.poppins(
-                        fontSize: kFourteenFont,
+              InkWell(
+                onTap: () {
+                  Fluttertoast.showToast(
+                    msg: "Not Available",
+                    toastLength: Toast.LENGTH_SHORT,
+                    gravity: ToastGravity.BOTTOM,
+                    timeInSecForIosWeb: 1,
+                    backgroundColor: KDarkPink_twg,
+                    textColor: Kwhite,
+                    fontSize: 16.0,
+                  );
+                },
+                child: Container(
+                  padding: EdgeInsets.only(left: 12.w, right: 12.w),
+                  height: 40,
+                  margin: EdgeInsets.only(top: 40.h),
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(30.r),
+                    color: Kform_border_twg,
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.download_outlined,
                         color: Kwhite,
-                        fontWeight: kFW600,
+                        size: 22.sp,
                       ),
-                    ),
-                  ],
+                      SizedBox(
+                        width: 6.w,
+                      ),
+                      Text(
+                        "Get PDF Recepit",
+                        textAlign: TextAlign.center,
+                        style: GoogleFonts.poppins(
+                          fontSize: kFourteenFont,
+                          color: Kwhite,
+                          fontWeight: kFW600,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ],
