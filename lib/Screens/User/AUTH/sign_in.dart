@@ -64,17 +64,11 @@ class _SignInState extends State<SignIn> {
 
   @override
   void initState() {
-    setState(() {
-      authcontroller.UserEmailSignInController.text = "androidtest@gmail.com";
-      // authcontroller.UserEmailSignInController.text = "bharatsports@gmail.com";
-      // bharatsports@gmail.com
-      // authcontroller.UserEmailSignInController.text = "nlp73683@gmail.com";
-      //"sri965272@gmail.com";
-      authcontroller.UserEmailPasswordController.text = "Bstore@123";
-      //  userprofilecontroller.profileData["user_details"]["last_name"] ?? "";
-      // userprofilecontroller.editEmailController.text =
-      //     userprofilecontroller.profileData["user_details"]["email"] ?? "";
-    });
+    // setState(() {
+    //   authcontroller.UserEmailSignInController.text = "androidtest@gmail.com";
+
+    //   authcontroller.UserEmailPasswordController.text = "Bstore@123";
+    // });
 
     super.initState();
   }
@@ -294,7 +288,6 @@ class _SignInState extends State<SignIn> {
                       alignment: Alignment.centerRight,
                       child: InkWell(
                         onTap: () {
-                          
                           // Get.toNamed(kForgotPassword);
                         },
                         child: Text(
