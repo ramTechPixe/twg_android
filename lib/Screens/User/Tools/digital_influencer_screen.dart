@@ -112,7 +112,8 @@ class _DigitalInfluencerState extends State<DigitalInfluencer> {
                             bottomRight: Radius.circular(10),
                           ),
                         ),
-                        child: Column(
+                        child: 
+                        Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
@@ -718,6 +719,7 @@ class _DigitalInfluencerState extends State<DigitalInfluencer> {
                             //       ),
                           ],
                         ),
+                    
                       ),
                     ),
                     menuscontroller.createDigitalData["response_body"] == null
