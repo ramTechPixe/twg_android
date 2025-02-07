@@ -15,6 +15,7 @@ class _UserDashboardState extends State<UserDashboard> {
   AccontsController accountscontroller = Get.put(AccontsController());
   AuthController authcontroller = Get.put(AuthController());
   SemiController semicontroller = Get.put(SemiController());
+  SuscribtionController suscrbtioncontroller = Get.put(SuscribtionController());
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   void checkInternet() async {
     bool isConnected = await InternetConnection().hasInternetAccess;
@@ -69,6 +70,7 @@ class _UserDashboardState extends State<UserDashboard> {
   @override
   void initState() {
     checkInternet();
+    checkSuscribtionStatus();
     // userprofilecontroller.userProfile();
     // dashboardcontroller.userTotalPostAPI();
     // dashboardcontroller.userPlanExpiryAPI();
@@ -80,18 +82,26 @@ class _UserDashboardState extends State<UserDashboard> {
     loadAccounts();
     deviceIp();
     // userprofilecontroller.userProfile();
+// changes
 
     super.initState();
   }
 
+  // CheckFOR Status
+  void checkSuscribtionStatus() {
+    suscrbtioncontroller.userSuscriptionv2();
+  }
+//
+
 //RefreshIndicator
   Future<void> _refreshData() async {
-    await Future.delayed(Duration(seconds: 2));
+    await Future.delayed(Duration(seconds: 0));
 
     // setState(() {
     //   items = List.generate(20, (index) => 'New Item ${index + 1}');
     // });
     checkInternet();
+    checkSuscribtionStatus();
     // userprofilecontroller.userProfile();
     // dashboardcontroller.userTotalPostAPI();
     // dashboardcontroller.userPlanExpiryAPI();

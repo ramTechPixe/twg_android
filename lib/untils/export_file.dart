@@ -110,6 +110,7 @@ export 'package:twg/Screens/User/Tools/fb_add_apply.dart';
 export 'package:twg/Screens/User/Tools/crm_tool_website_demo.dart';
 // settings
 export 'package:twg/Screens/no_internet_screen.dart';
+export 'package:twg/Screens/not_active_screen.dart';
 
 // Reports
 export 'package:twg/Screens/User/Reports/reports_screen.dart';

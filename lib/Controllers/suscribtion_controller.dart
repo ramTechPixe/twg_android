@@ -126,6 +126,7 @@ class SuscribtionController extends GetxController {
   // // var multiPostTotalPages = false.obs;
   // var multipostPagenumber = "1".obs;
   ////////////////////////////////////////////////////////suscriptionDatav2
+  var suscribtionStatusActive = false.obs;
   List<Map<String, dynamic>> networksListv2 = [];
   Future<void> userSuscriptionv2() async {
     sucriptionLoadingv2(true);
@@ -140,6 +141,12 @@ class SuscribtionController extends GetxController {
       print(data);
       if (data["status"] == "success") {
         suscriptionDatav2.value = data["data"];
+        if (suscriptionDatav2["subscription_details"]["status"] == "1") {
+          suscribtionStatusActive(true);
+        } else {
+          suscribtionStatusActive(false);
+          Get.toNamed(kNotActive);
+        }
         parseNetworksWithLength(
             suscriptionDatav2["subscription_details"]["networks_count"]);
         // parseNetworksWithLength(suscriptionData["networks_count"]);

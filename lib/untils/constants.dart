@@ -48,6 +48,8 @@ String kVideoTemplateScreen = "/Screens/User/VideoTemp/video_templates.dart";
 String kVideoTemplateView =
     "/Screens/User/VideoTemp/video_description_view.dart";
 String kAnalitics = "/Screens/User/Analitics/analitics_screen.dart";
+String kNotActive = "/Screens/not_active_screen.dart";
+// export 'package:twg/Screens/not_active_screen.dart';
 //   export 'package:twg/';
 //
 ////////// Fonts Size

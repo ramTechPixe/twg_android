@@ -168,6 +168,11 @@ class Routes {
         name: kMultiPostView,
         transition: Transition.rightToLeft,
         page: () => MultiPostView()),
+// not active
+    GetPage(
+        name: kNotActive,
+        transition: Transition.rightToLeft,
+        page: () => NoActive()),
 
     //
   ];
