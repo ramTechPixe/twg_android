@@ -32,6 +32,7 @@ class _PostingLogsListState extends State<PostingLogsList> {
 
   // Your dropdown data
   final List<String> variantsList = [
+    'All',
     'facebook',
     'twitter',
     'linkedIn',
@@ -180,7 +181,14 @@ class _PostingLogsListState extends State<PostingLogsList> {
                         validator: (value) {},
                         suffix: GestureDetector(
                           onTap: () {
-                            _showDropdown(context);
+                            final socialMediaNames = dashboardcontroller
+                                .networkCountList
+                                .map((item) =>
+                                    item["name"]?.toString() ?? "Unknown")
+                                .toList();
+                            socialMediaNames.insert(0, "All");
+                            _showDropdown(context, socialMediaNames);
+                            // _showDropdown(context);
                           },
                           child: Padding(
                             padding: const EdgeInsets.all(12),
@@ -512,325 +520,577 @@ class _PostingLogsListState extends State<PostingLogsList> {
                                                   var post = logsPostcontroller
                                                       .logsList[index];
                                                   String postId = post["id"];
-                                                  return logsPostcontroller
-                                                                  .filteredSocialCategory !=
-                                                              "" &&
-                                                          logsPostcontroller
-                                                                  .filteredSocialCategory !=
+                                                  return
+                                                      //
+                                                      logsPostcontroller
+                                                                      .filteredSocialCategory !=
+                                                                  "" &&
                                                               logsPostcontroller
+                                                                      .filteredSocialCategory ==
+                                                                  "All"
+                                                          ? InkWell(
+                                                              onTap: () {
+                                                                setState(() {
+                                                                  logsPostcontroller
+                                                                      .selectedlogId
+                                                                      .value = logsPostcontroller
                                                                           .logsList[
-                                                                      index][
-                                                                  "social_type"]
-                                                      ? SizedBox()
-                                                      : InkWell(
-                                                          onTap: () {
-                                                            setState(() {
-                                                              logsPostcontroller
-                                                                  .selectedlogId
-                                                                  .value = logsPostcontroller
-                                                                      .logsList[
-                                                                  index]["id"];
-                                                              // logsPostcontroller.logsList[index]["id"];
-                                                              // semicontroller
-                                                              //         .selectedSchedulePostID.value =
-                                                              //     semicontroller.scheduledList[index]
-                                                              //         ["id"];
-                                                            });
+                                                                      index]["id"];
+                                                                  // logsPostcontroller.logsList[index]["id"];
+                                                                  // semicontroller
+                                                                  //         .selectedSchedulePostID.value =
+                                                                  //     semicontroller.scheduledList[index]
+                                                                  //         ["id"];
+                                                                });
 
-                                                            Get.toNamed(
-                                                                kPostingLogView);
-                                                          },
-                                                          child:
-                                                              // Column(
-                                                              //   children: [
-                                                              Container(
-                                                            margin:
-                                                                EdgeInsets.only(
-                                                                    bottom:
-                                                                        13.h,
-                                                                    left: 2.w,
-                                                                    right: 2.w),
-                                                            padding:
-                                                                const EdgeInsets
-                                                                    .all(10),
-                                                            decoration:
-                                                                BoxDecoration(
-                                                              boxShadow: [
-                                                                BoxShadow(
-                                                                  color: kblack
-                                                                      .withOpacity(
-                                                                          0.1),
-                                                                  blurRadius:
-                                                                      2.r,
-                                                                  offset:
-                                                                      const Offset(
-                                                                          0, 1),
-                                                                  spreadRadius:
-                                                                      2.r,
-                                                                )
-                                                              ],
-                                                              color: Kwhite,
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          8.r),
-                                                            ),
-                                                            child: Column(
-                                                              children: [
-                                                                Stack(
+                                                                Get.toNamed(
+                                                                    kPostingLogView);
+                                                              },
+                                                              child:
+                                                                  // Column(
+                                                                  //   children: [
+                                                                  Container(
+                                                                margin: EdgeInsets
+                                                                    .only(
+                                                                        bottom: 13
+                                                                            .h,
+                                                                        left:
+                                                                            2.w,
+                                                                        right: 2
+                                                                            .w),
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                        .all(
+                                                                        10),
+                                                                decoration:
+                                                                    BoxDecoration(
+                                                                  boxShadow: [
+                                                                    BoxShadow(
+                                                                      color: kblack
+                                                                          .withOpacity(
+                                                                              0.1),
+                                                                      blurRadius:
+                                                                          2.r,
+                                                                      offset:
+                                                                          const Offset(
+                                                                              0,
+                                                                              1),
+                                                                      spreadRadius:
+                                                                          2.r,
+                                                                    )
+                                                                  ],
+                                                                  color: Kwhite,
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              8.r),
+                                                                ),
+                                                                child: Column(
                                                                   children: [
-                                                                    logsPostcontroller.logsList[index]["social_source"]["image"] ==
-                                                                            null
-                                                                        ? Image
-                                                                            .asset(
-                                                                            "assets/images/bharath_sports.png",
-                                                                            height:
-                                                                                200.h,
-                                                                            width:
-                                                                                double.infinity,
-                                                                            fit:
-                                                                                BoxFit.cover,
-                                                                            // width: 25.h,
-                                                                          )
-                                                                        : ClipRRect(
-                                                                            borderRadius:
-                                                                                BorderRadius.circular(8.r),
-                                                                            child:
-                                                                                CachedNetworkImage(
-                                                                              imageUrl: "https://thewisguystech.com" + newUrl,
-                                                                              // logsPostcontroller
-                                                                              //             .logsList[index]
-                                                                              //         ["social_source"]
-                                                                              //     ["image"],
-                                                                              placeholder: (context, url) => SizedBox(
-                                                                                height: 200.h,
-                                                                                width: double.infinity,
-                                                                                child: Shimmer.fromColors(
-                                                                                  baseColor: Colors.black12,
-                                                                                  highlightColor: Colors.white.withOpacity(0.5),
-                                                                                  child: Container(
-                                                                                    decoration: BoxDecoration(
-                                                                                      color: Kwhite.withOpacity(0.5),
-                                                                                    ),
-                                                                                    height: 200.h,
-                                                                                    width: double.infinity,
-                                                                                  ),
-                                                                                ),
-                                                                              ),
-                                                                              errorWidget: (context, url, error) => Image.asset(
-                                                                                // kBaseImageUrl
+                                                                    Stack(
+                                                                      children: [
+                                                                        logsPostcontroller.logsList[index]["social_source"]["image"] ==
+                                                                                null
+                                                                            ? Image.asset(
                                                                                 "assets/images/bharath_sports.png",
                                                                                 height: 200.h,
                                                                                 width: double.infinity,
                                                                                 fit: BoxFit.cover,
                                                                                 // width: 25.h,
+                                                                              )
+                                                                            : ClipRRect(
+                                                                                borderRadius: BorderRadius.circular(8.r),
+                                                                                child: CachedNetworkImage(
+                                                                                  imageUrl: "https://thewisguystech.com" + newUrl,
+                                                                                  // logsPostcontroller
+                                                                                  //             .logsList[index]
+                                                                                  //         ["social_source"]
+                                                                                  //     ["image"],
+                                                                                  placeholder: (context, url) => SizedBox(
+                                                                                    height: 200.h,
+                                                                                    width: double.infinity,
+                                                                                    child: Shimmer.fromColors(
+                                                                                      baseColor: Colors.black12,
+                                                                                      highlightColor: Colors.white.withOpacity(0.5),
+                                                                                      child: Container(
+                                                                                        decoration: BoxDecoration(
+                                                                                          color: Kwhite.withOpacity(0.5),
+                                                                                        ),
+                                                                                        height: 200.h,
+                                                                                        width: double.infinity,
+                                                                                      ),
+                                                                                    ),
+                                                                                  ),
+                                                                                  errorWidget: (context, url, error) => Image.asset(
+                                                                                    // kBaseImageUrl
+                                                                                    "assets/images/bharath_sports.png",
+                                                                                    height: 200.h,
+                                                                                    width: double.infinity,
+                                                                                    fit: BoxFit.cover,
+                                                                                    // width: 25.h,
+                                                                                  ),
+                                                                                  height: 200.h,
+                                                                                  width: double.infinity,
+                                                                                  fit: BoxFit.cover,
+                                                                                ),
                                                                               ),
-                                                                              height: 200.h,
-                                                                              width: double.infinity,
-                                                                              fit: BoxFit.cover,
-                                                                            ),
-                                                                          ),
-                                                                    Positioned(
-                                                                      bottom:
-                                                                          3.h,
-                                                                      right:
-                                                                          3.w,
-                                                                      child: isSelectAll
-                                                                          ? Checkbox(
-                                                                              value: selectedPostIds.contains(postId),
-                                                                              activeColor: Kblue_twg,
-                                                                              checkColor: Kwhite,
-                                                                              onChanged: (value) {
-                                                                                setState(() {
-                                                                                  if (value == true) {
-                                                                                    selectedPostIds.add(postId);
-                                                                                  } else {
-                                                                                    selectedPostIds.remove(postId);
-                                                                                  }
-                                                                                });
-                                                                              },
-                                                                            )
-                                                                          : SizedBox(),
-                                                                      // Checkbox(
-                                                                      //   activeColor: Kblue_twg,
-                                                                      //   checkColor: Kwhite,
-                                                                      //   value: value,
-                                                                      //   onChanged: (value) {
-                                                                      //     setState(() {
-                                                                      //       this.value = value!;
-                                                                      //     });
-                                                                      //     // print(value);
-                                                                      //   },
-                                                                      // ),
+                                                                        Positioned(
+                                                                          bottom:
+                                                                              3.h,
+                                                                          right:
+                                                                              3.w,
+                                                                          child: isSelectAll
+                                                                              ? Checkbox(
+                                                                                  value: selectedPostIds.contains(postId),
+                                                                                  activeColor: Kblue_twg,
+                                                                                  checkColor: Kwhite,
+                                                                                  onChanged: (value) {
+                                                                                    setState(() {
+                                                                                      if (value == true) {
+                                                                                        selectedPostIds.add(postId);
+                                                                                      } else {
+                                                                                        selectedPostIds.remove(postId);
+                                                                                      }
+                                                                                    });
+                                                                                  },
+                                                                                )
+                                                                              : SizedBox(),
+                                                                          // Checkbox(
+                                                                          //   activeColor: Kblue_twg,
+                                                                          //   checkColor: Kwhite,
+                                                                          //   value: value,
+                                                                          //   onChanged: (value) {
+                                                                          //     setState(() {
+                                                                          //       this.value = value!;
+                                                                          //     });
+                                                                          //     // print(value);
+                                                                          //   },
+                                                                          // ),
+                                                                        ),
+                                                                        // Positioned(
+                                                                        //   bottom: 3.h,
+                                                                        //   right: 3.w,
+                                                                        //   child: Checkbox(
+                                                                        //     activeColor: Kblue_twg,
+                                                                        //     checkColor: Kwhite,
+                                                                        //     value: value,
+                                                                        //     onChanged: (value) {
+                                                                        //       setState(() {
+                                                                        //         this.value = value!;
+                                                                        //       });
+                                                                        //       // print(value);
+                                                                        //     },
+                                                                        //   ),
+                                                                        // ),
+                                                                      ],
                                                                     ),
-                                                                    // Positioned(
-                                                                    //   bottom: 3.h,
-                                                                    //   right: 3.w,
-                                                                    //   child: Checkbox(
-                                                                    //     activeColor: Kblue_twg,
-                                                                    //     checkColor: Kwhite,
-                                                                    //     value: value,
-                                                                    //     onChanged: (value) {
-                                                                    //       setState(() {
-                                                                    //         this.value = value!;
-                                                                    //       });
-                                                                    //       // print(value);
-                                                                    //     },
-                                                                    //   ),
-                                                                    // ),
-                                                                  ],
-                                                                ),
-                                                                SizedBox(
-                                                                  height: 10.h,
-                                                                ),
-                                                                Row(
-                                                                  mainAxisAlignment:
-                                                                      MainAxisAlignment
-                                                                          .spaceBetween,
-                                                                  children: [
                                                                     SizedBox(
-                                                                      width: MediaQuery.of(context)
-                                                                              .size
-                                                                              .width /
-                                                                          2,
-                                                                      child:
-                                                                          Text(
-                                                                        logsPostcontroller.logsList[index]["newMessage"] ??
-                                                                            //  ["social_type"] ??
-                                                                            "     ",
-                                                                        // logsPostcontroller.logsList[
-                                                                        //                 index]
-                                                                        //             ["social_source"]
-                                                                        //         ["message"] ??
-                                                                        //     "no message",
-                                                                        // logsPostcontroller.logsList[index]
-                                                                        //     ["posting_type"],
-                                                                        //  "Discover how social media automation can transform your....",
-                                                                        maxLines:
-                                                                            1,
-                                                                        overflow:
-                                                                            TextOverflow.ellipsis,
-                                                                        style: GoogleFonts.poppins(
-                                                                            color:
-                                                                                kblack,
-                                                                            fontSize:
-                                                                                kSixteenFont,
-                                                                            fontWeight:
-                                                                                kFW500),
-                                                                      ),
+                                                                      height:
+                                                                          10.h,
+                                                                    ),
+                                                                    Row(
+                                                                      mainAxisAlignment:
+                                                                          MainAxisAlignment
+                                                                              .spaceBetween,
+                                                                      children: [
+                                                                        SizedBox(
+                                                                          width:
+                                                                              MediaQuery.of(context).size.width / 2,
+                                                                          child:
+                                                                              Text(
+                                                                            logsPostcontroller.logsList[index]["newMessage"] ??
+                                                                                //  ["social_type"] ??
+                                                                                "     ",
+                                                                            // logsPostcontroller.logsList[
+                                                                            //                 index]
+                                                                            //             ["social_source"]
+                                                                            //         ["message"] ??
+                                                                            //     "no message",
+                                                                            // logsPostcontroller.logsList[index]
+                                                                            //     ["posting_type"],
+                                                                            //  "Discover how social media automation can transform your....",
+                                                                            maxLines:
+                                                                                1,
+                                                                            overflow:
+                                                                                TextOverflow.ellipsis,
+                                                                            style: GoogleFonts.poppins(
+                                                                                color: kblack,
+                                                                                fontSize: kSixteenFont,
+                                                                                fontWeight: kFW500),
+                                                                          ),
+                                                                        ),
+                                                                        SizedBox(
+                                                                            height:
+                                                                                8.h),
+                                                                        InkWell(
+                                                                          onTap:
+                                                                              () async {
+                                                                            await showDialog(
+                                                                              context: context,
+                                                                              builder: (context) => AlertDialog(
+                                                                                title: Text(
+                                                                                  'Are you sure?',
+                                                                                  style: GoogleFonts.roboto(fontSize: 18, fontWeight: FontWeight.w600, color: Colors.black),
+                                                                                ),
+                                                                                content: Text(
+                                                                                  'Do you want to delete post',
+                                                                                  style: GoogleFonts.roboto(fontSize: 13, fontWeight: FontWeight.w600, color: Colors.black),
+                                                                                ),
+                                                                                actions: <Widget>[
+                                                                                  TextButton(
+                                                                                    onPressed: () => Navigator.of(context).pop(false),
+                                                                                    child: Text(
+                                                                                      'No',
+                                                                                      style: GoogleFonts.roboto(fontSize: 12, fontWeight: FontWeight.w600, color: Colors.black),
+                                                                                    ),
+                                                                                  ),
+                                                                                  TextButton(
+                                                                                    onPressed: () {
+                                                                                      setState(() {
+                                                                                        logsPostcontroller.toDeletePostID.value = logsPostcontroller.logsList[index]["id"];
+                                                                                      });
+                                                                                      logsPostcontroller.logPostDelete();
+                                                                                      Get.back();
+                                                                                    },
+                                                                                    // onPressed: () =>
+                                                                                    //     SystemNavigator
+                                                                                    //         .pop(),
+                                                                                    child: Text(
+                                                                                      'Yes',
+                                                                                      style: GoogleFonts.roboto(fontSize: 12, fontWeight: FontWeight.w600, color: Kblue_twg),
+                                                                                    ),
+                                                                                  ),
+                                                                                ],
+                                                                              ),
+                                                                            );
+                                                                          },
+                                                                          child:
+                                                                              Image.asset(
+                                                                            "assets/images/deleted_image.png",
+                                                                            height:
+                                                                                25.h,
+                                                                            width:
+                                                                                25.h,
+                                                                          ),
+                                                                        )
+                                                                      ],
                                                                     ),
                                                                     SizedBox(
                                                                         height:
                                                                             8.h),
-                                                                    InkWell(
-                                                                      onTap:
-                                                                          () async {
-                                                                        await showDialog(
-                                                                          context:
-                                                                              context,
-                                                                          builder: (context) =>
-                                                                              AlertDialog(
-                                                                            title:
-                                                                                Text(
-                                                                              'Are you sure?',
-                                                                              style: GoogleFonts.roboto(fontSize: 18, fontWeight: FontWeight.w600, color: Colors.black),
-                                                                            ),
-                                                                            content:
-                                                                                Text(
-                                                                              'Do you want to delete post',
-                                                                              style: GoogleFonts.roboto(fontSize: 13, fontWeight: FontWeight.w600, color: Colors.black),
-                                                                            ),
-                                                                            actions: <Widget>[
-                                                                              TextButton(
-                                                                                onPressed: () => Navigator.of(context).pop(false),
-                                                                                child: Text(
-                                                                                  'No',
-                                                                                  style: GoogleFonts.roboto(fontSize: 12, fontWeight: FontWeight.w600, color: Colors.black),
-                                                                                ),
-                                                                              ),
-                                                                              TextButton(
-                                                                                onPressed: () {
-                                                                                  setState(() {
-                                                                                    logsPostcontroller.toDeletePostID.value = logsPostcontroller.logsList[index]["id"];
-                                                                                  });
-                                                                                  logsPostcontroller.logPostDelete();
-                                                                                  Get.back();
-                                                                                },
-                                                                                // onPressed: () =>
-                                                                                //     SystemNavigator
-                                                                                //         .pop(),
-                                                                                child: Text(
-                                                                                  'Yes',
-                                                                                  style: GoogleFonts.roboto(fontSize: 12, fontWeight: FontWeight.w600, color: Kblue_twg),
-                                                                                ),
-                                                                              ),
-                                                                            ],
-                                                                          ),
-                                                                        );
-                                                                      },
-                                                                      child: Image
-                                                                          .asset(
-                                                                        "assets/images/deleted_image.png",
-                                                                        height:
-                                                                            25.h,
-                                                                        width:
-                                                                            25.h,
-                                                                      ),
-                                                                    )
-                                                                  ],
-                                                                ),
-                                                                SizedBox(
-                                                                    height:
-                                                                        8.h),
-                                                                Row(
-                                                                  mainAxisAlignment:
-                                                                      MainAxisAlignment
-                                                                          .spaceBetween,
-                                                                  children: [
-                                                                    Text(
-                                                                      logsPostcontroller.logsList[index]
-                                                                              [
-                                                                              "posting_type"] ??
-                                                                          "     ",
-                                                                      // logsPostcontroller
-                                                                      //                 .logsList[index]
-                                                                      //             ["social_source"]
-                                                                      //         ["display_name"] ??
-                                                                      //     "no name",
+                                                                    Row(
+                                                                      mainAxisAlignment:
+                                                                          MainAxisAlignment
+                                                                              .spaceBetween,
+                                                                      children: [
+                                                                        Text(
+                                                                          logsPostcontroller.logsList[index]["posting_type"] ??
+                                                                              "     ",
+                                                                          // logsPostcontroller
+                                                                          //                 .logsList[index]
+                                                                          //             ["social_source"]
+                                                                          //         ["display_name"] ??
+                                                                          //     "no name",
 
-                                                                      // "Instagram",
-                                                                      style: GoogleFonts.poppins(
-                                                                          color:
-                                                                              Kblue_twg,
-                                                                          fontSize:
-                                                                              kFourteenFont,
-                                                                          fontWeight:
-                                                                              kFW400),
-                                                                    ),
-                                                                    Text(
-                                                                      logsPostcontroller.logsList[index]["created"] ==
-                                                                              null
-                                                                          ? "No Date"
-                                                                          : DateFormat('MMM d, yyyy hh:mm a')
-                                                                              .format(
-                                                                              DateTime.parse(
-                                                                                logsPostcontroller.logsList[index]["created"],
-                                                                              ),
-                                                                            ),
-                                                                      style: GoogleFonts.poppins(
-                                                                          color:
-                                                                              kblack,
-                                                                          fontSize:
-                                                                              kTenFont,
-                                                                          fontWeight:
-                                                                              kFW400),
+                                                                          // "Instagram",
+                                                                          style: GoogleFonts.poppins(
+                                                                              color: Kblue_twg,
+                                                                              fontSize: kFourteenFont,
+                                                                              fontWeight: kFW400),
+                                                                        ),
+                                                                        Text(
+                                                                          logsPostcontroller.logsList[index]["created"] == null
+                                                                              ? "No Date"
+                                                                              : DateFormat('MMM d, yyyy hh:mm a').format(
+                                                                                  DateTime.parse(
+                                                                                    logsPostcontroller.logsList[index]["created"],
+                                                                                  ),
+                                                                                ),
+                                                                          style: GoogleFonts.poppins(
+                                                                              color: kblack,
+                                                                              fontSize: kTenFont,
+                                                                              fontWeight: kFW400),
+                                                                        ),
+                                                                      ],
                                                                     ),
                                                                   ],
                                                                 ),
-                                                              ],
-                                                            ),
-                                                          ),
-                                                        );
+                                                              ),
+                                                            )
+                                                          : logsPostcontroller
+                                                                          .filteredSocialCategory !=
+                                                                      "" &&
+                                                                  logsPostcontroller
+                                                                          .filteredSocialCategory !=
+                                                                      logsPostcontroller
+                                                                              .logsList[index]
+                                                                          [
+                                                                          "social_type"]
+                                                              ? SizedBox()
+                                                              : InkWell(
+                                                                  onTap: () {
+                                                                    setState(
+                                                                        () {
+                                                                      logsPostcontroller
+                                                                          .selectedlogId
+                                                                          .value = logsPostcontroller
+                                                                              .logsList[index]
+                                                                          [
+                                                                          "id"];
+                                                                      // logsPostcontroller.logsList[index]["id"];
+                                                                      // semicontroller
+                                                                      //         .selectedSchedulePostID.value =
+                                                                      //     semicontroller.scheduledList[index]
+                                                                      //         ["id"];
+                                                                    });
+
+                                                                    Get.toNamed(
+                                                                        kPostingLogView);
+                                                                  },
+                                                                  child:
+                                                                      // Column(
+                                                                      //   children: [
+                                                                      Container(
+                                                                    margin: EdgeInsets.only(
+                                                                        bottom: 13
+                                                                            .h,
+                                                                        left:
+                                                                            2.w,
+                                                                        right: 2
+                                                                            .w),
+                                                                    padding:
+                                                                        const EdgeInsets
+                                                                            .all(
+                                                                            10),
+                                                                    decoration:
+                                                                        BoxDecoration(
+                                                                      boxShadow: [
+                                                                        BoxShadow(
+                                                                          color:
+                                                                              kblack.withOpacity(0.1),
+                                                                          blurRadius:
+                                                                              2.r,
+                                                                          offset: const Offset(
+                                                                              0,
+                                                                              1),
+                                                                          spreadRadius:
+                                                                              2.r,
+                                                                        )
+                                                                      ],
+                                                                      color:
+                                                                          Kwhite,
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              8.r),
+                                                                    ),
+                                                                    child:
+                                                                        Column(
+                                                                      children: [
+                                                                        Stack(
+                                                                          children: [
+                                                                            logsPostcontroller.logsList[index]["social_source"]["image"] == null
+                                                                                ? Image.asset(
+                                                                                    "assets/images/bharath_sports.png",
+                                                                                    height: 200.h,
+                                                                                    width: double.infinity,
+                                                                                    fit: BoxFit.cover,
+                                                                                    // width: 25.h,
+                                                                                  )
+                                                                                : ClipRRect(
+                                                                                    borderRadius: BorderRadius.circular(8.r),
+                                                                                    child: CachedNetworkImage(
+                                                                                      imageUrl: "https://thewisguystech.com" + newUrl,
+                                                                                      // logsPostcontroller
+                                                                                      //             .logsList[index]
+                                                                                      //         ["social_source"]
+                                                                                      //     ["image"],
+                                                                                      placeholder: (context, url) => SizedBox(
+                                                                                        height: 200.h,
+                                                                                        width: double.infinity,
+                                                                                        child: Shimmer.fromColors(
+                                                                                          baseColor: Colors.black12,
+                                                                                          highlightColor: Colors.white.withOpacity(0.5),
+                                                                                          child: Container(
+                                                                                            decoration: BoxDecoration(
+                                                                                              color: Kwhite.withOpacity(0.5),
+                                                                                            ),
+                                                                                            height: 200.h,
+                                                                                            width: double.infinity,
+                                                                                          ),
+                                                                                        ),
+                                                                                      ),
+                                                                                      errorWidget: (context, url, error) => Image.asset(
+                                                                                        // kBaseImageUrl
+                                                                                        "assets/images/bharath_sports.png",
+                                                                                        height: 200.h,
+                                                                                        width: double.infinity,
+                                                                                        fit: BoxFit.cover,
+                                                                                        // width: 25.h,
+                                                                                      ),
+                                                                                      height: 200.h,
+                                                                                      width: double.infinity,
+                                                                                      fit: BoxFit.cover,
+                                                                                    ),
+                                                                                  ),
+                                                                            Positioned(
+                                                                              bottom: 3.h,
+                                                                              right: 3.w,
+                                                                              child: isSelectAll
+                                                                                  ? Checkbox(
+                                                                                      value: selectedPostIds.contains(postId),
+                                                                                      activeColor: Kblue_twg,
+                                                                                      checkColor: Kwhite,
+                                                                                      onChanged: (value) {
+                                                                                        setState(() {
+                                                                                          if (value == true) {
+                                                                                            selectedPostIds.add(postId);
+                                                                                          } else {
+                                                                                            selectedPostIds.remove(postId);
+                                                                                          }
+                                                                                        });
+                                                                                      },
+                                                                                    )
+                                                                                  : SizedBox(),
+                                                                              // Checkbox(
+                                                                              //   activeColor: Kblue_twg,
+                                                                              //   checkColor: Kwhite,
+                                                                              //   value: value,
+                                                                              //   onChanged: (value) {
+                                                                              //     setState(() {
+                                                                              //       this.value = value!;
+                                                                              //     });
+                                                                              //     // print(value);
+                                                                              //   },
+                                                                              // ),
+                                                                            ),
+                                                                            // Positioned(
+                                                                            //   bottom: 3.h,
+                                                                            //   right: 3.w,
+                                                                            //   child: Checkbox(
+                                                                            //     activeColor: Kblue_twg,
+                                                                            //     checkColor: Kwhite,
+                                                                            //     value: value,
+                                                                            //     onChanged: (value) {
+                                                                            //       setState(() {
+                                                                            //         this.value = value!;
+                                                                            //       });
+                                                                            //       // print(value);
+                                                                            //     },
+                                                                            //   ),
+                                                                            // ),
+                                                                          ],
+                                                                        ),
+                                                                        SizedBox(
+                                                                          height:
+                                                                              10.h,
+                                                                        ),
+                                                                        Row(
+                                                                          mainAxisAlignment:
+                                                                              MainAxisAlignment.spaceBetween,
+                                                                          children: [
+                                                                            SizedBox(
+                                                                              width: MediaQuery.of(context).size.width / 2,
+                                                                              child: Text(
+                                                                                logsPostcontroller.logsList[index]["newMessage"] ??
+                                                                                    //  ["social_type"] ??
+                                                                                    "     ",
+                                                                                // logsPostcontroller.logsList[
+                                                                                //                 index]
+                                                                                //             ["social_source"]
+                                                                                //         ["message"] ??
+                                                                                //     "no message",
+                                                                                // logsPostcontroller.logsList[index]
+                                                                                //     ["posting_type"],
+                                                                                //  "Discover how social media automation can transform your....",
+                                                                                maxLines: 1,
+                                                                                overflow: TextOverflow.ellipsis,
+                                                                                style: GoogleFonts.poppins(color: kblack, fontSize: kSixteenFont, fontWeight: kFW500),
+                                                                              ),
+                                                                            ),
+                                                                            SizedBox(height: 8.h),
+                                                                            InkWell(
+                                                                              onTap: () async {
+                                                                                await showDialog(
+                                                                                  context: context,
+                                                                                  builder: (context) => AlertDialog(
+                                                                                    title: Text(
+                                                                                      'Are you sure?',
+                                                                                      style: GoogleFonts.roboto(fontSize: 18, fontWeight: FontWeight.w600, color: Colors.black),
+                                                                                    ),
+                                                                                    content: Text(
+                                                                                      'Do you want to delete post',
+                                                                                      style: GoogleFonts.roboto(fontSize: 13, fontWeight: FontWeight.w600, color: Colors.black),
+                                                                                    ),
+                                                                                    actions: <Widget>[
+                                                                                      TextButton(
+                                                                                        onPressed: () => Navigator.of(context).pop(false),
+                                                                                        child: Text(
+                                                                                          'No',
+                                                                                          style: GoogleFonts.roboto(fontSize: 12, fontWeight: FontWeight.w600, color: Colors.black),
+                                                                                        ),
+                                                                                      ),
+                                                                                      TextButton(
+                                                                                        onPressed: () {
+                                                                                          setState(() {
+                                                                                            logsPostcontroller.toDeletePostID.value = logsPostcontroller.logsList[index]["id"];
+                                                                                          });
+                                                                                          logsPostcontroller.logPostDelete();
+                                                                                          Get.back();
+                                                                                        },
+                                                                                        // onPressed: () =>
+                                                                                        //     SystemNavigator
+                                                                                        //         .pop(),
+                                                                                        child: Text(
+                                                                                          'Yes',
+                                                                                          style: GoogleFonts.roboto(fontSize: 12, fontWeight: FontWeight.w600, color: Kblue_twg),
+                                                                                        ),
+                                                                                      ),
+                                                                                    ],
+                                                                                  ),
+                                                                                );
+                                                                              },
+                                                                              child: Image.asset(
+                                                                                "assets/images/deleted_image.png",
+                                                                                height: 25.h,
+                                                                                width: 25.h,
+                                                                              ),
+                                                                            )
+                                                                          ],
+                                                                        ),
+                                                                        SizedBox(
+                                                                            height:
+                                                                                8.h),
+                                                                        Row(
+                                                                          mainAxisAlignment:
+                                                                              MainAxisAlignment.spaceBetween,
+                                                                          children: [
+                                                                            Text(
+                                                                              logsPostcontroller.logsList[index]["posting_type"] ?? "     ",
+                                                                              // logsPostcontroller
+                                                                              //                 .logsList[index]
+                                                                              //             ["social_source"]
+                                                                              //         ["display_name"] ??
+                                                                              //     "no name",
+
+                                                                              // "Instagram",
+                                                                              style: GoogleFonts.poppins(color: Kblue_twg, fontSize: kFourteenFont, fontWeight: kFW400),
+                                                                            ),
+                                                                            Text(
+                                                                              logsPostcontroller.logsList[index]["created"] == null
+                                                                                  ? "No Date"
+                                                                                  : DateFormat('MMM d, yyyy hh:mm a').format(
+                                                                                      DateTime.parse(
+                                                                                        logsPostcontroller.logsList[index]["created"],
+                                                                                      ),
+                                                                                    ),
+                                                                              style: GoogleFonts.poppins(color: kblack, fontSize: kTenFont, fontWeight: kFW400),
+                                                                            ),
+                                                                          ],
+                                                                        ),
+                                                                      ],
+                                                                    ),
+                                                                  ),
+                                                                );
                                                 })
                                   ],
                                 ),
@@ -842,17 +1102,15 @@ class _PostingLogsListState extends State<PostingLogsList> {
         ));
   }
 
-  //
-  void _showDropdown(BuildContext context) {
+  void _showDropdown(BuildContext context, List<String> socialMediaNames) {
     showMenu<String>(
       context: context,
       position: RelativeRect.fromLTRB(200, 200, 0, 0),
-      // position: RelativeRect.fromLTRB(200, 300, 0, 0), // Adjust as needed
-      items: variantsList
+      items: socialMediaNames
           .map(
-            (variant) => PopupMenuItem<String>(
-              value: variant,
-              child: Text(variant),
+            (name) => PopupMenuItem<String>(
+              value: name,
+              child: Text(name),
             ),
           )
           .toList(),
@@ -867,4 +1125,30 @@ class _PostingLogsListState extends State<PostingLogsList> {
       }
     });
   }
+
+  // //
+  // void _showDropdown(BuildContext context) {
+  //   showMenu<String>(
+  //     context: context,
+  //     position: RelativeRect.fromLTRB(200, 200, 0, 0),
+  //     // position: RelativeRect.fromLTRB(200, 300, 0, 0), // Adjust as needed
+  //     items: variantsList
+  //         .map(
+  //           (variant) => PopupMenuItem<String>(
+  //             value: variant,
+  //             child: Text(variant),
+  //           ),
+  //         )
+  //         .toList(),
+  //   ).then((value) {
+  //     if (value != null) {
+  //       setState(() {
+  //         selectedVariant = value;
+  //         logsPostcontroller.filteredSocialCategory.value = selectedVariant!;
+  //       });
+
+  //       print("Selected Variant: $selectedVariant");
+  //     }
+  //   });
+  // }
 }

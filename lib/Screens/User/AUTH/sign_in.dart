@@ -64,11 +64,11 @@ class _SignInState extends State<SignIn> {
 
   @override
   void initState() {
-    // setState(() {
-    //   authcontroller.UserEmailSignInController.text = "androidtest@gmail.com";
+    setState(() {
+      authcontroller.UserEmailSignInController.text = "androidtest@gmail.com";
 
-    //   authcontroller.UserEmailPasswordController.text = "Bstore@123";
-    // });
+      authcontroller.UserEmailPasswordController.text = "Bstore@123";
+    });
 
     super.initState();
   }
@@ -135,8 +135,7 @@ class _SignInState extends State<SignIn> {
             ),
           ),
           builder: (context, state) {
-            return 
-            Container(
+            return Container(
               color: Kwhite,
               padding: EdgeInsets.only(top: 10.h, left: 15.w, right: 15.w),
               child: Form(
@@ -377,7 +376,6 @@ class _SignInState extends State<SignIn> {
                 ),
               ),
             );
-       
           },
         ),
       ),

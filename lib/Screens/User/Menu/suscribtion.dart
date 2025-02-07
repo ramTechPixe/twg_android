@@ -15,7 +15,7 @@ class _SuscribtionState extends State<Suscribtion> {
   @override
   void initState() {
     suscrbtioncontroller.userSuscriptionv2();
-    // TODO: implement initState
+
     super.initState();
   }
 

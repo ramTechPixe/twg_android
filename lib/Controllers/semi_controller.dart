@@ -22,6 +22,17 @@ class SemiController extends GetxController {
   var semipostMap = {}.obs;
   // update Post
   var sapFbtimeLoading = false.obs;
+  var sapFbStatusLoading = false.obs;
+  var sapTwStatusLoading = false.obs;
+  var sapLiStatusLoading = false.obs;
+  var saptumbStatusLoading = false.obs;
+  var sapInstagramStatusLoading = false.obs;
+  var sapPintStatusLoading = false.obs;
+  var sapYtStatusLoading = false.obs;
+  var sapgmbStatusLoading = false.obs;
+  var sapbloggerStatusLoading = false.obs;
+  var sapbRedditStatusLoading = false.obs;
+  var sapWordPressStatusLoading = false.obs;
   //global
   Future<void> getGlobaltime(Map payloadst) async {
     sapFbtimeLoading(true);
@@ -611,6 +622,721 @@ class SemiController extends GetxController {
     pintPostedAccounts.value = data.join('\n');
   }
 
+  ///
+  Future<void> getStatusofFBScheduled(Map payloadst) async {
+    sapFbtimeLoading(true);
+//  'post_id': '146',
+//   'meta_key': '_sap_fb_post_type'
+    // var payload = {
+    //   'post_id': '146',
+    //   'meta_key': '_sap_fb_post_type',
+    // };
+    try {
+      var response = await apiService.postRequestMetaFacebookpostType(
+          endpoint: "get-post-meta-api/",
+          // sap_schedule_time
+          //  "posts/get-post-meta-api/",
+          payload: payloadst);
+
+      Map data = jsonDecode(response);
+      print(data);
+      if (data["status"] == "1") {
+        // multiPostcontroller
+        //     .
+        // tumbPostedAccounts
+        setMetaDatafb(data["response"]["fb_accounts"]);
+
+        setMetaDatatwt(data["response"]["tw_accounts"]);
+
+        setMetaDatatumb(data["response"]["tumblr_accounts"]);
+
+        setMetaDatapingt(data["response"]["pin_accounts"]);
+
+        // postFBStatus.value = data["meta_data"];
+        // convertAndFormatTimestamyou(data["response"]);
+        // accountscontroller.selectedValues.value = data["meta_data"];
+        // sapPostType.value = data["meta_data"];
+
+        // Fluttertoast.showToast(
+        //   msg: data["message"],
+        // );
+
+        print("object");
+      } else if (data["message"] == "Invalid session token") {
+        Fluttertoast.showToast(
+          msg: data["message"],
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: KDarkPink_twg,
+          textColor: Kwhite,
+          fontSize: 16.0,
+        );
+        Get.toNamed(kSignIns);
+      } else {
+        Fluttertoast.showToast(
+          msg: data["message"],
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: KDarkPink_twg,
+          textColor: Kwhite,
+          fontSize: 16.0,
+        );
+      }
+    } catch (e) {
+      Fluttertoast.showToast(
+        msg: "Something went wrong",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: KDarkPink_twg,
+        textColor: Kwhite,
+        fontSize: 16.0,
+      );
+    } finally {
+      sapFbtimeLoading(false);
+    }
+  }
+
+  /// ram
+  var fbScheduledPostStatus = "".obs;
+  var twitterScheduledPostStatus = "".obs;
+  var linkedInnScheduledPostStatus = "".obs;
+  var tumblerScheduledPostStatus = "".obs;
+  var instagramScheduledPostStatus = "".obs;
+  var pinterestScheduledPostStatus = "".obs;
+  var youTubeScheduledPostStatus = "".obs;
+  var gmbScheduledPostStatus = "".obs;
+  var bloggerScheduledPostStatus = "".obs;
+  var redditScheduledPostStatus = "".obs;
+  var wordPressScheduledPostStatus = "".obs;
+  // GET Status of Scheduled posts  //
+  Future<void> getStatusFBScheduled(Map payloadst) async {
+    sapFbStatusLoading(true);
+
+    try {
+      var response = await apiService.postRequestMetaFacebookpostType(
+          endpoint: "get-post-meta-api/", payload: payloadst);
+
+      Map data = jsonDecode(response);
+      print(data);
+      if (data["status"] == "1") {
+        fbScheduledPostStatus.value = data["response"];
+        print("object");
+      } else if (data["status"] == "0") {
+        fbScheduledPostStatus.value = "-1";
+        // Fluttertoast.showToast(
+        //   msg: data["message"],
+        //   toastLength: Toast.LENGTH_SHORT,
+        //   gravity: ToastGravity.BOTTOM,
+        //   timeInSecForIosWeb: 1,
+        //   backgroundColor: KDarkPink_twg,
+        //   textColor: Kwhite,
+        //   fontSize: 16.0,
+        // );
+        //  Get.toNamed(kSignIns);
+        print("object");
+      }
+      //   print("object");
+      // } else if (data["message"] == "Invalid session token") {
+      //   Fluttertoast.showToast(
+      //     msg: data["message"],
+      //     toastLength: Toast.LENGTH_SHORT,
+      //     gravity: ToastGravity.BOTTOM,
+      //     timeInSecForIosWeb: 1,
+      //     backgroundColor: KDarkPink_twg,
+      //     textColor: Kwhite,
+      //     fontSize: 16.0,
+      //   );
+      //   Get.toNamed(kSignIns);
+      // }
+      else {
+        Fluttertoast.showToast(
+          msg: data["message"],
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: KDarkPink_twg,
+          textColor: Kwhite,
+          fontSize: 16.0,
+        );
+      }
+    } catch (e) {
+      Fluttertoast.showToast(
+        msg: "Something went wrong",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: KDarkPink_twg,
+        textColor: Kwhite,
+        fontSize: 16.0,
+      );
+    } finally {
+      sapFbStatusLoading(false);
+    }
+  }
+
+// sapTwStatusLoading
+  // twitter Status
+  Future<void> getStatusTWitterScheduled(Map payloadst) async {
+    sapTwStatusLoading(true);
+
+    try {
+      var response = await apiService.postRequestMetaFacebookpostType(
+          endpoint: "get-post-meta-api/", payload: payloadst);
+
+      Map data = jsonDecode(response);
+      print(data);
+      if (data["status"] == "1") {
+        twitterScheduledPostStatus.value = data["response"];
+
+        print("object");
+      } else if (data["status"] == "0") {
+        twitterScheduledPostStatus.value = "-1";
+        // Fluttertoast.showToast(
+        //   msg: data["message"],
+        //   toastLength: Toast.LENGTH_SHORT,
+        //   gravity: ToastGravity.BOTTOM,
+        //   timeInSecForIosWeb: 1,
+        //   backgroundColor: KDarkPink_twg,
+        //   textColor: Kwhite,
+        //   fontSize: 16.0,
+        // );
+        //  Get.toNamed(kSignIns);
+        print("object");
+      } else {
+        Fluttertoast.showToast(
+          msg: data["message"],
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: KDarkPink_twg,
+          textColor: Kwhite,
+          fontSize: 16.0,
+        );
+      }
+    } catch (e) {
+      Fluttertoast.showToast(
+        msg: "Something went wrong",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: KDarkPink_twg,
+        textColor: Kwhite,
+        fontSize: 16.0,
+      );
+    } finally {
+      sapTwStatusLoading(false);
+    }
+  }
+
+  // linkedinn status
+  Future<void> getStatusLinkedInScheduled(Map payloadst) async {
+    sapLiStatusLoading(true);
+
+    try {
+      var response = await apiService.postRequestMetaFacebookpostType(
+          endpoint: "get-post-meta-api/", payload: payloadst);
+
+      Map data = jsonDecode(response);
+      print(data);
+      if (data["status"] == "1") {
+        linkedInnScheduledPostStatus.value = data["response"];
+
+        print("object");
+      } else if (data["status"] == "0") {
+        linkedInnScheduledPostStatus.value = "-1";
+        // Fluttertoast.showToast(
+        //   msg: data["message"],
+        //   toastLength: Toast.LENGTH_SHORT,
+        //   gravity: ToastGravity.BOTTOM,
+        //   timeInSecForIosWeb: 1,
+        //   backgroundColor: KDarkPink_twg,
+        //   textColor: Kwhite,
+        //   fontSize: 16.0,
+        // );
+        //  Get.toNamed(kSignIns);
+        print("object");
+      } else {
+        Fluttertoast.showToast(
+          msg: data["message"],
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: KDarkPink_twg,
+          textColor: Kwhite,
+          fontSize: 16.0,
+        );
+      }
+    } catch (e) {
+      Fluttertoast.showToast(
+        msg: "Something went wrong",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: KDarkPink_twg,
+        textColor: Kwhite,
+        fontSize: 16.0,
+      );
+    } finally {
+      sapLiStatusLoading(false);
+    }
+  }
+
+  // tumbler
+  Future<void> getStatustumblerScheduled(Map payloadst) async {
+    saptumbStatusLoading(true);
+
+    try {
+      var response = await apiService.postRequestMetaFacebookpostType(
+          endpoint: "get-post-meta-api/", payload: payloadst);
+
+      Map data = jsonDecode(response);
+      print(data);
+      if (data["status"] == "1") {
+        tumblerScheduledPostStatus.value = data["response"];
+
+        print("object");
+      } else if (data["status"] == "0") {
+        tumblerScheduledPostStatus.value = "-1";
+        // Fluttertoast.showToast(
+        //   msg: data["message"],
+        //   toastLength: Toast.LENGTH_SHORT,
+        //   gravity: ToastGravity.BOTTOM,
+        //   timeInSecForIosWeb: 1,
+        //   backgroundColor: KDarkPink_twg,
+        //   textColor: Kwhite,
+        //   fontSize: 16.0,
+        // );
+        //  Get.toNamed(kSignIns);
+        print("object");
+      } else {
+        Fluttertoast.showToast(
+          msg: data["message"],
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: KDarkPink_twg,
+          textColor: Kwhite,
+          fontSize: 16.0,
+        );
+      }
+    } catch (e) {
+      Fluttertoast.showToast(
+        msg: "Something went wrong",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: KDarkPink_twg,
+        textColor: Kwhite,
+        fontSize: 16.0,
+      );
+    } finally {
+      saptumbStatusLoading(false);
+    }
+  }
+
+// instagram
+  Future<void> getStaInstagramScheduled(Map payloadst) async {
+    sapInstagramStatusLoading(true);
+
+    try {
+      var response = await apiService.postRequestMetaFacebookpostType(
+          endpoint: "get-post-meta-api/", payload: payloadst);
+
+      Map data = jsonDecode(response);
+      print(data);
+      if (data["status"] == "1") {
+        instagramScheduledPostStatus.value = data["response"];
+
+        print("object");
+      } else if (data["status"] == "0") {
+        instagramScheduledPostStatus.value = "-1";
+        // Fluttertoast.showToast(
+        //   msg: data["message"],
+        //   toastLength: Toast.LENGTH_SHORT,
+        //   gravity: ToastGravity.BOTTOM,
+        //   timeInSecForIosWeb: 1,
+        //   backgroundColor: KDarkPink_twg,
+        //   textColor: Kwhite,
+        //   fontSize: 16.0,
+        // );
+        //  Get.toNamed(kSignIns);
+        print("object");
+      } else {
+        Fluttertoast.showToast(
+          msg: data["message"],
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: KDarkPink_twg,
+          textColor: Kwhite,
+          fontSize: 16.0,
+        );
+      }
+    } catch (e) {
+      Fluttertoast.showToast(
+        msg: "Something went wrong",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: KDarkPink_twg,
+        textColor: Kwhite,
+        fontSize: 16.0,
+      );
+    } finally {
+      sapInstagramStatusLoading(false);
+    }
+  }
+
+  // pinterest
+  Future<void> getStatusPinterestScheduled(Map payloadst) async {
+    sapPintStatusLoading(true);
+
+    try {
+      var response = await apiService.postRequestMetaFacebookpostType(
+          endpoint: "get-post-meta-api/", payload: payloadst);
+
+      Map data = jsonDecode(response);
+      print(data);
+      if (data["status"] == "1") {
+        pinterestScheduledPostStatus.value = data["response"];
+
+        print("object");
+      } else if (data["status"] == "0") {
+        pinterestScheduledPostStatus.value = "-1";
+        // Fluttertoast.showToast(
+        //   msg: data["message"],
+        //   toastLength: Toast.LENGTH_SHORT,
+        //   gravity: ToastGravity.BOTTOM,
+        //   timeInSecForIosWeb: 1,
+        //   backgroundColor: KDarkPink_twg,
+        //   textColor: Kwhite,
+        //   fontSize: 16.0,
+        // );
+        //  Get.toNamed(kSignIns);
+        print("object");
+      } else {
+        Fluttertoast.showToast(
+          msg: data["message"],
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: KDarkPink_twg,
+          textColor: Kwhite,
+          fontSize: 16.0,
+        );
+      }
+    } catch (e) {
+      Fluttertoast.showToast(
+        msg: "Something went wrong",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: KDarkPink_twg,
+        textColor: Kwhite,
+        fontSize: 16.0,
+      );
+    } finally {
+      sapPintStatusLoading(false);
+    }
+  }
+
+  // youtube
+  Future<void> getStatusYoutubeScheduled(Map payloadst) async {
+    sapYtStatusLoading(true);
+
+    try {
+      var response = await apiService.postRequestMetaFacebookpostType(
+          endpoint: "get-post-meta-api/", payload: payloadst);
+
+      Map data = jsonDecode(response);
+      print(data);
+      if (data["status"] == "1") {
+        youTubeScheduledPostStatus.value = data["response"];
+
+        print("object");
+      } else if (data["status"] == "0") {
+        youTubeScheduledPostStatus.value = "-1";
+        // Fluttertoast.showToast(
+        //   msg: data["message"],
+        //   toastLength: Toast.LENGTH_SHORT,
+        //   gravity: ToastGravity.BOTTOM,
+        //   timeInSecForIosWeb: 1,
+        //   backgroundColor: KDarkPink_twg,
+        //   textColor: Kwhite,
+        //   fontSize: 16.0,
+        // );
+        //  Get.toNamed(kSignIns);
+        print("object");
+      } else {
+        Fluttertoast.showToast(
+          msg: data["message"],
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: KDarkPink_twg,
+          textColor: Kwhite,
+          fontSize: 16.0,
+        );
+      }
+    } catch (e) {
+      Fluttertoast.showToast(
+        msg: "Something went wrong",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: KDarkPink_twg,
+        textColor: Kwhite,
+        fontSize: 16.0,
+      );
+    } finally {
+      sapYtStatusLoading(false);
+    }
+  } //
+
+  ///gmb
+  Future<void> getStatusGMBScheduled(Map payloadst) async {
+    sapgmbStatusLoading(true);
+
+    try {
+      var response = await apiService.postRequestMetaFacebookpostType(
+          endpoint: "get-post-meta-api/", payload: payloadst);
+
+      Map data = jsonDecode(response);
+      print(data);
+      if (data["status"] == "1") {
+        gmbScheduledPostStatus.value = data["response"];
+
+        print("object");
+      } else if (data["status"] == "0") {
+        gmbScheduledPostStatus.value = "-1";
+        // Fluttertoast.showToast(
+        //   msg: data["message"],
+        //   toastLength: Toast.LENGTH_SHORT,
+        //   gravity: ToastGravity.BOTTOM,
+        //   timeInSecForIosWeb: 1,
+        //   backgroundColor: KDarkPink_twg,
+        //   textColor: Kwhite,
+        //   fontSize: 16.0,
+        // );
+        //  Get.toNamed(kSignIns);
+        print("object");
+      } else {
+        Fluttertoast.showToast(
+          msg: data["message"],
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: KDarkPink_twg,
+          textColor: Kwhite,
+          fontSize: 16.0,
+        );
+      }
+    } catch (e) {
+      Fluttertoast.showToast(
+        msg: "Something went wrong",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: KDarkPink_twg,
+        textColor: Kwhite,
+        fontSize: 16.0,
+      );
+    } finally {
+      sapgmbStatusLoading(false);
+    }
+  } //
+
+  // Blogger
+  Future<void> getStatusBloggerScheduled(Map payloadst) async {
+    sapbloggerStatusLoading(true);
+// sapbloggerStatusLoading
+    try {
+      var response = await apiService.postRequestMetaFacebookpostType(
+          endpoint: "get-post-meta-api/", payload: payloadst);
+
+      Map data = jsonDecode(response);
+      print(data);
+      if (data["status"] == "1") {
+        bloggerScheduledPostStatus.value = data["response"];
+
+        print("object");
+      } else if (data["status"] == "0") {
+        bloggerScheduledPostStatus.value = "-1";
+
+        print("object");
+      } else {
+        Fluttertoast.showToast(
+          msg: data["message"],
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: KDarkPink_twg,
+          textColor: Kwhite,
+          fontSize: 16.0,
+        );
+      }
+    } catch (e) {
+      Fluttertoast.showToast(
+        msg: "Something went wrong",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: KDarkPink_twg,
+        textColor: Kwhite,
+        fontSize: 16.0,
+      );
+    } finally {
+      sapbloggerStatusLoading(false);
+    }
+  }
+
+  // reddit
+  Future<void> getStatusRedditScheduled(Map payloadst) async {
+    sapbRedditStatusLoading(true);
+// sapbloggerStatusLoading
+    try {
+      var response = await apiService.postRequestMetaFacebookpostType(
+          endpoint: "get-post-meta-api/", payload: payloadst);
+
+      Map data = jsonDecode(response);
+      print(data);
+      if (data["status"] == "1") {
+        redditScheduledPostStatus.value = data["response"];
+
+        print("object");
+      } else if (data["status"] == "0") {
+        redditScheduledPostStatus.value = "-1";
+
+        print("object");
+      } else {
+        Fluttertoast.showToast(
+          msg: data["message"],
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: KDarkPink_twg,
+          textColor: Kwhite,
+          fontSize: 16.0,
+        );
+      }
+    } catch (e) {
+      Fluttertoast.showToast(
+        msg: "Something went wrong",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: KDarkPink_twg,
+        textColor: Kwhite,
+        fontSize: 16.0,
+      );
+    } finally {
+      sapbRedditStatusLoading(false);
+    }
+  }
+
+// word press //
+  Future<void> getStatusWordpressScheduled(Map payloadst) async {
+    sapWordPressStatusLoading(true);
+// sapbloggerStatusLoading
+    try {
+      var response = await apiService.postRequestMetaFacebookpostType(
+          endpoint: "get-post-meta-api/", payload: payloadst);
+
+      Map data = jsonDecode(response);
+      print(data);
+      if (data["status"] == "1") {
+        wordPressScheduledPostStatus.value = data["response"];
+
+        print("object");
+      } else if (data["status"] == "0") {
+        wordPressScheduledPostStatus.value = "-1";
+
+        print("object");
+      } else {
+        Fluttertoast.showToast(
+          msg: data["message"],
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: KDarkPink_twg,
+          textColor: Kwhite,
+          fontSize: 16.0,
+        );
+      }
+    } catch (e) {
+      Fluttertoast.showToast(
+        msg: "Something went wrong",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: KDarkPink_twg,
+        textColor: Kwhite,
+        fontSize: 16.0,
+      );
+    } finally {
+      sapWordPressStatusLoading(false);
+    }
+  }
+
+  ///
+
+  // //
+  // Future<void> getYtStatusScheduled(Map payloadst) async {
+  //   sapYtStatusLoading(true);
+
+  //   try {
+  //     var response = await apiService.postRequestMetaFacebookpostType(
+  //         endpoint: "get-post-meta-api/", payload: payloadst);
+
+  //     Map data = jsonDecode(response);
+  //     print(data);
+  //     if (data["status"] == "1") {
+  //       pinterestScheduledPostStatus.value = data["response"];
+
+  //       print("object");
+  //     } else if (data["status"] == "0") {
+  //       pinterestScheduledPostStatus.value = "-1";
+  //       // Fluttertoast.showToast(
+  //       //   msg: data["message"],
+  //       //   toastLength: Toast.LENGTH_SHORT,
+  //       //   gravity: ToastGravity.BOTTOM,
+  //       //   timeInSecForIosWeb: 1,
+  //       //   backgroundColor: KDarkPink_twg,
+  //       //   textColor: Kwhite,
+  //       //   fontSize: 16.0,
+  //       // );
+  //       //  Get.toNamed(kSignIns);
+  //       print("object");
+  //     } else {
+  //       Fluttertoast.showToast(
+  //         msg: data["message"],
+  //         toastLength: Toast.LENGTH_SHORT,
+  //         gravity: ToastGravity.BOTTOM,
+  //         timeInSecForIosWeb: 1,
+  //         backgroundColor: KDarkPink_twg,
+  //         textColor: Kwhite,
+  //         fontSize: 16.0,
+  //       );
+  //     }
+  //   } catch (e) {
+  //     Fluttertoast.showToast(
+  //       msg: "Something went wrong",
+  //       toastLength: Toast.LENGTH_SHORT,
+  //       gravity: ToastGravity.BOTTOM,
+  //       timeInSecForIosWeb: 1,
+  //       backgroundColor: KDarkPink_twg,
+  //       textColor: Kwhite,
+  //       fontSize: 16.0,
+  //     );
+  //   } finally {
+  //     sapYtStatusLoading(false);
+  //   }
+  // }
+
+//
 // All Networks
   Future<void> postedAllNetworks(Map payloadst) async {
     sapFbtimeLoading(true);
@@ -991,7 +1717,7 @@ class SemiController extends GetxController {
     try {
       var response = await apiService.postRequestScheduleViewData(
           endpoint: "quick-post-api/get_post_api/", payload: payload);
-
+// https://thewisguystech.com/quick-post-api/get_post_api/
       Map data = jsonDecode(response);
       print(data);
       if (data["status"] == "success") {
