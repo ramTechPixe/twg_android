@@ -80,15 +80,33 @@ class _TumblrState extends State<Tumblr> {
       // });
       setState(() {
         isautopostingSwitched = true;
+        UserSimplePreferences.tumblrStatus(tumblrStatus: true);
         //  _isfbExpandCard = true;
       });
     } else {
       setState(() {
         isautopostingSwitched = false;
+        UserSimplePreferences.tumblrStatus(tumblrStatus: false);
         //   _isfbExpandCard = false;
       });
     }
   }
+  // void toggleautoPostSwitch(bool value) async {
+  //   if (isautopostingSwitched == false) {
+  //     // setState(() {
+  //     //   _isfbExpandCard = !_isfbExpandCard;
+  //     // });
+  //     setState(() {
+  //       isautopostingSwitched = true;
+  //       //  _isfbExpandCard = true;
+  //     });
+  //   } else {
+  //     setState(() {
+  //       isautopostingSwitched = false;
+  //       //   _isfbExpandCard = false;
+  //     });
+  //   }
+  // }
 
   bool isProxySwitched = false;
   void toggleProxySwitch(bool value) async {
@@ -166,7 +184,9 @@ class _TumblrState extends State<Tumblr> {
                             // });
                             toggleautoPostSwitch(value);
                           },
-                          value: isautopostingSwitched,
+                          value: UserSimplePreferences.getTumblrStatus() ??
+                              isautopostingSwitched,
+                          //  value: isautopostingSwitched,
                           materialTapTargetSize:
                               MaterialTapTargetSize.shrinkWrap,
                           activeColor: KLightDust_twg,
@@ -175,6 +195,24 @@ class _TumblrState extends State<Tumblr> {
                           inactiveTrackColor: Kdim_brown_twg,
                         ),
                       ),
+                      // Transform.scale(
+                      //   scale: 0.6,
+                      //   child: Switch(
+                      //     onChanged: (value) {
+                      //       // setState(() {
+                      //       //   _isfbExpandCard = !_isfbExpandCard;
+                      //       // });
+                      //       toggleautoPostSwitch(value);
+                      //     },
+                      //     value: isautopostingSwitched,
+                      //     materialTapTargetSize:
+                      //         MaterialTapTargetSize.shrinkWrap,
+                      //     activeColor: KLightDust_twg,
+                      //     activeTrackColor: Kform_border_twg,
+                      //     inactiveThumbColor: KLightDust_twg,
+                      //     inactiveTrackColor: Kdim_brown_twg,
+                      //   ),
+                      // ),
                     ],
                   ),
                   SizedBox(

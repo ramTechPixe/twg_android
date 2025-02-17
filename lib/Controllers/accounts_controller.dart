@@ -15,7 +15,7 @@ import 'package:collection/collection.dart';
 class AccontsController extends GetxController {
   final apiService = Get.put(ApiService());
   ProfileController userprofilecontroller = Get.put(ProfileController());
-
+  // SemiController semicontroller = Get.put(SemiController());
   //insta
   // https://thewisguystech.com/insta-accounts-api/
   var instaAccountsLoading = false.obs;
@@ -834,6 +834,7 @@ class AccontsController extends GetxController {
           accountDetails.firstWhere((item) => item['name'] == name);
       return '${selectedItem['account_id']}|${selectedItem['user_id']}';
     }).toList();
+  
   }
 
   void selectAll() {
