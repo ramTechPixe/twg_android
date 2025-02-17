@@ -1569,6 +1569,30 @@ class SemiController extends GetxController {
   TextEditingController autoPostHeadingController = TextEditingController();
   TextEditingController autoPostMessageController = TextEditingController();
   TextEditingController contentLinkController = TextEditingController();
+
+  // scheduled post-selected media
+  //  'networks[facebook]': '1',
+  //                               'networks[twitter]': '1',
+  //                               'networks[linkedin]': '1',
+  //                               'networks[tumblr]': '1',
+  //                               'networks[pinterest]': '1',
+  //                               'networks[gmb]': '1',
+  //                               'networks[Instagram]': '1',
+  //                               'networks[reddit]': '1',
+  //                               'networks[blogger]': '1',
+  //                               'networks[wordpress]': '1',
+  var isFbScheduled = false.obs;
+  var isyouScheduled = false.obs;
+  var isTwiitterScheduled = false.obs;
+  var islinkedinScheduled = false.obs;
+  var istumblrScheduled = false.obs;
+  var ispinterestScheduled = false.obs;
+  var isgmbScheduled = false.obs;
+  var isInstagramScheduled = false.obs;
+  var isredditScheduled = false.obs;
+  var isbloggerScheduled = false.obs;
+  var isWordpressScheduled = false.obs;
+  ////////
   var aiTextLoading = false.obs;
   Future<void> autoPostAIText(Map paylodd) async {
     aiTextLoading(true);

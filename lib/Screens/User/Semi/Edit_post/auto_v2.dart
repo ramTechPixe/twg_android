@@ -4307,6 +4307,7 @@ class _AutoPostv2State extends State<AutoPostv2> {
                                 'custom_share_link':
                                     semicontroller.contentLinkController.text,
                                 'networks[facebook]': '1',
+                                'networks[twitter]': '1',
                                 // 'networks[fb_accounts][0]':
                                 //     '170283146164295|493105290336037', dynamic
                                 'status': '1',

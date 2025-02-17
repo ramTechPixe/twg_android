@@ -77,15 +77,33 @@ class _InstagramState extends State<Instagram> {
       // });
       setState(() {
         isautopostingSwitched = true;
+        UserSimplePreferences.instagramStatus(instagramStatus: true);
         //  _isfbExpandCard = true;
       });
     } else {
       setState(() {
         isautopostingSwitched = false;
+        UserSimplePreferences.instagramStatus(instagramStatus: false);
         //   _isfbExpandCard = false;
       });
     }
   }
+  // void toggleautoPostSwitch(bool value) async {
+  //   if (isautopostingSwitched == false) {
+  //     // setState(() {
+  //     //   _isfbExpandCard = !_isfbExpandCard;
+  //     // });
+  //     setState(() {
+  //       isautopostingSwitched = true;
+  //       //  _isfbExpandCard = true;
+  //     });
+  //   } else {
+  //     setState(() {
+  //       isautopostingSwitched = false;
+  //       //   _isfbExpandCard = false;
+  //     });
+  //   }
+  // }
 
   bool isProxySwitched = false;
   void toggleProxySwitch(bool value) async {
@@ -139,7 +157,9 @@ class _InstagramState extends State<Instagram> {
                             // });
                             toggleautoPostSwitch(value);
                           },
-                          value: isautopostingSwitched,
+                          value: UserSimplePreferences.getInstagramStatus() ??
+                              isautopostingSwitched,
+                          //  value: isautopostingSwitched,
                           materialTapTargetSize:
                               MaterialTapTargetSize.shrinkWrap,
                           activeColor: KLightDust_twg,
@@ -148,6 +168,24 @@ class _InstagramState extends State<Instagram> {
                           inactiveTrackColor: Kdim_brown_twg,
                         ),
                       ),
+                      // Transform.scale(
+                      //   scale: 0.6,
+                      //   child: Switch(
+                      //     onChanged: (value) {
+                      //       // setState(() {
+                      //       //   _isfbExpandCard = !_isfbExpandCard;
+                      //       // });
+                      //       toggleautoPostSwitch(value);
+                      //     },
+                      //     value: isautopostingSwitched,
+                      //     materialTapTargetSize:
+                      //         MaterialTapTargetSize.shrinkWrap,
+                      //     activeColor: KLightDust_twg,
+                      //     activeTrackColor: Kform_border_twg,
+                      //     inactiveThumbColor: KLightDust_twg,
+                      //     inactiveTrackColor: Kdim_brown_twg,
+                      //   ),
+                      // ),
                     ],
                   ),
                   SizedBox(
