@@ -64,7 +64,7 @@ class _ReportsState extends State<Reports> {
       "social_type": "facebook",
       "start_date": "",
       "end_date": "",
-      "filter_type": "current_month", // last_sevendays
+      "filter_type": "current_month",
       "user_id": userprofilecontroller.profileData["user_details"]["id"]
       //userprofilecontroller.profileData["user_details"]["id"]
     };
@@ -79,7 +79,7 @@ class _ReportsState extends State<Reports> {
         "social_type": dashboardcontroller.selectedSocialMediaType.value,
         "start_date": "",
         "end_date": "",
-        "filter_type": "current_month", // last_sevendays
+        "filter_type": "current_month",
         "user_id": userprofilecontroller.profileData["user_details"]["id"]
       };
       reportscontroller.userGraphs(payload);
@@ -88,7 +88,7 @@ class _ReportsState extends State<Reports> {
         "social_type": dashboardcontroller.selectedSocialMediaType.value,
         "start_date": "",
         "end_date": "",
-        "filter_type": "current_year", // last_sevendays
+        "filter_type": "current_year",
         "user_id": userprofilecontroller.profileData["user_details"]["id"]
       };
       reportscontroller.userGraphs(payload);
@@ -97,7 +97,7 @@ class _ReportsState extends State<Reports> {
         "social_type": dashboardcontroller.selectedSocialMediaType.value,
         "start_date": "",
         "end_date": "",
-        "filter_type": "last_sevendays", //
+        "filter_type": "last_sevendays",
         "user_id": userprofilecontroller.profileData["user_details"]["id"]
       };
       // dummy
@@ -158,7 +158,9 @@ class _ReportsState extends State<Reports> {
                 color: Kwhite, fontSize: kTwentyFont, fontWeight: kFW600),
           ),
         ),
-        body: Obx(() => reportscontroller.graphsLoading == true
+        body: Obx(() => reportscontroller.graphsLoading == true ||
+                dashboardcontroller.dashboardTotalSocialPostsLoading == true
+            // dashboardTotalSocialPostsLoading(true);
             ? Center(
                 child: CircularProgressIndicator(
                   color: Kform_border_twg,
@@ -171,7 +173,7 @@ class _ReportsState extends State<Reports> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Social Media",
+                      "Select Social Media",
                       style: GoogleFonts.poppins(
                           color: kblack,
                           fontSize: kSixteenFont,
@@ -275,6 +277,29 @@ class _ReportsState extends State<Reports> {
                               dashboardcontroller.selectedSocialMediaType
                                   .value = selectedUserValue!;
                             });
+                            //ram changes
+                            setState(() {
+                              dashboardcontroller.selectedSocialMediaGraph
+                                  .value = "This Month";
+                              dashboardcontroller.isCustomSelected.value =
+                                  false;
+                            });
+                            ///////////
+
+                            //////
+                            var payload = {
+                              "social_type": dashboardcontroller
+                                  .selectedSocialMediaType.value,
+                              "start_date": "",
+                              "end_date": "",
+                              "filter_type": "current_month",
+                               //
+                              "user_id": userprofilecontroller
+                                  .profileData["user_details"]["id"]
+                              //userprofilecontroller.profileData["user_details"]["id"]
+                            };
+                            reportscontroller.userGraphs(payload);
+
                             print("object");
                           },
                           onSaved: (value) {

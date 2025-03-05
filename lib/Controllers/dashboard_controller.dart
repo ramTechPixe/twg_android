@@ -142,6 +142,10 @@ class DashboardController extends GetxController {
   var pintnetworkCount = 0.obs;
   var dashboardTotalSocialPostsLoading = false.obs;
 
+  //
+  var twitterAccountsEnabled = 0.obs;
+  // var twitterAccountsEnabled = 0.obs;
+
   Future<void> dashboardTotalSocialPostAPI() async {
     dashboardTotalSocialPostsLoading(true);
     networkCountList.value = [];

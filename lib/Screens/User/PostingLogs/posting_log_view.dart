@@ -1,3 +1,4 @@
+import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:twg/untils/export_file.dart';
@@ -30,7 +31,7 @@ class _PostingLogViewState extends State<PostingLogView> {
   ];
   @override
   void initState() {
-    logsPostcontroller.userLogPostID();
+    logsPostcontroller.userLogPostID2();
 
     super.initState();
   }
@@ -95,32 +96,18 @@ class _PostingLogViewState extends State<PostingLogView> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        // ClipRRect(
-                        //   borderRadius: BorderRadius.circular(12),
-                        //   child: Image.asset(
-                        //     "assets/images/bharath_sports.png",
-                        //     height: 200.h,
-                        //     width: double.infinity,
-                        //     fit: BoxFit.cover,
-                        //   ),
-                        // ),
-                        logsPostcontroller.imageUrl == null
+                        logsPostcontroller.logIdData["Image"] == null
                             ? Image.asset(
                                 "assets/images/bharath_sports.png",
                                 height: 200.h,
                                 width: double.infinity,
                                 fit: BoxFit.cover,
-                                // width: 25.h,
                               )
                             : ClipRRect(
                                 borderRadius: BorderRadius.circular(8.r),
                                 child: CachedNetworkImage(
-                                  imageUrl: "https://thewisguystech.com" +
-                                      logsPostcontroller.imageUrl.value,
-                                  // logsPostcontroller
-                                  //             .logsList[index]
-                                  //         ["social_source"]
-                                  //     ["image"],
+                                  imageUrl:
+                                      logsPostcontroller.logIdData["Image"],
                                   placeholder: (context, url) => SizedBox(
                                     height: 200.h,
                                     width: double.infinity,
@@ -161,14 +148,15 @@ class _PostingLogViewState extends State<PostingLogView> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  "Account id",
+                                  "Account Name",
                                   style: GoogleFonts.poppins(
                                       color: kblack,
                                       fontSize: kSixteenFont,
                                       fontWeight: kFW500),
                                 ),
                                 Text(
-                                  logsPostcontroller.logIdData["Account id"] ??
+                                  logsPostcontroller
+                                          .logIdData["Account_name"] ??
                                       "",
                                   style: GoogleFonts.poppins(
                                       color: kblack,
@@ -205,19 +193,67 @@ class _PostingLogViewState extends State<PostingLogView> {
                         SizedBox(
                           height: 20.h,
                         ),
-                        Text(
-                          "Account name",
-                          style: GoogleFonts.poppins(
-                              color: kblack,
-                              fontSize: kSixteenFont,
-                              fontWeight: kFW500),
-                        ),
-                        Text(
-                          logsPostcontroller.logIdData["Account name"] ?? "",
-                          style: GoogleFonts.poppins(
-                              color: kblack,
-                              fontSize: kFourteenFont,
-                              fontWeight: kFW400),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "Link to post",
+                                  style: GoogleFonts.poppins(
+                                      color: kblack,
+                                      fontSize: kSixteenFont,
+                                      fontWeight: kFW500),
+                                ),
+                                SizedBox(
+                                  height: 10.h,
+                                ),
+                                SizedBox(
+                                  width: 200.w,
+                                  child: Text(
+                                    logsPostcontroller
+                                            .logIdData["Link_to_post"] ??
+                                        "",
+                                    maxLines: 3,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: GoogleFonts.poppins(
+                                        color: kblack,
+                                        fontSize: kFourteenFont,
+                                        fontWeight: kFW400),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            InkWell(
+                                onTap: () async {
+                                  if (await canLaunchUrl(Uri.parse(
+                                      logsPostcontroller
+                                          .logIdData["Link_to_post"]))) {
+                                    await launchUrl(
+                                        Uri.parse(logsPostcontroller
+                                            .logIdData["Link_to_post"]),
+                                        mode: LaunchMode.externalApplication);
+                                  } else {
+                                    throw "Could not launch ${logsPostcontroller.logIdData["Link_to_post"]}";
+                                  }
+                                },
+                                child: Icon(Icons.open_in_browser)),
+                            InkWell(
+                                onTap: () {
+                                  Clipboard.setData(ClipboardData(
+                                      text: logsPostcontroller
+                                              .logIdData["Link_to_post"] ??
+                                          ""));
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                        content:
+                                            Text("Link copied to clipboard!")),
+                                  );
+                                },
+                                child: Icon(Icons.copy))
+                          ],
                         ),
                         SizedBox(
                           height: 20.h,

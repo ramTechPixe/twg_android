@@ -22,6 +22,8 @@ class _YouTubeState extends State<YouTube> {
   DashboardController dashboardcontroller = Get.put(DashboardController());
   ProfileController userprofilecontroller = Get.put(ProfileController());
   SettingsController settingscontroller = Get.put(SettingsController());
+  AccontsController accountscontroller = Get.put(AccontsController());
+  SemiController semicontroller = Get.put(SemiController());
   File? selectedImage;
   String base64Image = "";
   bool showimagenullMessage = false;
@@ -47,6 +49,27 @@ class _YouTubeState extends State<YouTube> {
         "consumer_key": TextEditingController(),
         "consumer_secret": TextEditingController(),
       });
+    });
+  }
+
+  void _addApiListFieldSet(List dataList) {
+    setState(() {
+      for (var data in dataList) {
+        _twitterFields.add({
+          "consumer_key": TextEditingController(
+              text: data["consumer_key"] ?? ""), // consumer_key
+          "consumer_secret":
+              TextEditingController(text: data["consumer_secret"] ?? "")
+          // "consumer_key":
+          //     TextEditingController(text: data["consumer_key"] ?? ""),
+          // "consumer_secret":
+          //     TextEditingController(text: data["consumer_secret"] ?? ""),
+          // "oauth_token": TextEditingController(text: data["oauth_token"] ?? ""),
+          // "oauth_secret":
+          //     TextEditingController(text: data["oauth_secret"] ?? ""),
+        });
+      }
+      print("object");
     });
   }
 
@@ -94,17 +117,43 @@ class _YouTubeState extends State<YouTube> {
       // });
       setState(() {
         isautopostingSwitched = true;
-        UserSimplePreferences.youtubeStatus(youtubeStatus: true);
+        dashboardcontroller.twitterAccountsEnabled.value = 1;
+        // UserSimplePreferences.twitterStatus(twitterStatus: true);
+        accountscontroller.isYoutenabledFromBackend.value = "1";
         //  _isfbExpandCard = true;
+        print("n n");
       });
     } else {
       setState(() {
         isautopostingSwitched = false;
-        UserSimplePreferences.youtubeStatus(youtubeStatus: false);
+        dashboardcontroller.twitterAccountsEnabled.value = 0;
+        // UserSimplePreferences.twitterStatus(twitterStatus: false);
+        accountscontroller.isYoutenabledFromBackend.value = "0";
         //   _isfbExpandCard = false;
+        print("n n");
       });
     }
   }
+  // void toggleautoPostSwitch(bool value) async {
+  //   if (isautopostingSwitched == false) {
+  //     // setState(() {
+  //     //   _isfbExpandCard = !_isfbExpandCard;
+  //     // });
+  //     setState(() {
+  //       isautopostingSwitched = true;
+  //       UserSimplePreferences.youtubeStatus(youtubeStatus: true);
+  //       accountscontroller.isYoutenabledFromBackend.value == "1";
+  //       //  _isfbExpandCard = true;
+  //     });
+  //   } else {
+  //     setState(() {
+  //       isautopostingSwitched = false;
+  //       UserSimplePreferences.youtubeStatus(youtubeStatus: false);
+  //       accountscontroller.isYoutenabledFromBackend.value == "0";
+  //       //   _isfbExpandCard = false;
+  //     });
+  //   }
+  // }
   // void toggleautoPostSwitch(bool value) async {
   //   if (isautopostingSwitched == false) {
   //     // setState(() {
@@ -142,6 +191,7 @@ class _YouTubeState extends State<YouTube> {
 
       settingscontroller.youtubeAppSecretController.text = '456il;';
       settingscontroller.twitterShort.value = 'TinyURL';
+      _addApiListFieldSet(accountscontroller.youtubeKeys.value);
       _addNewFieldSet();
     });
 
@@ -187,8 +237,13 @@ class _YouTubeState extends State<YouTube> {
                             // });
                             toggleautoPostSwitch(value);
                           },
-                          value: UserSimplePreferences.getYouTubeStatus() ??
-                              isautopostingSwitched,
+                          value: accountscontroller
+                                      .isYoutenabledFromBackend.value ==
+                                  "1"
+                              ? true
+                              : false,
+                          // ?UserSimplePreferences.getYouTubeStatus() ??
+                          //     isautopostingSwitched, //ramyou
                           //  value: isautopostingSwitched,
                           materialTapTargetSize:
                               MaterialTapTargetSize.shrinkWrap,
@@ -226,50 +281,50 @@ class _YouTubeState extends State<YouTube> {
                     style: GoogleFonts.poppins(
                         fontSize: 11.sp, color: kblack, fontWeight: kFW400),
                   ),
-                  InkWell(
-                    onTap: () {
-                      Fluttertoast.showToast(
-                        msg: "Not Available Now",
-                        toastLength: Toast.LENGTH_SHORT,
-                        gravity: ToastGravity.BOTTOM,
-                        timeInSecForIosWeb: 1,
-                        backgroundColor: KDarkPink_twg,
-                        textColor: Kwhite,
-                        fontSize: 16.0,
-                      );
-                    },
-                    child: Container(
-                      margin: EdgeInsets.only(top: 10),
-                      height: 43,
-                      width: 110.w,
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                        color: Kform_border_twg,
-                        borderRadius: BorderRadius.all(Radius.circular(5)),
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Image.asset(
-                            "assets/images/Vector.png",
-                            // height: 3.h,
-                            // width: 80.w,
-                          ),
-                          SizedBox(
-                            width: 12.w,
-                          ),
-                          Text(
-                            "Save",
-                            textAlign: TextAlign.center,
-                            style: GoogleFonts.poppins(
-                                fontWeight: kFW600,
-                                color: Kwhite,
-                                fontSize: kFourteenFont.sp),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
+                  // InkWell(
+                  //   onTap: () {
+                  //     Fluttertoast.showToast(
+                  //       msg: "Not Available Now",
+                  //       toastLength: Toast.LENGTH_SHORT,
+                  //       gravity: ToastGravity.BOTTOM,
+                  //       timeInSecForIosWeb: 1,
+                  //       backgroundColor: KDarkPink_twg,
+                  //       textColor: Kwhite,
+                  //       fontSize: 16.0,
+                  //     );
+                  //   },
+                  //   child: Container(
+                  //     margin: EdgeInsets.only(top: 10),
+                  //     height: 43,
+                  //     width: 110.w,
+                  //     alignment: Alignment.center,
+                  //     decoration: BoxDecoration(
+                  //       color: Kform_border_twg,
+                  //       borderRadius: BorderRadius.all(Radius.circular(5)),
+                  //     ),
+                  //     child: Row(
+                  //       mainAxisAlignment: MainAxisAlignment.center,
+                  //       children: [
+                  //         Image.asset(
+                  //           "assets/images/Vector.png",
+                  //           // height: 3.h,
+                  //           // width: 80.w,
+                  //         ),
+                  //         SizedBox(
+                  //           width: 12.w,
+                  //         ),
+                  //         Text(
+                  //           "Save",
+                  //           textAlign: TextAlign.center,
+                  //           style: GoogleFonts.poppins(
+                  //               fontWeight: kFW600,
+                  //               color: Kwhite,
+                  //               fontSize: kFourteenFont.sp),
+                  //         ),
+                  //       ],
+                  //     ),
+                  //   ),
+                  // ),
                 ],
               )),
           SizedBox(
@@ -593,43 +648,50 @@ class _YouTubeState extends State<YouTube> {
                   SizedBox(
                     height: 15.h,
                   ),
-                  Container(
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8),
-                      color: Kwhite,
-                    ),
-                    child: DropDownMultiSelect(
-                      decoration: InputDecoration(
-                        contentPadding:
-                            EdgeInsets.symmetric(vertical: 16, horizontal: 8),
-                        fillColor: Kwhite,
-                        focusColor: Theme.of(context).colorScheme.onPrimary,
-                        enabledBorder: const OutlineInputBorder(
+                  Obx(() {
+                    return Container(
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8),
+                        color: Colors.white,
+                      ),
+                      child: DropDownMultiSelect(
+                        decoration: InputDecoration(
+                          contentPadding: const EdgeInsets.symmetric(
+                              vertical: 16, horizontal: 8),
+                          enabledBorder: const OutlineInputBorder(
                             borderRadius: BorderRadius.all(Radius.circular(8)),
                             borderSide:
-                                BorderSide(color: KText_border_twg, width: 1)),
-                        focusedBorder: const OutlineInputBorder(
+                                BorderSide(color: Colors.grey, width: 1),
+                          ),
+                          focusedBorder: const OutlineInputBorder(
                             borderRadius: BorderRadius.all(Radius.circular(8)),
-                            borderSide: BorderSide(
-                              color: Kform_border_twg,
-                              width: 1,
-                            )),
+                            borderSide:
+                                BorderSide(color: Colors.blue, width: 1),
+                          ),
+                        ),
+                        options: accountscontroller.selectedyoutubeValues
+                            .map((e) => e.toString())
+                            .toList(),
+                        selectedValues:
+                            accountscontroller.selectedyoutubeValuess.toList(),
+
+                        // onChanged: accountsController
+                        //     .ytuonSelectionChanged,
+                        onChanged: (selected) {
+                          accountscontroller.ytuonSelectionChanged(selected);
+
+                          // Check if selectedValues is empty and update semicontroller.isFbScheduled
+                        },
+                        whenEmpty: 'Select User',
                       ),
-                      options: variantsList,
-                      selectedValues: selectedCheckBoxValue,
-                      onChanged: (List<String> value) {
-                        //   value = selectedCheckBoxValue;
-                        print("${selectedCheckBoxValue}");
-                      },
-                      whenEmpty: 'Select User',
-                    ),
-                  ),
+                    );
+                  }),
                   SizedBox(
                     height: 10.h,
                   ),
                   Text(
-                    "Select each of the users that you want to automatically post to Youtube when a new post is published.",
+                    "Select each of the users that you want to automatically post to Facebook when a new post is published and enter  ' , ' to select.",
                     style: GoogleFonts.poppins(
                         fontSize: kTenFont, color: kblack, fontWeight: kFW400),
                   ),
@@ -651,32 +713,140 @@ class _YouTubeState extends State<YouTube> {
                           fontSize: kSixteenFont,
                           fontWeight: kFW600,
                           isLoading: false,
-                          onTap: () {}),
-                      Container(
-                        height: 45,
-                        alignment: Alignment.center,
-                        width: 140,
-                        margin: EdgeInsets.only(right: 10),
-                        padding: EdgeInsets.all(8),
-                        decoration: BoxDecoration(
-                          border: Border.all(color: Klight_grey_twg, width: 1),
-                          color: KPale_white_twg,
-                          borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(5),
-                              topRight: Radius.circular(5),
-                              bottomLeft: Radius.circular(5),
-                              bottomRight: Radius.circular(5)),
-                        ),
-                        child: Text(
-                          "Select None",
-                          style: GoogleFonts.poppins(
-                              color: kblack,
-                              fontSize: kSixteenFont,
-                              fontWeight: kFW600),
+                          onTap: () {
+                            accountscontroller.ytuselectAllDynamic();
+                            setState(() {
+                              semicontroller.isyouScheduled.value = true;
+                            });
+                          }
+
+                          // accountsController
+                          //     .ytuselectAllDynamic();
+                          ),
+                      InkWell(
+                        onTap: () {
+                          accountscontroller.ytuclearAllDynamic();
+                          setState(() {
+                            semicontroller.isyouScheduled.value = false;
+                          });
+                        },
+
+                        // onTap: () {
+                        //   accountsController.ytuclearAllDynamic();
+                        //   setState(() {});
+                        // },
+                        child: Container(
+                          height: 45,
+                          alignment: Alignment.center,
+                          width: 140,
+                          margin: EdgeInsets.only(right: 10),
+                          padding: EdgeInsets.all(8),
+                          decoration: BoxDecoration(
+                            border:
+                                Border.all(color: Klight_grey_twg, width: 1),
+                            color: KPale_white_twg,
+                            borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(5),
+                                topRight: Radius.circular(5),
+                                bottomLeft: Radius.circular(5),
+                                bottomRight: Radius.circular(5)),
+                          ),
+                          child: Text(
+                            "Select None",
+                            style: GoogleFonts.poppins(
+                                color: kblack,
+                                fontSize: kSixteenFont,
+                                fontWeight: kFW600),
+                          ),
                         ),
                       ),
                     ],
                   ),
+                  // Container(
+                  //   width: double.infinity,
+                  //   decoration: BoxDecoration(
+                  //     borderRadius: BorderRadius.circular(8),
+                  //     color: Kwhite,
+                  //   ),
+                  //   child: DropDownMultiSelect(
+                  //     decoration: InputDecoration(
+                  //       contentPadding:
+                  //           EdgeInsets.symmetric(vertical: 16, horizontal: 8),
+                  //       fillColor: Kwhite,
+                  //       focusColor: Theme.of(context).colorScheme.onPrimary,
+                  //       enabledBorder: const OutlineInputBorder(
+                  //           borderRadius: BorderRadius.all(Radius.circular(8)),
+                  //           borderSide:
+                  //               BorderSide(color: KText_border_twg, width: 1)),
+                  //       focusedBorder: const OutlineInputBorder(
+                  //           borderRadius: BorderRadius.all(Radius.circular(8)),
+                  //           borderSide: BorderSide(
+                  //             color: Kform_border_twg,
+                  //             width: 1,
+                  //           )),
+                  //     ),
+                  //     options: variantsList,
+                  //     selectedValues: selectedCheckBoxValue,
+                  //     onChanged: (List<String> value) {
+                  //       //   value = selectedCheckBoxValue;
+                  //       print("${selectedCheckBoxValue}");
+                  //     },
+                  //     whenEmpty: 'Select User',
+                  //   ),
+                  // ),
+                  // SizedBox(
+                  //   height: 10.h,
+                  // ),
+                  // Text(
+                  //   "Select each of the users that you want to automatically post to Youtube when a new post is published.",
+                  //   style: GoogleFonts.poppins(
+                  //       fontSize: kTenFont, color: kblack, fontWeight: kFW400),
+                  // ),
+                  // SizedBox(
+                  //   height: 10.h,
+                  // ),
+                  // Row(
+                  //   mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  //   crossAxisAlignment: CrossAxisAlignment.center,
+                  //   children: [
+                  //     CustomButton(
+                  //         // margin: EdgeInsets.only(top: 36.h),
+                  //         borderRadius: BorderRadius.circular(5.r),
+                  //         Color: Kform_border_twg,
+                  //         textColor: Kwhite,
+                  //         height: 45,
+                  //         width: 105.w,
+                  //         label: "Select All",
+                  //         fontSize: kSixteenFont,
+                  //         fontWeight: kFW600,
+                  //         isLoading: false,
+                  //         onTap: () {}),
+                  //     Container(
+                  //       height: 45,
+                  //       alignment: Alignment.center,
+                  //       width: 140,
+                  //       margin: EdgeInsets.only(right: 10),
+                  //       padding: EdgeInsets.all(8),
+                  //       decoration: BoxDecoration(
+                  //         border: Border.all(color: Klight_grey_twg, width: 1),
+                  //         color: KPale_white_twg,
+                  //         borderRadius: BorderRadius.only(
+                  //             topLeft: Radius.circular(5),
+                  //             topRight: Radius.circular(5),
+                  //             bottomLeft: Radius.circular(5),
+                  //             bottomRight: Radius.circular(5)),
+                  //       ),
+                  //       child: Text(
+                  //         "Select None",
+                  //         style: GoogleFonts.poppins(
+                  //             color: kblack,
+                  //             fontSize: kSixteenFont,
+                  //             fontWeight: kFW600),
+                  //       ),
+                  //     ),
+                  //   ],
+                  // ),
+
                   SizedBox(
                     height: 20.h,
                   ),
@@ -1089,7 +1259,10 @@ class _YouTubeState extends State<YouTube> {
                       : InkWell(
                           onTap: () {
                             Map<String, dynamic> payload = {};
-
+                            String postsUsers = accountscontroller
+                                .selectedyoutubeValuess
+                                .toList()
+                                .join("|");
                             // Loop through the dynamically added fields
                             for (int i = 0; i < _twitterFields.length; i++) {
                               var fieldSet = _twitterFields[i];
@@ -1126,6 +1299,15 @@ class _YouTubeState extends State<YouTube> {
                                   "${dashboardcontroller.younetworkCount.value}",
                               "created_youtube_count": "1",
                               "sap_youtube_submit": "",
+                              'sap_youtube_options[yt_type_post_user]':
+                                  postsUsers,
+                              'sap_youtube_options[enable_youtube]':
+                                  accountscontroller
+                                      .isYoutenabledFromBackend.value,
+
+                              ///
+                              //    --form 'sap_youtube_options[yt_type_post_user]="XJ4s7n1gsvScADjlh8W6eav9eeazZ1RqaJ8sb2VX3oDUiJXyNB|bharatsports"' \    --form 'sap_youtube_options[enable_youtube]=""' \
+                              /////
                               "user_id": userprofilecontroller
                                   .profileData["user_details"]["id"],
                             });

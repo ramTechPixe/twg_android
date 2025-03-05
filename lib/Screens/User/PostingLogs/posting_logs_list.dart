@@ -25,7 +25,8 @@ class _PostingLogsListState extends State<PostingLogsList> {
   @override
   void initState() {
     super.initState();
-    logsPostcontroller.userLogsPost();
+    logsPostcontroller.userLogsPost2();
+    // logsPostcontroller.userLogsPost();
   }
 
   String? selectedVariant;
@@ -60,7 +61,7 @@ class _PostingLogsListState extends State<PostingLogsList> {
     // dashboardcontroller.userPlanExpiryAPI();
     // dashboardcontroller.userQuickPostAPI();
     // dashboardcontroller.dashboardTotalSocialPostAPI();
-    logsPostcontroller.userLogsPost();
+    logsPostcontroller.userLogsPost2();
     setState(() {
       logsPostcontroller.filteredSocialCategory.value = "";
     });
@@ -206,12 +207,17 @@ class _PostingLogsListState extends State<PostingLogsList> {
                         ////////////////////////////////////
                         onChanged: (value) {
                           setState(() {
+                            // logsPostcontroller.logsList[index]["social_source"]
+                            //                                                   [
+                            //                                                   "message"]
+                            ////////////////////////////////////////////////////////////////////////////////////
                             //                                   apiController.assetsData = apiController.OriginalassetsData;
                             // apiController.assetsData = apiController.assetsDatafilter;
                             logsPostcontroller.logsList.value =
                                 logsPostcontroller.filterLogsList
                                     .where((element) =>
-                                        element["newMessage"]
+                                        element["social_source"]["message"]
+                                            // element["newMessage"]
                                             .toString()
                                             .toLowerCase()
                                             .contains(
@@ -236,7 +242,7 @@ class _PostingLogsListState extends State<PostingLogsList> {
                               textColor: Kwhite,
                               fontSize: 16.0,
                             );
-                            logsPostcontroller.userLogsPost();
+                            logsPostcontroller.userLogsPost2();
                             // setState(() {
                             //   multiPostcontroller.userMultiPost();
                             // });
@@ -264,6 +270,7 @@ class _PostingLogsListState extends State<PostingLogsList> {
                               child: SingleChildScrollView(
                                 child: Column(
                                   children: [
+                                    /////////////////////////
                                     // CustomFormFields(
                                     //   ontap: () {},
                                     //   enabled: true,
@@ -387,7 +394,7 @@ class _PostingLogsListState extends State<PostingLogsList> {
                                     //     return null;
                                     //   },
                                     // ),
-
+///////////////////////////////////////////////////////////
                                     Container(
                                       child: Row(
                                         mainAxisAlignment:
@@ -454,29 +461,6 @@ class _PostingLogsListState extends State<PostingLogsList> {
                                               : SizedBox()
                                         ],
                                       ),
-                                      // Row(
-                                      //   mainAxisAlignment: MainAxisAlignment.end,
-                                      //   children: [
-                                      //     Checkbox(
-                                      //       activeColor: Kblue_twg,
-                                      //       checkColor: Kwhite,
-                                      //       value: value,
-                                      //       onChanged: (value) {
-                                      //         setState(() {
-                                      //           this.value = value!;
-                                      //         });
-                                      //         print(value);
-                                      //       },
-                                      //     ),
-                                      //     Text(
-                                      //       "Select All",
-                                      //       style: GoogleFonts.poppins(
-                                      //           color: kblack,
-                                      //           fontSize: kSixteenFont,
-                                      //           fontWeight: kFW400),
-                                      //     ),
-                                      //   ],
-                                      // ),
                                     ),
                                     const SizedBox(
                                       height: 15,
@@ -506,29 +490,375 @@ class _PostingLogsListState extends State<PostingLogsList> {
                                                 itemCount: logsPostcontroller
                                                     .logsList.length,
                                                 itemBuilder: (context, index) {
-                                                  String imageUrl =
-                                                      logsPostcontroller.logsList[
-                                                                      index][
-                                                                  "social_source"]
-                                                              ["image"] ??
-                                                          "";
-                                                  String newUrl =
-                                                      imageUrl.contains(baseUrl)
-                                                          ? imageUrl.substring(
-                                                              baseUrl.length)
-                                                          : "URL not found";
-                                                  var post = logsPostcontroller
-                                                      .logsList[index];
-                                                  String postId = post["id"];
-                                                  return
-                                                      //
+                                                  // String newUrl =
+                                                  //     "URL not found";
+                                                  // var post = {};
+                                                  // String postId = "";
+                                                  // if (logsPostcontroller
+                                                  //             .logsList[index]
+                                                  //         ["social_source"] !=
+                                                  //     []) {
+                                                  //   String imageUrl =
+                                                  //       logsPostcontroller.logsList[
+                                                  //                       index][
+                                                  //                   "social_source"]
+                                                  //               ["image"] ??
+                                                  //           "";
+                                                  //   newUrl = imageUrl
+                                                  //           .contains(baseUrl)
+                                                  //       ? imageUrl.substring(
+                                                  //           baseUrl.length)
+                                                  //       : "URL not found";
+                                                  //   post = logsPostcontroller
+                                                  //       .logsList[index];
+                                                  //   postId = post["id"];
+                                                  // }
+                                                  String postId =
                                                       logsPostcontroller
+                                                              .logsList[index]
+                                                          ["id"];
+                                                  return logsPostcontroller
+                                                                  .filteredSocialCategory !=
+                                                              "" &&
+                                                          logsPostcontroller
+                                                                  .filteredSocialCategory ==
+                                                              "All"
+                                                      ? InkWell(
+                                                          onTap: () {
+                                                            setState(() {
+                                                              logsPostcontroller
+                                                                  .selectedlogId
+                                                                  .value = logsPostcontroller
+                                                                      .logsList[
+                                                                  index]["id"];
+                                                              // logsPostcontroller.logsList[index]["id"];
+                                                              // semicontroller
+                                                              //         .selectedSchedulePostID.value =
+                                                              //     semicontroller.scheduledList[index]
+                                                              //         ["id"];
+                                                            });
+
+                                                            Get.toNamed(
+                                                                kPostingLogView);
+                                                          },
+                                                          child:
+                                                              // Column(
+                                                              //   children: [
+                                                              Container(
+                                                            margin:
+                                                                EdgeInsets.only(
+                                                                    bottom:
+                                                                        13.h,
+                                                                    left: 2.w,
+                                                                    right: 2.w),
+                                                            padding:
+                                                                const EdgeInsets
+                                                                    .all(10),
+                                                            decoration:
+                                                                BoxDecoration(
+                                                              boxShadow: [
+                                                                BoxShadow(
+                                                                  color: kblack
+                                                                      .withOpacity(
+                                                                          0.1),
+                                                                  blurRadius:
+                                                                      2.r,
+                                                                  offset:
+                                                                      const Offset(
+                                                                          0, 1),
+                                                                  spreadRadius:
+                                                                      2.r,
+                                                                )
+                                                              ],
+                                                              color: Kwhite,
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          8.r),
+                                                            ),
+                                                            child: Column(
+                                                              children: [
+                                                                // logsPostcontroller.logsList[index]
+                                                                //                     [
+                                                                //                     "social_source"]
+                                                                //                 [
+                                                                //                 "image"] ==
+                                                                //             null ||
+                                                                Stack(
+                                                                    children: [
+                                                                      logsPostcontroller
+                                                                              .logsList[index]["social_source"]
+                                                                              .isEmpty
+                                                                          ? Image.asset(
+                                                                              "assets/images/bharath_sports.png",
+                                                                              height: 200.h,
+                                                                              width: double.infinity,
+                                                                              fit: BoxFit.cover,
+                                                                              // width: 25.h,
+                                                                            )
+                                                                          : logsPostcontroller.logsList[index]["social_source"]["image"] == null
+                                                                              ? Image.asset(
+                                                                                  "assets/images/bharath_sports.png",
+                                                                                  height: 200.h,
+                                                                                  width: double.infinity,
+                                                                                  fit: BoxFit.cover,
+                                                                                  // width: 25.h,
+                                                                                )
+                                                                              : ClipRRect(
+                                                                                  borderRadius: BorderRadius.circular(8.r),
+                                                                                  child: CachedNetworkImage(
+                                                                                    imageUrl:
+                                                                                        // "https://thewisguystech.com" +
+                                                                                        logsPostcontroller.logsList[index]["social_source"]["image"],
+                                                                                    // logsPostcontroller
+                                                                                    //             .logsList[index]
+                                                                                    //         ["social_source"]
+                                                                                    //     ["image"],
+                                                                                    placeholder: (context, url) => SizedBox(
+                                                                                      height: 200.h,
+                                                                                      width: double.infinity,
+                                                                                      child: Shimmer.fromColors(
+                                                                                        baseColor: Colors.black12,
+                                                                                        highlightColor: Colors.white.withOpacity(0.5),
+                                                                                        child: Container(
+                                                                                          decoration: BoxDecoration(
+                                                                                            color: Kwhite.withOpacity(0.5),
+                                                                                          ),
+                                                                                          height: 200.h,
+                                                                                          width: double.infinity,
+                                                                                        ),
+                                                                                      ),
+                                                                                    ),
+                                                                                    errorWidget: (context, url, error) => Image.asset(
+                                                                                      // kBaseImageUrl
+                                                                                      "assets/images/bharath_sports.png",
+                                                                                      height: 200.h,
+                                                                                      width: double.infinity,
+                                                                                      fit: BoxFit.cover,
+                                                                                      // width: 25.h,
+                                                                                    ),
+                                                                                    height: 200.h,
+                                                                                    width: double.infinity,
+                                                                                    fit: BoxFit.cover,
+                                                                                  ),
+                                                                                ),
+                                                                      Positioned(
+                                                                        bottom:
+                                                                            3.h,
+                                                                        right:
+                                                                            3.w,
+                                                                        child: isSelectAll
+                                                                            ? Checkbox(
+                                                                                value: selectedPostIds.contains(postId),
+                                                                                activeColor: Kblue_twg,
+                                                                                checkColor: Kwhite,
+                                                                                onChanged: (value) {
+                                                                                  setState(() {
+                                                                                    if (value == true) {
+                                                                                      selectedPostIds.add(postId);
+                                                                                    } else {
+                                                                                      selectedPostIds.remove(postId);
+                                                                                    }
+                                                                                  });
+                                                                                },
+                                                                              )
+                                                                            : SizedBox(),
+                                                                        // Checkbox(
+                                                                        //   activeColor: Kblue_twg,
+                                                                        //   checkColor: Kwhite,
+                                                                        //   value: value,
+                                                                        //   onChanged: (value) {
+                                                                        //     setState(() {
+                                                                        //       this.value = value!;
+                                                                        //     });
+                                                                        //     // print(value);
+                                                                        //   },
+                                                                        // ),
+                                                                      ),
+                                                                    ]),
+
+                                                                SizedBox(
+                                                                  height: 10.h,
+                                                                ),
+                                                                Row(
+                                                                  mainAxisAlignment:
+                                                                      MainAxisAlignment
+                                                                          .spaceBetween,
+                                                                  children: [
+                                                                    SizedBox(
+                                                                      width: MediaQuery.of(context)
+                                                                              .size
+                                                                              .width /
+                                                                          2,
+                                                                      child:
+                                                                          Text(
+                                                                        logsPostcontroller.logsList[index]["social_source"].isEmpty
+                                                                            ? "No Message"
+                                                                            : logsPostcontroller.logsList[index]["social_source"]["message"] ??
+                                                                                //  ["social_type"] ??
+                                                                                "No Message",
+                                                                        // logsPostcontroller.logsList[
+                                                                        //                 index]
+                                                                        //             ["social_source"]
+                                                                        //         ["message"] ??
+                                                                        //     "no message",
+                                                                        // logsPostcontroller.logsList[index]
+                                                                        //     ["posting_type"],
+                                                                        //  "Discover how social media automation can transform your....",
+                                                                        maxLines:
+                                                                            1,
+                                                                        overflow:
+                                                                            TextOverflow.ellipsis,
+                                                                        style: GoogleFonts.poppins(
+                                                                            color:
+                                                                                kblack,
+                                                                            fontSize:
+                                                                                kSixteenFont,
+                                                                            fontWeight:
+                                                                                kFW500),
+                                                                      ),
+                                                                    ),
+                                                                    SizedBox(
+                                                                        height:
+                                                                            8.h),
+                                                                    InkWell(
+                                                                      onTap:
+                                                                          () async {
+                                                                        await showDialog(
+                                                                          context:
+                                                                              context,
+                                                                          builder: (context) =>
+                                                                              AlertDialog(
+                                                                            title:
+                                                                                Text(
+                                                                              'Are you sure?',
+                                                                              style: GoogleFonts.roboto(fontSize: 18, fontWeight: FontWeight.w600, color: Colors.black),
+                                                                            ),
+                                                                            content:
+                                                                                Text(
+                                                                              'Do you want to delete post',
+                                                                              style: GoogleFonts.roboto(fontSize: 13, fontWeight: FontWeight.w600, color: Colors.black),
+                                                                            ),
+                                                                            actions: <Widget>[
+                                                                              TextButton(
+                                                                                onPressed: () => Navigator.of(context).pop(false),
+                                                                                child: Text(
+                                                                                  'No',
+                                                                                  style: GoogleFonts.roboto(fontSize: 12, fontWeight: FontWeight.w600, color: Colors.black),
+                                                                                ),
+                                                                              ),
+                                                                              TextButton(
+                                                                                onPressed: () {
+                                                                                  setState(() {
+                                                                                    logsPostcontroller.toDeletePostID.value = logsPostcontroller.logsList[index]["id"];
+                                                                                    //logsPostcontroller.logsList[index]["id"];
+                                                                                  });
+                                                                                  logsPostcontroller.logPostDelete();
+                                                                                  Get.back();
+                                                                                },
+                                                                                // onPressed: () =>
+                                                                                //     SystemNavigator
+                                                                                //         .pop(),
+                                                                                child: Text(
+                                                                                  'Yes',
+                                                                                  style: GoogleFonts.roboto(fontSize: 12, fontWeight: FontWeight.w600, color: Kblue_twg),
+                                                                                ),
+                                                                              ),
+                                                                            ],
+                                                                          ),
+                                                                        );
+                                                                      },
+                                                                      child: Image
+                                                                          .asset(
+                                                                        "assets/images/deleted_image.png",
+                                                                        height:
+                                                                            25.h,
+                                                                        width:
+                                                                            25.h,
+                                                                      ),
+                                                                    )
+                                                                  ],
+                                                                ),
+                                                                SizedBox(
+                                                                    height:
+                                                                        8.h),
+                                                                Row(
+                                                                  mainAxisAlignment:
+                                                                      MainAxisAlignment
+                                                                          .spaceBetween,
+                                                                  children: [
+                                                                    Text(
+                                                                      logsPostcontroller.logsList[index]
+                                                                              [
+                                                                              "social_type"] ??
+                                                                          //   ??
+                                                                          "NA",
+                                                                      // logsPostcontroller
+                                                                      //             .logsList[index]
+                                                                      //         [
+                                                                      //         "posting_type"] ??
+                                                                      //     "     ",
+                                                                      // logsPostcontroller
+                                                                      //                 .logsList[index]
+                                                                      //             ["social_source"]
+                                                                      //         ["display_name"] ??
+                                                                      //     "no name",
+
+                                                                      // "Instagram",
+                                                                      style: GoogleFonts.poppins(
+                                                                          color:
+                                                                              Kblue_twg,
+                                                                          fontSize:
+                                                                              kFourteenFont,
+                                                                          fontWeight:
+                                                                              kFW400),
+                                                                    ),
+                                                                    Text(
+                                                                      logsPostcontroller
+                                                                              .logsList[index]
+                                                                          [
+                                                                          "created"],
+                                                                      // logsPostcontroller.logsList[index]
+                                                                      //             [
+                                                                      //             "created"] ==
+                                                                      //         null
+                                                                      //     ? "No Date"
+                                                                      //     : DateFormat(
+                                                                      //             'MMM d, yyyy hh:mm a')
+                                                                      //         .format(
+                                                                      //         DateTime
+                                                                      //             .parse(
+                                                                      //           logsPostcontroller.logsList[index]
+                                                                      //               [
+                                                                      //               "created"],
+                                                                      //         ),
+                                                                      //       ),
+                                                                      style: GoogleFonts.poppins(
+                                                                          color:
+                                                                              kblack,
+                                                                          fontSize:
+                                                                              kTenFont,
+                                                                          fontWeight:
+                                                                              kFW400),
+                                                                    ),
+                                                                  ],
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          ),
+                                                        )
+                                                      : logsPostcontroller
                                                                       .filteredSocialCategory !=
                                                                   "" &&
                                                               logsPostcontroller
-                                                                      .filteredSocialCategory ==
-                                                                  "All"
-                                                          ? InkWell(
+                                                                      .filteredSocialCategory !=
+                                                                  logsPostcontroller
+                                                                              .logsList[
+                                                                          index]
+                                                                      [
+                                                                      "social_type"]
+                                                          ? SizedBox()
+                                                          : InkWell(
                                                               onTap: () {
                                                                 setState(() {
                                                                   logsPostcontroller
@@ -587,103 +917,103 @@ class _PostingLogsListState extends State<PostingLogsList> {
                                                                 ),
                                                                 child: Column(
                                                                   children: [
+                                                                    // logsPostcontroller.logsList[index]
+                                                                    //                     [
+                                                                    //                     "social_source"]
+                                                                    //                 [
+                                                                    //                 "image"] ==
+                                                                    //             null ||
                                                                     Stack(
-                                                                      children: [
-                                                                        logsPostcontroller.logsList[index]["social_source"]["image"] ==
-                                                                                null
-                                                                            ? Image.asset(
-                                                                                "assets/images/bharath_sports.png",
-                                                                                height: 200.h,
-                                                                                width: double.infinity,
-                                                                                fit: BoxFit.cover,
-                                                                                // width: 25.h,
-                                                                              )
-                                                                            : ClipRRect(
-                                                                                borderRadius: BorderRadius.circular(8.r),
-                                                                                child: CachedNetworkImage(
-                                                                                  imageUrl: "https://thewisguystech.com" + newUrl,
-                                                                                  // logsPostcontroller
-                                                                                  //             .logsList[index]
-                                                                                  //         ["social_source"]
-                                                                                  //     ["image"],
-                                                                                  placeholder: (context, url) => SizedBox(
-                                                                                    height: 200.h,
-                                                                                    width: double.infinity,
-                                                                                    child: Shimmer.fromColors(
-                                                                                      baseColor: Colors.black12,
-                                                                                      highlightColor: Colors.white.withOpacity(0.5),
-                                                                                      child: Container(
-                                                                                        decoration: BoxDecoration(
-                                                                                          color: Kwhite.withOpacity(0.5),
-                                                                                        ),
-                                                                                        height: 200.h,
-                                                                                        width: double.infinity,
-                                                                                      ),
-                                                                                    ),
-                                                                                  ),
-                                                                                  errorWidget: (context, url, error) => Image.asset(
-                                                                                    // kBaseImageUrl
-                                                                                    "assets/images/bharath_sports.png",
-                                                                                    height: 200.h,
-                                                                                    width: double.infinity,
-                                                                                    fit: BoxFit.cover,
-                                                                                    // width: 25.h,
-                                                                                  ),
+                                                                        children: [
+                                                                          logsPostcontroller.logsList[index]["social_source"].isEmpty
+                                                                              ? Image.asset(
+                                                                                  "assets/images/bharath_sports.png",
                                                                                   height: 200.h,
                                                                                   width: double.infinity,
                                                                                   fit: BoxFit.cover,
-                                                                                ),
-                                                                              ),
-                                                                        Positioned(
-                                                                          bottom:
-                                                                              3.h,
-                                                                          right:
-                                                                              3.w,
-                                                                          child: isSelectAll
-                                                                              ? Checkbox(
-                                                                                  value: selectedPostIds.contains(postId),
-                                                                                  activeColor: Kblue_twg,
-                                                                                  checkColor: Kwhite,
-                                                                                  onChanged: (value) {
-                                                                                    setState(() {
-                                                                                      if (value == true) {
-                                                                                        selectedPostIds.add(postId);
-                                                                                      } else {
-                                                                                        selectedPostIds.remove(postId);
-                                                                                      }
-                                                                                    });
-                                                                                  },
+                                                                                  // width: 25.h,
                                                                                 )
-                                                                              : SizedBox(),
-                                                                          // Checkbox(
-                                                                          //   activeColor: Kblue_twg,
-                                                                          //   checkColor: Kwhite,
-                                                                          //   value: value,
-                                                                          //   onChanged: (value) {
-                                                                          //     setState(() {
-                                                                          //       this.value = value!;
-                                                                          //     });
-                                                                          //     // print(value);
-                                                                          //   },
-                                                                          // ),
-                                                                        ),
-                                                                        // Positioned(
-                                                                        //   bottom: 3.h,
-                                                                        //   right: 3.w,
-                                                                        //   child: Checkbox(
-                                                                        //     activeColor: Kblue_twg,
-                                                                        //     checkColor: Kwhite,
-                                                                        //     value: value,
-                                                                        //     onChanged: (value) {
-                                                                        //       setState(() {
-                                                                        //         this.value = value!;
-                                                                        //       });
-                                                                        //       // print(value);
-                                                                        //     },
-                                                                        //   ),
-                                                                        // ),
-                                                                      ],
-                                                                    ),
+                                                                              : logsPostcontroller.logsList[index]["social_source"]["image"] == null
+                                                                                  ? Image.asset(
+                                                                                      "assets/images/bharath_sports.png",
+                                                                                      height: 200.h,
+                                                                                      width: double.infinity,
+                                                                                      fit: BoxFit.cover,
+                                                                                      // width: 25.h,
+                                                                                    )
+                                                                                  : ClipRRect(
+                                                                                      borderRadius: BorderRadius.circular(8.r),
+                                                                                      child: CachedNetworkImage(
+                                                                                        imageUrl:
+                                                                                            // "https://thewisguystech.com" +
+                                                                                            logsPostcontroller.logsList[index]["social_source"]["image"],
+                                                                                        // logsPostcontroller
+                                                                                        //             .logsList[index]
+                                                                                        //         ["social_source"]
+                                                                                        //     ["image"],
+                                                                                        placeholder: (context, url) => SizedBox(
+                                                                                          height: 200.h,
+                                                                                          width: double.infinity,
+                                                                                          child: Shimmer.fromColors(
+                                                                                            baseColor: Colors.black12,
+                                                                                            highlightColor: Colors.white.withOpacity(0.5),
+                                                                                            child: Container(
+                                                                                              decoration: BoxDecoration(
+                                                                                                color: Kwhite.withOpacity(0.5),
+                                                                                              ),
+                                                                                              height: 200.h,
+                                                                                              width: double.infinity,
+                                                                                            ),
+                                                                                          ),
+                                                                                        ),
+                                                                                        errorWidget: (context, url, error) => Image.asset(
+                                                                                          // kBaseImageUrl
+                                                                                          "assets/images/bharath_sports.png",
+                                                                                          height: 200.h,
+                                                                                          width: double.infinity,
+                                                                                          fit: BoxFit.cover,
+                                                                                          // width: 25.h,
+                                                                                        ),
+                                                                                        height: 200.h,
+                                                                                        width: double.infinity,
+                                                                                        fit: BoxFit.cover,
+                                                                                      ),
+                                                                                    ),
+                                                                          Positioned(
+                                                                            bottom:
+                                                                                3.h,
+                                                                            right:
+                                                                                3.w,
+                                                                            child: isSelectAll
+                                                                                ? Checkbox(
+                                                                                    value: selectedPostIds.contains(postId),
+                                                                                    activeColor: Kblue_twg,
+                                                                                    checkColor: Kwhite,
+                                                                                    onChanged: (value) {
+                                                                                      setState(() {
+                                                                                        if (value == true) {
+                                                                                          selectedPostIds.add(postId);
+                                                                                        } else {
+                                                                                          selectedPostIds.remove(postId);
+                                                                                        }
+                                                                                      });
+                                                                                    },
+                                                                                  )
+                                                                                : SizedBox(),
+                                                                            // Checkbox(
+                                                                            //   activeColor: Kblue_twg,
+                                                                            //   checkColor: Kwhite,
+                                                                            //   value: value,
+                                                                            //   onChanged: (value) {
+                                                                            //     setState(() {
+                                                                            //       this.value = value!;
+                                                                            //     });
+                                                                            //     // print(value);
+                                                                            //   },
+                                                                            // ),
+                                                                          ),
+                                                                        ]),
+
                                                                     SizedBox(
                                                                       height:
                                                                           10.h,
@@ -698,9 +1028,11 @@ class _PostingLogsListState extends State<PostingLogsList> {
                                                                               MediaQuery.of(context).size.width / 2,
                                                                           child:
                                                                               Text(
-                                                                            logsPostcontroller.logsList[index]["newMessage"] ??
-                                                                                //  ["social_type"] ??
-                                                                                "     ",
+                                                                            logsPostcontroller.logsList[index]["social_source"].isEmpty
+                                                                                ? "No Message"
+                                                                                : logsPostcontroller.logsList[index]["social_source"]["message"] ??
+                                                                                    //  ["social_type"] ??
+                                                                                    "No Message",
                                                                             // logsPostcontroller.logsList[
                                                                             //                 index]
                                                                             //             ["social_source"]
@@ -748,6 +1080,7 @@ class _PostingLogsListState extends State<PostingLogsList> {
                                                                                     onPressed: () {
                                                                                       setState(() {
                                                                                         logsPostcontroller.toDeletePostID.value = logsPostcontroller.logsList[index]["id"];
+                                                                                        //logsPostcontroller.logsList[index]["id"];
                                                                                       });
                                                                                       logsPostcontroller.logPostDelete();
                                                                                       Get.back();
@@ -784,8 +1117,14 @@ class _PostingLogsListState extends State<PostingLogsList> {
                                                                               .spaceBetween,
                                                                       children: [
                                                                         Text(
-                                                                          logsPostcontroller.logsList[index]["posting_type"] ??
-                                                                              "     ",
+                                                                          logsPostcontroller.logsList[index]["social_type"] ??
+                                                                              //   ??
+                                                                              "NA",
+                                                                          // logsPostcontroller
+                                                                          //             .logsList[index]
+                                                                          //         [
+                                                                          //         "posting_type"] ??
+                                                                          //     "     ",
                                                                           // logsPostcontroller
                                                                           //                 .logsList[index]
                                                                           //             ["social_source"]
@@ -799,13 +1138,24 @@ class _PostingLogsListState extends State<PostingLogsList> {
                                                                               fontWeight: kFW400),
                                                                         ),
                                                                         Text(
-                                                                          logsPostcontroller.logsList[index]["created"] == null
-                                                                              ? "No Date"
-                                                                              : DateFormat('MMM d, yyyy hh:mm a').format(
-                                                                                  DateTime.parse(
-                                                                                    logsPostcontroller.logsList[index]["created"],
-                                                                                  ),
-                                                                                ),
+                                                                          logsPostcontroller.logsList[index]
+                                                                              [
+                                                                              "created"],
+                                                                          // logsPostcontroller.logsList[index]
+                                                                          //             [
+                                                                          //             "created"] ==
+                                                                          //         null
+                                                                          //     ? "No Date"
+                                                                          //     : DateFormat(
+                                                                          //             'MMM d, yyyy hh:mm a')
+                                                                          //         .format(
+                                                                          //         DateTime
+                                                                          //             .parse(
+                                                                          //           logsPostcontroller.logsList[index]
+                                                                          //               [
+                                                                          //               "created"],
+                                                                          //         ),
+                                                                          //       ),
                                                                           style: GoogleFonts.poppins(
                                                                               color: kblack,
                                                                               fontSize: kTenFont,
@@ -816,281 +1166,7 @@ class _PostingLogsListState extends State<PostingLogsList> {
                                                                   ],
                                                                 ),
                                                               ),
-                                                            )
-                                                          : logsPostcontroller
-                                                                          .filteredSocialCategory !=
-                                                                      "" &&
-                                                                  logsPostcontroller
-                                                                          .filteredSocialCategory !=
-                                                                      logsPostcontroller
-                                                                              .logsList[index]
-                                                                          [
-                                                                          "social_type"]
-                                                              ? SizedBox()
-                                                              : InkWell(
-                                                                  onTap: () {
-                                                                    setState(
-                                                                        () {
-                                                                      logsPostcontroller
-                                                                          .selectedlogId
-                                                                          .value = logsPostcontroller
-                                                                              .logsList[index]
-                                                                          [
-                                                                          "id"];
-                                                                      // logsPostcontroller.logsList[index]["id"];
-                                                                      // semicontroller
-                                                                      //         .selectedSchedulePostID.value =
-                                                                      //     semicontroller.scheduledList[index]
-                                                                      //         ["id"];
-                                                                    });
-
-                                                                    Get.toNamed(
-                                                                        kPostingLogView);
-                                                                  },
-                                                                  child:
-                                                                      // Column(
-                                                                      //   children: [
-                                                                      Container(
-                                                                    margin: EdgeInsets.only(
-                                                                        bottom: 13
-                                                                            .h,
-                                                                        left:
-                                                                            2.w,
-                                                                        right: 2
-                                                                            .w),
-                                                                    padding:
-                                                                        const EdgeInsets
-                                                                            .all(
-                                                                            10),
-                                                                    decoration:
-                                                                        BoxDecoration(
-                                                                      boxShadow: [
-                                                                        BoxShadow(
-                                                                          color:
-                                                                              kblack.withOpacity(0.1),
-                                                                          blurRadius:
-                                                                              2.r,
-                                                                          offset: const Offset(
-                                                                              0,
-                                                                              1),
-                                                                          spreadRadius:
-                                                                              2.r,
-                                                                        )
-                                                                      ],
-                                                                      color:
-                                                                          Kwhite,
-                                                                      borderRadius:
-                                                                          BorderRadius.circular(
-                                                                              8.r),
-                                                                    ),
-                                                                    child:
-                                                                        Column(
-                                                                      children: [
-                                                                        Stack(
-                                                                          children: [
-                                                                            logsPostcontroller.logsList[index]["social_source"]["image"] == null
-                                                                                ? Image.asset(
-                                                                                    "assets/images/bharath_sports.png",
-                                                                                    height: 200.h,
-                                                                                    width: double.infinity,
-                                                                                    fit: BoxFit.cover,
-                                                                                    // width: 25.h,
-                                                                                  )
-                                                                                : ClipRRect(
-                                                                                    borderRadius: BorderRadius.circular(8.r),
-                                                                                    child: CachedNetworkImage(
-                                                                                      imageUrl: "https://thewisguystech.com" + newUrl,
-                                                                                      // logsPostcontroller
-                                                                                      //             .logsList[index]
-                                                                                      //         ["social_source"]
-                                                                                      //     ["image"],
-                                                                                      placeholder: (context, url) => SizedBox(
-                                                                                        height: 200.h,
-                                                                                        width: double.infinity,
-                                                                                        child: Shimmer.fromColors(
-                                                                                          baseColor: Colors.black12,
-                                                                                          highlightColor: Colors.white.withOpacity(0.5),
-                                                                                          child: Container(
-                                                                                            decoration: BoxDecoration(
-                                                                                              color: Kwhite.withOpacity(0.5),
-                                                                                            ),
-                                                                                            height: 200.h,
-                                                                                            width: double.infinity,
-                                                                                          ),
-                                                                                        ),
-                                                                                      ),
-                                                                                      errorWidget: (context, url, error) => Image.asset(
-                                                                                        // kBaseImageUrl
-                                                                                        "assets/images/bharath_sports.png",
-                                                                                        height: 200.h,
-                                                                                        width: double.infinity,
-                                                                                        fit: BoxFit.cover,
-                                                                                        // width: 25.h,
-                                                                                      ),
-                                                                                      height: 200.h,
-                                                                                      width: double.infinity,
-                                                                                      fit: BoxFit.cover,
-                                                                                    ),
-                                                                                  ),
-                                                                            Positioned(
-                                                                              bottom: 3.h,
-                                                                              right: 3.w,
-                                                                              child: isSelectAll
-                                                                                  ? Checkbox(
-                                                                                      value: selectedPostIds.contains(postId),
-                                                                                      activeColor: Kblue_twg,
-                                                                                      checkColor: Kwhite,
-                                                                                      onChanged: (value) {
-                                                                                        setState(() {
-                                                                                          if (value == true) {
-                                                                                            selectedPostIds.add(postId);
-                                                                                          } else {
-                                                                                            selectedPostIds.remove(postId);
-                                                                                          }
-                                                                                        });
-                                                                                      },
-                                                                                    )
-                                                                                  : SizedBox(),
-                                                                              // Checkbox(
-                                                                              //   activeColor: Kblue_twg,
-                                                                              //   checkColor: Kwhite,
-                                                                              //   value: value,
-                                                                              //   onChanged: (value) {
-                                                                              //     setState(() {
-                                                                              //       this.value = value!;
-                                                                              //     });
-                                                                              //     // print(value);
-                                                                              //   },
-                                                                              // ),
-                                                                            ),
-                                                                            // Positioned(
-                                                                            //   bottom: 3.h,
-                                                                            //   right: 3.w,
-                                                                            //   child: Checkbox(
-                                                                            //     activeColor: Kblue_twg,
-                                                                            //     checkColor: Kwhite,
-                                                                            //     value: value,
-                                                                            //     onChanged: (value) {
-                                                                            //       setState(() {
-                                                                            //         this.value = value!;
-                                                                            //       });
-                                                                            //       // print(value);
-                                                                            //     },
-                                                                            //   ),
-                                                                            // ),
-                                                                          ],
-                                                                        ),
-                                                                        SizedBox(
-                                                                          height:
-                                                                              10.h,
-                                                                        ),
-                                                                        Row(
-                                                                          mainAxisAlignment:
-                                                                              MainAxisAlignment.spaceBetween,
-                                                                          children: [
-                                                                            SizedBox(
-                                                                              width: MediaQuery.of(context).size.width / 2,
-                                                                              child: Text(
-                                                                                logsPostcontroller.logsList[index]["newMessage"] ??
-                                                                                    //  ["social_type"] ??
-                                                                                    "     ",
-                                                                                // logsPostcontroller.logsList[
-                                                                                //                 index]
-                                                                                //             ["social_source"]
-                                                                                //         ["message"] ??
-                                                                                //     "no message",
-                                                                                // logsPostcontroller.logsList[index]
-                                                                                //     ["posting_type"],
-                                                                                //  "Discover how social media automation can transform your....",
-                                                                                maxLines: 1,
-                                                                                overflow: TextOverflow.ellipsis,
-                                                                                style: GoogleFonts.poppins(color: kblack, fontSize: kSixteenFont, fontWeight: kFW500),
-                                                                              ),
-                                                                            ),
-                                                                            SizedBox(height: 8.h),
-                                                                            InkWell(
-                                                                              onTap: () async {
-                                                                                await showDialog(
-                                                                                  context: context,
-                                                                                  builder: (context) => AlertDialog(
-                                                                                    title: Text(
-                                                                                      'Are you sure?',
-                                                                                      style: GoogleFonts.roboto(fontSize: 18, fontWeight: FontWeight.w600, color: Colors.black),
-                                                                                    ),
-                                                                                    content: Text(
-                                                                                      'Do you want to delete post',
-                                                                                      style: GoogleFonts.roboto(fontSize: 13, fontWeight: FontWeight.w600, color: Colors.black),
-                                                                                    ),
-                                                                                    actions: <Widget>[
-                                                                                      TextButton(
-                                                                                        onPressed: () => Navigator.of(context).pop(false),
-                                                                                        child: Text(
-                                                                                          'No',
-                                                                                          style: GoogleFonts.roboto(fontSize: 12, fontWeight: FontWeight.w600, color: Colors.black),
-                                                                                        ),
-                                                                                      ),
-                                                                                      TextButton(
-                                                                                        onPressed: () {
-                                                                                          setState(() {
-                                                                                            logsPostcontroller.toDeletePostID.value = logsPostcontroller.logsList[index]["id"];
-                                                                                          });
-                                                                                          logsPostcontroller.logPostDelete();
-                                                                                          Get.back();
-                                                                                        },
-                                                                                        // onPressed: () =>
-                                                                                        //     SystemNavigator
-                                                                                        //         .pop(),
-                                                                                        child: Text(
-                                                                                          'Yes',
-                                                                                          style: GoogleFonts.roboto(fontSize: 12, fontWeight: FontWeight.w600, color: Kblue_twg),
-                                                                                        ),
-                                                                                      ),
-                                                                                    ],
-                                                                                  ),
-                                                                                );
-                                                                              },
-                                                                              child: Image.asset(
-                                                                                "assets/images/deleted_image.png",
-                                                                                height: 25.h,
-                                                                                width: 25.h,
-                                                                              ),
-                                                                            )
-                                                                          ],
-                                                                        ),
-                                                                        SizedBox(
-                                                                            height:
-                                                                                8.h),
-                                                                        Row(
-                                                                          mainAxisAlignment:
-                                                                              MainAxisAlignment.spaceBetween,
-                                                                          children: [
-                                                                            Text(
-                                                                              logsPostcontroller.logsList[index]["posting_type"] ?? "     ",
-                                                                              // logsPostcontroller
-                                                                              //                 .logsList[index]
-                                                                              //             ["social_source"]
-                                                                              //         ["display_name"] ??
-                                                                              //     "no name",
-
-                                                                              // "Instagram",
-                                                                              style: GoogleFonts.poppins(color: Kblue_twg, fontSize: kFourteenFont, fontWeight: kFW400),
-                                                                            ),
-                                                                            Text(
-                                                                              logsPostcontroller.logsList[index]["created"] == null
-                                                                                  ? "No Date"
-                                                                                  : DateFormat('MMM d, yyyy hh:mm a').format(
-                                                                                      DateTime.parse(
-                                                                                        logsPostcontroller.logsList[index]["created"],
-                                                                                      ),
-                                                                                    ),
-                                                                              style: GoogleFonts.poppins(color: kblack, fontSize: kTenFont, fontWeight: kFW400),
-                                                                            ),
-                                                                          ],
-                                                                        ),
-                                                                      ],
-                                                                    ),
-                                                                  ),
-                                                                );
+                                                            );
                                                 })
                                   ],
                                 ),

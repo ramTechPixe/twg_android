@@ -29,10 +29,6 @@ class MultPostingsController extends GetxController {
   Rx<File?> selectedImage = Rx<File?>(null);
 
   // Method to update the selected image
-  void updateSelectedImage(File? image) {
-    selectedImage.value = image;
-    print("object");
-  }
 
   // fb image
   Rx<File?> fbselectedImage = Rx<File?>(null);
@@ -40,6 +36,11 @@ class MultPostingsController extends GetxController {
   Rx<File?> tumbselectedImage = Rx<File?>(null);
   Rx<File?> pintselectedImage = Rx<File?>(null);
   Rx<File?> instaselectedImage = Rx<File?>(null);
+  void updateSelectedImage(File? image) {
+    selectedImage.value = image;
+    print("object");
+  }
+
   // Method to update the selected image
   void fbupdateSelectedImage(File? image) {
     fbselectedImage.value = image;
@@ -399,6 +400,14 @@ class MultPostingsController extends GetxController {
   var addposttumbTime = "".obs;
   var addposttwtTime = "".obs;
   var addpostytuTime = "".obs;
+  //
+  var addpostGlobalTime_changed = false.obs;
+  var addpostfbTime_changed = false.obs;
+  var addpostpintTime_changed = false.obs;
+  var addpostinstaTime_changed = false.obs;
+  var addposttumbTime_changed = false.obs;
+  var addposttwtTime_changed = false.obs;
+  var addpostytuTime_changed = false.obs;
   // Add multi post
   var addMultiPostLoading = false.obs;
   Future<void> addMultiPostSave(Map payload) async {
@@ -416,8 +425,10 @@ class MultPostingsController extends GetxController {
           sapTumbPostImg: tumbselectedImage.value,
           img: selectedImage.value,
           linkedFacebookPostImg: twtselectedImage.value,
-          tumbList: accountscontroller.selectedTumblerValues,
-          pintList: accountscontroller.selectedPinterestValues,
+          tumbList: accountscontroller.selectedTumblerValuesqa,
+          pintList: accountscontroller.selectedPinterestValuesqa,
+          // tumbList: accountscontroller.selectedTumblerValues,
+          // pintList: accountscontroller.selectedPinterestValues,
           instaList: accountscontroller.instpintselectedTumblerNames,
           sapinstaPostImg: instaselectedImage.value,
           sappintPostImg: pintselectedImage.value);
@@ -425,6 +436,30 @@ class MultPostingsController extends GetxController {
       Map data = response;
       print(data);
       if (data["status"] == "success") {
+        /// del data
+        accountscontroller.selectedValues.clear();
+        accountscontroller.twtnewTwitters.clear();
+        // image: dashboardcontroller.selectedImageobss.value,
+        // selectedImage(null);
+        // video: selectedVideos.valu
+        updateSelectedImage(null);
+        fbupdateSelectedImage(null);
+        twtupdateSelectedImage(null);
+        tumbupdateSelectedImage(null);
+        pintupdateSelectedImage(null);
+        instaupdateSelectedImage(null);
+
+        accountscontroller.selectedTumblerValuesqa.clear();
+        accountscontroller.selectedPinterestValuesqa.clear();
+        accountscontroller.instpintselectedTumblerNames.clear();
+        accountscontroller.selectedyoutubeValuess.clear();
+
+        // void instaupdateSelectedImage(File? image) {
+        //   instaselectedImage.value = image;
+        //   print("object");
+        // }
+
+        /// //
         Fluttertoast.showToast(
           msg: data["message"],
           toastLength: Toast.LENGTH_SHORT,
@@ -892,6 +927,8 @@ class MultPostingsController extends GetxController {
           DateTime.fromMillisecondsSinceEpoch(timestampInSeconds * 1000);
 
       formattedDate.value = DateFormat('dd/MM/yyyy hh:mm a').format(dateTime);
+      addpostfbTime.value = DateFormat('dd/MM/yyyy hh:mm a').format(dateTime);
+      print("object");
     } catch (e) {
       formattedDate.value = 'Invalid timestamp';
     }
@@ -970,6 +1007,8 @@ class MultPostingsController extends GetxController {
           DateTime.fromMillisecondsSinceEpoch(timestampInSeconds * 1000);
 
       formattedDateglobal.value =
+          DateFormat('dd/MM/yyyy hh:mm a').format(dateTime);
+      addpostGlobalTime.value =
           DateFormat('dd/MM/yyyy hh:mm a').format(dateTime);
     } catch (e) {
       formattedDateglobal.value = 'Invalid timestamp';
@@ -1372,8 +1411,9 @@ class MultPostingsController extends GetxController {
 
       formattedDatetumb.value =
           DateFormat('dd/MM/yyyy hh:mm a').format(dateTime);
+      addposttumbTime.value = DateFormat('dd/MM/yyyy hh:mm a').format(dateTime);
     } catch (e) {
-      formattedDate.value = 'Invalid timestamp';
+      formattedDatetumb.value = 'Invalid timestamp';
     }
   }
   //tumb end
@@ -1637,6 +1677,199 @@ class MultPostingsController extends GetxController {
     }
   }
 
+  var fbLinkmessage = "".obs;
+  // links missed
+  Future<void> getPostMetafbLinks(Map payloadst) async {
+    getMetadataLoading(true);
+//  'post_id': '146',
+//   'meta_key': '_sap_fb_post_type'
+    // var payload = {
+    //   'post_id': '146',
+    //   'meta_key': '_sap_fb_post_type',
+    // };
+    try {
+      var response = await apiService.postRequestMetaFacebookpostType(
+          endpoint: "posts/get-post-meta-api/", payload: payloadst);
+
+      Map data = jsonDecode(response);
+      print(data);
+      if (data["status"] == "success") {
+        // fbLinkmessage
+        fbCustomLink.text = data["meta_data"];
+        // accountscontroller.selectedValues.value = data["meta_data"];
+        // sapPostType.value = data["meta_data"];
+
+        // Fluttertoast.showToast(
+        //   msg: data["message"],
+        // );
+
+        print("object");
+      } else if (data["message"] == "Invalid session token") {
+        Fluttertoast.showToast(
+          msg: data["message"],
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: KDarkPink_twg,
+          textColor: Kwhite,
+          fontSize: 16.0,
+        );
+        Get.toNamed(kSignIns);
+      } else {
+        Fluttertoast.showToast(
+          msg: data["message"],
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: KDarkPink_twg,
+          textColor: Kwhite,
+          fontSize: 16.0,
+        );
+      }
+    } catch (e) {
+      Fluttertoast.showToast(
+        msg: "Something went wrong",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: KDarkPink_twg,
+        textColor: Kwhite,
+        fontSize: 16.0,
+      );
+    } finally {
+      getMetadataLoading(false);
+    }
+  }
+
+  //tumb link
+  Future<void> getPostMetatumbLinks(Map payloadst) async {
+    getMetadataLoading(true);
+//  'post_id': '146',
+//   'meta_key': '_sap_fb_post_type'
+    // var payload = {
+    //   'post_id': '146',
+    //   'meta_key': '_sap_fb_post_type',
+    // };
+    try {
+      var response = await apiService.postRequestMetaFacebookpostType(
+          endpoint: "posts/get-post-meta-api/", payload: payloadst);
+
+      Map data = jsonDecode(response);
+      print(data);
+      if (data["status"] == "success") {
+        // fbLinkmessage
+
+        tumblink.text = data["meta_data"];
+        // accountscontroller.selectedValues.value = data["meta_data"];
+        // sapPostType.value = data["meta_data"];
+
+        // Fluttertoast.showToast(
+        //   msg: data["message"],
+        // );
+
+        print("object");
+      } else if (data["message"] == "Invalid session token") {
+        Fluttertoast.showToast(
+          msg: data["message"],
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: KDarkPink_twg,
+          textColor: Kwhite,
+          fontSize: 16.0,
+        );
+        Get.toNamed(kSignIns);
+      } else {
+        Fluttertoast.showToast(
+          msg: data["message"],
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: KDarkPink_twg,
+          textColor: Kwhite,
+          fontSize: 16.0,
+        );
+      }
+    } catch (e) {
+      Fluttertoast.showToast(
+        msg: "Something went wrong",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: KDarkPink_twg,
+        textColor: Kwhite,
+        fontSize: 16.0,
+      );
+    } finally {
+      getMetadataLoading(false);
+    }
+  }
+
+  ////////////
+  Future<void> getPostMetapintLinks(Map payloadst) async {
+    getMetadataLoading(true);
+//  'post_id': '146',
+//   'meta_key': '_sap_fb_post_type'
+    // var payload = {
+    //   'post_id': '146',
+    //   'meta_key': '_sap_fb_post_type',
+    // };
+    try {
+      var response = await apiService.postRequestMetaFacebookpostType(
+          endpoint: "posts/get-post-meta-api/", payload: payloadst);
+
+      Map data = jsonDecode(response);
+      print(data);
+      if (data["status"] == "success") {
+        // fbLinkmessage
+
+        pintCustomLink.text = data["meta_data"];
+        // accountscontroller.selectedValues.value = data["meta_data"];
+        // sapPostType.value = data["meta_data"];
+
+        // Fluttertoast.showToast(
+        //   msg: data["message"],
+        // );
+
+        print("object");
+      } else if (data["message"] == "Invalid session token") {
+        Fluttertoast.showToast(
+          msg: data["message"],
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: KDarkPink_twg,
+          textColor: Kwhite,
+          fontSize: 16.0,
+        );
+        Get.toNamed(kSignIns);
+      } else {
+        Fluttertoast.showToast(
+          msg: data["message"],
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: KDarkPink_twg,
+          textColor: Kwhite,
+          fontSize: 16.0,
+        );
+      }
+    } catch (e) {
+      Fluttertoast.showToast(
+        msg: "Something went wrong",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: KDarkPink_twg,
+        textColor: Kwhite,
+        fontSize: 16.0,
+      );
+    } finally {
+      getMetadataLoading(false);
+    }
+  }
+  /////
+
   // time
   Future<void> getPostMetaApipintPosttime(Map payloadst) async {
     getMetadataLoading(true);
@@ -1712,8 +1945,9 @@ class MultPostingsController extends GetxController {
 
       formattedDatepint.value =
           DateFormat('dd/MM/yyyy hh:mm a').format(dateTime);
+      addpostpintTime.value = DateFormat('dd/MM/yyyy hh:mm a').format(dateTime);
     } catch (e) {
-      formattedDate.value = 'Invalid timestamp';
+      formattedDatepint.value = 'Invalid timestamp';
     }
   }
   //pintEnd
@@ -2053,8 +2287,10 @@ class MultPostingsController extends GetxController {
 
       formattedDateinsta.value =
           DateFormat('dd/MM/yyyy hh:mm a').format(dateTime);
+      addpostinstaTime.value =
+          DateFormat('dd/MM/yyyy hh:mm a').format(dateTime);
     } catch (e) {
-      formattedDate.value = 'Invalid timestamp';
+      formattedDateinsta.value = 'Invalid timestamp';
     }
   }
   //insat end
@@ -2394,8 +2630,9 @@ class MultPostingsController extends GetxController {
 
       formattedDatetwt.value =
           DateFormat('dd/MM/yyyy hh:mm a').format(dateTime);
+      addposttwtTime.value = DateFormat('dd/MM/yyyy hh:mm a').format(dateTime);
     } catch (e) {
-      formattedDate.value = 'Invalid timestamp';
+      formattedDatetwt.value = 'Invalid timestamp';
     }
   }
 

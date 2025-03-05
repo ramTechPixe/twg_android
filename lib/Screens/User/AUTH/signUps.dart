@@ -10,7 +10,7 @@ class SignUPS extends StatefulWidget {
 
 class _SignUPSState extends State<SignUPS> {
   AuthController authcontroller = Get.put(AuthController());
-  String? selectedOption;
+  String selectedOption = 'Option 1';
   bool passwordVisible = true;
   bool confirmpasswordVisible = true;
   String? passwordError;
@@ -1136,7 +1136,7 @@ class _SignUPSState extends State<SignUPS> {
                             onChanged: (value) {
                               setState(() {
                                 selectedOption =
-                                    value; // Update selected option
+                                    value!; // Update selected option
                               });
                             },
                           ),

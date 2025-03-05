@@ -33,7 +33,7 @@ class LogsController extends GetxController {
       print(data);
 
       if (data["status"] == "success") {
-        userLogsPost();
+        userLogsPost2();
         Fluttertoast.showToast(
           msg: data["message"],
           toastLength: Toast.LENGTH_SHORT,
@@ -130,7 +130,7 @@ class LogsController extends GetxController {
       print(data);
 
       if (data["status"] == "success") {
-        userLogsPost();
+        userLogsPost2();
         Fluttertoast.showToast(
           msg: data["message"],
           toastLength: Toast.LENGTH_SHORT,
@@ -259,9 +259,84 @@ class LogsController extends GetxController {
     }
   }
 
+  // 2
+  Future<void> userLogPostID2() async {
+    logIDLoading(true);
+
+    imageUrl.value = "";
+    var payload = {"log_id": selectedlogId.value};
+    try {
+      var response = await apiService.postRequestPostViewData(
+
+          // var response = await apiService.postRequestScheduleData(
+          endpoint: "view-logs-api/",
+          payload: payload);
+// https://thewisguystech.com/quick-post-all-api/
+      Map data = jsonDecode(response);
+      print(data);
+      if (data["status"] == "success") {
+        logIdData.value = data["data"];
+
+/////////////////////////////////////////////////////
+        // RegExp regExp = RegExp(
+        //     r'img class="img-responsive img-thumbnail" src="(https://[^"]+)"');
+        // var match = regExp.firstMatch(logIdData["Image"]);
+
+        // if (match != null) {
+        //   String fullUrl = match.group(1) ?? "No Image URL found";
+        //   if (fullUrl.startsWith("https://my.thewisguystech.com")) {
+        //     imageUrl.value =
+        //         fullUrl.replaceFirst("https://my.thewisguystech.com", "");
+        //   } else {
+        //     imageUrl.value = fullUrl; // No modification needed
+        //   }
+        // } else {
+        //   imageUrl.value = "No Image URL found";
+        // }
+///////////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////////////
+        print("object");
+      } else if (data["message"] == "Invalid session token") {
+        Fluttertoast.showToast(
+          msg: data["message"],
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: KDarkPink_twg,
+          textColor: Kwhite,
+          fontSize: 16.0,
+        );
+        Get.toNamed(kSignIns);
+      } else {
+        Fluttertoast.showToast(
+          msg: data["message"],
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: KDarkPink_twg,
+          textColor: Kwhite,
+          fontSize: 16.0,
+        );
+      }
+    } catch (e) {
+      Fluttertoast.showToast(
+        msg: "Something went wrong",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: KDarkPink_twg,
+        textColor: Kwhite,
+        fontSize: 16.0,
+      );
+    } finally {
+      logIDLoading(false);
+    }
+  }
+
 // https://my.thewisguystech.com/uploads/orange-and-white-professional-hotel-booking-desktop-prototipe-(1)-258-11-1280X800.png
   /////
-  Future<void> userLogsPost() async {
+  Future<void> userLogsPost3() async {
     logsListLoading(true);
     var payload = {
       "user_id": userprofilecontroller.profileData["user_details"]["id"],
@@ -389,6 +464,61 @@ class LogsController extends GetxController {
       return deserialized;
     } catch (e) {
       throw FormatException("Invalid PHP serialized format: $input");
+    }
+  }
+
+  // V2 Posting logs
+  Future<void> userLogsPost2() async {
+    logsListLoading(true);
+    var payload = {
+      "user_id": userprofilecontroller.profileData["user_details"]["id"],
+    };
+
+    try {
+      var response = await apiService.postRequestScheduleData(
+          endpoint: "logs-api/", payload: payload);
+
+      Map<String, dynamic> data = jsonDecode(response);
+
+      if (data["status"] == "success") {
+        ///////////////////////////////////////////////////
+
+        logsList.value = data["data"];
+        originalLogsList.value = data["data"];
+        filterLogsList.value = data["data"];
+        realLogsList.value = data["data"];
+        // originalLogsList.value = processedLogs;
+        // filterLogsList.value = processedLogs;
+        // realLogsList.value = processedLogs;
+        print(logsList.value);
+        print("Logs processed successfully.");
+      } else {
+        Fluttertoast.showToast(
+          msg: data["message"],
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: KDarkPink_twg,
+          textColor: Kwhite,
+          fontSize: 16.0,
+        );
+        if (data["message"] == "Invalid session token") {
+          Get.toNamed(kSignIns);
+        }
+      }
+    } catch (e) {
+      Fluttertoast.showToast(
+        msg: "Something went wrong",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: KDarkPink_twg,
+        textColor: Kwhite,
+        fontSize: 16.0,
+      );
+      print("Error: $e");
+    } finally {
+      logsListLoading(false);
     }
   }
 

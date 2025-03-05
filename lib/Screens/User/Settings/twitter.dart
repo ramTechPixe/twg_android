@@ -14,9 +14,11 @@ class TwitterSettings extends StatefulWidget {
 
 class _TwitterSettingsState extends State<TwitterSettings> {
   // File ? selectedImage;
+  AccontsController accountscontroller = Get.put(AccontsController());
   File? selectedImage;
   String base64Image = "";
   bool showimagenullMessage = false;
+  SemiController semicontroller = Get.put(SemiController());
   ProfileController userprofilecontroller = Get.put(ProfileController());
 //////////////////////
   Future<void> chooseImage(type) async {
@@ -85,6 +87,7 @@ class _TwitterSettingsState extends State<TwitterSettings> {
   ];
   List<String> selectedCheckBoxValue = [];
   String? selectedUserValue;
+  AccontsController accountsController = Get.put(AccontsController());
   bool isautopostingSwitched = false;
   void toggleautoPostSwitch(bool value) async {
     if (isautopostingSwitched == false) {
@@ -93,14 +96,20 @@ class _TwitterSettingsState extends State<TwitterSettings> {
       // });
       setState(() {
         isautopostingSwitched = true;
+        dashboardcontroller.twitterAccountsEnabled.value = 1;
         UserSimplePreferences.twitterStatus(twitterStatus: true);
+        accountscontroller.isTwtenabledFromBackend.value = "1";
         //  _isfbExpandCard = true;
+        print("n n");
       });
     } else {
       setState(() {
         isautopostingSwitched = false;
+        dashboardcontroller.twitterAccountsEnabled.value = 0;
         UserSimplePreferences.twitterStatus(twitterStatus: false);
+        accountscontroller.isTwtenabledFromBackend.value = "0";
         //   _isfbExpandCard = false;
+        print("n n");
       });
     }
   }
@@ -119,9 +128,32 @@ class _TwitterSettingsState extends State<TwitterSettings> {
   }
 
   bool passwordVisible = true;
+
+  // api data list
+
+  void _addApiListFieldSet(List dataList) {
+    setState(() {
+       
+      for (var data in dataList) {
+        _twitterFields.add({
+          "consumer_key":
+              TextEditingController(text: data["consumer_key"] ?? ""),
+          "consumer_secret":
+              TextEditingController(text: data["consumer_secret"] ?? ""),
+          "oauth_token": TextEditingController(text: data["oauth_token"] ?? ""),
+          "oauth_secret":
+              TextEditingController(text: data["oauth_secret"] ?? ""),
+        });
+      }
+      print("object");
+    });
+  }
+
+  //
   @override
   void initState() {
     setState(() {
+      _addApiListFieldSet(accountsController.twitterKeys.value);
       _addNewFieldSet();
       setState(() {
         settingscontroller.twitterShort.value = 'TinyURL';
@@ -177,8 +209,13 @@ class _TwitterSettingsState extends State<TwitterSettings> {
                             // });
                             toggleautoPostSwitch(value);
                           },
-                          value: UserSimplePreferences.getTwitterStatus() ??
-                              isautopostingSwitched,
+                          value: accountscontroller
+                                      .isTwtenabledFromBackend.value ==
+                                  "1"
+                              ? true
+                              : false,
+                          // UserSimplePreferences.getTwitterStatus() ??
+                          //     isautopostingSwitched,
                           //  value: isautopostingSwitched,
                           materialTapTargetSize:
                               MaterialTapTargetSize.shrinkWrap,
@@ -198,63 +235,63 @@ class _TwitterSettingsState extends State<TwitterSettings> {
                     style: GoogleFonts.poppins(
                         fontSize: 11.sp, color: kblack, fontWeight: kFW400),
                   ),
-                  InkWell(
-                    //
-                    onTap: () {
-                      Fluttertoast.showToast(
-                        msg: "Not Available Now",
-                        toastLength: Toast.LENGTH_SHORT,
-                        gravity: ToastGravity.BOTTOM,
-                        timeInSecForIosWeb: 1,
-                        backgroundColor: KDarkPink_twg,
-                        textColor: Kwhite,
-                        fontSize: 16.0,
-                      );
-                    },
-                    child: Container(
-                      margin: EdgeInsets.only(top: 10),
-                      height: 43,
-                      width: 110.w,
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                        // boxShadow: [
-                        //   BoxShadow(
-                        //     color: Ktextcolor.withOpacity(0.5),
-                        //     blurRadius: 5.r,
-                        //     offset: Offset(0, 5),
-                        //     spreadRadius: 1.r,
-                        //   )
-                        // ],
-                        color: Kform_border_twg,
-                        borderRadius: BorderRadius.all(Radius.circular(5)),
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          // Icon(
-                          //   Icons.shopping_bag,
-                          //   color: Kwhite,
-                          // ),
-                          Image.asset(
-                            "assets/images/Vector.png",
-                            // height: 3.h,
-                            // width: 80.w,
-                          ),
-                          SizedBox(
-                            width: 12.w,
-                          ),
-                          Text(
-                            "Save",
-                            textAlign: TextAlign.center,
-                            style: GoogleFonts.poppins(
-                                fontWeight: kFW600,
-                                color: Kwhite,
-                                fontSize: kFourteenFont.sp),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
+                  // InkWell(
+                  //   //
+                  //   onTap: () {
+                  //     Fluttertoast.showToast(
+                  //       msg: "Not Available Now",
+                  //       toastLength: Toast.LENGTH_SHORT,
+                  //       gravity: ToastGravity.BOTTOM,
+                  //       timeInSecForIosWeb: 1,
+                  //       backgroundColor: KDarkPink_twg,
+                  //       textColor: Kwhite,
+                  //       fontSize: 16.0,
+                  //     );
+                  //   },
+                  //   child: Container(
+                  //     margin: EdgeInsets.only(top: 10),
+                  //     height: 43,
+                  //     width: 110.w,
+                  //     alignment: Alignment.center,
+                  //     decoration: BoxDecoration(
+                  //       // boxShadow: [
+                  //       //   BoxShadow(
+                  //       //     color: Ktextcolor.withOpacity(0.5),
+                  //       //     blurRadius: 5.r,
+                  //       //     offset: Offset(0, 5),
+                  //       //     spreadRadius: 1.r,
+                  //       //   )
+                  //       // ],
+                  //       color: Kform_border_twg,
+                  //       borderRadius: BorderRadius.all(Radius.circular(5)),
+                  //     ),
+                  //     child: Row(
+                  //       mainAxisAlignment: MainAxisAlignment.center,
+                  //       children: [
+                  //         // Icon(
+                  //         //   Icons.shopping_bag,
+                  //         //   color: Kwhite,
+                  //         // ),
+                  //         Image.asset(
+                  //           "assets/images/Vector.png",
+                  //           // height: 3.h,
+                  //           // width: 80.w,
+                  //         ),
+                  //         SizedBox(
+                  //           width: 12.w,
+                  //         ),
+                  //         Text(
+                  //           "Save",
+                  //           textAlign: TextAlign.center,
+                  //           style: GoogleFonts.poppins(
+                  //               fontWeight: kFW600,
+                  //               color: Kwhite,
+                  //               fontSize: kFourteenFont.sp),
+                  //         ),
+                  //       ],
+                  //     ),
+                  //   ),
+                  // ),
                 ],
               )),
           SizedBox(
@@ -680,43 +717,75 @@ class _TwitterSettingsState extends State<TwitterSettings> {
                   SizedBox(
                     height: 15.h,
                   ),
-                  Container(
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8),
-                      color: Kwhite,
-                    ),
-                    child: DropDownMultiSelect(
-                      decoration: InputDecoration(
-                        contentPadding:
-                            EdgeInsets.symmetric(vertical: 16, horizontal: 8),
-                        fillColor: Kwhite,
-                        focusColor: Theme.of(context).colorScheme.onPrimary,
-                        enabledBorder: const OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(8)),
-                            borderSide:
-                                BorderSide(color: KText_border_twg, width: 1)),
-                        focusedBorder: const OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(8)),
-                            borderSide: BorderSide(
-                              color: Kform_border_twg,
-                              width: 1,
-                            )),
-                      ),
-                      options: variantsList,
-                      selectedValues: selectedCheckBoxValue,
-                      onChanged: (List<String> value) {
-                        //   value = selectedCheckBoxValue;
-                        print("${selectedCheckBoxValue}");
-                      },
-                      whenEmpty: 'Select User',
-                    ),
+                  SizedBox(
+                    height: 15.h,
                   ),
+                  Obx(() {
+                    return Container(
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8),
+                        color: Colors.white,
+                      ),
+                      child: DropDownMultiSelect(
+                        decoration: InputDecoration(
+                          contentPadding: const EdgeInsets.symmetric(
+                              vertical: 16, horizontal: 8),
+                          enabledBorder: const OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(8)),
+                              borderSide:
+                                  BorderSide(color: Colors.grey, width: 1)),
+                          focusedBorder: const OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(8)),
+                              borderSide:
+                                  BorderSide(color: Colors.blue, width: 1)),
+                        ),
+                        options: accountsController
+                            .twitterAccountsdata["twitter_accounts"]
+                            .map((option) => option['name']!)
+                            .toList(),
+                        selectedValues:
+                            accountsController.twtselectedNames.value,
+
+                        // onChanged: accountsController
+                        //     .twtonSelectionChanged,
+                        onChanged: (selected) {
+                          accountsController.twtonSelectionChanged(selected);
+
+                          // Check if selectedValues is empty and update semicontroller.isFbScheduled
+                          // if (accountsController.twtnewTwitters.isEmpty) {
+                          //   //  if (selected.isEmpty) {
+                          //   setState(() {
+                          //     semicontroller.isTwiitterScheduled.value = false;
+                          //   });
+                          // } else {
+                          //   setState(() {
+                          //     semicontroller.isTwiitterScheduled.value = true;
+                          //   });
+                          // }
+                        },
+                        whenEmpty: 'Select User',
+                        // Display names only
+                        // options: accountsController
+                        //     .accountDetails
+                        //     .map(
+                        //         (option) => option['name']!)
+                        //     .toList(),
+                        // selectedValues: accountsController
+                        //     .selectedNames.value,
+                        // onChanged: accountsController
+                        //     .onSelectionChanged,
+                        // whenEmpty: 'Select User',
+                      ),
+                    );
+                  }),
                   SizedBox(
                     height: 10.h,
                   ),
                   Text(
-                    "Select each of the users that you want to automatically post to Facebook when a new post is published and enter  ' , ' to select.",
+                    "Select each of the users that you want to automatically post to Facebook when a new post is published ",
                     style: GoogleFonts.poppins(
                         fontSize: kTenFont, color: kblack, fontWeight: kFW400),
                   ),
@@ -738,73 +807,124 @@ class _TwitterSettingsState extends State<TwitterSettings> {
                           fontSize: kSixteenFont,
                           fontWeight: kFW600,
                           isLoading: false,
-                          onTap: () {}),
-                      Container(
-                        height: 45,
-                        alignment: Alignment.center,
-                        width: 140,
-                        margin: EdgeInsets.only(right: 10),
-                        padding: EdgeInsets.all(8),
-                        decoration: BoxDecoration(
-                          border: Border.all(color: Klight_grey_twg, width: 1),
-                          color: KPale_white_twg,
-                          borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(5),
-                              topRight: Radius.circular(5),
-                              bottomLeft: Radius.circular(5),
-                              bottomRight: Radius.circular(5)),
-                        ),
-                        child: Text(
-                          "Select None",
-                          style: GoogleFonts.poppins(
-                              color: kblack,
-                              fontSize: kSixteenFont,
-                              fontWeight: kFW600),
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 20.h,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "Disable Image posting",
-                        style: GoogleFonts.poppins(
-                            fontSize: kFourteenFont,
-                            color: kblack,
-                            fontWeight: kFW500),
-                      ),
-                      Transform.scale(
-                        scale: 0.6,
-                        child: Switch(
-                          onChanged: (value) {
-                            // setState(() {
-                            //   _isfbExpandCard = !_isfbExpandCard;
-                            // });
-                            toggleautoPostSwitch(value);
-                          },
-                          value: isautopostingSwitched,
-                          materialTapTargetSize:
-                              MaterialTapTargetSize.shrinkWrap,
-                          activeColor: KLightDust_twg,
-                          activeTrackColor: Kform_border_twg,
-                          inactiveThumbColor: KLightDust_twg,
-                          inactiveTrackColor: Kdim_brown_twg,
+                          onTap: () {
+                            accountsController.twtselectAll();
+                            setState(() {
+                              semicontroller.isTwiitterScheduled.value = true;
+                            });
+                          }),
+                      InkWell(
+                        onTap: () {
+                          accountsController.twtclearAll();
+                          setState(() {
+                            semicontroller.isTwiitterScheduled.value = false;
+                          });
+                        },
+                        child: Container(
+                          height: 45,
+                          alignment: Alignment.center,
+                          width: 140,
+                          margin: EdgeInsets.only(right: 10),
+                          padding: EdgeInsets.all(8),
+                          decoration: BoxDecoration(
+                            border:
+                                Border.all(color: Klight_grey_twg, width: 1),
+                            color: KPale_white_twg,
+                            borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(5),
+                                topRight: Radius.circular(5),
+                                bottomLeft: Radius.circular(5),
+                                bottomRight: Radius.circular(5)),
+                          ),
+                          child: Text(
+                            "Select None",
+                            style: GoogleFonts.poppins(
+                                color: kblack,
+                                fontSize: kSixteenFont,
+                                fontWeight: kFW600),
+                          ),
                         ),
                       ),
                     ],
                   ),
-                  SizedBox(
-                    height: 5.h,
-                  ),
-                  Text(
-                    "Enable this button, if you want to disable image posting for Twitter.",
-                    style: GoogleFonts.poppins(
-                        fontSize: 10.sp, color: kblack, fontWeight: kFW400),
-                  ),
+                  // Container(
+                  //   width: double.infinity,
+                  //   decoration: BoxDecoration(
+                  //     borderRadius: BorderRadius.circular(8),
+                  //     color: Kwhite,
+                  //   ),
+                  //   child: DropDownMultiSelect(
+                  //     decoration: InputDecoration(
+                  //       contentPadding:
+                  //           EdgeInsets.symmetric(vertical: 16, horizontal: 8),
+                  //       fillColor: Kwhite,
+                  //       focusColor: Theme.of(context).colorScheme.onPrimary,
+                  //       enabledBorder: const OutlineInputBorder(
+                  //           borderRadius: BorderRadius.all(Radius.circular(8)),
+                  //           borderSide:
+                  //               BorderSide(color: KText_border_twg, width: 1)),
+                  //       focusedBorder: const OutlineInputBorder(
+                  //           borderRadius: BorderRadius.all(Radius.circular(8)),
+                  //           borderSide: BorderSide(
+                  //             color: Kform_border_twg,
+                  //             width: 1,
+                  //           )),
+                  //     ),
+                  //     options: variantsList,
+                  //     selectedValues: selectedCheckBoxValue,
+                  //     onChanged: (List<String> value) {
+                  //       //   value = selectedCheckBoxValue;
+                  //       print("${selectedCheckBoxValue}");
+                  //     },
+                  //     whenEmpty: 'Select User',
+                  //   ),
+                  // ),
+                  // SizedBox(
+                  //   height: 10.h,
+                  // ),
+
+                  // SizedBox(
+                  //   height: 20.h,
+                  // ),
+                  // Row(
+                  //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  //   children: [
+                  //     Text(
+                  //       "Disable Image posting",
+                  //       style: GoogleFonts.poppins(
+                  //           fontSize: kFourteenFont,
+                  //           color: kblack,
+                  //           fontWeight: kFW500),
+                  //     ),
+                  //     Transform.scale(
+                  //       scale: 0.6,
+                  //       child: Switch(
+                  //         onChanged: (value) {
+                  //           // setState(() {
+                  //           //   _isfbExpandCard = !_isfbExpandCard;
+                  //           // });
+                  //           toggleautoPostSwitch(value);
+                  //         },
+                  //         value: isautopostingSwitched,
+                  //         materialTapTargetSize:
+                  //             MaterialTapTargetSize.shrinkWrap,
+                  //         activeColor: KLightDust_twg,
+                  //         activeTrackColor: Kform_border_twg,
+                  //         inactiveThumbColor: KLightDust_twg,
+                  //         inactiveTrackColor: Kdim_brown_twg,
+                  //       ),
+                  //     ),
+                  //   ],
+                  // ),
+
+                  // SizedBox(
+                  //   height: 5.h,
+                  // ),
+                  // Text(
+                  //   "Enable this button, if you want to disable image posting for Twitter.",
+                  //   style: GoogleFonts.poppins(
+                  //       fontSize: 10.sp, color: kblack, fontWeight: kFW400),
+                  // ),
                   SizedBox(
                     height: 20.h,
                   ),
@@ -1244,7 +1364,9 @@ class _TwitterSettingsState extends State<TwitterSettings> {
 //////////////////////////////////
 
                             Map<String, dynamic> payload = {};
-
+                            String postsUsers = accountsController
+                                .twtselectedNames.value
+                                .join("|");
                             // Loop through the dynamically added fields
                             for (int i = 0; i < _twitterFields.length; i++) {
                               var fieldSet = _twitterFields[i];
@@ -1278,16 +1400,24 @@ class _TwitterSettingsState extends State<TwitterSettings> {
                                       : "",
                               "limit_twitter_count":
                                   "${dashboardcontroller.twitternetworkCount.value}",
+
                               "created_twitter_count": "1",
                               "sap_twitter_submit": "1",
+                              //
+                              'sap_twitter_options[posts_users]': postsUsers,
+                              'sap_twitter_options[enable_twitter]':
+                                  accountsController
+                                      .isTwtenabledFromBackend.value,
+                              //   --form 'sap_twitter_options[posts_users]="XJ4s7n1gsvScADjlh8W6eav9eeazZ1RqaJ8sb2VX3oDUiJXyNB|bharatsports"' \    --form 'sap_twitter_options[enable_twitter]=""' \
                               "user_id": userprofilecontroller
                                   .profileData["user_details"]["id"],
                             });
 
-                            // Debug log for verification
+                            //
                             print(payload);
                             settingscontroller.twitterSave(payload);
                           },
+                          //    --form 'sap_twitter_options[posts_users]="XJ4s7n1gsvScADjlh8W6eav9eeazZ1RqaJ8sb2VX3oDUiJXyNB|bharatsports"' \    --form 'sap_twitter_options[enable_twitter]=""' \
                           child: Container(
                             margin: EdgeInsets.only(top: 26),
                             height: 45,
