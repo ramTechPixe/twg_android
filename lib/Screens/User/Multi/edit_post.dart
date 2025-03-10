@@ -91,6 +91,7 @@ class _EditMultiScreenState extends State<EditMultiScreen> {
         selectedImage = File(image.path);
         base64Image = base64Encode(selectedImage!.readAsBytesSync());
         multiPostcontroller.updateSelectedImage(selectedImage);
+        multiPostcontroller.is_setSelectedImagechanged.value = true;
         // profilecontroller.editProfilePicture(selectedImage!); //
         print(selectedImage!.readAsBytesSync().lengthInBytes);
         final kb = selectedImage!.readAsBytesSync().lengthInBytes / 1024;
@@ -120,6 +121,8 @@ class _EditMultiScreenState extends State<EditMultiScreen> {
         fbselectedImage = File(image.path);
         base64Image = base64Encode(fbselectedImage!.readAsBytesSync());
         multiPostcontroller.fbupdateSelectedImage(fbselectedImage);
+        multiPostcontroller.is_setSelectedImagechangedfb.value = true;
+
         // profilecontroller.editProfilePicture(selectedImage!); //
         print(selectedImage!.readAsBytesSync().lengthInBytes);
         final kb = selectedImage!.readAsBytesSync().lengthInBytes / 1024;
@@ -150,6 +153,7 @@ class _EditMultiScreenState extends State<EditMultiScreen> {
         twtselectedImage = File(image.path);
         base64Image = base64Encode(twtselectedImage!.readAsBytesSync());
         multiPostcontroller.twtupdateSelectedImage(twtselectedImage);
+        multiPostcontroller.is_setSelectedImagechangedtwt.value = true;
         // profilecontroller.editProfilePicture(selectedImage!); //
         print(selectedImage!.readAsBytesSync().lengthInBytes);
         final kb = selectedImage!.readAsBytesSync().lengthInBytes / 1024;
@@ -180,6 +184,7 @@ class _EditMultiScreenState extends State<EditMultiScreen> {
         tumbselectedImage = File(image.path);
         base64Image = base64Encode(tumbselectedImage!.readAsBytesSync());
         multiPostcontroller.tumbupdateSelectedImage(tumbselectedImage);
+        multiPostcontroller.is_setSelectedImagechangedtumb.value = true;
         // profilecontroller.editProfilePicture(selectedImage!); //
         print(selectedImage!.readAsBytesSync().lengthInBytes);
         final kb = selectedImage!.readAsBytesSync().lengthInBytes / 1024;
@@ -209,6 +214,7 @@ class _EditMultiScreenState extends State<EditMultiScreen> {
         pintselectedImage = File(image.path);
         base64Image = base64Encode(pintselectedImage!.readAsBytesSync());
         multiPostcontroller.pintupdateSelectedImage(pintselectedImage);
+        multiPostcontroller.is_setSelectedImagechangedpint.value = true;
         // profilecontroller.editProfilePicture(selectedImage!); //
         print(selectedImage!.readAsBytesSync().lengthInBytes);
         final kb = selectedImage!.readAsBytesSync().lengthInBytes / 1024;
@@ -238,6 +244,7 @@ class _EditMultiScreenState extends State<EditMultiScreen> {
         instaselectedImage = File(image.path);
         base64Image = base64Encode(instaselectedImage!.readAsBytesSync());
         multiPostcontroller.instaupdateSelectedImage(instaselectedImage);
+        multiPostcontroller.is_setSelectedImagechangedinsta.value = true;
         // profilecontroller.editProfilePicture(selectedImage!); //
         print(selectedImage!.readAsBytesSync().lengthInBytes);
         final kb = selectedImage!.readAsBytesSync().lengthInBytes / 1024;
@@ -537,6 +544,10 @@ class _EditMultiScreenState extends State<EditMultiScreen> {
                         controller: multiPostcontroller.addPostBodyController,
                         labelColor: KText,
                         onChanged: (Value) {
+                          setState(() {
+                            multiPostcontroller
+                                .isMultiEditPostBodyChanged.value = true;
+                          });
                           setState(() {});
                         },
                         obscureText: false,
@@ -566,6 +577,12 @@ class _EditMultiScreenState extends State<EditMultiScreen> {
                         controller: multiPostcontroller.sharelinkController,
                         labelColor: KText,
                         onChanged: (Value) {
+                          setState(() {
+                            multiPostcontroller
+                                .isMultiEditSharelinkChanged.value = true;
+                            // payload['share_link'] =
+                            //     multiPostcontroller.sharelinkController.text;
+                          });
                           setState(() {});
                         },
                         obscureText: false,
@@ -1095,7 +1112,17 @@ class _EditMultiScreenState extends State<EditMultiScreen> {
                                             onChanged: (selected) {
                                               accountsController
                                                   .onSelectionChanged(selected);
+                                              //
+// if (is_selectedValueschanged.value == false) {
+//       //
+//       accountscontroller.selectedValues.clear();
+//     }
 
+                                              setState(() {
+                                                multiPostcontroller
+                                                    .is_selectedValueschanged
+                                                    .value = true;
+                                              });
                                               // Check if selectedValues is empty and update semicontroller.isFbScheduled
                                               if (accountsController
                                                   .selectedValues.isEmpty) {
@@ -1620,6 +1647,14 @@ class _EditMultiScreenState extends State<EditMultiScreen> {
                                             setState(() {
                                               selectedUserValue =
                                                   value.toString();
+
+                                              ///
+                                              multiPostcontroller
+                                                  .isMultiEditfbTypeChanged
+                                                  .value = true;
+                                              // payload['sap_facebook[type]'] =
+                                              //     multiPostcontroller.fbSharingPosttype.value; //
+                                              /////
                                             });
                                             //  "image_posting",
                                             // "link_posting"
@@ -2007,6 +2042,13 @@ class _EditMultiScreenState extends State<EditMultiScreen> {
                                                       horizontal: 8),
                                               fontSize: kFourteenFont,
                                               fontWeight: FontWeight.w500,
+                                              onChanged: (value) {
+                                                setState(() {
+                                                  multiPostcontroller
+                                                      .isMultiEditfbCustomlinkChanged
+                                                      .value = true;
+                                                });
+                                              },
                                               hintText: "Enter Custom Link",
                                               maxLines: 1,
                                               readOnly: false,
@@ -2056,6 +2098,15 @@ class _EditMultiScreenState extends State<EditMultiScreen> {
                                       enabled: true,
                                       labelColor: KText,
                                       onChanged: (Value) {
+                                        setState(() {
+                                          /////////////////
+                                          multiPostcontroller
+                                              .isMultiEditfbMessageChanged
+                                              .value = true;
+                                          // payload['sap_facebook[message]'] =
+                                          //     multiPostcontroller.fbMesssage.text;
+                                          /////////
+                                        });
                                         setState(() {});
                                       },
                                       controller:
@@ -2210,6 +2261,13 @@ class _EditMultiScreenState extends State<EditMultiScreen> {
                                                           pickedTime.hour,
                                                           pickedTime.minute,
                                                         );
+
+                                                        ///
+                                                        semicontroller
+                                                            .is_sapscheduletimefbchanged
+                                                            .value = true;
+
+                                                        ////
                                                         fbchoosenDate =
                                                             fbselectedDate;
                                                         fbselectDate
@@ -3027,6 +3085,17 @@ class _EditMultiScreenState extends State<EditMultiScreen> {
                                                   accountsController
                                                       .onTumblerSelectionChanged(
                                                           selected);
+
+                                                  ///
+                                                  // accountscontroller.selectedTumblerValuesqa.clear();
+                                                  // var is_selectedTumblerValuesqachanged = false.obs;
+
+                                                  setState(() {
+                                                    multiPostcontroller
+                                                        .is_selectedTumblerValuesqachanged
+                                                        .value = true;
+                                                  });
+                                                  /////
 
                                                   // Update semicontroller.istumblrScheduled reactively
                                                   // semicontroller.istumblrScheduled
@@ -3975,6 +4044,11 @@ class _EditMultiScreenState extends State<EditMultiScreen> {
                                               },
                                               onChanged: (value) {
                                                 setState(() {
+                                                  //
+                                                  multiPostcontroller
+                                                      .isMultiEditTumbPostingTypeChanged
+                                                      .value = true; //
+                                                  //
                                                   selectedUserValue =
                                                       value.toString();
                                                   multiPostcontroller
@@ -4324,6 +4398,11 @@ class _EditMultiScreenState extends State<EditMultiScreen> {
                                                       maxLines: 1,
                                                       readOnly: false,
                                                       label: "Custom Link",
+                                                      onChanged: (value) {
+                                                        multiPostcontroller
+                                                            .isMultiEditTumbCustomlink
+                                                            .value = true;
+                                                      },
                                                       validator: (value) {
                                                         if (value!.isEmpty) {
                                                           return 'Please Enter Custom Link';
@@ -4399,6 +4478,11 @@ class _EditMultiScreenState extends State<EditMultiScreen> {
                                           enabled: true,
                                           labelColor: KText,
                                           onChanged: (Value) {
+                                            setState(() {
+                                              multiPostcontroller
+                                                  .isMultiEditTumbCustomDescription
+                                                  .value = true;
+                                            });
                                             setState(() {});
                                           },
                                           controller: multiPostcontroller
@@ -4559,6 +4643,13 @@ class _EditMultiScreenState extends State<EditMultiScreen> {
                                                               pickedTime.hour,
                                                               pickedTime.minute,
                                                             );
+
+                                                            ///
+                                                            semicontroller
+                                                                .is_sapscheduletimetumblr_changed
+                                                                .value = true;
+
+                                                            /////
                                                             tumbchoosenDate =
                                                                 tumbselectedDate;
                                                             tumbselectDate
@@ -5398,7 +5489,15 @@ class _EditMultiScreenState extends State<EditMultiScreen> {
                                                       accountsController
                                                           .pintonTumblerSelectionChanged(
                                                               selected);
+                                                      setState(() {
+                                                        multiPostcontroller
+                                                            .is_selectedPinterestValuesqachanged
+                                                            .value = true;
+                                                      });
 
+                                                      ///
+
+//////
                                                       // Check if selectedValues is empty and update semicontroller.isFbScheduled
                                                       if (accountsController
                                                           .pintselectedTumblerNames
@@ -6473,10 +6572,15 @@ class _EditMultiScreenState extends State<EditMultiScreen> {
                                                 height: 20.h,
                                               ),
                                               CustomFormFields(
-                                                ontap: () {
-                                                  //  Get.toNamed(kSearchPlaces);
-                                                },
+                                                ontap: () {},
                                                 enabled: true,
+                                                onChanged: (value) {
+                                                  setState(() {
+                                                    multiPostcontroller
+                                                        .isMultiEditpintCustomLinkChanged
+                                                        .value = true;
+                                                  });
+                                                },
                                                 controller: multiPostcontroller
                                                     .pintCustomLink,
                                                 labelColor: KText,
@@ -6537,6 +6641,14 @@ class _EditMultiScreenState extends State<EditMultiScreen> {
                                               enabled: true,
                                               labelColor: KText,
                                               onChanged: (Value) {
+                                                setState(() {
+                                                  multiPostcontroller
+                                                      .isMultiEditpintMessageChanged
+                                                      .value = true;
+                                                });
+
+                                                // payload['sap_pinterest[message]'] =
+                                                //     multiPostcontroller.pintCustomMessage.text;
                                                 setState(() {});
                                               },
                                               controller: multiPostcontroller
@@ -6707,6 +6819,11 @@ class _EditMultiScreenState extends State<EditMultiScreen> {
                                                                 );
                                                                 pintchoosenDate =
                                                                     pintselectedDate;
+
+                                                                semicontroller
+                                                                    .is_sapscheduletimepin_changed
+                                                                    .value = true;
+
                                                                 pintselectDate
                                                                     .value = DateFormat(
                                                                         'MM/dd/yyyy hh:mm a')
@@ -7257,6 +7374,16 @@ class _EditMultiScreenState extends State<EditMultiScreen> {
                                                           accountsController
                                                               .instpintonTumblerSelectionChanged(
                                                                   selected);
+                                                          setState(() {
+                                                            multiPostcontroller
+                                                                .is_instpintselectedTumblerNameschanged
+                                                                .value = true;
+                                                          });
+                                                          ////
+                                                          // accountscontroller.instpintselectedTumblerNames.clear();
+                                                          //  var is_instpintselectedTumblerNameschanged = false.obs;
+
+                                                          /////
 
                                                           // Check if selectedValues is empty and update semicontroller.isFbScheduled
                                                           if (accountsController
@@ -8194,6 +8321,11 @@ class _EditMultiScreenState extends State<EditMultiScreen> {
                                                   enabled: true,
                                                   labelColor: KText,
                                                   onChanged: (Value) {
+                                                    setState(() {
+                                                      multiPostcontroller
+                                                          .isMultiEditInstaMesssageChanged
+                                                          .value = true;
+                                                    });
                                                     setState(() {});
                                                   },
                                                   controller:
@@ -8380,6 +8512,14 @@ class _EditMultiScreenState extends State<EditMultiScreen> {
                                                                     );
                                                                     instachoosenDate =
                                                                         instaselectedDate;
+
+                                                                    ///
+                                                                    semicontroller
+                                                                            .is_sapscheduletimeinstagram_changed
+                                                                            .value =
+                                                                        true; //
+
+                                                                    /////
                                                                     instaselectDate
                                                                         .value = DateFormat(
                                                                             'MM/dd/yyyy hh:mm a')
@@ -9061,7 +9201,20 @@ class _EditMultiScreenState extends State<EditMultiScreen> {
                                                               accountsController
                                                                   .twtonSelectionChanged(
                                                                       selected);
+                                                              setState(() {
+                                                                multiPostcontroller
+                                                                    .is_twtnewTwitterschanged
+                                                                    .value = true;
+                                                              });
+// accountscontroller.twtnewTwitters.clear();
+                                                              //   var is_twtnewTwitterschanged = false.obs;
 
+                                                              ///
+
+                                                              // if (.value == false) {
+                                                              //   accountscontroller.twtnewTwitters.clear();
+                                                              // }
+//////
                                                               // Check if selectedValues is empty and update semicontroller.isFbScheduled
                                                               if (accountsController
                                                                   .twtnewTwitters
@@ -9852,6 +10005,13 @@ class _EditMultiScreenState extends State<EditMultiScreen> {
                                                       enabled: true,
                                                       labelColor: KText,
                                                       onChanged: (Value) {
+                                                        setState(() {
+                                                          multiPostcontroller
+                                                              .isMultiEdittwtrMsgChanged
+                                                              .value = true;
+                                                          // payload['sap_twitter_msg'] =
+                                                          //     multiPostcontroller.twtMesssage.text;
+                                                        });
                                                         setState(() {});
                                                       },
                                                       controller:
@@ -10352,6 +10512,12 @@ class _EditMultiScreenState extends State<EditMultiScreen> {
                                                                           pickedTime
                                                                               .minute,
                                                                         );
+                                                                        //
+                                                                        semicontroller
+                                                                            .is_sapscheduletimetw_changed
+                                                                            .value = true;
+
+                                                                        //
                                                                         twtchoosenDate =
                                                                             twtselectedDate;
                                                                         twtselectDate
@@ -10525,6 +10691,10 @@ class _EditMultiScreenState extends State<EditMultiScreen> {
                                       pickedTime.hour,
                                       pickedTime.minute,
                                     );
+
+                                    semicontroller.is_sapscheduletime_changed
+                                        .value = true; //
+
                                     choosenDate =
                                         selectedDate; // Store the selected date
                                     selectDate.value =
@@ -10653,81 +10823,7 @@ class _EditMultiScreenState extends State<EditMultiScreen> {
                               formattedDateTime); // Example output: 2024-12-18 15:09:23
 
                           var payload = {
-                            'body':
-                                multiPostcontroller.addPostBodyController.text,
-                            'share_link':
-                                multiPostcontroller.sharelinkController.text,
-                            // 'sap_facebook[accounts][0]': '"170283146164295|493105290336037"',
-                            'sap_facebook[type]':
-                                multiPostcontroller.fbSharingPosttype.value,
-                            'sap_facebook[message]':
-                                multiPostcontroller.fbMesssage.text,
-                            'sap_facebook_custom_link':
-                                multiPostcontroller.fbCustomLink.text,
-                            // 'sap_facebbok_post_img': '""',
-                            'sap-schedule-time-fb':
-                                multiPostcontroller.addpostfbTime.value,
-                            'networks[facebook]': '1',
-                            'networks[twitter]': '1',
-                            'networks[linkedin]': '1',
-                            'networks[tumblr]': '1',
-                            'networks[pinterest]': '1',
-                            'networks[gmb]': '1',
-                            'networks[instagram]': '1',
-                            // 'sap_twitter_user_id[0]': '0',
-                            // 'sap_tweet_img':  '',,
-                            'sap_twitter_msg':
-                                multiPostcontroller.twtMesssage.text,
-                            'sap-schedule-time-tw':
-                                multiPostcontroller.addposttwtTime.value,
-                            // 'sap_linkedin_custom_link': '',
-                            // 'sap_linkedin_post_img': '',
-                            // 'sap_linkedin_custom_title': '',
-                            // 'sap_linkedin_custom_description': '',
-                            // 'sap-schedule-time-li': '',
-                            // 'sap_tumblr_user_id[0]':
-                            //     '"XJ4s7n1gsvScADjlh8W6eav9eeazZ1RqaJ8sb2VX3oDUiJXyNB|bharatsports"',
-                            'sap_tumblr_posting_type':
-                                multiPostcontroller.tumbSharingPosttype.value ??
-                                    "",
-                            'sap_tumblr_custom_link':
-                                multiPostcontroller.tumblink.text,
-                            // 'sap_tumblr_post_img': '""',
-                            'sap_tumblr_custom_description':
-                                multiPostcontroller.tumbCustomMessage.text,
-                            'sap-schedule-time-tumblr':
-                                multiPostcontroller.addposttumbTime.value,
-                            // 'sap_pinterest[accounts][0]':
-                            //     '"bharatshoprajasthan|1005428754250575356"',
-                            'sap_pinterest[message]':
-                                multiPostcontroller.pintCustomMessage.text,
-                            'sap_pinterest_custom_link':
-                                multiPostcontroller.pintCustomLink.text,
-                            // 'sap_pinterest_post_img': '""',
-                            'sap-schedule-time-pin':
-                                multiPostcontroller.addpostpintTime.value,
-                            // 'sap_gmb[gmb_button_type]': '"LEARN_MORE"',
-                            // 'sap_gmb[message]': '""',
-                            // 'sap_gmb_custom_link': '""',
-                            // 'sap_gmb_post_img': '""',
-                            // 'sap-schedule-time-gmb': '""',
-                            // 'sap_instagram[accounts][0]':
-                            //     '"17841466874683562|493105290336037"',
-                            'sap_instagram[message]':
-                                multiPostcontroller.instaCustomMessage.text,
-                            //   'sap_instagram_post_img': '""',
-                            'sap-schedule-time-instagram':
-                                multiPostcontroller.addpostinstaTime.value,
-                            'sap-schedule-time':
-                                multiPostcontroller.addpostGlobalTime.value,
-                            'status': '1',
-                            'form-submitted': '1',
-                            'individual_status': '1',
-                            'ip': dashboardcontroller.deviceIp.value,
-                            'created_date': formattedDateTime,
-                            'user_id': userprofilecontroller
-                                .profileData["user_details"]["id"],
-                            'id': thisPost["post_id"],
+                            //////////////////////////////////////////////
                             // 'body':
                             //     multiPostcontroller.addPostBodyController.text,
                             // 'share_link':
@@ -10806,6 +10902,35 @@ class _EditMultiScreenState extends State<EditMultiScreen> {
                             // // '2024-12-18 15:09:23',
                             // 'user_id': userprofilecontroller
                             //     .profileData["user_details"]["id"]
+                            //new
+
+                            // 'sap-schedule-time-fb':
+                            //     multiPostcontroller.addpostfbTime.value,
+                            // 'networks[facebook]': '1',
+                            // 'networks[twitter]': '1',
+                            // 'networks[linkedin]': '1',
+                            // 'networks[tumblr]': '1',
+                            // 'networks[pinterest]': '1',
+                            // 'networks[gmb]': '1',
+                            // 'networks[instagram]': '1',
+
+                            //
+                            // 'sap-schedule-time-pin':
+                            //     multiPostcontroller.addpostpintTime.value,
+
+                            //
+                            // 'sap-schedule-time-instagram':
+                            //     multiPostcontroller.addpostinstaTime.value,
+                            // 'sap-schedule-time':
+                            //     multiPostcontroller.addpostGlobalTime.value,
+                            // //
+                            // 'form-submitted': '1',
+                            // 'individual_status': '1',
+                            // 'ip': dashboardcontroller.deviceIp.value,
+                            // 'created_date': formattedDateTime,
+                            'user_id': userprofilecontroller
+                                .profileData["user_details"]["id"],
+                            'id': thisPost["post_id"],
                           };
                           if (semicontroller.isFbScheduled.value)
                             payload['networks[facebook]'] = '1';
@@ -10829,6 +10954,100 @@ class _EditMultiScreenState extends State<EditMultiScreen> {
                             payload['networks[blogger]'] = '1';
                           if (semicontroller.isWordpressScheduled.value)
                             payload['networks[wordpress]'] = '1';
+                          //new ones
+
+                          // if (multiPostcontroller
+                          //     .isMultiEditPostBodyChanged.value)
+                          payload['body'] =
+                              multiPostcontroller.addPostBodyController.text;
+                          if (multiPostcontroller
+                              .isMultiEditSharelinkChanged.value)
+                            payload['share_link'] =
+                                multiPostcontroller.sharelinkController.text;
+                          //////////////////////////////////////////////////////////////////////////////////////
+
+                          if (multiPostcontroller
+                              .isMultiEditfbTypeChanged.value)
+                            payload['sap_facebook[type]'] =
+                                multiPostcontroller.fbSharingPosttype.value; //
+                          if (multiPostcontroller
+                              .isMultiEditfbMessageChanged.value)
+                            payload['sap_facebook[message]'] =
+                                multiPostcontroller.fbMesssage.text;
+                          if (multiPostcontroller
+                              .isMultiEditfbCustomlinkChanged.value)
+                            payload['sap_facebook_custom_link'] =
+                                multiPostcontroller.fbCustomLink.text;
+
+                          if (multiPostcontroller
+                              .isMultiEdittwtrMsgChanged.value)
+                            payload['sap_twitter_msg'] =
+                                multiPostcontroller.twtMesssage.text; //
+                          if (multiPostcontroller
+                              .isMultiEditTumbPostingTypeChanged.value)
+                            payload['sap_tumblr_posting_type'] =
+                                multiPostcontroller
+                                    .tumbSharingPosttype.value; //
+                          if (multiPostcontroller
+                              .isMultiEditTumbCustomlink.value)
+                            payload['sap_tumblr_custom_link'] =
+                                multiPostcontroller.tumblink.text;
+                          if (multiPostcontroller
+                              .isMultiEditTumbCustomDescription.value)
+                            payload['sap_tumblr_custom_description'] =
+                                multiPostcontroller.tumbCustomMessage.text; //
+
+                          //multiPostcontroller.pintCustomMessage.text,
+                          // 'sap_pinterest_custom_link':
+
+                          if (multiPostcontroller
+                              .isMultiEditpintMessageChanged.value)
+                            payload['sap_pinterest[message]'] =
+                                multiPostcontroller.pintCustomMessage.text;
+                          if (multiPostcontroller
+                              .isMultiEditpintCustomLinkChanged.value)
+                            payload['sap_pinterest_custom_link'] =
+                                multiPostcontroller.pintCustomLink.text;
+
+                          if (multiPostcontroller
+                              .isMultiEditInstaMesssageChanged.value)
+                            payload['sap_instagram[message]'] =
+                                multiPostcontroller.instaCustomMessage.text;
+                          ////////////////////////////////////////////////////
+
+                          ///////////////////////////////////////////
+
+                          // time
+                          if (semicontroller
+                              .is_sapscheduletimefbchanged.value) //
+                            payload['sap-schedule-time-fb'] =
+                                // 'sap-schedule-time-fb'
+                                multiPostcontroller.addpostfbTime.value;
+                          //'2024-12-23 12:21:47',
+                          if (semicontroller
+                              .is_sapscheduletimetw_changed.value) //
+                            payload['sap-schedule-time-tw'] =
+                                multiPostcontroller.addposttwtTime.value;
+                          // if (semicontroller
+                          //     .is_sapscheduletimeyoutube_changed.value) //
+                          //   payload['sap-schedule-time-youtube'] =
+                          //       multiPostcontroller.addpostytuTime.value;
+                          if (semicontroller
+                              .is_sapscheduletimetumblr_changed.value) //
+                            payload['sap-schedule-time-tumblr'] =
+                                multiPostcontroller.addposttumbTime.value;
+                          if (semicontroller
+                              .is_sapscheduletimepin_changed.value) //
+                            payload['sap-schedule-time-pin'] =
+                                multiPostcontroller.addpostpintTime.value;
+                          if (semicontroller
+                              .is_sapscheduletimeinstagram_changed.value) //
+                            payload['sap-schedule-time-instagram'] =
+                                multiPostcontroller.addpostinstaTime.value;
+                          if (semicontroller
+                              .is_sapscheduletime_changed.value) //
+                            payload['sap-schedule-time'] =
+                                multiPostcontroller.addpostGlobalTime.value;
 
                           multiPostcontroller.editMultiPostSave(payload);
 

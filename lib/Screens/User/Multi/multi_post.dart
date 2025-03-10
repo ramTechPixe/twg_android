@@ -388,9 +388,9 @@ class _MultiPostScreenState extends State<MultiPostScreen> {
                                                               //     semicontroller.scheduledList[index]
                                                               //         ["id"];
                                                             });
-                                                            Get.toNamed(
-                                                              kMultiPostView,
-                                                            );
+                                                            // Get.toNamed( vvipchange
+                                                            //   kMultiPostView,
+                                                            // );
                                                             // Get.toNamed(kMultiPostView,
                                                             //     arguments: multiPostcontroller
                                                             //         .mutiPostList[index]);

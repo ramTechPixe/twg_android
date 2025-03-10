@@ -98,9 +98,9 @@ class _Bottom_navigationState extends State<Bottom_navigation> {
                 _buildImageNavigationItem(_pageIndex == 3
                     ? "assets/images/chart_selected.png"
                     : "assets/images/chart_unselected.png"),
-                _buildImageNavigationItem(_pageIndex == 4
-                    ? "assets/images/settings_selected.png"
-                    : "assets/images/settings_unselected.png"),
+                // _buildImageNavigationItem(_pageIndex == 4
+                //     ? "assets/images/settings_selected.png"
+                //     : "assets/images/settings_unselected.png"),
               ],
               onTap: (index) {
                 setState(() {
@@ -156,16 +156,16 @@ class _Bottom_navigationState extends State<Bottom_navigation> {
                             fontSize: 11.sp, color: Kwhite, fontWeight: kFW600),
                       ),
                     ),
-                    SizedBox(
-                      width: 50.w,
-                      child: Text(
-                        "  Setting",
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 1,
-                        style: GoogleFonts.poppins(
-                            fontSize: 11.sp, color: Kwhite, fontWeight: kFW600),
-                      ),
-                    ),
+                    // SizedBox(
+                    //   width: 50.w,
+                    //   child: Text(
+                    //     "  Setting",
+                    //     overflow: TextOverflow.ellipsis,
+                    //     maxLines: 1,
+                    //     style: GoogleFonts.poppins(
+                    //         fontSize: 11.sp, color: Kwhite, fontWeight: kFW600),
+                    //   ),
+                    // ),
                   ],
                 ),
               ),
@@ -192,7 +192,7 @@ class _Bottom_navigationState extends State<Bottom_navigation> {
       // QuickPosting(),
       Reports(),
       // QuickPosting(),
-      SettingsScreen(),
+      // SettingsScreen(), lastremoved
     ];
   }
 }

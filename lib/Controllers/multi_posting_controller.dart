@@ -29,6 +29,62 @@ class MultPostingsController extends GetxController {
   Rx<File?> selectedImage = Rx<File?>(null);
 
   // Method to update the selected image
+  //editpostchanges
+  // 'body':
+  var isMultiEditPostBodyChanged = false.obs;
+  // multiPostcontroller.addPostBodyController.text,
+  //  'share_link':
+  var isMultiEditSharelinkChanged = false.obs;
+  // multiPostcontroller.sharelinkController.text,
+
+  //    'sap_facebook[type]':
+  var isMultiEditfbTypeChanged = false.obs;
+  // multiPostcontroller.fbSharingPosttype.value,
+  //  'sap_facebook[message]':
+  var isMultiEditfbMessageChanged = false.obs;
+  //  multiPostcontroller.fbMesssage.text,
+  //  'sap_facebook_custom_link':
+  var isMultiEditfbCustomlinkChanged = false.obs;
+  //  multiPostcontroller.fbCustomLink.text,
+
+  // 'sap_twitter_msg':
+  var isMultiEdittwtrMsgChanged = false.obs;
+  //     multiPostcontroller.twtMesssage.text,
+
+  //    'sap_tumblr_posting_type':
+  var isMultiEditTumbPostingTypeChanged = false.obs;
+  //  multiPostcontroller.tumbSharingPosttype.value ??
+  //   "",
+  //'sap_tumblr_custom_link':
+  var isMultiEditTumbCustomlink = false.obs;
+  // multiPostcontroller.tumblink.text,
+  // 'sap_tumblr_post_img': '""',
+  // 'sap_tumblr_custom_description':
+  var isMultiEditTumbCustomDescription = false.obs;
+  //multiPostcontroller.tumbCustomMessage.text,
+
+  // 'sap_pinterest[accounts][0]':
+  //     '"bharatshoprajasthan|1005428754250575356"',
+  //  'sap_pinterest[message]':
+  var isMultiEditpintMessageChanged = false.obs;
+  //multiPostcontroller.pintCustomMessage.text,
+  // 'sap_pinterest_custom_link':
+  var isMultiEditpintCustomLinkChanged = false.obs;
+  //  multiPostcontroller.pintCustomLink.text,
+  // 'sap_pinterest_post_img': '""',
+
+  // 'sap_gmb[gmb_button_type]': '"LEARN_MORE"',
+  // 'sap_gmb[message]': '""',
+  // 'sap_gmb_custom_link': '""',
+  // 'sap_gmb_post_img': '""',
+  // 'sap-schedule-time-gmb': '""',
+
+  // 'sap_instagram[message]':
+  var isMultiEditInstaMesssageChanged = false.obs;
+  //  multiPostcontroller.instaCustomMessage.text,
+  //
+
+  ///////////////////
 
   // fb image
   Rx<File?> fbselectedImage = Rx<File?>(null);
@@ -511,10 +567,102 @@ class MultPostingsController extends GetxController {
     }
   }
 
+//   accountscontroller.selectedValues.clear();
+  var is_selectedValueschanged = false.obs;
+// accountscontroller.twtnewTwitters.clear();
+  var is_twtnewTwitterschanged = false.obs;
+// dashboardcontroller.setSelectedImage(null);
+  var is_setSelectedImagechanged = false.obs;
+// updateSelectedVideo(null);
+  var is_updateSelectedVideochanged = false.obs;
+// accountscontroller.selectedTumblerValuesqa.clear();
+  var is_selectedTumblerValuesqachanged = false.obs;
+// accountscontroller.selectedPinterestValuesqa.clear();
+  var is_selectedPinterestValuesqachanged = false.obs;
+// accountscontroller.instpintselectedTumblerNames.clear();
+  var is_instpintselectedTumblerNameschanged = false.obs;
+// accountscontroller.selectedyoutubeValuess.clear();
+  var is_selectedyoutubeValuesschanged = false.obs;
+  var is_setSelectedImagechangedfb = false.obs;
+  var is_setSelectedImagechangedtwt = false.obs;
+  var is_setSelectedImagechangedtumb = false.obs;
+  var is_setSelectedImagechangedpint = false.obs;
+  var is_setSelectedImagechangedinsta = false.obs;
+  ////////////
   // Edit Multi
   var editMultiPostLoading = false.obs;
   Future<void> editMultiPostSave(Map payload) async {
+    //rameditmulti
     editMultiPostLoading(true);
+    // var is_selectedValueschanged = false.obs;
+    if (is_selectedValueschanged.value == false) {
+      //
+      accountscontroller.selectedValues.clear();
+    }
+// accountscontroller.twtnewTwitters.clear();
+    //   var is_twtnewTwitterschanged = false.obs;
+    if (is_twtnewTwitterschanged.value == false) {
+      accountscontroller.twtnewTwitters.clear();
+    }
+// dashboardcontroller.setSelectedImage(null);
+    // var is_setSelectedImagechanged = false.obs;
+    if (is_setSelectedImagechanged.value == false) {
+      updateSelectedImage(null);
+    }
+    if (is_setSelectedImagechangedfb.value == false) {
+      fbupdateSelectedImage(null);
+    }
+    if (is_setSelectedImagechangedtwt.value == false) {
+      twtupdateSelectedImage(null);
+    }
+    if (is_setSelectedImagechangedtumb.value == false) {
+      tumbupdateSelectedImage(null);
+    }
+
+    if (is_setSelectedImagechangedpint.value == false) {
+      pintupdateSelectedImage(null);
+    }
+    if (is_setSelectedImagechangedtumb.value == false) {
+      tumbupdateSelectedImage(null);
+    }
+    if (is_setSelectedImagechangedinsta.value == false) {
+      instaupdateSelectedImage(null);
+    }
+    // updateSelectedImage(null);
+
+    // twtupdateSelectedImage(null);
+
+    //     void updateSelectedImage(File? image) { completed
+    //   selectedImage.value = image;
+    //   print("object");
+    // }
+
+    // Method to update the selected image
+
+// updateSelectedVideo(null);
+    //  var is_updateSelectedVideochanged = false.obs;
+
+// accountscontroller.selectedTumblerValuesqa.clear();
+    // var is_selectedTumblerValuesqachanged = false.obs;
+    if (is_selectedTumblerValuesqachanged.value == false) {
+      accountscontroller.selectedTumblerValuesqa.clear();
+    }
+// accountscontroller.selectedPinterestValuesqa.clear();
+    //   var is_selectedPinterestValuesqachanged = false.obs;
+    if (is_selectedPinterestValuesqachanged.value == false) {
+      accountscontroller.selectedPinterestValuesqa.clear();
+    }
+// accountscontroller.instpintselectedTumblerNames.clear();
+    //  var is_instpintselectedTumblerNameschanged = false.obs;
+    if (is_instpintselectedTumblerNameschanged.value == false) {
+      accountscontroller.instpintselectedTumblerNames.clear();
+    }
+// accountscontroller.selectedyoutubeValuess.clear();
+//    var is_selectedyoutubeValuesschanged = false.obs;
+    if (is_selectedyoutubeValuesschanged.value == false) {
+      accountscontroller.selectedyoutubeValuess.clear();
+    }
+    //
 
     try {
       var response = await dioapiService.postRequestAddSaveMultipost(
@@ -537,6 +685,23 @@ class MultPostingsController extends GetxController {
       Map data = response;
       print(data);
       if (data["status"] == "success") {
+        accountscontroller.selectedValues.clear();
+        accountscontroller.twtnewTwitters.clear();
+        // image: dashboardcontroller.selectedImageobss.value,
+        // selectedImage(null);
+        // video: selectedVideos.valu
+        updateSelectedImage(null);
+        fbupdateSelectedImage(null);
+        twtupdateSelectedImage(null);
+        tumbupdateSelectedImage(null);
+        pintupdateSelectedImage(null);
+        instaupdateSelectedImage(null);
+
+        accountscontroller.selectedTumblerValuesqa.clear();
+        accountscontroller.selectedPinterestValuesqa.clear();
+        accountscontroller.instpintselectedTumblerNames.clear();
+        accountscontroller.selectedyoutubeValuess.clear();
+
         Fluttertoast.showToast(
           msg: data["message"],
           toastLength: Toast.LENGTH_SHORT,

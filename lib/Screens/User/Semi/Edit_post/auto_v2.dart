@@ -314,6 +314,60 @@ class _AutoPostv2State extends State<AutoPostv2> {
   ];
 
   String? selectedUserValue;
+  // initfunctions
+  void initFunctions() {
+    //raminit
+    setState(() {
+      // 'status': '1',
+      semicontroller.is_quick_post_message_changed.value = false;
+
+      semicontroller.is_share_link_changed.value = false;
+
+      semicontroller.is_sapscheduletimefbchanged.value = false;
+
+      semicontroller.is_sapscheduletimetw_changed.value = false;
+
+      semicontroller.is_sapscheduletimeyoutube_changed.value = false;
+
+      semicontroller.is_sapscheduletimetumblr_changed.value = false;
+
+      semicontroller.is_sapscheduletimepin_changed.value = false;
+
+      semicontroller.is_sapscheduletimeinstagram_changed.value = false;
+
+      semicontroller.is_sapscheduletime_changed.value = false;
+      //
+      semicontroller.is_selectedValueschanged.value = false;
+      //
+
+// accountscontroller.twtnewTwitters.clear();
+      //   var is_twtnewTwitterschanged = false.obs;
+      semicontroller.is_twtnewTwitterschanged.value = false;
+
+// dashboardcontroller.setSelectedImage(null);
+      // var is_setSelectedImagechanged = false.obs;
+      semicontroller.is_setSelectedImagechanged.value = false;
+
+// updateSelectedVideo(null);
+      //  var is_updateSelectedVideochanged = false.obs;
+      semicontroller.is_updateSelectedVideochanged.value = false;
+// accountscontroller.selectedTumblerValuesqa.clear();
+      // var is_selectedTumblerValuesqachanged = false.obs;
+      semicontroller.is_selectedTumblerValuesqachanged.value = false;
+
+// accountscontroller.selectedPinterestValuesqa.clear();
+      //   var is_selectedPinterestValuesqachanged = false.obs;
+      semicontroller.is_selectedPinterestValuesqachanged.value = false;
+
+// accountscontroller.instpintselectedTumblerNames.clear();
+      //  var is_instpintselectedTumblerNameschanged = false.obs;
+      semicontroller.is_instpintselectedTumblerNameschanged.value = false;
+// accountscontroller.selectedyoutubeValuess.clear();
+//    var is_selectedyoutubeValuesschanged = false.obs;
+      semicontroller.is_selectedyoutubeValuesschanged.value = false;
+    });
+  }
+
 ////////
   @override
   void initState() {
@@ -352,6 +406,10 @@ class _AutoPostv2State extends State<AutoPostv2> {
               });
           });
           semicontroller.updateSelectedVideo(selectedVideo!);
+          //
+          setState(() {
+            semicontroller.is_updateSelectedVideochanged.value = true;
+          });
         }
       }
     } catch (e) {
@@ -432,6 +490,8 @@ class _AutoPostv2State extends State<AutoPostv2> {
       setState(() {
         selectedImage = File(image.path);
         dashboardcontroller.setSelectedImage(selectedImage);
+        semicontroller.is_setSelectedImagechanged.value = true;
+        //image
         base64Image = base64Encode(selectedImage!.readAsBytesSync());
         // profilecontroller.editProfilePicture(selectedImage!); //
         print(selectedImage!.readAsBytesSync().lengthInBytes);
@@ -489,7 +549,8 @@ class _AutoPostv2State extends State<AutoPostv2> {
                                   "image";
                               dashboardcontroller.semiAuotPostMediaType.value =
                                   "enableimage";
-
+                              semicontroller
+                                  .isenable_video_image_changed.value = true;
                               semicontroller.updateSelectedVideo(null);
                               //enableimage
                             });
@@ -519,6 +580,8 @@ class _AutoPostv2State extends State<AutoPostv2> {
                                   "video";
                               dashboardcontroller.semiAuotPostMediaType.value =
                                   "enablevideo";
+                              semicontroller
+                                  .isenable_video_image_changed.value = true;
                               dashboardcontroller.setSelectedImage(null);
                             });
                           },
@@ -1594,6 +1657,9 @@ class _AutoPostv2State extends State<AutoPostv2> {
                   controller: semicontroller.contentLinkController,
                   labelColor: KText,
                   onChanged: (Value) {
+                    setState(() {
+                      semicontroller.iscustom_share_link_changed.value = true;
+                    });
                     setState(() {});
                   },
                   obscureText: false,
@@ -1782,7 +1848,11 @@ class _AutoPostv2State extends State<AutoPostv2> {
                                           onChanged: (selected) {
                                             accountsController
                                                 .onSelectionChanged(selected);
-
+                                            setState(() {
+                                              semicontroller
+                                                  .is_selectedValueschanged
+                                                  .value = true;
+                                            });
                                             // Check if selectedValues is empty and update semicontroller.isFbScheduled
                                             if (accountsController
                                                 .selectedValues.isEmpty) {
@@ -1913,12 +1983,22 @@ class _AutoPostv2State extends State<AutoPostv2> {
                                               accountsController.selectAll();
                                               setState(() {
                                                 semicontroller
+                                                    .is_selectedValueschanged
+                                                    .value = true;
+                                              });
+                                              setState(() {
+                                                semicontroller
                                                     .isFbScheduled.value = true;
                                               });
                                             }),
                                         InkWell(
                                           onTap: () {
                                             accountsController.clearAll();
+                                            setState(() {
+                                              semicontroller
+                                                  .is_selectedValueschanged
+                                                  .value = true;
+                                            });
                                             setState(() {
                                               semicontroller
                                                   .isFbScheduled.value = false;
@@ -2102,6 +2182,9 @@ class _AutoPostv2State extends State<AutoPostv2> {
                                                                 'MM/dd/yyyy hh:mm a')
                                                             .format(
                                                                 fbselectedDate);
+                                                        semicontroller
+                                                            .is_sapscheduletimefbchanged
+                                                            .value = true;
                                                         //
                                                       });
                                                       setState(() {});
@@ -2619,6 +2702,11 @@ class _AutoPostv2State extends State<AutoPostv2> {
                                             accountsController
                                                 .twtonSelectionChanged(
                                                     selected);
+                                            setState(() {
+                                              semicontroller
+                                                  .is_twtnewTwitterschanged
+                                                  .value = true;
+                                            });
 
                                             // Check if selectedValues is empty and update semicontroller.isFbScheduled
                                             if (accountsController
@@ -2691,6 +2779,11 @@ class _AutoPostv2State extends State<AutoPostv2> {
                                               accountsController.twtselectAll();
                                               setState(() {
                                                 semicontroller
+                                                    .is_twtnewTwitterschanged
+                                                    .value = true;
+                                              });
+                                              setState(() {
+                                                semicontroller
                                                     .isTwiitterScheduled
                                                     .value = true;
                                               });
@@ -2698,6 +2791,11 @@ class _AutoPostv2State extends State<AutoPostv2> {
                                         InkWell(
                                           onTap: () {
                                             accountsController.twtclearAll();
+                                            setState(() {
+                                              semicontroller
+                                                  .is_twtnewTwitterschanged
+                                                  .value = true;
+                                            });
                                             setState(() {
                                               semicontroller.isTwiitterScheduled
                                                   .value = false;
@@ -2850,6 +2948,9 @@ class _AutoPostv2State extends State<AutoPostv2> {
                                                             .format(
                                                                 twtselectedDate);
                                                         //
+                                                        semicontroller
+                                                            .is_sapscheduletimetw_changed
+                                                            .value = true;
                                                       });
                                                       setState(() {});
                                                     }
@@ -3146,7 +3247,11 @@ class _AutoPostv2State extends State<AutoPostv2> {
                                             accountsController
                                                 .ytuonSelectionChanged(
                                                     selected);
-
+                                            setState(() {
+                                              semicontroller
+                                                  .is_selectedyoutubeValuesschanged
+                                                  .value = true;
+                                            });
                                             // Check if selectedValues is empty and update semicontroller.isFbScheduled
                                             if (accountsController
                                                 .selectedyoutubeValuess
@@ -3202,6 +3307,11 @@ class _AutoPostv2State extends State<AutoPostv2> {
                                               accountsController
                                                   .ytuselectAllDynamic();
                                               setState(() {
+                                                semicontroller
+                                                    .is_selectedyoutubeValuesschanged
+                                                    .value = true;
+                                              });
+                                              setState(() {
                                                 semicontroller.isyouScheduled
                                                     .value = true;
                                               });
@@ -3214,6 +3324,11 @@ class _AutoPostv2State extends State<AutoPostv2> {
                                           onTap: () {
                                             accountsController
                                                 .ytuclearAllDynamic();
+                                            setState(() {
+                                              semicontroller
+                                                  .is_selectedyoutubeValuesschanged
+                                                  .value = true;
+                                            });
                                             setState(() {
                                               semicontroller
                                                   .isyouScheduled.value = false;
@@ -3375,6 +3490,10 @@ class _AutoPostv2State extends State<AutoPostv2> {
                                                                 'MM/dd/yyyy hh:mm a')
                                                             .format(
                                                                 ytuselectedDate);
+                                                        //
+                                                        semicontroller
+                                                            .is_sapscheduletimeyoutube_changed
+                                                            .value = true;
                                                         //
                                                       });
                                                       setState(() {});
@@ -3670,7 +3789,11 @@ class _AutoPostv2State extends State<AutoPostv2> {
                                             accountsController
                                                 .onTumblerSelectionChanged(
                                                     selected);
-
+                                            setState(() {
+                                              semicontroller
+                                                  .is_selectedTumblerValuesqachanged
+                                                  .value = true;
+                                            });
                                             // Update semicontroller.istumblrScheduled reactively
                                             // semicontroller.istumblrScheduled
                                             //     .value = selected.isNotEmpty;
@@ -3880,6 +4003,11 @@ class _AutoPostv2State extends State<AutoPostv2> {
                                                     .tumbaccountDetails.values
                                                     .toList(),
                                               );
+                                              setState(() {
+                                                semicontroller
+                                                    .is_selectedTumblerValuesqachanged
+                                                    .value = true;
+                                              });
 
                                               setState(() {
                                                 semicontroller.istumblrScheduled
@@ -3911,6 +4039,11 @@ class _AutoPostv2State extends State<AutoPostv2> {
                                             setState(() {
                                               semicontroller.istumblrScheduled
                                                   .value = false;
+                                            });
+                                            setState(() {
+                                              semicontroller
+                                                  .is_selectedTumblerValuesqachanged
+                                                  .value = true;
                                             });
 
                                             // semicontroller.istumblrScheduled
@@ -4077,6 +4210,9 @@ class _AutoPostv2State extends State<AutoPostv2> {
                                                                 'MM/dd/yyyy hh:mm a')
                                                             .format(
                                                                 tumbselectedDate);
+                                                        semicontroller
+                                                            .is_sapscheduletimetumblr_changed
+                                                            .value = true;
                                                         //
                                                       });
                                                       setState(() {});
@@ -4376,7 +4512,11 @@ class _AutoPostv2State extends State<AutoPostv2> {
                                             accountsController
                                                 .pintonTumblerSelectionChanged(
                                                     selected);
-
+                                            setState(() {
+                                              semicontroller
+                                                  .is_selectedPinterestValuesqachanged
+                                                  .value = true;
+                                            });
                                             // Check if selectedValues is empty and update semicontroller.isFbScheduled
                                             if (accountsController
                                                 .pintselectedTumblerNames
@@ -4512,6 +4652,11 @@ class _AutoPostv2State extends State<AutoPostv2> {
                                                   .pintselectAll();
                                               setState(() {
                                                 semicontroller
+                                                    .is_selectedPinterestValuesqachanged
+                                                    .value = true;
+                                              });
+                                              setState(() {
+                                                semicontroller
                                                     .ispinterestScheduled
                                                     .value = true;
                                               });
@@ -4520,6 +4665,11 @@ class _AutoPostv2State extends State<AutoPostv2> {
                                         InkWell(
                                           onTap: () {
                                             accountsController.pintclearAll();
+                                            setState(() {
+                                              semicontroller
+                                                  .is_selectedPinterestValuesqachanged
+                                                  .value = true;
+                                            });
                                             setState(() {
                                               semicontroller
                                                   .ispinterestScheduled
@@ -4674,6 +4824,10 @@ class _AutoPostv2State extends State<AutoPostv2> {
                                                                 'MM/dd/yyyy hh:mm a')
                                                             .format(
                                                                 pintselectedDate);
+                                                        semicontroller
+                                                            .is_sapscheduletimepin_changed
+                                                            .value = true;
+
                                                         //
                                                       });
                                                       setState(() {});
@@ -4929,6 +5083,11 @@ class _AutoPostv2State extends State<AutoPostv2> {
                                             accountsController
                                                 .instpintonTumblerSelectionChanged(
                                                     selected);
+                                            setState(() {
+                                              semicontroller
+                                                  .is_instpintselectedTumblerNameschanged
+                                                  .value = true;
+                                            });
 
                                             // Check if selectedValues is empty and update semicontroller.isFbScheduled
                                             if (accountsController
@@ -4990,6 +5149,11 @@ class _AutoPostv2State extends State<AutoPostv2> {
                                           onTap: () {
                                             accountsController
                                                 .instpintselectAll();
+                                            setState(() {
+                                              semicontroller
+                                                  .is_instpintselectedTumblerNameschanged
+                                                  .value = true;
+                                            });
                                             // Select all users
                                             setState(() {
                                               semicontroller
@@ -5002,6 +5166,11 @@ class _AutoPostv2State extends State<AutoPostv2> {
                                           onTap: () {
                                             accountsController
                                                 .instpintclearAll();
+                                            setState(() {
+                                              semicontroller
+                                                  .is_instpintselectedTumblerNameschanged
+                                                  .value = true;
+                                            });
                                             setState(() {
                                               semicontroller
                                                   .isInstagramScheduled
@@ -5157,6 +5326,9 @@ class _AutoPostv2State extends State<AutoPostv2> {
                                                             .format(
                                                                 instaselectedDate);
                                                         //
+                                                        semicontroller
+                                                            .is_sapscheduletimeinstagram_changed
+                                                            .value = true;
                                                       });
                                                       setState(() {});
                                                     }
@@ -7985,6 +8157,9 @@ class _AutoPostv2State extends State<AutoPostv2> {
                                                   .addpostGlobalTime.value =
                                               DateFormat('MM/dd/yyyy hh:mm a')
                                                   .format(selectedDate);
+                                          semicontroller
+                                              .is_sapscheduletime_changed
+                                              .value = true;
                                         });
                                         setState(() {});
                                       }
@@ -8298,38 +8473,43 @@ class _AutoPostv2State extends State<AutoPostv2> {
                             fontWeight: kFW600,
                             isLoading: false,
                             onTap: () {
-                              /////
+                              // var payload = { //originalPayload
+                              //   'id': semicontroller.semipostMap["post_id"],
+
+                              //   'user_id': userprofilecontroller
+                              //       .profileData["user_details"]["id"],
+                              //   'enable_video_image': dashboardcontroller
+                              //       .semiAuotPostMediaType.value,
+                              //   'custom_share_link':
+                              //       semicontroller.contentLinkController.text,
+
+                              //   // 'status': '1',
+                              //   'message': semicontroller
+                              //       .autoPostMessageController.text,
+                              //   'share_link': '',
+                              //   //     semicontrollercontentLinkController.text,
+                              //   'sap-schedule-time-fb':
+                              //       multiPostcontroller.addpostfbTime.value,
+                              //   //'2024-12-23 12:21:47',
+                              //   'sap-schedule-time-tw':
+                              //       multiPostcontroller.addposttwtTime.value,
+                              //   'sap-schedule-time-youtube':
+                              //       multiPostcontroller.addpostytuTime.value,
+                              //   'sap-schedule-time-tumblr':
+                              //       multiPostcontroller.addposttumbTime.value,
+                              //   'sap-schedule-time-pin':
+                              //       multiPostcontroller.addpostpintTime.value,
+                              //   'sap-schedule-time-instagram':
+                              //       multiPostcontroller.addpostinstaTime.value,
+                              //   'sap-schedule-time':
+                              //       multiPostcontroller.addpostGlobalTime.value
+                              //   //'',
+                              // };
                               var payload = {
                                 'id': semicontroller.semipostMap["post_id"],
-
                                 'user_id': userprofilecontroller
                                     .profileData["user_details"]["id"],
-                                'enable_video_image': dashboardcontroller
-                                    .semiAuotPostMediaType.value,
-                                'custom_share_link':
-                                    semicontroller.contentLinkController.text,
-
-                                // 'status': '1',
-                                'message': semicontroller
-                                    .autoPostMessageController.text,
-                                'share_link': '',
-                                //     semicontrollercontentLinkController.text,
-                                'sap-schedule-time-fb':
-                                    multiPostcontroller.addpostfbTime.value,
-                                //'2024-12-23 12:21:47',
-                                'sap-schedule-time-tw':
-                                    multiPostcontroller.addposttwtTime.value,
-                                'sap-schedule-time-youtube':
-                                    multiPostcontroller.addpostytuTime.value,
-                                'sap-schedule-time-tumblr':
-                                    multiPostcontroller.addposttumbTime.value,
-                                'sap-schedule-time-pin':
-                                    multiPostcontroller.addpostpintTime.value,
-                                'sap-schedule-time-instagram':
-                                    multiPostcontroller.addpostinstaTime.value,
-                                'sap-schedule-time':
-                                    multiPostcontroller.addpostGlobalTime.value
-                                //'',
+                                'status': '2',
                               };
                               if (semicontroller.isFbScheduled.value)
                                 payload['networks[facebook]'] = '1';
@@ -8353,6 +8533,55 @@ class _AutoPostv2State extends State<AutoPostv2> {
                                 payload['networks[blogger]'] = '1';
                               if (semicontroller.isWordpressScheduled.value)
                                 payload['networks[wordpress]'] = '1';
+                              // New chages
+                              if (semicontroller
+                                  .isenable_video_image_changed.value)
+                                payload['enable_video_image'] =
+                                    dashboardcontroller
+                                        .semiAuotPostMediaType.value;
+                              if (semicontroller
+                                  .iscustom_share_link_changed.value)
+                                payload['custom_share_link'] =
+                                    semicontroller.contentLinkController.text;
+
+                              // 'status': '1',
+                              if (semicontroller
+                                  .is_quick_post_message_changed.value) //
+                                payload['message'] = semicontroller
+                                    .autoPostMessageController.text;
+                              if (semicontroller.is_share_link_changed.value) //
+                                payload['share_link'] = '';
+                              //     semicontrollercontentLinkController.text,
+                              if (semicontroller
+                                  .is_sapscheduletimefbchanged.value) //
+                                payload['sap-schedule-time-fb'] =
+                                    multiPostcontroller.addpostfbTime.value;
+                              //'2024-12-23 12:21:47',
+                              if (semicontroller
+                                  .is_sapscheduletimetw_changed.value) //
+                                payload['sap-schedule-time-tw'] =
+                                    multiPostcontroller.addposttwtTime.value;
+                              if (semicontroller
+                                  .is_sapscheduletimeyoutube_changed.value) //
+                                payload['sap-schedule-time-youtube'] =
+                                    multiPostcontroller.addpostytuTime.value;
+                              if (semicontroller
+                                  .is_sapscheduletimetumblr_changed.value) //
+                                payload['sap-schedule-time-tumblr'] =
+                                    multiPostcontroller.addposttumbTime.value;
+                              if (semicontroller
+                                  .is_sapscheduletimepin_changed.value) //
+                                payload['sap-schedule-time-pin'] =
+                                    multiPostcontroller.addpostpintTime.value;
+                              if (semicontroller
+                                  .is_sapscheduletimeinstagram_changed.value) //
+                                payload['sap-schedule-time-instagram'] =
+                                    multiPostcontroller.addpostinstaTime.value;
+                              if (semicontroller
+                                  .is_sapscheduletime_changed.value) //
+                                payload['sap-schedule-time'] =
+                                    multiPostcontroller.addpostGlobalTime.value;
+
                               semicontroller.quickPostUpdate(payload);
                               // semicontroller.quickPostPublish(payload);
                               setState(() {

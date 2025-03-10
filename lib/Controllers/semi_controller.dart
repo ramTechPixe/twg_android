@@ -1595,6 +1595,7 @@ class SemiController extends GetxController {
       if (data["status"] == "1") {
         // scheduledList.value = data["data"];
         autoPostMessageController.text = data["response"];
+        is_quick_post_message_changed.value = true;
 
         Fluttertoast.showToast(
           msg: "Caption generated successfully",
@@ -1660,6 +1661,7 @@ class SemiController extends GetxController {
       if (data["status"] == "1") {
         // scheduledList.value = data["data"];
         autoPostMessageController.text = data["response"];
+        is_quick_post_message_changed.value = true;
         //data["data"]["curl_response"]
         //  data["data"]["data"]["curl_response"] ?? "";
         // userprofilecontroller.profileData["user_details"]["first_name"] ?? "";
@@ -1748,6 +1750,48 @@ class SemiController extends GetxController {
   var isredditScheduled = false.obs;
   var isbloggerScheduled = false.obs;
   var isWordpressScheduled = false.obs;
+  // For quick post
+  //enable_video_image
+  var isenable_video_image_changed = false.obs;
+  //custom_share_link
+  var iscustom_share_link_changed = false.obs;
+// //                                 'message':
+  var is_quick_post_message_changed = false.obs;
+  //  'share_link': '',
+  var is_share_link_changed = false.obs;
+  // sap-schedule-time-fb
+  var is_sapscheduletimefbchanged = false.obs;
+  //  'sap-schedule-time-tw':
+  var is_sapscheduletimetw_changed = false.obs;
+  // sap-schedule-time-youtube
+  var is_sapscheduletimeyoutube_changed = false.obs;
+  // sap-schedule-time-tumblr
+  var is_sapscheduletimetumblr_changed = false.obs;
+  // sap-schedule-time-pin
+  var is_sapscheduletimepin_changed = false.obs;
+  // sap-schedule-time-instagram
+  var is_sapscheduletimeinstagram_changed = false.obs;
+  // sap-schedule-time
+  var is_sapscheduletime_changed = false.obs;
+  //continue
+//   accountscontroller.selectedValues.clear();
+  var is_selectedValueschanged = false.obs;
+// accountscontroller.twtnewTwitters.clear();
+  var is_twtnewTwitterschanged = false.obs;
+// dashboardcontroller.setSelectedImage(null);
+  var is_setSelectedImagechanged = false.obs;
+// updateSelectedVideo(null);
+  var is_updateSelectedVideochanged = false.obs;
+// accountscontroller.selectedTumblerValuesqa.clear();
+  var is_selectedTumblerValuesqachanged = false.obs;
+// accountscontroller.selectedPinterestValuesqa.clear();
+  var is_selectedPinterestValuesqachanged = false.obs;
+// accountscontroller.instpintselectedTumblerNames.clear();
+  var is_instpintselectedTumblerNameschanged = false.obs;
+// accountscontroller.selectedyoutubeValuess.clear();
+  var is_selectedyoutubeValuesschanged = false.obs;
+  ////////////
+
   ////////
   var aiTextLoading = false.obs;
   Future<void> autoPostAIText(Map paylodd) async {
@@ -2164,10 +2208,51 @@ class SemiController extends GetxController {
   Future<void> quickPostUpdate(Map payload) async {
     updatepublishLoading(true);
 
+    ///////////////////////////////////////////////
+    //   accountscontroller.selectedValues.clear();
+    // var is_selectedValueschanged = false.obs;
+    if (is_selectedValueschanged.value == false) {
+      //
+      accountscontroller.selectedValues.clear();
+    }
+// accountscontroller.twtnewTwitters.clear();
+    //   var is_twtnewTwitterschanged = false.obs;
+    if (is_twtnewTwitterschanged.value == false) {
+      accountscontroller.twtnewTwitters.clear();
+    }
+// dashboardcontroller.setSelectedImage(null);
+    // var is_setSelectedImagechanged = false.obs;
+    if (is_setSelectedImagechanged.value == false) {
+      dashboardcontroller.setSelectedImage(null);
+    }
+// updateSelectedVideo(null);
+    //  var is_updateSelectedVideochanged = false.obs;
+    if (is_updateSelectedVideochanged.value == false) {
+      updateSelectedVideo(null);
+    }
+// accountscontroller.selectedTumblerValuesqa.clear();
+    // var is_selectedTumblerValuesqachanged = false.obs;
+    if (is_selectedTumblerValuesqachanged.value == false) {
+      accountscontroller.selectedTumblerValuesqa.clear();
+    }
+// accountscontroller.selectedPinterestValuesqa.clear();
+    //   var is_selectedPinterestValuesqachanged = false.obs;
+    if (is_selectedPinterestValuesqachanged.value == false) {
+      accountscontroller.selectedPinterestValuesqa.clear();
+    }
+// accountscontroller.instpintselectedTumblerNames.clear();
+    //  var is_instpintselectedTumblerNameschanged = false.obs;
+    if (is_instpintselectedTumblerNameschanged.value == false) {
+      accountscontroller.instpintselectedTumblerNames.clear();
+    }
+// accountscontroller.selectedyoutubeValuess.clear();
+//    var is_selectedyoutubeValuesschanged = false.obs;
+    if (is_selectedyoutubeValuesschanged.value == false) {
+      accountscontroller.selectedyoutubeValuess.clear();
+    }
+    ///////////////////////////
+
     try {
-      // var response = await apiService.postRequestQuickPostPublish( // postRequestAddQucikpost
-      //  var response = await apiService.postRequestQuickPostPublish(
-      //    endpoint: "quick-save-post-api/", payload: payload);
 //
       var response = await dioapiService.postRequestAddQucikpost(
           // var response = await apiService.postRequestAddSaveMultipost(
@@ -2200,6 +2285,8 @@ class SemiController extends GetxController {
         accountscontroller.selectedPinterestValuesqa.clear();
         accountscontroller.instpintselectedTumblerNames.clear();
         accountscontroller.selectedyoutubeValuess.clear();
+        userScheduledPost();
+        Get.back();
         // Get.toNamed(kPublishedScreens);
         Fluttertoast.showToast(
           msg: data["message"],
