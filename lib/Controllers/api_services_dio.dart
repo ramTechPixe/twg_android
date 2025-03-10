@@ -17,9 +17,9 @@ import 'package:intl/intl.dart';
 import 'package:dio/dio.dart' as dio;
 import 'package:get/get.dart';
 //
-import 'package:dio/dio.dart' as dio; // Alias for dio package
+import 'package:dio/dio.dart' as dio; //
 import 'package:get/get_connect/http/src/multipart/form_data.dart'
-    as getFormData; // Alias for GetX FormData
+    as getFormData; //
 import 'package:http_parser/http_parser.dart';
 import 'package:dio/dio.dart' as dio_package;
 import 'package:get/get_connect/http/src/multipart/form_data.dart'
@@ -268,7 +268,8 @@ class ApiServiceDio extends GetxService {
       }
       if (tumbList.isNotEmpty) {
         for (String id in tumbList) {
-          formData.fields.add(MapEntry('sap_tumblr_user_id[0]', id));
+          formData.fields.add(
+              MapEntry('sap_tumblr_user_id[0]', id)); // sap_tumblr_user_id[0]
         }
       }
       if (fbList.isNotEmpty) {
@@ -451,32 +452,31 @@ class ApiServiceDio extends GetxService {
     required List ytuList,
     Map<String, String>? customHeaders,
     File? video,
-    File? image, // Separate image for img
+    File? image, //
   }) async {
     try {
-      // Create Dio instance
+      //
       dio.Dio dioInstance = dio.Dio();
 
-      // Construct headers
+      //
       Map<String, dynamic> headers = {};
       if (customHeaders != null) {
         headers.addAll(customHeaders);
       }
 
-      // Construct form data using dio.FormData
+      //
       dio.FormData formData = dio.FormData();
 
-      // Add fields dynamically with null handling
+      //
       payload.forEach((key, value) {
-        formData.fields
-            .add(MapEntry(key, value?.toString() ?? "")); // Handle null values
+        formData.fields.add(MapEntry(key, value?.toString() ?? ""));
       });
       if (ytuList.isNotEmpty) {
         for (String id in ytuList) {
           formData.fields.add(MapEntry('networks[youtube_accounts][0]', id));
         } //
       }
-      //  'sap_instagram_post_img': '', dynamic \\ 'sap_instagram[accounts][0]':
+
       if (instaList.isNotEmpty) {
         for (String id in instaList) {
           formData.fields.add(MapEntry('networks[instagram_accounts][0]', id));
@@ -497,13 +497,12 @@ class ApiServiceDio extends GetxService {
           formData.fields.add(MapEntry('networks[fb_accounts][0]', id));
         }
       }
-
       ;
 
       if (twtList.isNotEmpty) {
         for (String id in twtList) {
           formData.fields.add(MapEntry('networks[tw_accounts][0]', "0"));
-        } // tw_accounts
+        }
       }
       ;
 
@@ -514,23 +513,24 @@ class ApiServiceDio extends GetxService {
             await dio.MultipartFile.fromFile(
               image.path,
               filename: basename(image.path),
-              // filename: 'post_image.jpg',
-              contentType: MediaType('image', 'jpeg'), // Specify the MIME type
+
+              contentType: MediaType('image', 'jpeg'), //
             ),
           ),
         );
-      }
-      if (video != null) {
-        formData.files.add(
-          MapEntry(
-            'video',
-            await dio.MultipartFile.fromFile(
-              video.path,
-              filename: basename(video.path),
-              contentType: MediaType('video', 'mp4'),
+      } else {
+        if (video != null) {
+          formData.files.add(
+            MapEntry(
+              'video',
+              await dio.MultipartFile.fromFile(
+                video.path,
+                filename: basename(video.path),
+                contentType: MediaType('video', 'mp4'),
+              ),
             ),
-          ),
-        );
+          );
+        }
       }
 
 /////////////

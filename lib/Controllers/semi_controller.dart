@@ -110,6 +110,9 @@ class SemiController extends GetxController {
 
       formattedDateglobal.value =
           DateFormat('dd/MM/yyyy hh:mm a').format(dateTime);
+
+      multiPostcontroller.addpostGlobalTime.value =
+          DateFormat('dd/MM/yyyy hh:mm a').format(dateTime);
     } catch (e) {
       formattedDateglobal.value = 'Invalid timestamp';
     }
@@ -193,6 +196,8 @@ class SemiController extends GetxController {
           DateTime.fromMillisecondsSinceEpoch(timestampInSeconds * 1000);
 
       formattedDatefb.value = DateFormat('dd/MM/yyyy hh:mm a').format(dateTime);
+      multiPostcontroller.addpostfbTime.value =
+          DateFormat('dd/MM/yyyy hh:mm a').format(dateTime);
     } catch (e) {
       formattedDatefb.value = 'Invalid timestamp';
     }
@@ -268,6 +273,8 @@ class SemiController extends GetxController {
           DateTime.fromMillisecondsSinceEpoch(timestampInSeconds * 1000);
 
       formattedDatetwt.value =
+          DateFormat('dd/MM/yyyy hh:mm a').format(dateTime);
+      multiPostcontroller.addposttwtTime.value =
           DateFormat('dd/MM/yyyy hh:mm a').format(dateTime);
     } catch (e) {
       formattedDatetwt.value = 'Invalid timestamp';
@@ -351,6 +358,9 @@ class SemiController extends GetxController {
 
       formattedDatetumb.value =
           DateFormat('dd/MM/yyyy hh:mm a').format(dateTime);
+
+      multiPostcontroller.addposttumbTime.value =
+          DateFormat('dd/MM/yyyy hh:mm a').format(dateTime);
     } catch (e) {
       formattedDatetumb.value = 'Invalid timestamp';
     }
@@ -432,6 +442,8 @@ class SemiController extends GetxController {
           DateTime.fromMillisecondsSinceEpoch(timestampInSeconds * 1000);
 
       formattedDatepint.value =
+          DateFormat('dd/MM/yyyy hh:mm a').format(dateTime);
+      multiPostcontroller.addpostpintTime.value =
           DateFormat('dd/MM/yyyy hh:mm a').format(dateTime);
     } catch (e) {
       formattedDatepint.value = 'Invalid timestamp';
@@ -515,6 +527,8 @@ class SemiController extends GetxController {
 
       formattedDateinsta.value =
           DateFormat('dd/MM/yyyy hh:mm a').format(dateTime);
+      multiPostcontroller.addpostinstaTime.value =
+          DateFormat('dd/MM/yyyy hh:mm a').format(dateTime);
     } catch (e) {
       formattedDateinsta.value = 'Invalid timestamp';
     }
@@ -597,6 +611,8 @@ class SemiController extends GetxController {
 
       formattedDateyou.value =
           DateFormat('dd/MM/yyyy hh:mm a').format(dateTime);
+      multiPostcontroller.addpostytuTime.value =
+          DateFormat('dd/MM/yyyy hh:mm a').format(dateTime);
     } catch (e) {
       formattedDateyou.value = 'Invalid timestamp';
     }
@@ -606,6 +622,10 @@ class SemiController extends GetxController {
   var twtPostedAccounts = "".obs;
   var tumbPostedAccounts = "".obs;
   var pintPostedAccounts = "".obs;
+  var instaPostedAccounts = "".obs;
+  var reddPostedAccounts = "".obs;
+  var bloggPostedAccounts = "".obs;
+
   void setMetaDatafb(List data) {
     fbPostedAccounts.value = data.join('\n');
   }
@@ -622,6 +642,35 @@ class SemiController extends GetxController {
     pintPostedAccounts.value = data.join('\n');
   }
 
+  void setMetaDataInsta(List data) {
+    instaPostedAccounts.value = data.join('\n');
+  }
+
+  void setMetaDataRedd(List data) {
+    reddPostedAccounts.value = data.join('\n');
+  }
+
+  void setMetaDataBlogg(List data) {
+    bloggPostedAccounts.value = data.join('\n');
+  }
+
+//////////////////////////////
+//  {status: 1, message: Post meta retrieved successfully,
+// response: {facebook: 1,
+//  fb_accounts: [477637478770316|493105290336037],
+//  twitter: 1,
+// tw_accounts: [0],
+// tumblr: 1,
+// tumblr_accounts: [qwZ4e2SJ9D5rHsRNYzKxEfd1i7QR9mTBY0T3KN0S72lnvAxNe6|bharatsports], tu_posting_type: text, pin_accounts: [bharatshoprajasthan|1005428754250654545],
+//  instagram: 1,
+//  instagram_accounts: [17841465697895553|493105290336037],
+//  reddit: 1,
+//  reddit_a
+// ccounts: [1acdqzatrh],
+// blogger: 1,
+//  blogger_urls: [https://thewisguystech.com/settings/],
+//  blogger_title: testt, blogger_accounts: [112393148941340012997]}}
+////////////////////
   ///
   Future<void> getStatusofFBScheduled(Map payloadst) async {
     sapFbtimeLoading(true);
@@ -644,13 +693,34 @@ class SemiController extends GetxController {
         // multiPostcontroller
         //     .
         // tumbPostedAccounts
-        setMetaDatafb(data["response"]["fb_accounts"]);
+        if (data["response"]["fb_accounts"] != null) {
+          setMetaDatafb(data["response"]["fb_accounts"]);
+        }
 
-        setMetaDatatwt(data["response"]["tw_accounts"]);
+        if (data["response"]["tw_accounts"] != null) {
+          setMetaDatatwt(data["response"]["tw_accounts"]);
+        }
 
-        setMetaDatatumb(data["response"]["tumblr_accounts"]);
+        if (data["response"]["tumblr_accounts"] != null) {
+          setMetaDatatumb(data["response"]["tumblr_accounts"]);
+        }
+        if (data["response"]["pin_accounts"] != null) {
+          setMetaDatapingt(data["response"]["pin_accounts"]);
+        }
 
-        setMetaDatapingt(data["response"]["pin_accounts"]);
+        if (data["response"]["instagram_accounts"] != null) {
+          setMetaDataInsta(data["response"]["instagram_accounts"]);
+        }
+
+        if (data["response"]["reddit_accounts"]) {
+          setMetaDataRedd(data["response"]["reddit_accounts"]);
+        }
+
+        if (data["response"]["blogger_accounts"]) {
+          setMetaDataBlogg(data["response"]["blogger_accounts"]);
+        }
+
+        //  reddit_accounts
 
         // postFBStatus.value = data["meta_data"];
         // convertAndFormatTimestamyou(data["response"]);
@@ -1359,13 +1429,99 @@ class SemiController extends GetxController {
         // multiPostcontroller
         //     .
         // tumbPostedAccounts
-        setMetaDatafb(data["response"]["fb_accounts"]);
+        // setMetaDatafb(data["response"]["fb_accounts"]);
 
-        setMetaDatatwt(data["response"]["tw_accounts"]);
+        // setMetaDatatwt(data["response"]["tw_accounts"]);
 
-        setMetaDatatumb(data["response"]["tumblr_accounts"]);
+        // setMetaDatatumb(data["response"]["tumblr_accounts"]);
 
-        setMetaDatapingt(data["response"]["pin_accounts"]);
+        // setMetaDatapingt(data["response"]["pin_accounts"]);
+
+        ///////////////////////////////////////
+        if (data["response"]["fb_accounts"] != null) {
+          setMetaDatafb(data["response"]["fb_accounts"]);
+        }
+
+        if (data["response"]["facebook"] != null &&
+            data["response"]["facebook"] == "1") {
+          isFbScheduled.value = true;
+        }
+
+        if (data["response"]["tw_accounts"] != null) {
+          setMetaDatatwt(data["response"]["tw_accounts"]);
+        }
+        if (data["response"]["twitter"] != null &&
+            data["response"]["twitter"] == "1") {
+          isTwiitterScheduled.value = true;
+        }
+
+        if (data["response"]["tumblr_accounts"] != null) {
+          setMetaDatatumb(data["response"]["tumblr_accounts"]);
+        }
+        if (data["response"]["tumblr"] != null &&
+            data["response"]["tumblr"] == "1") {
+          istumblrScheduled.value = true;
+        }
+        if (data["response"]["pin_accounts"] != null) {
+          setMetaDatapingt(data["response"]["pin_accounts"]);
+        }
+
+        // if (data["response"]["pinterest"] != null &&
+        //     data["response"]["pinterest"] == "1") {
+        //
+        if (data["response"]["pin_accounts"] != null &&
+            data["response"]["pin_accounts"].isNotEmpty) {
+          ispinterestScheduled.value = true;
+        }
+
+        if (data["response"]["instagram_accounts"] != null) {
+          setMetaDataInsta(data["response"]["instagram_accounts"]);
+        }
+        if (data["response"]["instagram"] != null &&
+            data["response"]["instagram"] == "1") {
+          isInstagramScheduled.value = true;
+          ;
+        }
+
+        // if (data["response"]["reddit_accounts"]) {
+        //   setMetaDataRedd(data["response"]["reddit_accounts"]);
+        // }
+
+        // if (data["response"]["blogger_accounts"]) {
+        //   setMetaDataBlogg(data["response"]["blogger_accounts"]);
+        // }
+
+        /////////////// instagram_accounts
+//          {status: 1, message: Post meta retrieved successfully,
+// response: {facebook: 1,
+//  fb_accounts: [477637478770316|493105290336037],
+//  twitter: 1,
+// tw_accounts: [0],
+// tumblr: 1,
+// tumblr_accounts: [qwZ4e2SJ9D5rHsRNYzKxEfd1i7QR9mTBY0T3KN0S72lnvAxNe6|bharatsports], tu_posting_type: text, pin_accounts: [bharatshoprajasthan|1005428754250654545],
+//  instagram: 1,
+//  instagram_accounts: [17841465697895553|493105290336037],
+//  reddit: 1,
+//  reddit_a
+// ccounts: [1acdqzatrh],
+// blogger: 1,
+//  blogger_urls: [https://thewisguystech.com/settings/],
+//  blogger_title: testt, blogger_accounts: [112393148941340012997]}}
+
+//  //////////////////////////////////////////////////////////////
+
+// Instagram
+// instagram_accounts
+
+// reddit
+// reddit_accounts
+
+// blogger
+// blogger_accounts
+
+// wordpress
+// wordpress_accounts
+        //////
 
         // postFBStatus.value = data["meta_data"];
         // convertAndFormatTimestamyou(data["response"]);
@@ -1439,6 +1595,7 @@ class SemiController extends GetxController {
       if (data["status"] == "1") {
         // scheduledList.value = data["data"];
         autoPostMessageController.text = data["response"];
+        is_quick_post_message_changed.value = true;
 
         Fluttertoast.showToast(
           msg: "Caption generated successfully",
@@ -1504,6 +1661,7 @@ class SemiController extends GetxController {
       if (data["status"] == "1") {
         // scheduledList.value = data["data"];
         autoPostMessageController.text = data["response"];
+        is_quick_post_message_changed.value = true;
         //data["data"]["curl_response"]
         //  data["data"]["data"]["curl_response"] ?? "";
         // userprofilecontroller.profileData["user_details"]["first_name"] ?? "";
@@ -1592,6 +1750,48 @@ class SemiController extends GetxController {
   var isredditScheduled = false.obs;
   var isbloggerScheduled = false.obs;
   var isWordpressScheduled = false.obs;
+  // For quick post
+  //enable_video_image
+  var isenable_video_image_changed = false.obs;
+  //custom_share_link
+  var iscustom_share_link_changed = false.obs;
+// //                                 'message':
+  var is_quick_post_message_changed = false.obs;
+  //  'share_link': '',
+  var is_share_link_changed = false.obs;
+  // sap-schedule-time-fb
+  var is_sapscheduletimefbchanged = false.obs;
+  //  'sap-schedule-time-tw':
+  var is_sapscheduletimetw_changed = false.obs;
+  // sap-schedule-time-youtube
+  var is_sapscheduletimeyoutube_changed = false.obs;
+  // sap-schedule-time-tumblr
+  var is_sapscheduletimetumblr_changed = false.obs;
+  // sap-schedule-time-pin
+  var is_sapscheduletimepin_changed = false.obs;
+  // sap-schedule-time-instagram
+  var is_sapscheduletimeinstagram_changed = false.obs;
+  // sap-schedule-time
+  var is_sapscheduletime_changed = false.obs;
+  //continue
+//   accountscontroller.selectedValues.clear();
+  var is_selectedValueschanged = false.obs;
+// accountscontroller.twtnewTwitters.clear();
+  var is_twtnewTwitterschanged = false.obs;
+// dashboardcontroller.setSelectedImage(null);
+  var is_setSelectedImagechanged = false.obs;
+// updateSelectedVideo(null);
+  var is_updateSelectedVideochanged = false.obs;
+// accountscontroller.selectedTumblerValuesqa.clear();
+  var is_selectedTumblerValuesqachanged = false.obs;
+// accountscontroller.selectedPinterestValuesqa.clear();
+  var is_selectedPinterestValuesqachanged = false.obs;
+// accountscontroller.instpintselectedTumblerNames.clear();
+  var is_instpintselectedTumblerNameschanged = false.obs;
+// accountscontroller.selectedyoutubeValuess.clear();
+  var is_selectedyoutubeValuesschanged = false.obs;
+  ////////////
+
   ////////
   var aiTextLoading = false.obs;
   Future<void> autoPostAIText(Map paylodd) async {
@@ -1928,8 +2128,10 @@ class SemiController extends GetxController {
           twtList: accountscontroller.twtnewTwitters.value,
           image: dashboardcontroller.selectedImageobss.value,
           video: selectedVideos.value,
-          tumbList: accountscontroller.selectedTumblerValues,
-          pintList: accountscontroller.selectedPinterestValues,
+          tumbList: accountscontroller.selectedTumblerValuesqa,
+          pintList: accountscontroller.selectedPinterestValuesqa,
+          // tumbList: accountscontroller.selectedTumblerValues,
+          // pintList: accountscontroller.selectedPinterestValues,
           instaList: accountscontroller.instpintselectedTumblerNames,
           ytuList: accountscontroller.selectedyoutubeValuess);
       Map data = response;
@@ -1937,6 +2139,20 @@ class SemiController extends GetxController {
       // Map data = jsonDecode(response);
       // print(data);
       if (data["status"] == "1") {
+        /////////////////
+        accountscontroller.selectedValues.clear();
+        accountscontroller.twtnewTwitters.clear();
+        // image: dashboardcontroller.selectedImageobss.value,
+        dashboardcontroller.setSelectedImage(null);
+        // video: selectedVideos.valu
+        updateSelectedVideo(null);
+        accountscontroller.selectedTumblerValuesqa.clear();
+        accountscontroller.selectedPinterestValuesqa.clear();
+        accountscontroller.instpintselectedTumblerNames.clear();
+        accountscontroller.selectedyoutubeValuess.clear();
+        Get.toNamed(kPublishedScreens);
+
+        ///////////
         Fluttertoast.showToast(
           msg: data["message"],
           toastLength: Toast.LENGTH_SHORT,
@@ -1992,10 +2208,51 @@ class SemiController extends GetxController {
   Future<void> quickPostUpdate(Map payload) async {
     updatepublishLoading(true);
 
+    ///////////////////////////////////////////////
+    //   accountscontroller.selectedValues.clear();
+    // var is_selectedValueschanged = false.obs;
+    if (is_selectedValueschanged.value == false) {
+      //
+      accountscontroller.selectedValues.clear();
+    }
+// accountscontroller.twtnewTwitters.clear();
+    //   var is_twtnewTwitterschanged = false.obs;
+    if (is_twtnewTwitterschanged.value == false) {
+      accountscontroller.twtnewTwitters.clear();
+    }
+// dashboardcontroller.setSelectedImage(null);
+    // var is_setSelectedImagechanged = false.obs;
+    if (is_setSelectedImagechanged.value == false) {
+      dashboardcontroller.setSelectedImage(null);
+    }
+// updateSelectedVideo(null);
+    //  var is_updateSelectedVideochanged = false.obs;
+    if (is_updateSelectedVideochanged.value == false) {
+      updateSelectedVideo(null);
+    }
+// accountscontroller.selectedTumblerValuesqa.clear();
+    // var is_selectedTumblerValuesqachanged = false.obs;
+    if (is_selectedTumblerValuesqachanged.value == false) {
+      accountscontroller.selectedTumblerValuesqa.clear();
+    }
+// accountscontroller.selectedPinterestValuesqa.clear();
+    //   var is_selectedPinterestValuesqachanged = false.obs;
+    if (is_selectedPinterestValuesqachanged.value == false) {
+      accountscontroller.selectedPinterestValuesqa.clear();
+    }
+// accountscontroller.instpintselectedTumblerNames.clear();
+    //  var is_instpintselectedTumblerNameschanged = false.obs;
+    if (is_instpintselectedTumblerNameschanged.value == false) {
+      accountscontroller.instpintselectedTumblerNames.clear();
+    }
+// accountscontroller.selectedyoutubeValuess.clear();
+//    var is_selectedyoutubeValuesschanged = false.obs;
+    if (is_selectedyoutubeValuesschanged.value == false) {
+      accountscontroller.selectedyoutubeValuess.clear();
+    }
+    ///////////////////////////
+
     try {
-      // var response = await apiService.postRequestQuickPostPublish( // postRequestAddQucikpost
-      //  var response = await apiService.postRequestQuickPostPublish(
-      //    endpoint: "quick-save-post-api/", payload: payload);
 //
       var response = await dioapiService.postRequestAddQucikpost(
           // var response = await apiService.postRequestAddSaveMultipost(
@@ -2005,9 +2262,12 @@ class SemiController extends GetxController {
           fbList: accountscontroller.selectedValues.value,
           twtList: accountscontroller.twtnewTwitters.value,
           image: dashboardcontroller.selectedImageobss.value,
+          // selectedImageobss
           video: selectedVideos.value,
-          tumbList: accountscontroller.selectedTumblerValues,
-          pintList: accountscontroller.selectedPinterestValues,
+          tumbList: accountscontroller.selectedTumblerValuesqa,
+          pintList: accountscontroller.selectedPinterestValuesqa,
+          // tumbList: accountscontroller.selectedTumblerValues,
+          // pintList: accountscontroller.selectedPinterestValues,
           instaList: accountscontroller.instpintselectedTumblerNames,
           ytuList: accountscontroller.selectedyoutubeValuess);
       Map data = jsonDecode(response);
@@ -2015,6 +2275,19 @@ class SemiController extends GetxController {
       // Map data = jsonDecode(response);
       // print(data);
       if (data["status"] == "success") {
+        accountscontroller.selectedValues.clear();
+        accountscontroller.twtnewTwitters.clear();
+        // image: dashboardcontroller.selectedImageobss.value,
+        dashboardcontroller.setSelectedImage(null);
+        // video: selectedVideos.valu
+        updateSelectedVideo(null);
+        accountscontroller.selectedTumblerValuesqa.clear();
+        accountscontroller.selectedPinterestValuesqa.clear();
+        accountscontroller.instpintselectedTumblerNames.clear();
+        accountscontroller.selectedyoutubeValuess.clear();
+        userScheduledPost();
+        Get.back();
+        // Get.toNamed(kPublishedScreens);
         Fluttertoast.showToast(
           msg: data["message"],
           toastLength: Toast.LENGTH_SHORT,

@@ -318,19 +318,8 @@ class CustomFormFields extends StatelessWidget {
       children: [
         /////////////
         ///#D2D6DE
-        /////////////
-        Text(
-          label,
-          textAlign: TextAlign.start,
-          style: GoogleFonts.poppins(
-              fontSize: kSixteenFont,
-              //  letterSpacing: 1,
-              color: KBlack_twg,
-              fontWeight: kFW400),
-        ),
-        SizedBox(
-          height: 2.h,
-        ),
+        ///////////// 
+       
         Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8),

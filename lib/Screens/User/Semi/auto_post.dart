@@ -69,12 +69,16 @@ class _AutoPostState extends State<AutoPost> {
       setState(() {
         isfbSwitched = true;
         _isfbExpandCard = true;
+        semicontroller.isFbScheduled.value = true;
       });
+      print("object");
     } else {
       setState(() {
         isfbSwitched = false;
         _isfbExpandCard = false;
+        semicontroller.isFbScheduled.value = false;
       });
+      print("object");
     }
   }
 
@@ -89,11 +93,13 @@ class _AutoPostState extends State<AutoPost> {
       setState(() {
         istwSwitched = true;
         _istwExpandCard = true;
+        semicontroller.isTwiitterScheduled.value = true;
       });
     } else {
       setState(() {
         istwSwitched = false;
         _istwExpandCard = false;
+        semicontroller.isTwiitterScheduled.value = false;
       });
     }
   }
@@ -109,11 +115,13 @@ class _AutoPostState extends State<AutoPost> {
       setState(() {
         isytuSwitched = true;
         _isytuExpandCard = true;
+        semicontroller.isyouScheduled.value = true;
       });
     } else {
       setState(() {
         isytuSwitched = false;
         _isytuExpandCard = false;
+        semicontroller.isyouScheduled.value = false;
       });
     }
   }
@@ -129,11 +137,13 @@ class _AutoPostState extends State<AutoPost> {
       setState(() {
         istumbSwitched = true;
         _istumbExpandCard = true;
+        semicontroller.istumblrScheduled.value = true;
       });
     } else {
       setState(() {
         istumbSwitched = false;
         _istumbExpandCard = false;
+        semicontroller.istumblrScheduled.value = false;
       });
     }
   }
@@ -149,11 +159,13 @@ class _AutoPostState extends State<AutoPost> {
       setState(() {
         ispintSwitched = true;
         _ispintExpandCard = true;
+        semicontroller.ispinterestScheduled.value = true;
       });
     } else {
       setState(() {
         ispintSwitched = false;
         _ispintExpandCard = false;
+        semicontroller.ispinterestScheduled.value = false;
       });
     }
   }
@@ -169,11 +181,13 @@ class _AutoPostState extends State<AutoPost> {
       setState(() {
         isinstaSwitched = true;
         _isinstaExpandCard = true;
+        semicontroller.isInstagramScheduled.value = true;
       });
     } else {
       setState(() {
         isinstaSwitched = false;
         _isinstaExpandCard = false;
+        semicontroller.isInstagramScheduled.value = false;
       });
     }
   }
@@ -1481,8 +1495,11 @@ class _AutoPostState extends State<AutoPost> {
                   ),
                 ),
                 // implement later
-                UserSimplePreferences.getfacebookStatus() == null ||
-                        UserSimplePreferences.getfacebookStatus() == false
+                // UserSimplePreferences.getfacebookStatus() == null ||
+                //         UserSimplePreferences.getfacebookStatus() == false
+                accountsController.isFBenabledFromBackend.value != "1"
+                    // ? true
+                    // : false,
                     ? SizedBox()
                     : AnimatedContainer(
                         duration: const Duration(milliseconds: 200),
@@ -1919,121 +1936,248 @@ class _AutoPostState extends State<AutoPost> {
                                     //         onTap: () {}),
                                     //   ],
                                     // ),
-
                                     SizedBox(
                                       height: 20.h,
                                     ),
-                                    CustomFormFields(
-                                      hintText: DateFormat.yMMMd()
-                                                  .format(fbselectedDate) ==
-                                              DateFormat.yMMMd()
-                                                  .format(DateTime.now())
-                                          ? "Select Date & Time"
-                                          : DateFormat('dd/MM/yyyy hh:mm a')
-                                              .format(fbselectedDate),
-                                      ontap: () async {
-                                        // Step 1: Show Date Picker
-                                        final DateTime? pickedDate =
-                                            await showDatePicker(
-                                          context: context,
-                                          initialDate: fbselectedDate,
-                                          firstDate: DateTime(1924, 8),
-                                          lastDate: DateTime(2025, 8),
-                                          builder: (context, child) {
-                                            return Theme(
-                                              data: Theme.of(context).copyWith(
-                                                colorScheme:
-                                                    const ColorScheme.light(
-                                                  primary:
-                                                      Kform_border_twg, // Primary color for date picker
-                                                  onSurface: Colors
-                                                      .black, // Text color for unselected items
-                                                ),
-                                              ),
-                                              child: child!,
-                                            );
-                                          },
-                                        );
-
-                                        if (pickedDate != null) {
-                                          // Step 2: Show Time Picker
-                                          final TimeOfDay? pickedTime =
-                                              await showTimePicker(
-                                            context: context,
-                                            initialTime: TimeOfDay.fromDateTime(
-                                                fbselectedDate),
-                                            builder: (context, child) {
-                                              return Theme(
-                                                data:
-                                                    Theme.of(context).copyWith(
-                                                  timePickerTheme:
-                                                      const TimePickerThemeData(
-                                                    dialBackgroundColor:
-                                                        Colors.white,
-                                                    hourMinuteTextColor:
-                                                        Colors.black,
-                                                  ),
-                                                ),
-                                                child: child!,
-                                              );
-                                            },
-                                          );
-
-                                          if (pickedTime != null) {
-                                            // Step 3: Combine Date and Time
-                                            setState(() {
-                                              fbselectedDate = DateTime(
-                                                pickedDate.year,
-                                                pickedDate.month,
-                                                pickedDate.day,
-                                                pickedTime.hour,
-                                                pickedTime.minute,
-                                              );
-                                              fbchoosenDate = fbselectedDate;
-                                              fbselectDate.value = DateFormat(
-                                                      'MM/dd/yyyy hh:mm a')
-                                                  .format(fbselectedDate);
-                                              multiPostcontroller.addpostfbTime
-                                                  .value = DateFormat(
-                                                      'MM/dd/yyyy hh:mm a')
-                                                  .format(fbselectedDate);
-                                              //
-                                            });
-                                          }
-                                        }
-                                      },
-                                      enabled: true,
-                                      readOnly: true,
-                                      labelColor: KText,
-                                      onChanged: (value) {
-                                        setState(() {});
-                                      },
-                                      obscureText: false,
-                                      contentPadding:
-                                          const EdgeInsets.symmetric(
-                                              vertical: 16, horizontal: 8),
-                                      fontSize: kFourteenFont,
-                                      // prefix: Image.asset(
-                                      //   "assets/images/black_clock.png",
-                                      //   height: 10.h,
-                                      //   width: 10.w,
-                                      // ),
-                                      fontWeight: FontWeight.w500,
-                                      hintColor: DateFormat.yMMMd()
-                                                  .format(fbselectedDate) ==
-                                              DateFormat.yMMMd()
-                                                  .format(DateTime.now())
-                                          ? KTextgery.withOpacity(0.5)
-                                          : KdarkText,
-                                      maxLines: 1,
-                                      label: "Schedule Facebook Time",
-                                      validator: (value) {
-                                        if (value!.isEmpty) {
-                                          return 'Please Schedule';
-                                        }
-                                        return null;
-                                      },
+                                    Text(
+                                      "Schedule Facebook Time",
+                                      textAlign: TextAlign.start,
+                                      style: GoogleFonts.poppins(
+                                          fontSize: kSixteenFont,
+                                          //  letterSpacing: 1,
+                                          color: KBlack_twg,
+                                          fontWeight: kFW400),
                                     ),
+                                    SizedBox(
+                                      height: 2.h,
+                                    ),
+                                    // SizedBox(
+                                    //   height: 20.h,
+                                    // ),
+                                    Obx(
+                                      () => Container(
+                                        width: double.infinity,
+                                        padding: EdgeInsets.symmetric(
+                                            vertical: 15.h, horizontal: 20.w),
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(8),
+                                            border:
+                                                Border.all(color: KTextgery)),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Text(multiPostcontroller
+                                                    .addpostfbTime.value
+                                                //  fbselectDate.value,
+                                                //  "select FB Time"
+                                                ),
+                                            InkWell(
+                                                onTap: () async {
+                                                  // Step 1: Show Date Picker
+                                                  final DateTime? pickedDate =
+                                                      await showDatePicker(
+                                                    context: context,
+                                                    initialDate: fbselectedDate,
+                                                    firstDate:
+                                                        DateTime(1924, 8),
+                                                    lastDate: DateTime(2025, 8),
+                                                    builder: (context, child) {
+                                                      return Theme(
+                                                        data: Theme.of(context)
+                                                            .copyWith(
+                                                          colorScheme:
+                                                              const ColorScheme
+                                                                  .light(
+                                                            primary:
+                                                                Kform_border_twg, // Primary color for date picker
+                                                            onSurface: Colors
+                                                                .black, // Text color for unselected items
+                                                          ),
+                                                        ),
+                                                        child: child!,
+                                                      );
+                                                    },
+                                                  );
+
+                                                  if (pickedDate != null) {
+                                                    // Step 2: Show Time Picker
+                                                    final TimeOfDay?
+                                                        pickedTime =
+                                                        await showTimePicker(
+                                                      context: context,
+                                                      initialTime: TimeOfDay
+                                                          .fromDateTime(
+                                                              fbselectedDate),
+                                                      builder:
+                                                          (context, child) {
+                                                        return Theme(
+                                                          data:
+                                                              Theme.of(context)
+                                                                  .copyWith(
+                                                            timePickerTheme:
+                                                                const TimePickerThemeData(
+                                                              dialBackgroundColor:
+                                                                  Colors.white,
+                                                              hourMinuteTextColor:
+                                                                  Colors.black,
+                                                            ),
+                                                          ),
+                                                          child: child!,
+                                                        );
+                                                      },
+                                                    );
+
+                                                    if (pickedTime != null) {
+                                                      // Step 3: Combine Date and Time
+                                                      setState(() {
+                                                        fbselectedDate =
+                                                            DateTime(
+                                                          pickedDate.year,
+                                                          pickedDate.month,
+                                                          pickedDate.day,
+                                                          pickedTime.hour,
+                                                          pickedTime.minute,
+                                                        );
+                                                        fbchoosenDate =
+                                                            fbselectedDate;
+                                                        fbselectDate
+                                                            .value = DateFormat(
+                                                                'MM/dd/yyyy hh:mm a')
+                                                            .format(
+                                                                fbselectedDate);
+                                                        multiPostcontroller
+                                                            .addpostfbTime
+                                                            .value = DateFormat(
+                                                                'MM/dd/yyyy hh:mm a')
+                                                            .format(
+                                                                fbselectedDate);
+                                                        //
+                                                      });
+                                                      setState(() {});
+                                                    }
+                                                  }
+                                                },
+                                                child: Icon(Icons.timer))
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+
+                                    // CustomFormFields(
+                                    //   hintText: DateFormat.yMMMd()
+                                    //               .format(fbselectedDate) ==
+                                    //           DateFormat.yMMMd()
+                                    //               .format(DateTime.now())
+                                    //       ? "Select Date & Time"
+                                    //       : DateFormat('dd/MM/yyyy hh:mm a')
+                                    //           .format(fbselectedDate),
+                                    //   ontap: () async {
+                                    //     // Step 1: Show Date Picker
+                                    //     final DateTime? pickedDate =
+                                    //         await showDatePicker(
+                                    //       context: context,
+                                    //       initialDate: fbselectedDate,
+                                    //       firstDate: DateTime(1924, 8),
+                                    //       lastDate: DateTime(2025, 8),
+                                    //       builder: (context, child) {
+                                    //         return Theme(
+                                    //           data: Theme.of(context).copyWith(
+                                    //             colorScheme:
+                                    //                 const ColorScheme.light(
+                                    //               primary:
+                                    //                   Kform_border_twg, // Primary color for date picker
+                                    //               onSurface: Colors
+                                    //                   .black, // Text color for unselected items
+                                    //             ),
+                                    //           ),
+                                    //           child: child!,
+                                    //         );
+                                    //       },
+                                    //     );
+
+                                    //     if (pickedDate != null) {
+                                    //       // Step 2: Show Time Picker
+                                    //       final TimeOfDay? pickedTime =
+                                    //           await showTimePicker(
+                                    //         context: context,
+                                    //         initialTime: TimeOfDay.fromDateTime(
+                                    //             fbselectedDate),
+                                    //         builder: (context, child) {
+                                    //           return Theme(
+                                    //             data:
+                                    //                 Theme.of(context).copyWith(
+                                    //               timePickerTheme:
+                                    //                   const TimePickerThemeData(
+                                    //                 dialBackgroundColor:
+                                    //                     Colors.white,
+                                    //                 hourMinuteTextColor:
+                                    //                     Colors.black,
+                                    //               ),
+                                    //             ),
+                                    //             child: child!,
+                                    //           );
+                                    //         },
+                                    //       );
+
+                                    //       if (pickedTime != null) {
+                                    //         // Step 3: Combine Date and Time
+                                    //         setState(() {
+                                    //           fbselectedDate = DateTime(
+                                    //             pickedDate.year,
+                                    //             pickedDate.month,
+                                    //             pickedDate.day,
+                                    //             pickedTime.hour,
+                                    //             pickedTime.minute,
+                                    //           );
+                                    //           fbchoosenDate = fbselectedDate;
+                                    //           fbselectDate.value = DateFormat(
+                                    //                   'MM/dd/yyyy hh:mm a')
+                                    //               .format(fbselectedDate);
+                                    //           multiPostcontroller.addpostfbTime
+                                    //               .value = DateFormat(
+                                    //                   'MM/dd/yyyy hh:mm a')
+                                    //               .format(fbselectedDate);
+                                    //           //
+                                    //         });
+                                    //         setState(() {});
+                                    //       }
+                                    //     }
+                                    //   },
+                                    //   enabled: true,
+                                    //   readOnly: true,
+                                    //   labelColor: KText,
+                                    //   onChanged: (value) {
+                                    //     setState(() {});
+                                    //   },
+                                    //   obscureText: false,
+                                    //   contentPadding:
+                                    //       const EdgeInsets.symmetric(
+                                    //           vertical: 16, horizontal: 8),
+                                    //   fontSize: kFourteenFont,
+                                    //   // prefix: Image.asset(
+                                    //   //   "assets/images/black_clock.png",
+                                    //   //   height: 10.h,
+                                    //   //   width: 10.w,
+                                    //   // ),
+                                    //   fontWeight: FontWeight.w500,
+                                    //   hintColor: DateFormat.yMMMd()
+                                    //               .format(fbselectedDate) ==
+                                    //           DateFormat.yMMMd()
+                                    //               .format(DateTime.now())
+                                    //       ? KTextgery.withOpacity(0.5)
+                                    //       : KdarkText,
+                                    //   maxLines: 1,
+                                    //   label: "Schedule Facebook Time",
+                                    //   validator: (value) {
+                                    //     if (value!.isEmpty) {
+                                    //       return 'Please Schedule';
+                                    //     }
+                                    //     return null;
+                                    //   },
+                                    // ),
+
                                     // CustomFormFields(
                                     //   hintText: DateFormat.yMMMd()
                                     //               .format(selectedDate) ==
@@ -2191,12 +2335,14 @@ class _AutoPostState extends State<AutoPost> {
                         ),
                       ),
 
-                UserSimplePreferences.getTwitterStatus() == null ||
-                        UserSimplePreferences.getTwitterStatus() == false
+                // UserSimplePreferences.getTwitterStatus() == null ||
+                //         UserSimplePreferences.getTwitterStatus() == false
+                accountsController.isTwtenabledFromBackend.value != "1"
+                    // ? true
+                    // : false,
                     ? SizedBox()
                     : AnimatedContainer(
                         duration: const Duration(milliseconds: 200),
-                        
                         child: Column(
                           children: [
                             Row(
@@ -2458,7 +2604,7 @@ class _AutoPostState extends State<AutoPost> {
                                       height: 10.h,
                                     ),
                                     Text(
-                                      "Select each of the users that you want to automatically post to Facebook when a new post is published and enter  ' , ' to select.",
+                                      "Select each of the users that you want to automatically post to Facebook when a new post is published ",
                                       style: GoogleFonts.poppins(
                                           fontSize: kTenFont,
                                           color: kblack,
@@ -2534,117 +2680,242 @@ class _AutoPostState extends State<AutoPost> {
                                     SizedBox(
                                       height: 20.h,
                                     ),
-                                    CustomFormFields(
-                                      hintText: DateFormat.yMMMd()
-                                                  .format(twtselectedDate) ==
-                                              DateFormat.yMMMd()
-                                                  .format(DateTime.now())
-                                          ? "Select Date & Time"
-                                          : DateFormat('dd/MM/yyyy hh:mm a')
-                                              .format(twtselectedDate),
-                                      ontap: () async {
-                                        // Step 1: Show Date Picker
-                                        final DateTime? pickedDate =
-                                            await showDatePicker(
-                                          context: context,
-                                          initialDate: twtselectedDate,
-                                          firstDate: DateTime(1924, 8),
-                                          lastDate: DateTime(2025, 8),
-                                          builder: (context, child) {
-                                            return Theme(
-                                              data: Theme.of(context).copyWith(
-                                                colorScheme:
-                                                    const ColorScheme.light(
-                                                  primary:
-                                                      Kform_border_twg, // Primary color for date picker
-                                                  onSurface: Colors
-                                                      .black, // Text color for unselected items
-                                                ),
-                                              ),
-                                              child: child!,
-                                            );
-                                          },
-                                        );
-
-                                        if (pickedDate != null) {
-                                          // Step 2: Show Time Picker
-                                          final TimeOfDay? pickedTime =
-                                              await showTimePicker(
-                                            context: context,
-                                            initialTime: TimeOfDay.fromDateTime(
-                                                twtselectedDate),
-                                            builder: (context, child) {
-                                              return Theme(
-                                                data:
-                                                    Theme.of(context).copyWith(
-                                                  timePickerTheme:
-                                                      const TimePickerThemeData(
-                                                    dialBackgroundColor:
-                                                        Colors.white,
-                                                    hourMinuteTextColor:
-                                                        Colors.black,
-                                                  ),
-                                                ),
-                                                child: child!,
-                                              );
-                                            },
-                                          );
-
-                                          if (pickedTime != null) {
-                                            // Step 3: Combine Date and Time
-                                            setState(() {
-                                              twtselectedDate = DateTime(
-                                                pickedDate.year,
-                                                pickedDate.month,
-                                                pickedDate.day,
-                                                pickedTime.hour,
-                                                pickedTime.minute,
-                                              );
-                                              twtchoosenDate = twtselectedDate;
-                                              twtselectDate.value = DateFormat(
-                                                      'MM/dd/yyyy hh:mm a')
-                                                  .format(twtselectedDate);
-                                              multiPostcontroller.addposttwtTime
-                                                  .value = DateFormat(
-                                                      'MM/dd/yyyy hh:mm a')
-                                                  .format(twtselectedDate);
-                                              //
-                                            });
-                                          }
-                                        }
-                                      },
-                                      enabled: true,
-                                      readOnly: true,
-                                      labelColor: KText,
-                                      onChanged: (value) {
-                                        setState(() {});
-                                      },
-                                      obscureText: false,
-                                      contentPadding:
-                                          const EdgeInsets.symmetric(
-                                              vertical: 16, horizontal: 8),
-                                      fontSize: kFourteenFont,
-                                      // prefix: Image.asset(
-                                      //   "assets/images/black_clock.png",
-                                      //   height: 10.h,
-                                      //   width: 10.w,
-                                      // ),
-                                      fontWeight: FontWeight.w500,
-                                      hintColor: DateFormat.yMMMd()
-                                                  .format(twtselectedDate) ==
-                                              DateFormat.yMMMd()
-                                                  .format(DateTime.now())
-                                          ? KTextgery.withOpacity(0.5)
-                                          : KdarkText,
-                                      maxLines: 1,
-                                      label: "Schedule Global",
-                                      validator: (value) {
-                                        if (value!.isEmpty) {
-                                          return 'Please Schedule';
-                                        }
-                                        return null;
-                                      },
+                                    Text(
+                                      "Schedule Twitter Time",
+                                      textAlign: TextAlign.start,
+                                      style: GoogleFonts.poppins(
+                                          fontSize: kSixteenFont,
+                                          //  letterSpacing: 1,
+                                          color: KBlack_twg,
+                                          fontWeight: kFW400),
                                     ),
+                                    SizedBox(
+                                      height: 2.h,
+                                    ),
+                                    Obx(
+                                      () => Container(
+                                        width: double.infinity,
+                                        padding: EdgeInsets.symmetric(
+                                            vertical: 15.h, horizontal: 20.w),
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(8),
+                                            border:
+                                                Border.all(color: KTextgery)),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Text(
+                                              multiPostcontroller
+                                                  .addposttwtTime.value,
+                                              //  fbselectDate.value,
+                                              //  "select FB Time"
+                                            ),
+                                            InkWell(
+                                                onTap: () async {
+                                                  // Step 1: Show Date Picker
+                                                  final DateTime? pickedDate =
+                                                      await showDatePicker(
+                                                    context: context,
+                                                    initialDate:
+                                                        twtselectedDate,
+                                                    firstDate:
+                                                        DateTime(1924, 8),
+                                                    lastDate: DateTime(2025, 8),
+                                                    builder: (context, child) {
+                                                      return Theme(
+                                                        data: Theme.of(context)
+                                                            .copyWith(
+                                                          colorScheme:
+                                                              const ColorScheme
+                                                                  .light(
+                                                            primary:
+                                                                Kform_border_twg, // Primary color for date picker
+                                                            onSurface: Colors
+                                                                .black, // Text color for unselected items
+                                                          ),
+                                                        ),
+                                                        child: child!,
+                                                      );
+                                                    },
+                                                  );
+
+                                                  if (pickedDate != null) {
+                                                    // Step 2: Show Time Picker
+                                                    final TimeOfDay?
+                                                        pickedTime =
+                                                        await showTimePicker(
+                                                      context: context,
+                                                      initialTime: TimeOfDay
+                                                          .fromDateTime(
+                                                              twtselectedDate),
+                                                      builder:
+                                                          (context, child) {
+                                                        return Theme(
+                                                          data:
+                                                              Theme.of(context)
+                                                                  .copyWith(
+                                                            timePickerTheme:
+                                                                const TimePickerThemeData(
+                                                              dialBackgroundColor:
+                                                                  Colors.white,
+                                                              hourMinuteTextColor:
+                                                                  Colors.black,
+                                                            ),
+                                                          ),
+                                                          child: child!,
+                                                        );
+                                                      },
+                                                    );
+
+                                                    if (pickedTime != null) {
+                                                      // Step 3: Combine Date and Time
+                                                      setState(() {
+                                                        twtselectedDate =
+                                                            DateTime(
+                                                          pickedDate.year,
+                                                          pickedDate.month,
+                                                          pickedDate.day,
+                                                          pickedTime.hour,
+                                                          pickedTime.minute,
+                                                        );
+                                                        twtchoosenDate =
+                                                            twtselectedDate;
+                                                        twtselectDate
+                                                            .value = DateFormat(
+                                                                'MM/dd/yyyy hh:mm a')
+                                                            .format(
+                                                                twtselectedDate);
+                                                        multiPostcontroller
+                                                            .addposttwtTime
+                                                            .value = DateFormat(
+                                                                'MM/dd/yyyy hh:mm a')
+                                                            .format(
+                                                                twtselectedDate);
+                                                        //
+                                                      });
+                                                      setState(() {});
+                                                    }
+                                                  }
+                                                },
+                                                child: Icon(Icons.timer))
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                    // CustomFormFields(
+                                    //   hintText: DateFormat.yMMMd()
+                                    //               .format(twtselectedDate) ==
+                                    //           DateFormat.yMMMd()
+                                    //               .format(DateTime.now())
+                                    //       ? "Select Date & Time"
+                                    //       : DateFormat('dd/MM/yyyy hh:mm a')
+                                    //           .format(twtselectedDate),
+                                    //   ontap: () async {
+                                    //     // Step 1: Show Date Picker
+                                    //     final DateTime? pickedDate =
+                                    //         await showDatePicker(
+                                    //       context: context,
+                                    //       initialDate: twtselectedDate,
+                                    //       firstDate: DateTime(1924, 8),
+                                    //       lastDate: DateTime(2025, 8),
+                                    //       builder: (context, child) {
+                                    //         return Theme(
+                                    //           data: Theme.of(context).copyWith(
+                                    //             colorScheme:
+                                    //                 const ColorScheme.light(
+                                    //               primary:
+                                    //                   Kform_border_twg, // Primary color for date picker
+                                    //               onSurface: Colors
+                                    //                   .black, // Text color for unselected items
+                                    //             ),
+                                    //           ),
+                                    //           child: child!,
+                                    //         );
+                                    //       },
+                                    //     );
+
+                                    //     if (pickedDate != null) {
+                                    //       // Step 2: Show Time Picker
+                                    //       final TimeOfDay? pickedTime =
+                                    //           await showTimePicker(
+                                    //         context: context,
+                                    //         initialTime: TimeOfDay.fromDateTime(
+                                    //             twtselectedDate),
+                                    //         builder: (context, child) {
+                                    //           return Theme(
+                                    //             data:
+                                    //                 Theme.of(context).copyWith(
+                                    //               timePickerTheme:
+                                    //                   const TimePickerThemeData(
+                                    //                 dialBackgroundColor:
+                                    //                     Colors.white,
+                                    //                 hourMinuteTextColor:
+                                    //                     Colors.black,
+                                    //               ),
+                                    //             ),
+                                    //             child: child!,
+                                    //           );
+                                    //         },
+                                    //       );
+
+                                    //       if (pickedTime != null) {
+                                    //         // Step 3: Combine Date and Time
+                                    //         setState(() {
+                                    //           twtselectedDate = DateTime(
+                                    //             pickedDate.year,
+                                    //             pickedDate.month,
+                                    //             pickedDate.day,
+                                    //             pickedTime.hour,
+                                    //             pickedTime.minute,
+                                    //           );
+                                    //           twtchoosenDate = twtselectedDate;
+                                    //           twtselectDate.value = DateFormat(
+                                    //                   'MM/dd/yyyy hh:mm a')
+                                    //               .format(twtselectedDate);
+                                    //           multiPostcontroller.addposttwtTime
+                                    //               .value = DateFormat(
+                                    //                   'MM/dd/yyyy hh:mm a')
+                                    //               .format(twtselectedDate);
+                                    //           //
+                                    //         });
+                                    //         setState(() {});
+                                    //       }
+                                    //     }
+                                    //   },
+                                    //   enabled: true,
+                                    //   readOnly: true,
+                                    //   labelColor: KText,
+                                    //   onChanged: (value) {
+                                    //     setState(() {});
+                                    //   },
+                                    //   obscureText: false,
+                                    //   contentPadding:
+                                    //       const EdgeInsets.symmetric(
+                                    //           vertical: 16, horizontal: 8),
+                                    //   fontSize: kFourteenFont,
+                                    //   // prefix: Image.asset(
+                                    //   //   "assets/images/black_clock.png",
+                                    //   //   height: 10.h,
+                                    //   //   width: 10.w,
+                                    //   // ),
+                                    //   fontWeight: FontWeight.w500,
+                                    //   hintColor: DateFormat.yMMMd()
+                                    //               .format(twtselectedDate) ==
+                                    //           DateFormat.yMMMd()
+                                    //               .format(DateTime.now())
+                                    //       ? KTextgery.withOpacity(0.5)
+                                    //       : KdarkText,
+                                    //   maxLines: 1,
+                                    //   label: "Schedule Global",
+                                    //   validator: (value) {
+                                    //     if (value!.isEmpty) {
+                                    //       return 'Please Schedule';
+                                    //     }
+                                    //     return null;
+                                    //   },
+                                    // ),
 
                                     // Stack(
                                     //   children: [
@@ -2695,8 +2966,9 @@ class _AutoPostState extends State<AutoPost> {
                         ),
                       ),
                 // youtube
-                UserSimplePreferences.getYouTubeStatus() == null ||
-                        UserSimplePreferences.getYouTubeStatus() == false
+                // UserSimplePreferences.getYouTubeStatus() == null ||
+                //         UserSimplePreferences.getYouTubeStatus() == false
+                accountsController.isYoutenabledFromBackend.value != "1"
                     ? SizedBox()
                     : AnimatedContainer(
                         duration: const Duration(milliseconds: 200),
@@ -2926,117 +3198,248 @@ class _AutoPostState extends State<AutoPost> {
                                     SizedBox(
                                       height: 20.h,
                                     ),
-                                    CustomFormFields(
-                                      hintText: DateFormat.yMMMd()
-                                                  .format(ytuselectedDate) ==
-                                              DateFormat.yMMMd()
-                                                  .format(DateTime.now())
-                                          ? "Select Date & Time"
-                                          : DateFormat('dd/MM/yyyy hh:mm a')
-                                              .format(ytuselectedDate),
-                                      ontap: () async {
-                                        // Step 1: Show Date Picker
-                                        final DateTime? pickedDate =
-                                            await showDatePicker(
-                                          context: context,
-                                          initialDate: ytuselectedDate,
-                                          firstDate: DateTime(1924, 8),
-                                          lastDate: DateTime(2025, 8),
-                                          builder: (context, child) {
-                                            return Theme(
-                                              data: Theme.of(context).copyWith(
-                                                colorScheme:
-                                                    const ColorScheme.light(
-                                                  primary:
-                                                      Kform_border_twg, // Primary color for date picker
-                                                  onSurface: Colors
-                                                      .black, // Text color for unselected items
-                                                ),
-                                              ),
-                                              child: child!,
-                                            );
-                                          },
-                                        );
 
-                                        if (pickedDate != null) {
-                                          // Step 2: Show Time Picker
-                                          final TimeOfDay? pickedTime =
-                                              await showTimePicker(
-                                            context: context,
-                                            initialTime: TimeOfDay.fromDateTime(
-                                                ytuselectedDate),
-                                            builder: (context, child) {
-                                              return Theme(
-                                                data:
-                                                    Theme.of(context).copyWith(
-                                                  timePickerTheme:
-                                                      const TimePickerThemeData(
-                                                    dialBackgroundColor:
-                                                        Colors.white,
-                                                    hourMinuteTextColor:
-                                                        Colors.black,
-                                                  ),
-                                                ),
-                                                child: child!,
-                                              );
-                                            },
-                                          );
-
-                                          if (pickedTime != null) {
-                                            // Step 3: Combine Date and Time
-                                            setState(() {
-                                              ytuselectedDate = DateTime(
-                                                pickedDate.year,
-                                                pickedDate.month,
-                                                pickedDate.day,
-                                                pickedTime.hour,
-                                                pickedTime.minute,
-                                              );
-                                              ytuchoosenDate = ytuselectedDate;
-                                              ytuselectDate.value = DateFormat(
-                                                      'MM/dd/yyyy hh:mm a')
-                                                  .format(ytuselectedDate);
-                                              multiPostcontroller.addpostytuTime
-                                                  .value = DateFormat(
-                                                      'MM/dd/yyyy hh:mm a')
-                                                  .format(ytuselectedDate);
-                                              //
-                                            });
-                                          }
-                                        }
-                                      },
-                                      enabled: true,
-                                      readOnly: true,
-                                      labelColor: KText,
-                                      onChanged: (value) {
-                                        setState(() {});
-                                      },
-                                      obscureText: false,
-                                      contentPadding:
-                                          const EdgeInsets.symmetric(
-                                              vertical: 16, horizontal: 8),
-                                      fontSize: kFourteenFont,
-                                      // prefix: Image.asset(
-                                      //   "assets/images/black_clock.png",
-                                      //   height: 10.h,
-                                      //   width: 10.w,
-                                      // ),
-                                      fontWeight: FontWeight.w500,
-                                      hintColor: DateFormat.yMMMd()
-                                                  .format(ytuselectedDate) ==
-                                              DateFormat.yMMMd()
-                                                  .format(DateTime.now())
-                                          ? KTextgery.withOpacity(0.5)
-                                          : KdarkText,
-                                      maxLines: 1,
-                                      label: "Schedule Global",
-                                      validator: (value) {
-                                        if (value!.isEmpty) {
-                                          return 'Please Schedule';
-                                        }
-                                        return null;
-                                      },
+                                    SizedBox(
+                                      height: 20.h,
                                     ),
+                                    Text(
+                                      "Schedule Youtube Time",
+                                      textAlign: TextAlign.start,
+                                      style: GoogleFonts.poppins(
+                                          fontSize: kSixteenFont,
+                                          //  letterSpacing: 1,
+                                          color: KBlack_twg,
+                                          fontWeight: kFW400),
+                                    ),
+                                    SizedBox(
+                                      height: 2.h,
+                                    ),
+                                    Obx(
+                                      () => Container(
+                                        width: double.infinity,
+                                        padding: EdgeInsets.symmetric(
+                                            vertical: 15.h, horizontal: 20.w),
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(8),
+                                            border:
+                                                Border.all(color: KTextgery)),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Text(multiPostcontroller
+                                                    .addpostytuTime.value
+                                                // multiPostcontroller
+                                                //     .addposttwtTime.value,
+                                                //  fbselectDate.value,
+                                                //  "select FB Time"
+                                                ),
+                                            InkWell(
+                                                onTap: () async {
+                                                  // Step 1: Show Date Picker
+                                                  final DateTime? pickedDate =
+                                                      await showDatePicker(
+                                                    context: context,
+                                                    initialDate:
+                                                        ytuselectedDate,
+                                                    firstDate:
+                                                        DateTime(1924, 8),
+                                                    lastDate: DateTime(2025, 8),
+                                                    builder: (context, child) {
+                                                      return Theme(
+                                                        data: Theme.of(context)
+                                                            .copyWith(
+                                                          colorScheme:
+                                                              const ColorScheme
+                                                                  .light(
+                                                            primary:
+                                                                Kform_border_twg, // Primary color for date picker
+                                                            onSurface: Colors
+                                                                .black, // Text color for unselected items
+                                                          ),
+                                                        ),
+                                                        child: child!,
+                                                      );
+                                                    },
+                                                  );
+
+                                                  if (pickedDate != null) {
+                                                    // Step 2: Show Time Picker
+                                                    final TimeOfDay?
+                                                        pickedTime =
+                                                        await showTimePicker(
+                                                      context: context,
+                                                      initialTime: TimeOfDay
+                                                          .fromDateTime(
+                                                              ytuselectedDate),
+                                                      builder:
+                                                          (context, child) {
+                                                        return Theme(
+                                                          data:
+                                                              Theme.of(context)
+                                                                  .copyWith(
+                                                            timePickerTheme:
+                                                                const TimePickerThemeData(
+                                                              dialBackgroundColor:
+                                                                  Colors.white,
+                                                              hourMinuteTextColor:
+                                                                  Colors.black,
+                                                            ),
+                                                          ),
+                                                          child: child!,
+                                                        );
+                                                      },
+                                                    );
+
+                                                    if (pickedTime != null) {
+                                                      // Step 3: Combine Date and Time
+                                                      setState(() {
+                                                        ytuselectedDate =
+                                                            DateTime(
+                                                          pickedDate.year,
+                                                          pickedDate.month,
+                                                          pickedDate.day,
+                                                          pickedTime.hour,
+                                                          pickedTime.minute,
+                                                        );
+                                                        ytuchoosenDate =
+                                                            ytuselectedDate;
+                                                        ytuselectDate
+                                                            .value = DateFormat(
+                                                                'MM/dd/yyyy hh:mm a')
+                                                            .format(
+                                                                ytuselectedDate);
+                                                        multiPostcontroller
+                                                            .addpostytuTime
+                                                            .value = DateFormat(
+                                                                'MM/dd/yyyy hh:mm a')
+                                                            .format(
+                                                                ytuselectedDate);
+                                                        //
+                                                      });
+                                                      setState(() {});
+                                                    }
+                                                  }
+                                                },
+                                                child: Icon(Icons.timer))
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+
+                                    // CustomFormFields(
+                                    //   hintText: DateFormat.yMMMd()
+                                    //               .format(ytuselectedDate) ==
+                                    //           DateFormat.yMMMd()
+                                    //               .format(DateTime.now())
+                                    //       ? "Select Date & Time"
+                                    //       : DateFormat('dd/MM/yyyy hh:mm a')
+                                    //           .format(ytuselectedDate),
+                                    //   ontap: () async {
+                                    //     // Step 1: Show Date Picker
+                                    //     final DateTime? pickedDate =
+                                    //         await showDatePicker(
+                                    //       context: context,
+                                    //       initialDate: ytuselectedDate,
+                                    //       firstDate: DateTime(1924, 8),
+                                    //       lastDate: DateTime(2025, 8),
+                                    //       builder: (context, child) {
+                                    //         return Theme(
+                                    //           data: Theme.of(context).copyWith(
+                                    //             colorScheme:
+                                    //                 const ColorScheme.light(
+                                    //               primary:
+                                    //                   Kform_border_twg, // Primary color for date picker
+                                    //               onSurface: Colors
+                                    //                   .black, // Text color for unselected items
+                                    //             ),
+                                    //           ),
+                                    //           child: child!,
+                                    //         );
+                                    //       },
+                                    //     );
+
+                                    //     if (pickedDate != null) {
+                                    //       // Step 2: Show Time Picker
+                                    //       final TimeOfDay? pickedTime =
+                                    //           await showTimePicker(
+                                    //         context: context,
+                                    //         initialTime: TimeOfDay.fromDateTime(
+                                    //             ytuselectedDate),
+                                    //         builder: (context, child) {
+                                    //           return Theme(
+                                    //             data:
+                                    //                 Theme.of(context).copyWith(
+                                    //               timePickerTheme:
+                                    //                   const TimePickerThemeData(
+                                    //                 dialBackgroundColor:
+                                    //                     Colors.white,
+                                    //                 hourMinuteTextColor:
+                                    //                     Colors.black,
+                                    //               ),
+                                    //             ),
+                                    //             child: child!,
+                                    //           );
+                                    //         },
+                                    //       );
+
+                                    //       if (pickedTime != null) {
+                                    //         setState(() {
+                                    //           ytuselectedDate = DateTime(
+                                    //             pickedDate.year,
+                                    //             pickedDate.month,
+                                    //             pickedDate.day,
+                                    //             pickedTime.hour,
+                                    //             pickedTime.minute,
+                                    //           );
+                                    //           ytuchoosenDate = ytuselectedDate;
+                                    //           ytuselectDate.value = DateFormat(
+                                    //                   'MM/dd/yyyy hh:mm a')
+                                    //               .format(ytuselectedDate);
+                                    //           multiPostcontroller.addpostytuTime
+                                    //               .value = DateFormat(
+                                    //                   'MM/dd/yyyy hh:mm a')
+                                    //               .format(ytuselectedDate);
+                                    //           //
+                                    //         });
+                                    //         setState(() {});
+                                    //       }
+                                    //     }
+                                    //   },
+
+                                    //   enabled: true,
+                                    //   readOnly: true,
+                                    //   labelColor: KText,
+                                    //   onChanged: (value) {
+                                    //     setState(() {});
+                                    //   },
+                                    //   obscureText: false,
+                                    //   contentPadding:
+                                    //       const EdgeInsets.symmetric(
+                                    //           vertical: 16, horizontal: 8),
+                                    //   fontSize: kFourteenFont,
+                                    //   // prefix: Image.asset(
+                                    //   //   "assets/images/black_clock.png",
+                                    //   //   height: 10.h,
+                                    //   //   width: 10.w,
+                                    //   // ),
+                                    //   fontWeight: FontWeight.w500,
+                                    //   hintColor: DateFormat.yMMMd()
+                                    //               .format(ytuselectedDate) ==
+                                    //           DateFormat.yMMMd()
+                                    //               .format(DateTime.now())
+                                    //       ? KTextgery.withOpacity(0.5)
+                                    //       : KdarkText,
+                                    //   maxLines: 1,
+                                    //   label: "Schedule Global",
+                                    //   validator: (value) {
+                                    //     if (value!.isEmpty) {
+                                    //       return 'Please Schedule';
+                                    //     }
+                                    //     return null;
+                                    //   },
+                                    // ),
 
                                     // Stack(
                                     //   children: [
@@ -3089,8 +3492,11 @@ class _AutoPostState extends State<AutoPost> {
 
                 //end youtube
                 // tumbler
-                UserSimplePreferences.getTumblrStatus() == null ||
-                        UserSimplePreferences.getTumblrStatus() == false
+                accountsController.isTumbenabledFromBackend.value != "1"
+                    // ? true
+                    // : false,
+                    // UserSimplePreferences.getTumblrStatus() == null ||
+                    //         UserSimplePreferences.getTumblrStatus() == false
                     ? SizedBox()
                     : AnimatedContainer(
                         duration: const Duration(milliseconds: 200),
@@ -3177,49 +3583,36 @@ class _AutoPostState extends State<AutoPost> {
                                         child: DropDownMultiSelect(
                                           decoration: InputDecoration(
                                             contentPadding:
-                                                const EdgeInsets.symmetric(
+                                                EdgeInsets.symmetric(
                                                     vertical: 16,
                                                     horizontal: 8),
-                                            enabledBorder:
-                                                const OutlineInputBorder(
-                                                    borderRadius:
-                                                        BorderRadius.all(
-                                                            Radius.circular(8)),
-                                                    borderSide: BorderSide(
-                                                        color: Colors.grey,
-                                                        width: 1)),
-                                            focusedBorder:
-                                                const OutlineInputBorder(
-                                                    borderRadius:
-                                                        BorderRadius.all(
-                                                            Radius.circular(8)),
-                                                    borderSide: BorderSide(
-                                                        color: Colors.blue,
-                                                        width: 1)),
+                                            enabledBorder: OutlineInputBorder(
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(8)),
+                                              borderSide: BorderSide(
+                                                  color: Colors.grey, width: 1),
+                                            ),
+                                            focusedBorder: OutlineInputBorder(
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(8)),
+                                              borderSide: BorderSide(
+                                                  color: Colors.blue, width: 1),
+                                            ),
                                           ),
                                           options: accountsController
                                               .tumbaccountDetails.values
                                               .toList(),
-                                          // Display names only
-                                          //  controller.accountDetails.values.toList()
-                                          // options:accountsController accountsController
-                                          //     .selectedtumblerNames
-                                          //     // .accountDetails
-                                          //     .map(
-                                          //         (option) => option['name']!)
-                                          //     .toList(),
                                           selectedValues: accountsController
-                                              .tumbselectedTumblerNames.value,
-                                          //  accountsController
-                                          //     .selectedtumblerNames.value,
-                                          // onChanged: accountsController
-                                          //     .onTumblerSelectionChanged,
+                                              .selectedtumblerNames.value,
                                           onChanged: (selected) {
                                             accountsController
                                                 .onTumblerSelectionChanged(
                                                     selected);
 
-                                            // Check if selectedValues is empty and update semicontroller.isFbScheduled
+                                            // Update semicontroller.istumblrScheduled reactively
+                                            // semicontroller.istumblrScheduled
+                                            //     .value = selected.isNotEmpty;
+
                                             if (accountsController
                                                 .selectedtumblerNames.isEmpty) {
                                               //  if (selected.isEmpty) {
@@ -3238,6 +3631,79 @@ class _AutoPostState extends State<AutoPost> {
                                         ),
                                       );
                                     }),
+
+                                    // Obx(() {
+                                    //   return Container(
+                                    //     width: double.infinity,
+                                    //     decoration: BoxDecoration(
+                                    //       borderRadius:
+                                    //           BorderRadius.circular(8),
+                                    //       color: Colors.white,
+                                    //     ),
+                                    //     child: DropDownMultiSelect(
+                                    //       decoration: InputDecoration(
+                                    //         contentPadding:
+                                    //             const EdgeInsets.symmetric(
+                                    //                 vertical: 16,
+                                    //                 horizontal: 8),
+                                    //         enabledBorder:
+                                    //             const OutlineInputBorder(
+                                    //                 borderRadius:
+                                    //                     BorderRadius.all(
+                                    //                         Radius.circular(8)),
+                                    //                 borderSide: BorderSide(
+                                    //                     color: Colors.grey,
+                                    //                     width: 1)),
+                                    //         focusedBorder:
+                                    //             const OutlineInputBorder(
+                                    //                 borderRadius:
+                                    //                     BorderRadius.all(
+                                    //                         Radius.circular(8)),
+                                    //                 borderSide: BorderSide(
+                                    //                     color: Colors.blue,
+                                    //                     width: 1)),
+                                    //       ),
+                                    //       options: accountsController
+                                    //           .tumbaccountDetails.values
+                                    //           .toList(),
+                                    //       // Display names only
+                                    //       //  controller.accountDetails.values.toList()
+                                    //       // options:accountsController accountsController
+                                    //       //     .selectedtumblerNames
+                                    //       //     // .accountDetails
+                                    //       //     .map(
+                                    //       //         (option) => option['name']!)
+                                    //       //     .toList(),
+                                    //       selectedValues: accountsController
+                                    //           .tumbselectedTumblerNames.value,
+                                    //       //  accountsController
+                                    //       //     .selectedtumblerNames.value,
+                                    //       // onChanged: accountsController
+                                    //       //     .onTumblerSelectionChanged,
+                                    //       onChanged: (selected) {
+                                    //         accountsController
+                                    //             .onTumblerSelectionChanged(
+                                    //                 selected);
+
+                                    //         // Check if selectedValues is empty and update semicontroller.isFbScheduled
+                                    //         if (accountsController
+                                    //             .selectedtumblerNames.isEmpty) {
+                                    //           //  if (selected.isEmpty) {
+                                    //           setState(() {
+                                    //             semicontroller.istumblrScheduled
+                                    //                 .value = false;
+                                    //           });
+                                    //         } else {
+                                    //           setState(() {
+                                    //             semicontroller.istumblrScheduled
+                                    //                 .value = true;
+                                    //           });
+                                    //         }
+                                    //       },
+                                    //       whenEmpty: 'Select User',
+                                    //     ),
+                                    //   );
+                                    // }),
                                     // Container(
                                     //   width: double.infinity,
                                     //   decoration: BoxDecoration(
@@ -3344,20 +3810,55 @@ class _AutoPostState extends State<AutoPost> {
                                             isLoading: false,
                                             onTap: () {
                                               accountsController
-                                                  .tumbselectAll();
+                                                  .onTumblerSelectionChanged(
+                                                accountsController
+                                                    .tumbaccountDetails.values
+                                                    .toList(),
+                                              );
+
                                               setState(() {
                                                 semicontroller.istumblrScheduled
                                                     .value = true;
                                               });
-                                              //.selectAll();
+                                              // accountsController
+                                              //     .onTumblerSelectionChanged(
+                                              //         accountsController
+                                              //             .tumbaccountDetails
+                                              //             .values
+                                              //             .toList());
+                                              setState(() {});
+
+                                              //old
+                                              // accountsController
+                                              //     .selectAllTumblerAccounts();
+                                              // // .tumbselectAll();
+                                              // setState(() {
+                                              //   semicontroller.istumblrScheduled
+                                              //       .value = true;
+                                              // });
+                                              // setState(() {});
+                                              // //.selectAll();
                                             }),
                                         InkWell(
                                           onTap: () {
-                                            accountsController.tumbclearAll();
+                                            accountsController
+                                                .clearAllTumblerSelections(); // Clear selected values
                                             setState(() {
                                               semicontroller.istumblrScheduled
                                                   .value = false;
                                             });
+
+                                            // semicontroller.istumblrScheduled
+                                            //     .value = false; // Reset state
+                                            // accountsController
+                                            //     .clearAllTumblerSelections();
+                                            // //tumbclearAll();
+
+                                            // setState(() {
+                                            //   semicontroller.istumblrScheduled
+                                            //       .value = false;
+                                            // });
+                                            // setState(() {});
                                           },
                                           child: Container(
                                             height: 45,
@@ -3393,119 +3894,250 @@ class _AutoPostState extends State<AutoPost> {
                                     SizedBox(
                                       height: 20.h,
                                     ),
-                                    CustomFormFields(
-                                      hintText: DateFormat.yMMMd()
-                                                  .format(tumbselectedDate) ==
-                                              DateFormat.yMMMd()
-                                                  .format(DateTime.now())
-                                          ? "Select Date & Time"
-                                          : DateFormat('dd/MM/yyyy hh:mm a')
-                                              .format(tumbselectedDate),
-                                      ontap: () async {
-                                        // Step 1: Show Date Picker
-                                        final DateTime? pickedDate =
-                                            await showDatePicker(
-                                          context: context,
-                                          initialDate: tumbselectedDate,
-                                          firstDate: DateTime(1924, 8),
-                                          lastDate: DateTime(2025, 8),
-                                          builder: (context, child) {
-                                            return Theme(
-                                              data: Theme.of(context).copyWith(
-                                                colorScheme:
-                                                    const ColorScheme.light(
-                                                  primary:
-                                                      Kform_border_twg, // Primary color for date picker
-                                                  onSurface: Colors
-                                                      .black, // Text color for unselected items
-                                                ),
-                                              ),
-                                              child: child!,
-                                            );
-                                          },
-                                        );
+                                    ////////////////////////////////////////////////////////////
 
-                                        if (pickedDate != null) {
-                                          // Step 2: Show Time Picker
-                                          final TimeOfDay? pickedTime =
-                                              await showTimePicker(
-                                            context: context,
-                                            initialTime: TimeOfDay.fromDateTime(
-                                                tumbselectedDate),
-                                            builder: (context, child) {
-                                              return Theme(
-                                                data:
-                                                    Theme.of(context).copyWith(
-                                                  timePickerTheme:
-                                                      const TimePickerThemeData(
-                                                    dialBackgroundColor:
-                                                        Colors.white,
-                                                    hourMinuteTextColor:
-                                                        Colors.black,
-                                                  ),
-                                                ),
-                                                child: child!,
-                                              );
-                                            },
-                                          );
-
-                                          if (pickedTime != null) {
-                                            // Step 3: Combine Date and Time
-                                            setState(() {
-                                              tumbselectedDate = DateTime(
-                                                pickedDate.year,
-                                                pickedDate.month,
-                                                pickedDate.day,
-                                                pickedTime.hour,
-                                                pickedTime.minute,
-                                              );
-                                              tumbchoosenDate =
-                                                  tumbselectedDate;
-                                              tumbselectDate.value = DateFormat(
-                                                      'MM/dd/yyyy hh:mm a')
-                                                  .format(tumbselectedDate);
-                                              multiPostcontroller
-                                                  .addposttumbTime
-                                                  .value = DateFormat(
-                                                      'MM/dd/yyyy hh:mm a')
-                                                  .format(tumbselectedDate);
-                                              //
-                                            });
-                                          }
-                                        }
-                                      },
-                                      enabled: true,
-                                      readOnly: true,
-                                      labelColor: KText,
-                                      onChanged: (value) {
-                                        setState(() {});
-                                      },
-                                      obscureText: false,
-                                      contentPadding:
-                                          const EdgeInsets.symmetric(
-                                              vertical: 16, horizontal: 8),
-                                      fontSize: kFourteenFont,
-                                      // prefix: Image.asset(
-                                      //   "assets/images/black_clock.png",
-                                      //   height: 10.h,
-                                      //   width: 10.w,
-                                      // ),
-                                      fontWeight: FontWeight.w500,
-                                      hintColor: DateFormat.yMMMd()
-                                                  .format(selectedDate) ==
-                                              DateFormat.yMMMd()
-                                                  .format(DateTime.now())
-                                          ? KTextgery.withOpacity(0.5)
-                                          : KdarkText,
-                                      maxLines: 1,
-                                      label: "Schedule Tumblr time",
-                                      validator: (value) {
-                                        if (value!.isEmpty) {
-                                          return 'Please Schedule';
-                                        }
-                                        return null;
-                                      },
+                                    SizedBox(
+                                      height: 20.h,
                                     ),
+                                    Text(
+                                      "Schedule Tumblr Time",
+                                      textAlign: TextAlign.start,
+                                      style: GoogleFonts.poppins(
+                                          fontSize: kSixteenFont,
+                                          //  letterSpacing: 1,
+                                          color: KBlack_twg,
+                                          fontWeight: kFW400),
+                                    ),
+                                    SizedBox(
+                                      height: 2.h,
+                                    ),
+                                    Obx(
+                                      () => Container(
+                                        width: double.infinity,
+                                        padding: EdgeInsets.symmetric(
+                                            vertical: 15.h, horizontal: 20.w),
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(8),
+                                            border:
+                                                Border.all(color: KTextgery)),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Text(multiPostcontroller
+                                                    .addposttumbTime.value
+                                                // multiPostcontroller
+                                                //     .addposttwtTime.value,
+
+                                                ),
+                                            InkWell(
+                                                onTap: () async {
+                                                  // Step 1: Show Date Picker
+                                                  final DateTime? pickedDate =
+                                                      await showDatePicker(
+                                                    context: context,
+                                                    initialDate:
+                                                        tumbselectedDate,
+                                                    firstDate:
+                                                        DateTime(1924, 8),
+                                                    lastDate: DateTime(2025, 8),
+                                                    builder: (context, child) {
+                                                      return Theme(
+                                                        data: Theme.of(context)
+                                                            .copyWith(
+                                                          colorScheme:
+                                                              const ColorScheme
+                                                                  .light(
+                                                            primary:
+                                                                Kform_border_twg, // Primary color for date picker
+                                                            onSurface: Colors
+                                                                .black, // Text color for unselected items
+                                                          ),
+                                                        ),
+                                                        child: child!,
+                                                      );
+                                                    },
+                                                  );
+
+                                                  if (pickedDate != null) {
+                                                    // Step 2: Show Time Picker
+                                                    final TimeOfDay?
+                                                        pickedTime =
+                                                        await showTimePicker(
+                                                      context: context,
+                                                      initialTime: TimeOfDay
+                                                          .fromDateTime(
+                                                              tumbselectedDate),
+                                                      builder:
+                                                          (context, child) {
+                                                        return Theme(
+                                                          data:
+                                                              Theme.of(context)
+                                                                  .copyWith(
+                                                            timePickerTheme:
+                                                                const TimePickerThemeData(
+                                                              dialBackgroundColor:
+                                                                  Colors.white,
+                                                              hourMinuteTextColor:
+                                                                  Colors.black,
+                                                            ),
+                                                          ),
+                                                          child: child!,
+                                                        );
+                                                      },
+                                                    );
+
+                                                    if (pickedTime != null) {
+                                                      // Step 3: Combine Date and Time
+                                                      setState(() {
+                                                        tumbselectedDate =
+                                                            DateTime(
+                                                          pickedDate.year,
+                                                          pickedDate.month,
+                                                          pickedDate.day,
+                                                          pickedTime.hour,
+                                                          pickedTime.minute,
+                                                        );
+                                                        tumbchoosenDate =
+                                                            tumbselectedDate;
+                                                        tumbselectDate
+                                                            .value = DateFormat(
+                                                                'MM/dd/yyyy hh:mm a')
+                                                            .format(
+                                                                tumbselectedDate);
+                                                        multiPostcontroller
+                                                            .addposttumbTime
+                                                            .value = DateFormat(
+                                                                'MM/dd/yyyy hh:mm a')
+                                                            .format(
+                                                                tumbselectedDate);
+                                                        //
+                                                      });
+                                                      setState(() {});
+                                                    }
+                                                  }
+                                                },
+                                                child: Icon(Icons.timer))
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                    /////////////////////////////////////////////////////////
+                                    // CustomFormFields(
+                                    //   hintText: DateFormat.yMMMd()
+                                    //               .format(tumbselectedDate) ==
+                                    //           DateFormat.yMMMd()
+                                    //               .format(DateTime.now())
+                                    //       ? "Select Date & Time"
+                                    //       : DateFormat('dd/MM/yyyy hh:mm a')
+                                    //           .format(tumbselectedDate),
+                                    //   ontap: () async {
+                                    //     // Step 1: Show Date Picker
+                                    //     final DateTime? pickedDate =
+                                    //         await showDatePicker(
+                                    //       context: context,
+                                    //       initialDate: tumbselectedDate,
+                                    //       firstDate: DateTime(1924, 8),
+                                    //       lastDate: DateTime(2025, 8),
+                                    //       builder: (context, child) {
+                                    //         return Theme(
+                                    //           data: Theme.of(context).copyWith(
+                                    //             colorScheme:
+                                    //                 const ColorScheme.light(
+                                    //               primary:
+                                    //                   Kform_border_twg, // Primary color for date picker
+                                    //               onSurface: Colors
+                                    //                   .black, // Text color for unselected items
+                                    //             ),
+                                    //           ),
+                                    //           child: child!,
+                                    //         );
+                                    //       },
+                                    //     );
+
+                                    //     if (pickedDate != null) {
+                                    //       // Step 2: Show Time Picker
+                                    //       final TimeOfDay? pickedTime =
+                                    //           await showTimePicker(
+                                    //         context: context,
+                                    //         initialTime: TimeOfDay.fromDateTime(
+                                    //             tumbselectedDate),
+                                    //         builder: (context, child) {
+                                    //           return Theme(
+                                    //             data:
+                                    //                 Theme.of(context).copyWith(
+                                    //               timePickerTheme:
+                                    //                   const TimePickerThemeData(
+                                    //                 dialBackgroundColor:
+                                    //                     Colors.white,
+                                    //                 hourMinuteTextColor:
+                                    //                     Colors.black,
+                                    //               ),
+                                    //             ),
+                                    //             child: child!,
+                                    //           );
+                                    //         },
+                                    //       );
+
+                                    //       if (pickedTime != null) {
+                                    //         // Step 3: Combine Date and Time
+                                    //         setState(() {
+                                    //           tumbselectedDate = DateTime(
+                                    //             pickedDate.year,
+                                    //             pickedDate.month,
+                                    //             pickedDate.day,
+                                    //             pickedTime.hour,
+                                    //             pickedTime.minute,
+                                    //           );
+                                    //           tumbchoosenDate =
+                                    //               tumbselectedDate;
+                                    //           tumbselectDate.value = DateFormat(
+                                    //                   'MM/dd/yyyy hh:mm a')
+                                    //               .format(tumbselectedDate);
+                                    //           multiPostcontroller
+                                    //               .addposttumbTime
+                                    //               .value = DateFormat(
+                                    //                   'MM/dd/yyyy hh:mm a')
+                                    //               .format(tumbselectedDate);
+                                    //           //
+                                    //         });
+                                    //         setState(() {});
+                                    //       }
+                                    //     }
+                                    //   },
+                                    //   enabled: true,
+                                    //   readOnly: true,
+                                    //   labelColor: KText,
+                                    //   onChanged: (value) {
+                                    //     setState(() {});
+                                    //   },
+                                    //   obscureText: false,
+                                    //   contentPadding:
+                                    //       const EdgeInsets.symmetric(
+                                    //           vertical: 16, horizontal: 8),
+                                    //   fontSize: kFourteenFont,
+                                    //   // prefix: Image.asset(
+                                    //   //   "assets/images/black_clock.png",
+                                    //   //   height: 10.h,
+                                    //   //   width: 10.w,
+                                    //   // ),
+                                    //   fontWeight: FontWeight.w500,
+                                    //   hintColor: DateFormat.yMMMd()
+                                    //               .format(selectedDate) ==
+                                    //           DateFormat.yMMMd()
+                                    //               .format(DateTime.now())
+                                    //       ? KTextgery.withOpacity(0.5)
+                                    //       : KdarkText,
+                                    //   maxLines: 1,
+                                    //   label: "Schedule Tumblr time",
+                                    //   validator: (value) {
+                                    //     if (value!.isEmpty) {
+                                    //       return 'Please Schedule';
+                                    //     }
+                                    //     return null;
+                                    //   },
+                                    // ),
 
                                     // Stack(
                                     //   children: [
@@ -3556,21 +4188,12 @@ class _AutoPostState extends State<AutoPost> {
                         ),
                       ),
                 //
-                UserSimplePreferences.getPinterestStatus() == null ||
-                        UserSimplePreferences.getPinterestStatus() == false
+                // UserSimplePreferences.getPinterestStatus() == null ||
+                //         UserSimplePreferences.getPinterestStatus() == false
+                accountsController.isPintenabledFromBackend.value != "1"
                     ? SizedBox()
                     : AnimatedContainer(
                         duration: const Duration(milliseconds: 200),
-                        // decoration: BoxDecoration(
-                        //     border: Border.all(width: 1, color: Colors.grey),
-                        //     borderRadius: _isfbExpandCard
-                        //         ? const BorderRadius.only(
-                        //             topLeft: Radius.zero,
-                        //             topRight: Radius.zero,
-                        //             bottomLeft: Radius.circular(10),
-                        //             bottomRight: Radius.circular(10),
-                        //           )
-                        //         : BorderRadius.circular(10)),
                         child: Column(
                           children: [
                             Row(
@@ -3865,119 +4488,245 @@ class _AutoPostState extends State<AutoPost> {
                                     SizedBox(
                                       height: 20.h,
                                     ),
-                                    CustomFormFields(
-                                      hintText: DateFormat.yMMMd()
-                                                  .format(pintselectedDate) ==
-                                              DateFormat.yMMMd()
-                                                  .format(DateTime.now())
-                                          ? "Select Date & Time"
-                                          : DateFormat('dd/MM/yyyy hh:mm a')
-                                              .format(pintselectedDate),
-                                      ontap: () async {
-                                        // Step 1: Show Date Picker
-                                        final DateTime? pickedDate =
-                                            await showDatePicker(
-                                          context: context,
-                                          initialDate: pintselectedDate,
-                                          firstDate: DateTime(1924, 8),
-                                          lastDate: DateTime(2025, 8),
-                                          builder: (context, child) {
-                                            return Theme(
-                                              data: Theme.of(context).copyWith(
-                                                colorScheme:
-                                                    const ColorScheme.light(
-                                                  primary:
-                                                      Kform_border_twg, // Primary color for date picker
-                                                  onSurface: Colors
-                                                      .black, // Text color for unselected items
-                                                ),
-                                              ),
-                                              child: child!,
-                                            );
-                                          },
-                                        );
 
-                                        if (pickedDate != null) {
-                                          // Step 2: Show Time Picker
-                                          final TimeOfDay? pickedTime =
-                                              await showTimePicker(
-                                            context: context,
-                                            initialTime: TimeOfDay.fromDateTime(
-                                                pintselectedDate),
-                                            builder: (context, child) {
-                                              return Theme(
-                                                data:
-                                                    Theme.of(context).copyWith(
-                                                  timePickerTheme:
-                                                      const TimePickerThemeData(
-                                                    dialBackgroundColor:
-                                                        Colors.white,
-                                                    hourMinuteTextColor:
-                                                        Colors.black,
-                                                  ),
-                                                ),
-                                                child: child!,
-                                              );
-                                            },
-                                          );
-
-                                          if (pickedTime != null) {
-                                            // Step 3: Combine Date and Time
-                                            setState(() {
-                                              pintselectedDate = DateTime(
-                                                pickedDate.year,
-                                                pickedDate.month,
-                                                pickedDate.day,
-                                                pickedTime.hour,
-                                                pickedTime.minute,
-                                              );
-                                              pintchoosenDate =
-                                                  pintselectedDate;
-                                              pintselectDate.value = DateFormat(
-                                                      'MM/dd/yyyy hh:mm a')
-                                                  .format(pintselectedDate);
-                                              multiPostcontroller
-                                                  .addpostpintTime
-                                                  .value = DateFormat(
-                                                      'MM/dd/yyyy hh:mm a')
-                                                  .format(pintselectedDate);
-                                              //
-                                            });
-                                          }
-                                        }
-                                      },
-                                      enabled: true,
-                                      readOnly: true,
-                                      labelColor: KText,
-                                      onChanged: (value) {
-                                        setState(() {});
-                                      },
-                                      obscureText: false,
-                                      contentPadding:
-                                          const EdgeInsets.symmetric(
-                                              vertical: 16, horizontal: 8),
-                                      fontSize: kFourteenFont,
-                                      // prefix: Image.asset(
-                                      //   "assets/images/black_clock.png",
-                                      //   height: 10.h,
-                                      //   width: 10.w,
-                                      // ),
-                                      fontWeight: FontWeight.w500,
-                                      hintColor: DateFormat.yMMMd()
-                                                  .format(pintselectedDate) ==
-                                              DateFormat.yMMMd()
-                                                  .format(DateTime.now())
-                                          ? KTextgery.withOpacity(0.5)
-                                          : KdarkText,
-                                      maxLines: 1,
-                                      label: "Schedule Pinterest",
-                                      validator: (value) {
-                                        if (value!.isEmpty) {
-                                          return 'Please Schedule';
-                                        }
-                                        return null;
-                                      },
+                                    SizedBox(
+                                      height: 20.h,
                                     ),
+                                    Text(
+                                      "Schedule Pinterest Time",
+                                      textAlign: TextAlign.start,
+                                      style: GoogleFonts.poppins(
+                                          fontSize: kSixteenFont,
+                                          //  letterSpacing: 1,
+                                          color: KBlack_twg,
+                                          fontWeight: kFW400),
+                                    ),
+                                    SizedBox(
+                                      height: 2.h,
+                                    ),
+                                    Obx(
+                                      () => Container(
+                                        width: double.infinity,
+                                        padding: EdgeInsets.symmetric(
+                                            vertical: 15.h, horizontal: 20.w),
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(8),
+                                            border:
+                                                Border.all(color: KTextgery)),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Text(multiPostcontroller
+                                                .addpostpintTime.value),
+                                            InkWell(
+                                                onTap: () async {
+                                                  // Step 1: Show Date Picker
+                                                  final DateTime? pickedDate =
+                                                      await showDatePicker(
+                                                    context: context,
+                                                    initialDate:
+                                                        pintselectedDate,
+                                                    firstDate:
+                                                        DateTime(1924, 8),
+                                                    lastDate: DateTime(2025, 8),
+                                                    builder: (context, child) {
+                                                      return Theme(
+                                                        data: Theme.of(context)
+                                                            .copyWith(
+                                                          colorScheme:
+                                                              const ColorScheme
+                                                                  .light(
+                                                            primary:
+                                                                Kform_border_twg, // Primary color for date picker
+                                                            onSurface: Colors
+                                                                .black, // Text color for unselected items
+                                                          ),
+                                                        ),
+                                                        child: child!,
+                                                      );
+                                                    },
+                                                  );
+
+                                                  if (pickedDate != null) {
+                                                    // Step 2: Show Time Picker
+                                                    final TimeOfDay?
+                                                        pickedTime =
+                                                        await showTimePicker(
+                                                      context: context,
+                                                      initialTime: TimeOfDay
+                                                          .fromDateTime(
+                                                              pintselectedDate),
+                                                      builder:
+                                                          (context, child) {
+                                                        return Theme(
+                                                          data:
+                                                              Theme.of(context)
+                                                                  .copyWith(
+                                                            timePickerTheme:
+                                                                const TimePickerThemeData(
+                                                              dialBackgroundColor:
+                                                                  Colors.white,
+                                                              hourMinuteTextColor:
+                                                                  Colors.black,
+                                                            ),
+                                                          ),
+                                                          child: child!,
+                                                        );
+                                                      },
+                                                    );
+
+                                                    if (pickedTime != null) {
+                                                      // Step 3: Combine Date and Time
+                                                      setState(() {
+                                                        pintselectedDate =
+                                                            DateTime(
+                                                          pickedDate.year,
+                                                          pickedDate.month,
+                                                          pickedDate.day,
+                                                          pickedTime.hour,
+                                                          pickedTime.minute,
+                                                        );
+                                                        pintchoosenDate =
+                                                            pintselectedDate;
+                                                        pintselectDate
+                                                            .value = DateFormat(
+                                                                'MM/dd/yyyy hh:mm a')
+                                                            .format(
+                                                                pintselectedDate);
+                                                        multiPostcontroller
+                                                            .addpostpintTime
+                                                            .value = DateFormat(
+                                                                'MM/dd/yyyy hh:mm a')
+                                                            .format(
+                                                                pintselectedDate);
+                                                        //
+                                                      });
+                                                      setState(() {});
+                                                    }
+                                                  }
+                                                },
+                                                child: Icon(Icons.timer))
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+
+                                    // CustomFormFields(
+                                    //   hintText: DateFormat.yMMMd()
+                                    //               .format(pintselectedDate) ==
+                                    //           DateFormat.yMMMd()
+                                    //               .format(DateTime.now())
+                                    //       ? "Select Date & Time"
+                                    //       : DateFormat('dd/MM/yyyy hh:mm a')
+                                    //           .format(pintselectedDate),
+                                    //   ontap: () async {
+                                    //     // Step 1: Show Date Picker
+                                    //     final DateTime? pickedDate =
+                                    //         await showDatePicker(
+                                    //       context: context,
+                                    //       initialDate: pintselectedDate,
+                                    //       firstDate: DateTime(1924, 8),
+                                    //       lastDate: DateTime(2025, 8),
+                                    //       builder: (context, child) {
+                                    //         return Theme(
+                                    //           data: Theme.of(context).copyWith(
+                                    //             colorScheme:
+                                    //                 const ColorScheme.light(
+                                    //               primary:
+                                    //                   Kform_border_twg, // Primary color for date picker
+                                    //               onSurface: Colors
+                                    //                   .black, // Text color for unselected items
+                                    //             ),
+                                    //           ),
+                                    //           child: child!,
+                                    //         );
+                                    //       },
+                                    //     );
+
+                                    //     if (pickedDate != null) {
+                                    //       // Step 2: Show Time Picker
+                                    //       final TimeOfDay? pickedTime =
+                                    //           await showTimePicker(
+                                    //         context: context,
+                                    //         initialTime: TimeOfDay.fromDateTime(
+                                    //             pintselectedDate),
+                                    //         builder: (context, child) {
+                                    //           return Theme(
+                                    //             data:
+                                    //                 Theme.of(context).copyWith(
+                                    //               timePickerTheme:
+                                    //                   const TimePickerThemeData(
+                                    //                 dialBackgroundColor:
+                                    //                     Colors.white,
+                                    //                 hourMinuteTextColor:
+                                    //                     Colors.black,
+                                    //               ),
+                                    //             ),
+                                    //             child: child!,
+                                    //           );
+                                    //         },
+                                    //       );
+
+                                    //       if (pickedTime != null) {
+                                    //         // Step 3: Combine Date and Time
+                                    //         setState(() {
+                                    //           pintselectedDate = DateTime(
+                                    //             pickedDate.year,
+                                    //             pickedDate.month,
+                                    //             pickedDate.day,
+                                    //             pickedTime.hour,
+                                    //             pickedTime.minute,
+                                    //           );
+                                    //           pintchoosenDate =
+                                    //               pintselectedDate;
+                                    //           pintselectDate.value = DateFormat(
+                                    //                   'MM/dd/yyyy hh:mm a')
+                                    //               .format(pintselectedDate);
+                                    //           multiPostcontroller
+                                    //               .addpostpintTime
+                                    //               .value = DateFormat(
+                                    //                   'MM/dd/yyyy hh:mm a')
+                                    //               .format(pintselectedDate);
+                                    //           //
+                                    //         });
+                                    //         setState(() {});
+                                    //       }
+                                    //     }
+                                    //   },
+                                    //   enabled: true,
+                                    //   readOnly: true,
+                                    //   labelColor: KText,
+                                    //   onChanged: (value) {
+                                    //     setState(() {});
+                                    //   },
+                                    //   obscureText: false,
+                                    //   contentPadding:
+                                    //       const EdgeInsets.symmetric(
+                                    //           vertical: 16, horizontal: 8),
+                                    //   fontSize: kFourteenFont,
+                                    //   // prefix: Image.asset(
+                                    //   //   "assets/images/black_clock.png",
+                                    //   //   height: 10.h,
+                                    //   //   width: 10.w,
+                                    //   // ),
+                                    //   fontWeight: FontWeight.w500,
+                                    //   hintColor: DateFormat.yMMMd()
+                                    //               .format(pintselectedDate) ==
+                                    //           DateFormat.yMMMd()
+                                    //               .format(DateTime.now())
+                                    //       ? KTextgery.withOpacity(0.5)
+                                    //       : KdarkText,
+                                    //   maxLines: 1,
+                                    //   label: "Schedule Pinterest",
+                                    //   validator: (value) {
+                                    //     if (value!.isEmpty) {
+                                    //       return 'Please Schedule';
+                                    //     }
+                                    //     return null;
+                                    //   },
+                                    // ),
                                   ],
                                 ),
                               ),
@@ -3987,8 +4736,10 @@ class _AutoPostState extends State<AutoPost> {
                       ),
                 //
                 // instagram
-                UserSimplePreferences.getInstagramStatus() == null ||
-                        UserSimplePreferences.getInstagramStatus() == false
+                accountsController.isInstabenabledFromBackend.value != "1"
+
+                    // UserSimplePreferences.getInstagramStatus() == null ||
+                    //         UserSimplePreferences.getInstagramStatus() == false
                     ? SizedBox()
                     : AnimatedContainer(
                         duration: const Duration(milliseconds: 200),
@@ -4211,120 +4962,247 @@ class _AutoPostState extends State<AutoPost> {
                                     SizedBox(
                                       height: 20.h,
                                     ),
-                                    CustomFormFields(
-                                      hintText: DateFormat.yMMMd()
-                                                  .format(instaselectedDate) ==
-                                              DateFormat.yMMMd()
-                                                  .format(DateTime.now())
-                                          ? "Select Date & Time"
-                                          : DateFormat('dd/MM/yyyy hh:mm a')
-                                              .format(instaselectedDate),
-                                      ontap: () async {
-                                        // Step 1: Show Date Picker
-                                        final DateTime? pickedDate =
-                                            await showDatePicker(
-                                          context: context,
-                                          initialDate: instaselectedDate,
-                                          firstDate: DateTime(1924, 8),
-                                          lastDate: DateTime(2025, 8),
-                                          builder: (context, child) {
-                                            return Theme(
-                                              data: Theme.of(context).copyWith(
-                                                colorScheme:
-                                                    const ColorScheme.light(
-                                                  primary:
-                                                      Kform_border_twg, // Primary color for date picker
-                                                  onSurface: Colors
-                                                      .black, // Text color for unselected items
-                                                ),
-                                              ),
-                                              child: child!,
-                                            );
-                                          },
-                                        );
-
-                                        if (pickedDate != null) {
-                                          // Step 2: Show Time Picker
-                                          final TimeOfDay? pickedTime =
-                                              await showTimePicker(
-                                            context: context,
-                                            initialTime: TimeOfDay.fromDateTime(
-                                                instaselectedDate),
-                                            builder: (context, child) {
-                                              return Theme(
-                                                data:
-                                                    Theme.of(context).copyWith(
-                                                  timePickerTheme:
-                                                      const TimePickerThemeData(
-                                                    dialBackgroundColor:
-                                                        Colors.white,
-                                                    hourMinuteTextColor:
-                                                        Colors.black,
-                                                  ),
-                                                ),
-                                                child: child!,
-                                              );
-                                            },
-                                          );
-
-                                          if (pickedTime != null) {
-                                            // Step 3: Combine Date and Time
-                                            setState(() {
-                                              instaselectedDate = DateTime(
-                                                pickedDate.year,
-                                                pickedDate.month,
-                                                pickedDate.day,
-                                                pickedTime.hour,
-                                                pickedTime.minute,
-                                              );
-                                              instachoosenDate =
-                                                  instaselectedDate;
-                                              instaselectDate
-                                                  .value = DateFormat(
-                                                      'MM/dd/yyyy hh:mm a')
-                                                  .format(instaselectedDate);
-                                              multiPostcontroller
-                                                  .addpostinstaTime
-                                                  .value = DateFormat(
-                                                      'MM/dd/yyyy hh:mm a')
-                                                  .format(instaselectedDate);
-                                              //
-                                            });
-                                          }
-                                        }
-                                      },
-                                      enabled: true,
-                                      readOnly: true,
-                                      labelColor: KText,
-                                      onChanged: (value) {
-                                        setState(() {});
-                                      },
-                                      obscureText: false,
-                                      contentPadding:
-                                          const EdgeInsets.symmetric(
-                                              vertical: 16, horizontal: 8),
-                                      fontSize: kFourteenFont,
-                                      // prefix: Image.asset(
-                                      //   "assets/images/black_clock.png",
-                                      //   height: 10.h,
-                                      //   width: 10.w,
-                                      // ),
-                                      fontWeight: FontWeight.w500,
-                                      hintColor: DateFormat.yMMMd()
-                                                  .format(instaselectedDate) ==
-                                              DateFormat.yMMMd()
-                                                  .format(DateTime.now())
-                                          ? KTextgery.withOpacity(0.5)
-                                          : KdarkText,
-                                      maxLines: 1,
-                                      label: "Schedule Instagram",
-                                      validator: (value) {
-                                        if (value!.isEmpty) {
-                                          return 'Please Schedule';
-                                        }
-                                        return null;
-                                      },
+                                    SizedBox(
+                                      height: 20.h,
                                     ),
+                                    Text(
+                                      "Schedule Instagram Time",
+                                      textAlign: TextAlign.start,
+                                      style: GoogleFonts.poppins(
+                                          fontSize: kSixteenFont,
+                                          //  letterSpacing: 1,
+                                          color: KBlack_twg,
+                                          fontWeight: kFW400),
+                                    ),
+                                    SizedBox(
+                                      height: 2.h,
+                                    ),
+                                    Obx(
+                                      () => Container(
+                                        width: double.infinity,
+                                        padding: EdgeInsets.symmetric(
+                                            vertical: 15.h, horizontal: 20.w),
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(8),
+                                            border:
+                                                Border.all(color: KTextgery)),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Text(multiPostcontroller
+                                                    .addpostinstaTime.value
+                                                //  fbselectDate.value,
+                                                //  "select FB Time"
+                                                ),
+                                            InkWell(
+                                                onTap: () async {
+                                                  // Step 1: Show Date Picker
+                                                  final DateTime? pickedDate =
+                                                      await showDatePicker(
+                                                    context: context,
+                                                    initialDate:
+                                                        instaselectedDate,
+                                                    firstDate:
+                                                        DateTime(1924, 8),
+                                                    lastDate: DateTime(2025, 8),
+                                                    builder: (context, child) {
+                                                      return Theme(
+                                                        data: Theme.of(context)
+                                                            .copyWith(
+                                                          colorScheme:
+                                                              const ColorScheme
+                                                                  .light(
+                                                            primary:
+                                                                Kform_border_twg,
+                                                            onSurface:
+                                                                Colors.black,
+                                                          ),
+                                                        ),
+                                                        child: child!,
+                                                      );
+                                                    },
+                                                  );
+
+                                                  if (pickedDate != null) {
+                                                    //
+                                                    final TimeOfDay?
+                                                        pickedTime =
+                                                        await showTimePicker(
+                                                      context: context,
+                                                      initialTime: TimeOfDay
+                                                          .fromDateTime(
+                                                              instaselectedDate),
+                                                      builder:
+                                                          (context, child) {
+                                                        return Theme(
+                                                          data:
+                                                              Theme.of(context)
+                                                                  .copyWith(
+                                                            timePickerTheme:
+                                                                const TimePickerThemeData(
+                                                              dialBackgroundColor:
+                                                                  Colors.white,
+                                                              hourMinuteTextColor:
+                                                                  Colors.black,
+                                                            ),
+                                                          ),
+                                                          child: child!,
+                                                        );
+                                                      },
+                                                    );
+
+                                                    if (pickedTime != null) {
+                                                      //
+                                                      setState(() {
+                                                        instaselectedDate =
+                                                            DateTime(
+                                                          pickedDate.year,
+                                                          pickedDate.month,
+                                                          pickedDate.day,
+                                                          pickedTime.hour,
+                                                          pickedTime.minute,
+                                                        );
+                                                        instachoosenDate =
+                                                            instaselectedDate;
+                                                        instaselectDate
+                                                            .value = DateFormat(
+                                                                'MM/dd/yyyy hh:mm a')
+                                                            .format(
+                                                                instaselectedDate);
+                                                        multiPostcontroller
+                                                            .addpostinstaTime
+                                                            .value = DateFormat(
+                                                                'MM/dd/yyyy hh:mm a')
+                                                            .format(
+                                                                instaselectedDate);
+                                                        //
+                                                      });
+                                                      setState(() {});
+                                                    }
+                                                  }
+                                                },
+                                                child: Icon(Icons.timer))
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                    // CustomFormFields(
+                                    //   hintText: DateFormat.yMMMd()
+                                    //               .format(instaselectedDate) ==
+                                    //           DateFormat.yMMMd()
+                                    //               .format(DateTime.now())
+                                    //       ? "Select Date & Time"
+                                    //       : DateFormat('dd/MM/yyyy hh:mm a')
+                                    //           .format(instaselectedDate),
+                                    //   ontap: () async {
+                                    //     // Step 1: Show Date Picker
+                                    //     final DateTime? pickedDate =
+                                    //         await showDatePicker(
+                                    //       context: context,
+                                    //       initialDate: instaselectedDate,
+                                    //       firstDate: DateTime(1924, 8),
+                                    //       lastDate: DateTime(2025, 8),
+                                    //       builder: (context, child) {
+                                    //         return Theme(
+                                    //           data: Theme.of(context).copyWith(
+                                    //             colorScheme:
+                                    //                 const ColorScheme.light(
+                                    //               primary:
+                                    //                   Kform_border_twg, // Primary color for date picker
+                                    //               onSurface: Colors
+                                    //                   .black, // Text color for unselected items
+                                    //             ),
+                                    //           ),
+                                    //           child: child!,
+                                    //         );
+                                    //       },
+                                    //     );
+
+                                    //     if (pickedDate != null) {
+                                    //       // Step 2: Show Time Picker
+                                    //       final TimeOfDay? pickedTime =
+                                    //           await showTimePicker(
+                                    //         context: context,
+                                    //         initialTime: TimeOfDay.fromDateTime(
+                                    //             instaselectedDate),
+                                    //         builder: (context, child) {
+                                    //           return Theme(
+                                    //             data:
+                                    //                 Theme.of(context).copyWith(
+                                    //               timePickerTheme:
+                                    //                   const TimePickerThemeData(
+                                    //                 dialBackgroundColor:
+                                    //                     Colors.white,
+                                    //                 hourMinuteTextColor:
+                                    //                     Colors.black,
+                                    //               ),
+                                    //             ),
+                                    //             child: child!,
+                                    //           );
+                                    //         },
+                                    //       );
+
+                                    //       if (pickedTime != null) {
+                                    //         // Step 3: Combine Date and Time
+                                    //         setState(() {
+                                    //           instaselectedDate = DateTime(
+                                    //             pickedDate.year,
+                                    //             pickedDate.month,
+                                    //             pickedDate.day,
+                                    //             pickedTime.hour,
+                                    //             pickedTime.minute,
+                                    //           );
+                                    //           instachoosenDate =
+                                    //               instaselectedDate;
+                                    //           instaselectDate
+                                    //               .value = DateFormat(
+                                    //                   'MM/dd/yyyy hh:mm a')
+                                    //               .format(instaselectedDate);
+                                    //           multiPostcontroller
+                                    //               .addpostinstaTime
+                                    //               .value = DateFormat(
+                                    //                   'MM/dd/yyyy hh:mm a')
+                                    //               .format(instaselectedDate);
+                                    //           //
+                                    //         });
+                                    //         setState(() {});
+                                    //       }
+                                    //     }
+                                    //   },
+                                    //   enabled: true,
+                                    //   readOnly: true,
+                                    //   labelColor: KText,
+                                    //   onChanged: (value) {
+                                    //     setState(() {});
+                                    //   },
+                                    //   obscureText: false,
+                                    //   contentPadding:
+                                    //       const EdgeInsets.symmetric(
+                                    //           vertical: 16, horizontal: 8),
+                                    //   fontSize: kFourteenFont,
+                                    //   // prefix: Image.asset(
+                                    //   //   "assets/images/black_clock.png",
+                                    //   //   height: 10.h,
+                                    //   //   width: 10.w,
+                                    //   // ),
+                                    //   fontWeight: FontWeight.w500,
+                                    //   hintColor: DateFormat.yMMMd()
+                                    //               .format(instaselectedDate) ==
+                                    //           DateFormat.yMMMd()
+                                    //               .format(DateTime.now())
+                                    //       ? KTextgery.withOpacity(0.5)
+                                    //       : KdarkText,
+                                    //   maxLines: 1,
+                                    //   label: "Schedule Instagram",
+                                    //   validator: (value) {
+                                    //     if (value!.isEmpty) {
+                                    //       return 'Please Schedule';
+                                    //     }
+                                    //     return null;
+                                    //   },
+                                    // ),
                                   ],
                                 ),
                               ),
@@ -4368,103 +5246,194 @@ class _AutoPostState extends State<AutoPost> {
                   children: [
                     SizedBox(
                       width: MediaQuery.of(context).size.width / 2.5,
-                      child: CustomFormFields(
-                        hintText: DateFormat.yMMMd().format(selectedDate) ==
-                                DateFormat.yMMMd().format(DateTime.now())
-                            ? "Select Date & Time"
-                            : DateFormat('dd/MM/yyyy hh:mm a')
-                                .format(selectedDate),
-                        ontap: () async {
-                          // Step 1: Show Date Picker
-                          final DateTime? pickedDate = await showDatePicker(
-                            context: context,
-                            initialDate: selectedDate,
-                            firstDate: DateTime(1924, 8),
-                            lastDate: DateTime(2025, 8),
-                            builder: (context, child) {
-                              return Theme(
-                                data: Theme.of(context).copyWith(
-                                  colorScheme: const ColorScheme.light(
-                                    primary:
-                                        Kform_border_twg, // Primary color for date picker
-                                    onSurface: Colors
-                                        .black, // Text color for unselected items
-                                  ),
+                      child: Obx(
+                        () => Container(
+                          width: double.infinity,
+                          padding: EdgeInsets.symmetric(
+                              vertical: 4.h, horizontal: 8.w),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(8),
+                              border: Border.all(color: KTextgery)),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              SizedBox(
+                                width: 100.w,
+                                child: Text(
+                                  multiPostcontroller.addpostGlobalTime.value,
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
                                 ),
-                                child: child!,
-                              );
-                            },
-                          );
+                              ),
+                              InkWell(
+                                  onTap: () async {
+                                    //
+                                    final DateTime? pickedDate =
+                                        await showDatePicker(
+                                      context: context,
+                                      initialDate: selectedDate,
+                                      firstDate: DateTime(1924, 8),
+                                      lastDate: DateTime(2025, 8),
+                                      builder: (context, child) {
+                                        return Theme(
+                                          data: Theme.of(context).copyWith(
+                                            colorScheme:
+                                                const ColorScheme.light(
+                                              primary: Kform_border_twg, //
+                                              onSurface: Colors.black, //
+                                            ),
+                                          ),
+                                          child: child!,
+                                        );
+                                      },
+                                    );
 
-                          if (pickedDate != null) {
-                            // Step 2: Show Time Picker
-                            final TimeOfDay? pickedTime = await showTimePicker(
-                              context: context,
-                              initialTime: TimeOfDay.fromDateTime(selectedDate),
-                              builder: (context, child) {
-                                return Theme(
-                                  data: Theme.of(context).copyWith(
-                                    timePickerTheme: const TimePickerThemeData(
-                                      dialBackgroundColor: Colors.white,
-                                      hourMinuteTextColor: Colors.black,
-                                    ),
-                                  ),
-                                  child: child!,
-                                );
-                              },
-                            );
+                                    if (pickedDate != null) {
+                                      //
+                                      final TimeOfDay? pickedTime =
+                                          await showTimePicker(
+                                        context: context,
+                                        initialTime: TimeOfDay.fromDateTime(
+                                            selectedDate),
+                                        builder: (context, child) {
+                                          return Theme(
+                                            data: Theme.of(context).copyWith(
+                                              timePickerTheme:
+                                                  const TimePickerThemeData(
+                                                dialBackgroundColor:
+                                                    Colors.white,
+                                                hourMinuteTextColor:
+                                                    Colors.black,
+                                              ),
+                                            ),
+                                            child: child!,
+                                          );
+                                        },
+                                      );
 
-                            if (pickedTime != null) {
-                              // Step 3: Combine Date and Time
-                              setState(() {
-                                selectedDate = DateTime(
-                                  pickedDate.year,
-                                  pickedDate.month,
-                                  pickedDate.day,
-                                  pickedTime.hour,
-                                  pickedTime.minute,
-                                );
-                                choosenDate =
-                                    selectedDate; // Store the selected date
-                                selectDate.value =
-                                    DateFormat('MM/dd/yyyy hh:mm a')
-                                        .format(selectedDate);
-                                multiPostcontroller.addpostGlobalTime.value =
-                                    DateFormat('MM/dd/yyyy hh:mm a')
-                                        .format(selectedDate);
-                              });
-                            }
-                          }
-                        },
-                        enabled: true,
-                        readOnly: true,
-                        labelColor: KText,
-                        onChanged: (value) {
-                          setState(() {});
-                        },
-                        obscureText: false,
-                        contentPadding: const EdgeInsets.symmetric(
-                            vertical: 16, horizontal: 8),
-                        fontSize: kFourteenFont,
-                        // prefix: Image.asset(
-                        //   "assets/images/black_clock.png",
-                        //   height: 10.h,
-                        //   width: 10.w,
-                        // ),
-                        fontWeight: FontWeight.w500,
-                        hintColor: DateFormat.yMMMd().format(selectedDate) ==
-                                DateFormat.yMMMd().format(DateTime.now())
-                            ? KTextgery.withOpacity(0.5)
-                            : KdarkText,
-                        maxLines: 1,
-                        label: "Schedule Global",
-                        validator: (value) {
-                          if (value!.isEmpty) {
-                            return 'Please Schedule';
-                          }
-                          return null;
-                        },
+                                      if (pickedTime != null) {
+                                        //
+                                        setState(() {
+                                          selectedDate = DateTime(
+                                            pickedDate.year,
+                                            pickedDate.month,
+                                            pickedDate.day,
+                                            pickedTime.hour,
+                                            pickedTime.minute,
+                                          );
+                                          choosenDate = selectedDate; //
+                                          selectDate.value =
+                                              DateFormat('MM/dd/yyyy hh:mm a')
+                                                  .format(selectedDate);
+                                          multiPostcontroller
+                                                  .addpostGlobalTime.value =
+                                              DateFormat('MM/dd/yyyy hh:mm a')
+                                                  .format(selectedDate);
+                                        });
+                                        setState(() {});
+                                      }
+                                    }
+                                  },
+                                  child: Icon(Icons.timer))
+                            ],
+                          ),
+                        ),
                       ),
+                      // CustomFormFields(
+                      //   hintText: DateFormat.yMMMd().format(selectedDate) ==
+                      //           DateFormat.yMMMd().format(DateTime.now())
+                      //       ? "Select Date & Time"
+                      //       : DateFormat('dd/MM/yyyy hh:mm a')
+                      //           .format(selectedDate),
+                      //   ontap: () async {
+                      //     //
+                      //     final DateTime? pickedDate = await showDatePicker(
+                      //       context: context,
+                      //       initialDate: selectedDate,
+                      //       firstDate: DateTime(1924, 8),
+                      //       lastDate: DateTime(2025, 8),
+                      //       builder: (context, child) {
+                      //         return Theme(
+                      //           data: Theme.of(context).copyWith(
+                      //             colorScheme: const ColorScheme.light(
+                      //               primary: Kform_border_twg, //
+                      //               onSurface: Colors.black, //
+                      //             ),
+                      //           ),
+                      //           child: child!,
+                      //         );
+                      //       },
+                      //     );
+
+                      //     if (pickedDate != null) {
+                      //       //
+                      //       final TimeOfDay? pickedTime = await showTimePicker(
+                      //         context: context,
+                      //         initialTime: TimeOfDay.fromDateTime(selectedDate),
+                      //         builder: (context, child) {
+                      //           return Theme(
+                      //             data: Theme.of(context).copyWith(
+                      //               timePickerTheme: const TimePickerThemeData(
+                      //                 dialBackgroundColor: Colors.white,
+                      //                 hourMinuteTextColor: Colors.black,
+                      //               ),
+                      //             ),
+                      //             child: child!,
+                      //           );
+                      //         },
+                      //       );
+
+                      //       if (pickedTime != null) {
+                      //         //
+                      //         setState(() {
+                      //           selectedDate = DateTime(
+                      //             pickedDate.year,
+                      //             pickedDate.month,
+                      //             pickedDate.day,
+                      //             pickedTime.hour,
+                      //             pickedTime.minute,
+                      //           );
+                      //           choosenDate = selectedDate; //
+                      //           selectDate.value =
+                      //               DateFormat('MM/dd/yyyy hh:mm a')
+                      //                   .format(selectedDate);
+                      //           multiPostcontroller.addpostGlobalTime.value =
+                      //               DateFormat('MM/dd/yyyy hh:mm a')
+                      //                   .format(selectedDate);
+                      //         });
+                      //         setState(() {});
+                      //       }
+                      //     }
+                      //   },
+                      //   enabled: true,
+                      //   readOnly: true,
+                      //   labelColor: KText,
+                      //   onChanged: (value) {
+                      //     setState(() {});
+                      //   },
+                      //   obscureText: false,
+                      //   contentPadding: const EdgeInsets.symmetric(
+                      //       vertical: 16, horizontal: 8),
+                      //   fontSize: kFourteenFont,
+                      //   // prefix: Image.asset(
+                      //   //   "assets/images/black_clock.png",
+                      //   //   height: 10.h,
+                      //   //   width: 10.w,
+                      //   // ),
+                      //   fontWeight: FontWeight.w500,
+                      //   hintColor: DateFormat.yMMMd().format(selectedDate) ==
+                      //           DateFormat.yMMMd().format(DateTime.now())
+                      //       ? KTextgery.withOpacity(0.5)
+                      //       : KdarkText,
+                      //   maxLines: 1,
+                      //   label: "Schedule Global",
+                      //   validator: (value) {
+                      //     if (value!.isEmpty) {
+                      //       return 'Please Schedule';
+                      //     }
+                      //     return null;
+                      //   },
+                      // ),
                     )
 
 //                     SizedBox(
@@ -4568,7 +5537,7 @@ class _AutoPostState extends State<AutoPost> {
                             textColor: Kwhite,
                             height: 52,
                             width: 150.w,
-                            label: "Publish Postss",
+                            label: "Publish Posts",
                             fontSize: kSixteenFont,
                             fontWeight: kFW600,
                             isLoading: false,
@@ -4631,7 +5600,7 @@ class _AutoPostState extends State<AutoPost> {
                               if (semicontroller.isgmbScheduled.value)
                                 payload['networks[gmb]'] = '1';
                               if (semicontroller.isInstagramScheduled.value)
-                                payload['networks[Instagram]'] = '1';
+                                payload['networks[instagram]'] = '1';
                               if (semicontroller.isredditScheduled.value)
                                 payload['networks[reddit]'] = '1';
                               if (semicontroller.isbloggerScheduled.value)
@@ -4640,6 +5609,68 @@ class _AutoPostState extends State<AutoPost> {
                                 payload['networks[wordpress]'] = '1';
 
                               semicontroller.quickPostPublish(payload);
+                              //
+                              setState(() {
+                                dashboardcontroller.semiAuotPostMediaType
+                                    .value = "enableimage";
+                                semicontroller.contentLinkController.clear();
+
+                                // .autoPostHeadingController,
+                                semicontroller.autoPostMessageController
+                                    .clear();
+
+                                multiPostcontroller.addpostfbTime.value = "";
+                                multiPostcontroller.addposttwtTime.value = "";
+
+                                multiPostcontroller.addpostytuTime.value = "";
+
+                                multiPostcontroller.addposttumbTime.value = "";
+
+                                multiPostcontroller.addpostpintTime.value = "";
+
+                                multiPostcontroller.addpostinstaTime.value = "";
+
+                                multiPostcontroller.addpostGlobalTime.value =
+                                    "";
+
+                                semicontroller.isFbScheduled.value = false;
+                                semicontroller.isTwiitterScheduled.value =
+                                    false;
+                                semicontroller.isyouScheduled.value = false;
+                                semicontroller.islinkedinScheduled.value =
+                                    false;
+                                semicontroller.istumblrScheduled.value = false;
+                                semicontroller.ispinterestScheduled.value =
+                                    false;
+                                semicontroller.isgmbScheduled.value = false;
+                                semicontroller.isInstagramScheduled.value =
+                                    false;
+                                semicontroller.isredditScheduled.value = false;
+                                semicontroller.isbloggerScheduled.value = false;
+                                semicontroller.isWordpressScheduled.value =
+                                    false;
+                                selectedImage = null;
+                                selectedVideo = null;
+
+                                ///
+
+                                // if (semicontroller.istumblrScheduled.value)
+                                //   payload['networks[tumblr]'] = '1';
+                                // if (semicontroller.ispinterestScheduled.value)
+                                //   payload['networks[pinterest]'] = '1';
+                                // if (semicontroller.isgmbScheduled.value)
+                                //   payload['networks[gmb]'] = '1';
+                                // if (semicontroller.isInstagramScheduled.value)
+                                // payload['networks[Instagram]'] = '1';
+                                // if (semicontroller.isredditScheduled.value)
+                                //   payload['networks[reddit]'] = '1';
+                                // if (semicontroller.isbloggerScheduled.value)
+                                //   payload['networks[blogger]'] = '1';
+                                // if (semicontroller.isWordpressScheduled.value)
+                                //   payload['networks[wordpress]'] = '1';
+                                /////
+                              });
+                              setState(() {});
                             })),
                   ],
                 ),

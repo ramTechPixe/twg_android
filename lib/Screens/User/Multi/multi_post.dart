@@ -147,7 +147,7 @@ class _MultiPostScreenState extends State<MultiPostScreen> {
                       MediaQuery.of(context).size.height / 10.35),
                   child: Container(
                     margin: EdgeInsets.only(
-                      // bottom: 10.h,
+                      // bottom: 40.h,
                       left: 10.w,
                       right: 10.h,
                     ),
@@ -388,20 +388,22 @@ class _MultiPostScreenState extends State<MultiPostScreen> {
                                                               //     semicontroller.scheduledList[index]
                                                               //         ["id"];
                                                             });
-                                                            Get.toNamed(
-                                                              kMultiPostView,
-                                                            );
+                                                            // Get.toNamed( vvipchange
+                                                            //   kMultiPostView,
+                                                            // );
                                                             // Get.toNamed(kMultiPostView,
                                                             //     arguments: multiPostcontroller
                                                             //         .mutiPostList[index]);
                                                           },
                                                           child: Container(
-                                                            margin:
-                                                                EdgeInsets.only(
-                                                                    bottom:
-                                                                        13.h,
-                                                                    left: 2.w,
-                                                                    right: 2.w),
+                                                            margin: EdgeInsets.only(
+                                                                bottom: index ==
+                                                                        multiPostcontroller.mutiPostList.length -
+                                                                            1
+                                                                    ? 40.h
+                                                                    : 13.h,
+                                                                left: 2.w,
+                                                                right: 2.w),
                                                             padding:
                                                                 const EdgeInsets
                                                                     .all(10),

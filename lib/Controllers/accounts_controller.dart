@@ -22,6 +22,7 @@ class AccontsController extends GetxController {
 
   var instaAccountsdata = {}.obs;
   var selectedinstaValues = [].obs;
+  var isInstabenabledFromBackend = "0".obs;
   //
   Future<void> userInstaAccountsList() async {
     instaAccountsLoading(true);
@@ -33,8 +34,11 @@ class AccontsController extends GetxController {
           endpoint: "insta-accounts-api/", payload: payload);
 // https://thewisguystech.com/reddit-accounts-api/
       Map data = jsonDecode(response);
+
       print(data);
       if (data["success"] == true) {
+        isInstabenabledFromBackend.value =
+            data["data"]["sap_instagram_options"]["enable_instagram"];
         instaAccountsdata.value = data["data"];
         initializeData(instaAccountsdata.value);
         //["sap_youtube_options"]["yt_type_post_user"];
@@ -230,6 +234,7 @@ class AccontsController extends GetxController {
 
   var redditAccountsdata = {}.obs;
   var selectedredditValues = [].obs;
+  var isRedditenabledFromBackend = "0".obs;
   //
   Future<void> userredditAccountsList() async {
     redditAccountsLoading(true);
@@ -237,13 +242,17 @@ class AccontsController extends GetxController {
       "user_id": userprofilecontroller.profileData["user_details"]["id"]
     };
     try {
-      var response = await apiService.postRequestScheduleDataAccounts(
+      // postRequestScheduleData
+      //  var response = await apiService.postRequestScheduleDataAccounts(
+      var response = await apiService.postRequestScheduleData(
           endpoint: "reddit-accounts-api/", payload: payload);
 // https://thewisguystech.com/reddit-accounts-api/
       Map data = jsonDecode(response);
       print(data);
       if (data["success"] == true) {
         redditAccountsdata.value = data["data"];
+        isRedditenabledFromBackend.value =
+            data["data"]["sap_reddit_options"]["enable_reddit"];
         //["sap_youtube_options"]["yt_type_post_user"];
         //["twitter_option_details"];
 
@@ -291,6 +300,8 @@ class AccontsController extends GetxController {
   var youtubeAccountsdata = {}.obs;
   var selectedyoutubeValues = [].obs;
   var selectedyoutubeValuess = [].obs;
+  var isYoutenabledFromBackend = "0".obs;
+  var youtubeKeys = [].obs;
 
   Future<void> userYouTubeAccountsList() async {
     youtubeAccountsLoading(true);
@@ -304,6 +315,9 @@ class AccontsController extends GetxController {
       );
       Map data = jsonDecode(response);
       if (data["success"] == true) {
+        isYoutenabledFromBackend.value =
+            data["data"]["sap_youtube_options"]["enable_youtube"];
+        youtubeKeys.value = data["data"]["sap_youtube_options"]["youtube_keys"];
         selectedyoutubeValues.value =
             List.from(data["data"]["sap_youtube_options"]["yt_type_post_user"]);
         selectedyoutubeValuess.value =
@@ -414,6 +428,9 @@ class AccontsController extends GetxController {
 
   var tumblerAccountsdata = {}.obs;
   var selectedTumblerValues = [].obs;
+  var selectedTumblerValuesqa = [].obs;
+  var isTumbenabledFromBackend = "0".obs;
+  var tumblrKeys = [].obs;
   //
   Future<void> usertumblerAccountsList() async {
     tumblerAccountsLoading(true);
@@ -427,8 +444,19 @@ class AccontsController extends GetxController {
       Map data = jsonDecode(response);
       print(data);
       if (data["success"] == true) {
+        tumblrKeys.value = data["data"]["sap_tumblr_options"]["tumblr_keys"];
+        print(tumblrKeys.value);
+        isTumbenabledFromBackend.value =
+            data["data"]["sap_tumblr_options"]["enable_tumblr"];
+        // if (data["data"]["get_tumblr_account_details"] != null) {
+        //   ramtumbaccountDetails.value =
+        //       data["data"]["get_tumblr_account_details"]["0"] ?? "";
+        // }
+
         tumblerAccountsdata.value = data["data"]["get_tumblr_account_details"];
         tumbaccountDetails.value = data["data"]["get_tumblr_account_details"];
+        ramtumbaccountDetails.value =
+            data["data"]["get_tumblr_account_details"];
         //["twitter_option_details"];
         selectedTumblerValues.value = tumblerAccountsdata.value.keys.toList();
         print("Selected Pinterest Values: $twitterAccountsdata");
@@ -471,6 +499,7 @@ class AccontsController extends GetxController {
   }
 
 // original
+  var ramtumbaccountDetails = {}.obs;
   var tumbaccountDetails = {}.obs; // To store API response
   var tumbselectedTumblerNames = [].obs; // To store selected names
 
@@ -499,32 +528,67 @@ class AccontsController extends GetxController {
   // Observables for selected Pinterest names and values
   var selectedtumblerNames = [].obs;
 // var selectedPinterestValues = [].obs;
-
-// Function to update selected Pinterest values
   void onTumblerSelectionChanged(List selected) {
+    // selectedtumblerNames.clear();
+
+    ///
     selectedtumblerNames.value = selected;
 
-    // Map names to their corresponding Pinterest account key
-    selectedTumblerValues.value = selected.map((name) {
-      final selectedItem = tumblerAccountsdata.entries.firstWhere(
-        (entry) => entry.value == name,
-      );
-      return selectedItem
-          .key; // Return the key (e.g., "bharatshoprajasthan|1005428754250575356")
-    }).toList();
+    // selectedTumblerValuesqa.clear();
+    selectedTumblerValuesqa.value = selected;
+    print("object");
   }
+
+// old
+// Function to update selected Pinterest values
+  // void onTumblerSelectionChanged(List selected) {
+  //   selectedtumblerNames.value = selected;
+
+  //   // Map names to their corresponding Pinterest account key
+  //   selectedTumblerValues.value = selected.map((name) {
+  //     final selectedItem = tumblerAccountsdata.entries.firstWhere(
+  //       (entry) => entry.value == name,
+  //     );
+  //     return selectedItem
+  //         .key; // Return the key (e.g., "bharatshoprajasthan|1005428754250575356")
+  //   }).toList();
+  //   selectedTumblerValuesqa.value = selected.map((name) {
+  //     final selectedItem = tumblerAccountsdata.entries.firstWhere(
+  //       (entry) => entry.value == name,
+  //     );
+  //     return selectedItem
+  //         .key; // Return the key (e.g., "bharatshoprajasthan|1005428754250575356")
+  //   }).toList();
+
+  // }
 
 // Function to select all Pinterest accounts
   void selectAllTumblerAccounts() {
-    selectedtumblerNames.value = tumblerAccountsdata.values.toList();
+    selectedtumblerNames.value = tumblerAccountsdata.keys.toList();
     selectedTumblerValues.value = tumblerAccountsdata.keys.toList();
+    selectedTumblerValuesqa.value = tumblerAccountsdata.keys.toList();
+
+    selectedtumblerNames.refresh();
+    selectedTumblerValues.refresh();
+    selectedTumblerValuesqa.refresh();
   }
 
-// Function to clear all selected Pinterest accounts
   void clearAllTumblerSelections() {
-    selectedtumblerNames.clear();
-    selectedTumblerValues.clear();
+    selectedtumblerNames.clear(); // Clear selected names
+    selectedTumblerValues.clear(); // Clear mapped values
+    selectedTumblerValuesqa.clear();
   }
+// old
+// Function to clear all selected Pinterest accounts
+  // void clearAllTumblerSelections() {
+  //   selectedtumblerNames.clear();
+  //   selectedTumblerValues.clear();
+  //   selectedTumblerValuesqa.clear();
+
+  //   selectedtumblerNames.refresh();
+  //   selectedTumblerValues.refresh();
+  //   selectedTumblerValuesqa.refresh();
+  // }
 
   //////
 
@@ -536,6 +600,8 @@ class AccontsController extends GetxController {
   var twitterAccountsLoading = false.obs;
 
   var twitterAccountsdata = {}.obs;
+  var isTwtenabledFromBackend = "0".obs;
+  var twitterKeys = [].obs;
 
   // var selectedPinterestValues = [].obs;
   Future<void> userTwitterAccountsList() async {
@@ -550,11 +616,17 @@ class AccontsController extends GetxController {
       Map data = jsonDecode(response);
       print(data);
       if (data["success"] == true) {
+        twitterAccountsdata.clear();
         twitterAccountsdata.value = data["data"];
         //["twitter_option_details"];
-
-        print("Selected Pinterest Values: $twitterAccountsdata");
-        // print("object");
+        isTwtenabledFromBackend.value =
+            twitterAccountsdata["twitter_option_details"]["enable_twitter"];
+        print(twitterAccountsdata);
+        print("object");
+        twitterKeys.value =
+            twitterAccountsdata["twitter_option_details"]["twitter_keys"];
+        print(twitterKeys);
+        print("object");
       } else if (data["message"] == "Invalid session token") {
         Fluttertoast.showToast(
           msg: data["message"],
@@ -610,10 +682,12 @@ class AccontsController extends GetxController {
     twtnewTwitters.clear();
   }
 
-  // Handle individual selection changes
+  // Handle individual selection changesn //ramwork
   void twtonSelectionChanged(List selected) {
     twtselectedNames.value = selected;
-    twtnewTwitters.value = List.from(selected); // Sync newTwitters
+    twtnewTwitters.value = List.from(selected);
+
+    print("object");
   }
 
   ///
@@ -623,8 +697,10 @@ class AccontsController extends GetxController {
   var pinterestAccountsLoading = false.obs;
 
   var pinterestAccountsdata = {}.obs;
+  var isPintenabledFromBackend = "0".obs;
 
   var selectedPinterestValues = [].obs;
+  var selectedPinterestValuesqa = [].obs;
   Future<void> userPinterestAccountsList() async {
     pinterestAccountsLoading(true);
     var payload = {
@@ -637,6 +713,8 @@ class AccontsController extends GetxController {
       Map data = jsonDecode(response);
       print(data);
       if (data["success"] == true) {
+        isPintenabledFromBackend.value =
+            data["data"]["sap_pinterest_options"]["enable_pinterest"];
         pinterestAccountsdata.value = data["data"]["pinterest_accounts"];
         pintaccountDetails.value = data["data"]["pinterest_accounts"];
         selectedPinterestValues.value =
@@ -702,18 +780,27 @@ class AccontsController extends GetxController {
       return selectedItem
           .key; // Return the key (e.g., "bharatshoprajasthan|1005428754250575356")
     }).toList();
+    selectedPinterestValuesqa.value = selected.map((name) {
+      final selectedItem = pinterestAccountsdata.entries.firstWhere(
+        (entry) => entry.value == name,
+      );
+      return selectedItem
+          .key; // Return the key (e.g., "bharatshoprajasthan|1005428754250575356")
+    }).toList();
   }
 
   // Method to select all accounts
   void pintselectAll() {
     pintselectedTumblerNames.value = pintaccountDetails.values.toList();
     selectedPinterestValues.value = pintaccountDetails.keys.toList();
+    selectedPinterestValuesqa.value = pintaccountDetails.keys.toList();
   }
 
   // Method to clear all selections
   void pintclearAll() {
     pintselectedTumblerNames.clear();
     selectedPinterestValues.clear();
+    selectedPinterestValuesqa.clear();
   }
 
   /////////////////////////////remove
@@ -751,22 +838,100 @@ class AccontsController extends GetxController {
     selectedPinterestValues.clear();
   }
 
+  //reddit
+  var smRTAccountsLoading = false.obs;
+
+  var RTTotalAccounts = [].obs;
+  var isRTenabledFromBackend = "0".obs;
+  Future<void> userSMRTAccountsList() async {
+    smFbAccountsLoading(true);
+    var payload = {
+      "user_id": userprofilecontroller.profileData["user_details"]["id"]
+    };
+    try {
+      // data['data']['sap_facebook_options']['enable_facebook']
+      var response = await apiService.postRequestScheduleData(
+          endpoint: "reddit-accounts-api/", payload: payload);
+      // https://thewisguystech.com/reddit-accounts-api/
+// https://twgpost.in/fb-accounts-api/ // https://thewisguystech.com/fb-accounts-api/
+      Map data = jsonDecode(response);
+      print(data);
+      if (data["success"] == true) {
+        isFBenabledFromBackend.value =
+            data['data']['sap_facebook_options']['enable_facebook'];
+        print("jsn");
+        //
+        final fbAccounts = data['data']['fb_accounts'] as Map<String, dynamic>;
+        // accountDetails.clear();
+
+        fbAccounts.forEach((userId, accounts) {
+          (accounts as Map<String, dynamic>).forEach((key, value) {
+            final parts = key.split('|');
+            accountDetails.add(
+                {'account_id': parts[0], 'user_id': parts[1], 'name': value});
+          });
+        });
+        print(accountDetails);
+
+        print("object");
+      } else if (data["message"] == "Invalid session token") {
+        Fluttertoast.showToast(
+          msg: data["message"],
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: KDarkPink_twg,
+          textColor: Kwhite,
+          fontSize: 16.0,
+        );
+        Get.toNamed(kSignIns);
+      } else {
+        Fluttertoast.showToast(
+          msg: data["message"],
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: KDarkPink_twg,
+          textColor: Kwhite,
+          fontSize: 16.0,
+        );
+      }
+    } catch (e) {
+      Fluttertoast.showToast(
+        msg: "Something went wrong",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: KDarkPink_twg,
+        textColor: Kwhite,
+        fontSize: 16.0,
+      );
+    } finally {
+      smFbAccountsLoading(false);
+    }
+  }
+
   //////
   var smFbAccountsLoading = false.obs;
   var accountDetails = <Map<String, String>>[].obs;
   var fbTotalAccounts = [].obs;
+  var isFBenabledFromBackend = "0".obs;
   Future<void> userSMFbAccountsList() async {
     smFbAccountsLoading(true);
     var payload = {
       "user_id": userprofilecontroller.profileData["user_details"]["id"]
     };
     try {
+      // data['data']['sap_facebook_options']['enable_facebook']
       var response = await apiService.postRequestScheduleData(
           endpoint: "fb-accounts-api/", payload: payload);
 // https://twgpost.in/fb-accounts-api/ // https://thewisguystech.com/fb-accounts-api/
       Map data = jsonDecode(response);
       print(data);
       if (data["success"] == true) {
+        isFBenabledFromBackend.value =
+            data['data']['sap_facebook_options']['enable_facebook'];
+        print("jsn");
         // fbTotalAccounts.value = data["data"]["fb_accounts"];
         final fbAccounts = data['data']['fb_accounts'] as Map<String, dynamic>;
         accountDetails.clear();
@@ -834,7 +999,6 @@ class AccontsController extends GetxController {
           accountDetails.firstWhere((item) => item['name'] == name);
       return '${selectedItem['account_id']}|${selectedItem['user_id']}';
     }).toList();
-  
   }
 
   void selectAll() {

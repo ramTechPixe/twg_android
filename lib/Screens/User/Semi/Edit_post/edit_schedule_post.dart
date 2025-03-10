@@ -205,6 +205,11 @@ class _EditSchedulePostState extends State<EditSchedulePost> {
                                       enabled: true,
                                       labelColor: KText,
                                       onChanged: (Value) {
+                                        setState(() {
+                                          semicontroller
+                                              .is_quick_post_message_changed
+                                              .value = true;
+                                        });
                                         setState(() {});
                                       },
                                       obscureText: false,
@@ -381,6 +386,11 @@ class _EditSchedulePostState extends State<EditSchedulePost> {
                                           enabled: true,
                                           labelColor: KText,
                                           onChanged: (Value) {
+                                            setState(() {
+                                              semicontroller
+                                                  .is_quick_post_message_changed
+                                                  .value = true;
+                                            });
                                             setState(() {});
                                           },
                                           obscureText: false,
@@ -456,6 +466,11 @@ class _EditSchedulePostState extends State<EditSchedulePost> {
                                           labelColor: KText,
                                           // maxLength: 5,
                                           onChanged: (Value) {
+                                            setState(() {
+                                              semicontroller
+                                                  .is_quick_post_message_changed
+                                                  .value = true;
+                                            });
                                             setState(() {});
                                           },
                                           obscureText: false,

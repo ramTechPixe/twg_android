@@ -12,6 +12,7 @@ class FacebbokSettings extends StatefulWidget {
 class _FacebbokSettingsState extends State<FacebbokSettings> {
   String? selectedOption;
   DashboardController dashboardcontroller = Get.put(DashboardController());
+  AccontsController accountscontroller = Get.put(AccontsController());
   bool isTimestampSwitched = false;
   List<String> yourOptionsList = ['Option 1', 'Option 2', 'Option 3'];
   final List<String> CompanyList = [
@@ -42,14 +43,18 @@ class _FacebbokSettingsState extends State<FacebbokSettings> {
       setState(() {
         isautopostingSwitched = true;
         UserSimplePreferences.facebookStatus(fbStatus: true);
+        accountscontroller.isFBenabledFromBackend.value = "1";
         //  _isfbExpandCard = true;
       });
+      print("object");
     } else {
       setState(() {
         isautopostingSwitched = false;
         UserSimplePreferences.facebookStatus(fbStatus: false);
+        accountscontroller.isFBenabledFromBackend.value = "0";
         //   _isfbExpandCard = false;
       });
+      print("object");
     }
   }
 
@@ -108,8 +113,14 @@ class _FacebbokSettingsState extends State<FacebbokSettings> {
                             // });
                             toggleautoPostSwitch(value);
                           },
-                          value: UserSimplePreferences.getfacebookStatus() ??
-                              isautopostingSwitched,
+                          value:
+                              accountscontroller.isFBenabledFromBackend.value ==
+                                      "1"
+                                  ? true
+                                  : false,
+                          // UserSimplePreferences.getfacebookStatus() ??
+                          //     isautopostingSwitched,
+
                           //  value: isautopostingSwitched,
                           materialTapTargetSize:
                               MaterialTapTargetSize.shrinkWrap,
@@ -129,59 +140,59 @@ class _FacebbokSettingsState extends State<FacebbokSettings> {
                     style: GoogleFonts.poppins(
                         fontSize: 11.sp, color: kblack, fontWeight: kFW400),
                   ),
-                  InkWell(
-                    onTap: () {
-                      Fluttertoast.showToast(
-                        msg: "Not Available Now",
-                        toastLength: Toast.LENGTH_SHORT,
-                        gravity: ToastGravity.BOTTOM,
-                        timeInSecForIosWeb: 1,
-                        backgroundColor: KDarkPink_twg,
-                        textColor: Kwhite,
-                        fontSize: 16.0,
-                      );
-                    },
-                    child: Container(
-                      margin: EdgeInsets.only(top: 10),
-                      // "7"
-                      height: 43,
-                      width: 110.w,
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                        // boxShadow: [
-                        //   BoxShadow(
-                        //     color: Ktextcolor.withOpacity(0.5),
-                        //     blurRadius: 5.r,
-                        //     offset: Offset(0, 5),
-                        //     spreadRadius: 1.r,
-                        //   )
-                        // ],
-                        color: Kform_border_twg,
-                        borderRadius: BorderRadius.all(Radius.circular(5)),
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Image.asset(
-                            "assets/images/Vector.png",
-                            // height: 3.h,
-                            // width: 80.w,
-                          ),
-                          SizedBox(
-                            width: 12.w,
-                          ),
-                          Text(
-                            "Save",
-                            textAlign: TextAlign.center,
-                            style: GoogleFonts.poppins(
-                                fontWeight: kFW600,
-                                color: Kwhite,
-                                fontSize: kFourteenFont.sp),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
+                  // InkWell(
+                  //   onTap: () {
+                  //     Fluttertoast.showToast(
+                  //       msg: "Not Available Now",
+                  //       toastLength: Toast.LENGTH_SHORT,
+                  //       gravity: ToastGravity.BOTTOM,
+                  //       timeInSecForIosWeb: 1,
+                  //       backgroundColor: KDarkPink_twg,
+                  //       textColor: Kwhite,
+                  //       fontSize: 16.0,
+                  //     );
+                  //   },
+                  //   child: Container(
+                  //     margin: EdgeInsets.only(top: 10),
+                  //     // "7"
+                  //     height: 43,
+                  //     width: 110.w,
+                  //     alignment: Alignment.center,
+                  //     decoration: BoxDecoration(
+                  //       // boxShadow: [
+                  //       //   BoxShadow(
+                  //       //     color: Ktextcolor.withOpacity(0.5),
+                  //       //     blurRadius: 5.r,
+                  //       //     offset: Offset(0, 5),
+                  //       //     spreadRadius: 1.r,
+                  //       //   )
+                  //       // ],
+                  //       color: Kform_border_twg,
+                  //       borderRadius: BorderRadius.all(Radius.circular(5)),
+                  //     ),
+                  //     child: Row(
+                  //       mainAxisAlignment: MainAxisAlignment.center,
+                  //       children: [
+                  //         Image.asset(
+                  //           "assets/images/Vector.png",
+                  //           // height: 3.h,
+                  //           // width: 80.w,
+                  //         ),
+                  //         SizedBox(
+                  //           width: 12.w,
+                  //         ),
+                  //         Text(
+                  //           "Save",
+                  //           textAlign: TextAlign.center,
+                  //           style: GoogleFonts.poppins(
+                  //               fontWeight: kFW600,
+                  //               color: Kwhite,
+                  //               fontSize: kFourteenFont.sp),
+                  //         ),
+                  //       ],
+                  //     ),
+                  //   ),
+                  // ),
                 ],
               )),
           // SizedBox(

@@ -16,9 +16,11 @@ class _TumblrState extends State<Tumblr> {
   String? selectedOption;
   File? selectedImage;
   String base64Image = "";
+  AccontsController accountscontroller = Get.put(AccontsController());
   DashboardController dashboardcontroller = Get.put(DashboardController());
   ProfileController userprofilecontroller = Get.put(ProfileController());
   SettingsController settingscontroller = Get.put(SettingsController());
+  SemiController semicontroller = Get.put(SemiController());
   bool showimagenullMessage = false;
   List<String> variantsList = [
     'Ram',
@@ -81,16 +83,19 @@ class _TumblrState extends State<Tumblr> {
       setState(() {
         isautopostingSwitched = true;
         UserSimplePreferences.tumblrStatus(tumblrStatus: true);
+        accountscontroller.isTumbenabledFromBackend.value = "1";
         //  _isfbExpandCard = true;
       });
     } else {
       setState(() {
         isautopostingSwitched = false;
         UserSimplePreferences.tumblrStatus(tumblrStatus: false);
+        accountscontroller.isTumbenabledFromBackend.value = "0";
         //   _isfbExpandCard = false;
       });
     }
   }
+
   // void toggleautoPostSwitch(bool value) async {
   //   if (isautopostingSwitched == false) {
   //     // setState(() {
@@ -131,6 +136,26 @@ class _TumblrState extends State<Tumblr> {
       });
     });
   }
+  // apiList
+
+  void _addApiListFieldSet(List dataList) {
+    setState(() {
+      for (var data in dataList) {
+        _twitterFields.add({
+          "consumer_key":
+              TextEditingController(text: data["tumblr_consumer_key"] ?? ""),
+          "consumer_secret":
+              TextEditingController(text: data["tumblr_consumer_secret"] ?? ""),
+
+          ////////////
+          //  [{tumblr_consumer_key: qwZ4e2SJ9D5rHsRNYzKxEfd1i7QR9mTBY0T3KN0S72lnvAxNe6,
+          //tumblr_consumer_secret: tOovbgiVWo5rVu50Cpb1u1argbSnqhvlxhg4vTI44qghVcG1cf}]
+          ////////
+        });
+      }
+      print("object");
+    });
+  }
 
   @override
   void initState() {
@@ -139,6 +164,7 @@ class _TumblrState extends State<Tumblr> {
 
       settingscontroller.tumblerSecretController.text = "uiujyutiu";
       settingscontroller.twitterShort.value = 'TinyURL';
+      _addApiListFieldSet(accountscontroller.tumblrKeys.value);
       _addNewFieldSet();
     });
     // TODO: implement initState
@@ -184,8 +210,13 @@ class _TumblrState extends State<Tumblr> {
                             // });
                             toggleautoPostSwitch(value);
                           },
-                          value: UserSimplePreferences.getTumblrStatus() ??
-                              isautopostingSwitched,
+                          value: accountscontroller
+                                      .isTumbenabledFromBackend.value ==
+                                  "1"
+                              ? true
+                              : false,
+                          // UserSimplePreferences.getTumblrStatus() ??
+                          //     isautopostingSwitched,
                           //  value: isautopostingSwitched,
                           materialTapTargetSize:
                               MaterialTapTargetSize.shrinkWrap,
@@ -295,55 +326,55 @@ class _TumblrState extends State<Tumblr> {
                     style: GoogleFonts.poppins(
                         fontSize: kTenFont, color: kblack, fontWeight: kFW400),
                   ),
-                  InkWell(
-                    onTap: () {
-                      Fluttertoast.showToast(
-                        msg: "Not Available Now",
-                        toastLength: Toast.LENGTH_SHORT,
-                        gravity: ToastGravity.BOTTOM,
-                        timeInSecForIosWeb: 1,
-                        backgroundColor: KDarkPink_twg,
-                        textColor: Kwhite,
-                        fontSize: 16.0,
-                      );
-                    },
-                    child: Container(
-                      margin: EdgeInsets.only(top: 15),
-                      // "7"
-                      height: 43,
-                      width: 110.w,
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                        color: Kform_border_twg,
-                        borderRadius: BorderRadius.all(Radius.circular(5)),
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          // Icon(
-                          //   Icons.shopping_bag,
-                          //   color: Kwhite,
-                          // ),
-                          Image.asset(
-                            "assets/images/Vector.png",
-                            // height: 3.h,
-                            // width: 80.w,
-                          ),
-                          SizedBox(
-                            width: 12.w,
-                          ),
-                          Text(
-                            "Save",
-                            textAlign: TextAlign.center,
-                            style: GoogleFonts.poppins(
-                                fontWeight: kFW600,
-                                color: Kwhite,
-                                fontSize: kFourteenFont.sp),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
+                  // InkWell(
+                  //   onTap: () {
+                  //     Fluttertoast.showToast(
+                  //       msg: "Not Available Now",
+                  //       toastLength: Toast.LENGTH_SHORT,
+                  //       gravity: ToastGravity.BOTTOM,
+                  //       timeInSecForIosWeb: 1,
+                  //       backgroundColor: KDarkPink_twg,
+                  //       textColor: Kwhite,
+                  //       fontSize: 16.0,
+                  //     );
+                  //   },
+                  //   child: Container(
+                  //     margin: EdgeInsets.only(top: 15),
+                  //     // "7"
+                  //     height: 43,
+                  //     width: 110.w,
+                  //     alignment: Alignment.center,
+                  //     decoration: BoxDecoration(
+                  //       color: Kform_border_twg,
+                  //       borderRadius: BorderRadius.all(Radius.circular(5)),
+                  //     ),
+                  //     child: Row(
+                  //       mainAxisAlignment: MainAxisAlignment.center,
+                  //       children: [
+                  //         // Icon(
+                  //         //   Icons.shopping_bag,
+                  //         //   color: Kwhite,
+                  //         // ),
+                  //         Image.asset(
+                  //           "assets/images/Vector.png",
+                  //           // height: 3.h,
+                  //           // width: 80.w,
+                  //         ),
+                  //         SizedBox(
+                  //           width: 12.w,
+                  //         ),
+                  //         Text(
+                  //           "Save",
+                  //           textAlign: TextAlign.center,
+                  //           style: GoogleFonts.poppins(
+                  //               fontWeight: kFW600,
+                  //               color: Kwhite,
+                  //               fontSize: kFourteenFont.sp),
+                  //         ),
+                  //       ],
+                  //     ),
+                  //   ),
+                  // ),
                 ],
               )),
           SizedBox(
@@ -701,43 +732,143 @@ class _TumblrState extends State<Tumblr> {
                   SizedBox(
                     height: 15.h,
                   ),
-                  Container(
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8),
-                      color: Kwhite,
-                    ),
-                    child: DropDownMultiSelect(
-                      decoration: InputDecoration(
-                        contentPadding:
-                            EdgeInsets.symmetric(vertical: 16, horizontal: 8),
-                        fillColor: Kwhite,
-                        focusColor: Theme.of(context).colorScheme.onPrimary,
-                        enabledBorder: const OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(8)),
-                            borderSide:
-                                BorderSide(color: KText_border_twg, width: 1)),
-                        focusedBorder: const OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(8)),
-                            borderSide: BorderSide(
-                              color: Kform_border_twg,
-                              width: 1,
-                            )),
+                  Obx(() {
+                    return Container(
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8),
+                        color: Colors.white,
                       ),
-                      options: variantsList,
-                      selectedValues: selectedCheckBoxValue,
-                      onChanged: (List<String> value) {
-                        //   value = selectedCheckBoxValue;
-                        print("${selectedCheckBoxValue}");
-                      },
-                      whenEmpty: 'Select User',
-                    ),
-                  ),
+                      child: DropDownMultiSelect(
+                        decoration: InputDecoration(
+                          contentPadding: const EdgeInsets.symmetric(
+                              vertical: 16, horizontal: 8),
+                          enabledBorder: const OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(8)),
+                              borderSide:
+                                  BorderSide(color: Colors.grey, width: 1)),
+                          focusedBorder: const OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(8)),
+                              borderSide:
+                                  BorderSide(color: Colors.blue, width: 1)),
+                        ),
+                        options: accountscontroller.tumbaccountDetails.values
+                            .toList(),
+                        // Display names only
+                        //  controller.accountDetails.values.toList()
+                        // options:accountsController accountsController
+                        //     .selectedtumblerNames
+                        //     // .accountDetails
+                        //     .map(
+                        //         (option) => option['name']!)
+                        //     .toList(),
+                        selectedValues:
+                            accountscontroller.tumbselectedTumblerNames.value,
+                        //  accountsController
+                        //     .selectedtumblerNames.value,
+                        // onChanged: accountsController
+                        //     .onTumblerSelectionChanged,
+                        onChanged: (selected) {
+                          accountscontroller
+                              .onTumblerSelectionChanged(selected);
+
+                          // Check if selectedValues is empty and update semicontroller.isFbScheduled
+                          //   if (accountscontroller.selectedtumblerNames.isEmpty) {
+                          //     //  if (selected.isEmpty) {
+                          //     setState(() {
+                          //       semicontroller.istumblrScheduled.value = false;
+                          //     });
+                          //   } else {
+                          //     setState(() {
+                          //       semicontroller.istumblrScheduled.value = true;
+                          //     });
+                          //   }
+                        },
+
+                        whenEmpty: 'Select User',
+                      ),
+                    );
+                  }),
+                  // Container(
+                  //   width: double.infinity,
+                  //   decoration: BoxDecoration(
+                  //     borderRadius: BorderRadius.circular(8),
+                  //     color: Kwhite,
+                  //   ),
+                  //   child: DropDownMultiSelect(
+                  //     decoration: InputDecoration(
+                  //       contentPadding: EdgeInsets.symmetric(
+                  //           vertical: 16, horizontal: 8),
+                  //       fillColor: Kwhite,
+                  //       focusColor: Theme.of(context)
+                  //           .colorScheme
+                  //           .onPrimary,
+                  //       enabledBorder: const OutlineInputBorder(
+                  //           borderRadius: BorderRadius.all(
+                  //               Radius.circular(8)),
+                  //           borderSide: BorderSide(
+                  //               color: KText_border_twg,
+                  //               width: 1)),
+                  //       focusedBorder: const OutlineInputBorder(
+                  //           borderRadius: BorderRadius.all(
+                  //               Radius.circular(8)),
+                  //           borderSide: BorderSide(
+                  //             color: Kform_border_twg,
+                  //             width: 1,
+                  //           )),
+                  //     ),
+                  //     options: variantsList,
+                  //     selectedValues: selectedCheckBoxValue,
+                  //     onChanged: (List<String> value) {
+                  //       //   value = selectedCheckBoxValue;
+                  //       print("${selectedCheckBoxValue}");
+                  //     },
+                  //     whenEmpty: 'Select User',
+                  //   ),
+                  // ),
+                  // Container(
+                  //   width: double.infinity,
+                  //   decoration: BoxDecoration(
+                  //     borderRadius: BorderRadius.circular(8),
+                  //     color: Kwhite,
+                  //   ),
+                  //   child: ChipsInputAutocomplete(
+                  //     showClearButton: true,
+                  //     widgetContainerDecoration: BoxDecoration(
+                  //         borderRadius: BorderRadius.circular(8),
+                  //         border: Border.all(
+                  //             color: KText_border_twg, width: 0.5)),
+
+                  //     // addChipOnSelection: true,
+                  //     // placeChipsSectionAbove: true,
+                  //     autoFocus: false,
+                  //     // enabled: true,
+                  //     // keyboardType: TextInputType.none,
+                  //     decorationTextField: InputDecoration(
+                  //       hintStyle: GoogleFonts.poppins(
+                  //         color: KLighText_twg,
+                  //         fontSize: 14.sp,
+                  //         fontWeight: kFW400,
+                  //       ),
+                  //       border: OutlineInputBorder(
+                  //         borderRadius: BorderRadius.circular(8.r),
+                  //       ),
+                  //       enabledBorder: OutlineInputBorder(
+                  //         borderSide: BorderSide(
+                  //             color: KText_border_twg, width: 0.5),
+                  //         borderRadius: BorderRadius.circular(8.r),
+                  //       ),
+                  //     ),
+                  //     options: yourOptionsList,
+                  //   ),
+                  // ),
                   SizedBox(
                     height: 10.h,
                   ),
                   Text(
-                    "Select each of the users that you want to automatically post to Tumblr when a new post is published.",
+                    "Select each of the users that you want to automatically post to Tumbler when a new post is published and enter  ' , ' to select.",
                     style: GoogleFonts.poppins(
                         fontSize: kTenFont, color: kblack, fontWeight: kFW400),
                   ),
@@ -759,32 +890,132 @@ class _TumblrState extends State<Tumblr> {
                           fontSize: kSixteenFont,
                           fontWeight: kFW600,
                           isLoading: false,
-                          onTap: () {}),
-                      Container(
-                        height: 45,
-                        alignment: Alignment.center,
-                        width: 140,
-                        margin: EdgeInsets.only(right: 10),
-                        padding: EdgeInsets.all(8),
-                        decoration: BoxDecoration(
-                          border: Border.all(color: Klight_grey_twg, width: 1),
-                          color: KPale_white_twg,
-                          borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(5),
-                              topRight: Radius.circular(5),
-                              bottomLeft: Radius.circular(5),
-                              bottomRight: Radius.circular(5)),
-                        ),
-                        child: Text(
-                          "Select None",
-                          style: GoogleFonts.poppins(
-                              color: kblack,
-                              fontSize: kSixteenFont,
-                              fontWeight: kFW600),
+                          onTap: () {
+                            accountscontroller.tumbselectAll();
+                            setState(() {
+                              semicontroller.istumblrScheduled.value = true;
+                            });
+                            //.selectAll();
+                          }),
+                      InkWell(
+                        onTap: () {
+                          accountscontroller.tumbclearAll();
+                          setState(() {
+                            semicontroller.istumblrScheduled.value = false;
+                          });
+                        },
+                        child: Container(
+                          height: 45,
+                          alignment: Alignment.center,
+                          width: 140,
+                          margin: EdgeInsets.only(right: 10),
+                          padding: EdgeInsets.all(8),
+                          decoration: BoxDecoration(
+                            border:
+                                Border.all(color: Klight_grey_twg, width: 1),
+                            color: KPale_white_twg,
+                            borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(5),
+                                topRight: Radius.circular(5),
+                                bottomLeft: Radius.circular(5),
+                                bottomRight: Radius.circular(5)),
+                          ),
+                          child: Text(
+                            "Select None",
+                            style: GoogleFonts.poppins(
+                                color: kblack,
+                                fontSize: kSixteenFont,
+                                fontWeight: kFW600),
+                          ),
                         ),
                       ),
                     ],
                   ),
+
+                  // Container(
+                  //   width: double.infinity,
+                  //   decoration: BoxDecoration(
+                  //     borderRadius: BorderRadius.circular(8),
+                  //     color: Kwhite,
+                  //   ),
+                  //   child: DropDownMultiSelect(
+                  //     decoration: InputDecoration(
+                  //       contentPadding:
+                  //           EdgeInsets.symmetric(vertical: 16, horizontal: 8),
+                  //       fillColor: Kwhite,
+                  //       focusColor: Theme.of(context).colorScheme.onPrimary,
+                  //       enabledBorder: const OutlineInputBorder(
+                  //           borderRadius: BorderRadius.all(Radius.circular(8)),
+                  //           borderSide:
+                  //               BorderSide(color: KText_border_twg, width: 1)),
+                  //       focusedBorder: const OutlineInputBorder(
+                  //           borderRadius: BorderRadius.all(Radius.circular(8)),
+                  //           borderSide: BorderSide(
+                  //             color: Kform_border_twg,
+                  //             width: 1,
+                  //           )),
+                  //     ),
+                  //     options: variantsList,
+                  //     selectedValues: selectedCheckBoxValue,
+                  //     onChanged: (List<String> value) {
+                  //       //   value = selectedCheckBoxValue;
+                  //       print("${selectedCheckBoxValue}");
+                  //     },
+                  //     whenEmpty: 'Select User',
+                  //   ),
+                  // ),
+                  // SizedBox(
+                  //   height: 10.h,
+                  // ),
+                  // Text(
+                  //   "Select each of the users that you want to automatically post to Tumblr when a new post is published.",
+                  //   style: GoogleFonts.poppins(
+                  //       fontSize: kTenFont, color: kblack, fontWeight: kFW400),
+                  // ),
+                  // SizedBox(
+                  //   height: 10.h,
+                  // ),
+                  // Row(
+                  //   mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  //   crossAxisAlignment: CrossAxisAlignment.center,
+                  //   children: [
+                  //     CustomButton(
+                  //         // margin: EdgeInsets.only(top: 36.h),
+                  //         borderRadius: BorderRadius.circular(5.r),
+                  //         Color: Kform_border_twg,
+                  //         textColor: Kwhite,
+                  //         height: 45,
+                  //         width: 105.w,
+                  //         label: "Select All",
+                  //         fontSize: kSixteenFont,
+                  //         fontWeight: kFW600,
+                  //         isLoading: false,
+                  //         onTap: () {}),
+                  //     Container(
+                  //       height: 45,
+                  //       alignment: Alignment.center,
+                  //       width: 140,
+                  //       margin: EdgeInsets.only(right: 10),
+                  //       padding: EdgeInsets.all(8),
+                  //       decoration: BoxDecoration(
+                  //         border: Border.all(color: Klight_grey_twg, width: 1),
+                  //         color: KPale_white_twg,
+                  //         borderRadius: BorderRadius.only(
+                  //             topLeft: Radius.circular(5),
+                  //             topRight: Radius.circular(5),
+                  //             bottomLeft: Radius.circular(5),
+                  //             bottomRight: Radius.circular(5)),
+                  //       ),
+                  //       child: Text(
+                  //         "Select None",
+                  //         style: GoogleFonts.poppins(
+                  //             color: kblack,
+                  //             fontSize: kSixteenFont,
+                  //             fontWeight: kFW600),
+                  //       ),
+                  //     ),
+                  //   ],
+                  // ),
 
                   // Container(
                   //   margin: EdgeInsets.only(top: 10),
@@ -1112,7 +1343,13 @@ class _TumblrState extends State<Tumblr> {
 /////////////
 //////////////////////////////////
                             Map<String, dynamic> payload = {};
-
+                            String postsUsers =
+                                // accountscontroller
+                                //     .twtselectedNames.value
+                                accountscontroller
+                                    .tumbselectedTumblerNames.value
+                                    .join("|");
+                            // 
                             // Loop through the dynamically added fields
                             for (int i = 0; i < _twitterFields.length; i++) {
                               var fieldSet = _twitterFields[i];
@@ -1152,10 +1389,24 @@ class _TumblrState extends State<Tumblr> {
                                   dashboardcontroller.tumbnetworkCount.value ??
                                       "",
                               "created_tumbir_count": "1",
+                              /////////////////////////////'
+                              'sap_tumblr_options[tumblr_type_post_accounts]':
+                                  postsUsers,
+
+                              ///
+                              'sap_tumblr_options[enable_twitter]':
+                                  accountscontroller
+                                      .isTumbenabledFromBackend.value,
+                              //////////////////////
                               "sap_tumblr_submit": "1",
                               "user_id": userprofilecontroller
                                   .profileData["user_details"]["id"],
                             });
+                            //
+                            // --form 'sap_tumblr_options[tumblr_type_post_accounts]="XJ4s7n1gsvScADjlh8W6eav9eeazZ1RqaJ8sb2VX3oDUiJXyNB|bharatsports"' \
+                            //   --form 'sap_tumblr_options[enable_twitter]=""' \
+
+                            //
 
                             // Debug log for verification
                             print(payload);

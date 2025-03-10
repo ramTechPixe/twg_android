@@ -33,7 +33,8 @@ class _CallAgentState extends State<CallAgent> {
             "Call An Agent",
             style: GoogleFonts.poppins(
                 color: Kwhite, fontSize: kTwentyFont, fontWeight: kFW600),
-          )),
+          )
+          ),
       body: SingleChildScrollView(
         child: Container(
           margin: EdgeInsets.all(16),

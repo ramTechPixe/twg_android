@@ -21,6 +21,7 @@ class SuscribtionController extends GetxController {
   List<Map<String, dynamic>> networksList = [];
   Future<void> userSuscription() async {
     sucriptionLoading(true);
+
     var payload = {
       "user_id": userprofilecontroller.profileData["user_details"]["id"],
     };
@@ -97,7 +98,7 @@ class SuscribtionController extends GetxController {
     List<String> extractedValues = matches.map((match) {
       return match.group(2) ?? ""; // Extract the second group (name or length)
     }).toList();
-
+    networksList.clear();
     // Pair names with their corresponding lengths
     for (int i = 0; i < extractedValues.length; i += 2) {
       if (i + 1 < extractedValues.length) {
